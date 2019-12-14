@@ -1,88 +1,79 @@
-import React from 'react'
-import Head from 'next/head'
-import Nav from '../components/nav'
+import React, { useEffect, useState } from "react";
+import Layout from "../components/Layout";
+import baseURL from "../utils/baseRL";
+import Banner from "../components/Home/Banner";
+import ProductList from "../components/Shared/Products/ProductList";
 
-const Home = () => (
-  <div>
-    <Head>
-      <title>Home</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+const Home = () => {
+  const [products, setProducts] = useState([]);
 
-    <Nav />
+  useEffect(() => {
+    async function fetchProducts() {
+      const response = await fetch(`${baseURL}/api/products`);
+      const { products } = await response.json();
+      setProducts(products);
+    }
+    fetchProducts();
+  }, []);
 
-    <div className="hero">
-      <h1 className="title">Welcome to Next.js!</h1>
-      <p className="description">
-        To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
+  return (
+    <>
+      <Layout>
+        <Banner />
+        <div className="container">
+          <div className="heading">Product Overview</div>
+          <ProductList products={products} />
+          <div className="load-more">
+            <button className="btn"> Load More </button>
+          </div>
+        </div>
+      </Layout>
+      <style jsx>
+        {`
+          .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+          }
 
-      <div className="row">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Learn more about Next.js in the documentation.</p>
-        </a>
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Next.js Learn &rarr;</h3>
-          <p>Learn about Next.js by following an interactive tutorial!</p>
-        </a>
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Find other example boilerplates on the Next.js GitHub.</p>
-        </a>
-      </div>
-    </div>
+          .heading {
+            padding: 1.5rem;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 1.1;
+            text-transform: uppercase;
+          }
 
-    <style jsx>{`
-      .hero {
-        width: 100%;
-        color: #333;
-      }
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      .title,
-      .description {
-        text-align: center;
-      }
-      .row {
-        max-width: 880px;
-        margin: 80px auto 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-      .card {
-        padding: 18px 18px 24px;
-        width: 220px;
-        text-align: left;
-        text-decoration: none;
-        color: #434343;
-        border: 1px solid #9b9b9b;
-      }
-      .card:hover {
-        border-color: #067df7;
-      }
-      .card h3 {
-        margin: 0;
-        color: #067df7;
-        font-size: 18px;
-      }
-      .card p {
-        margin: 0;
-        padding: 12px 0 0;
-        font-size: 13px;
-        color: #333;
-      }
-    `}</style>
-  </div>
-)
+          .load-more {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 5rem 0;
+          }
 
-export default Home
+          .load-more .btn {
+            background-color: #fff;
+            color: var(--color-primary);
+            font-size: 2rem;
+            width: 25rem;
+            height: 6rem;
+            line-height 6rem;
+            border-radius: 5rem;
+            border: 1px solid var(--color-primary);
+            cursor: pointer;
+          }
+
+          .load-more .btn:focus {
+            outline: none;
+          }
+
+          .load-more .btn:hover {
+            background-color: var(--color-primary);
+            color: #fff;
+          }
+        `}
+      </style>
+    </>
+  );
+};
+
+export default Home;

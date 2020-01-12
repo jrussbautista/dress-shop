@@ -5,7 +5,7 @@ export default ({ products }) => {
     <>
       <div className="product-grid">
         {products.map(product => (
-          <Link href="/">
+          <Link href={`/product?id=${product._id}`} key={product._id}>
             <a>
               <div>
                 <div className="product-img-cover">

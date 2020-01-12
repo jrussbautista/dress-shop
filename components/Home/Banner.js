@@ -10,7 +10,7 @@ export default () => {
       <style jsx>
         {`
           .banner {
-            height: 50rem;
+            height: 60rem;
             position: relative;
           }
 

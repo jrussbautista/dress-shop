@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useContext, useEffect } from "react";
-import { ADD_CART, REMOVE_CART, SET_CART } from "./cart.types";
+import { ADD_CART, REMOVE_CART, SET_CART, CLEAR_CART } from "./cart.types";
 import { useAuth } from "../auth/auth.context";
 import reducer from "./cart.reducer";
 import baseURL from "../../utils/baseURL";
@@ -59,8 +59,14 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART });
+  };
+
   return (
-    <CartContext.Provider value={{ carts: state.carts, addCart, removeCart }}>
+    <CartContext.Provider
+      value={{ carts: state.carts, addCart, removeCart, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );

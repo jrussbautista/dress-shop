@@ -14,17 +14,21 @@ const Home = () => {
 
   useEffect(() => {
     async function fetchProducts() {
-      const payload = { params: { currentPage, pageSize: 10 } };
-      const { data } = await axios.get(`${baseURL}/api/products`, payload);
-      const newProducts = products.concat(data.products);
-      setProducts(products.concat(data.products));
-      setIsLoadingMore(false);
-      //check if theres still a products to show
-      const hasLoadMore = newProducts.length >= data.totalProducts;
-      if (!hasLoadMore) {
-        setIsLoadMOre(true);
-      } else {
-        setIsLoadMOre(false);
+      try {
+        const payload = { params: { currentPage, pageSize: 10 } };
+        const { data } = await axios.get(`${baseURL}/api/products`, payload);
+        const newProducts = products.concat(data.products);
+        setProducts(products.concat(data.products));
+        setIsLoadingMore(false);
+        //check if theres still a products to show
+        const hasLoadMore = newProducts.length >= data.totalProducts;
+        if (!hasLoadMore) {
+          setIsLoadMOre(true);
+        } else {
+          setIsLoadMOre(false);
+        }
+      } catch (error) {
+        console.log(error);
       }
     }
     fetchProducts();
@@ -44,7 +48,7 @@ const Home = () => {
           <ProductList products={products} />
           {isLoadingMore && (
             <div className="loading-wrapper">
-              <Spinner color={"var(--color-primary)"} />
+              <Spinner color={"var(--color-primary)"} width={80} height={80} />
             </div>
           )}
           {isLoadMore && !isLoadingMore && (

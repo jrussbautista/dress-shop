@@ -1,4 +1,4 @@
-const Spinner = ({ color }) => {
+const Spinner = ({ color, width, height }) => {
   return (
     <>
       <div className="lds-ring">
@@ -12,17 +12,17 @@ const Spinner = ({ color }) => {
           .lds-ring {
             display: inline-block;
             position: relative;
-            width: 80px;
-            height: 80px;
+            width: ${width}px;
+            height: ${width}px;
           }
           .lds-ring div {
             box-sizing: border-box;
             display: block;
             position: absolute;
-            width: 64px;
-            height: 64px;
+            width: ${width - 16}px;
+            height: ${width - 16}px;
             margin: 8px;
-            border: 4px solid ${color};
+            border: 2px solid ${color};
             border-radius: 50%;
             animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
             border-color: ${color} transparent transparent transparent;

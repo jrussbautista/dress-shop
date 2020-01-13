@@ -3,5 +3,7 @@ export default function calculateCartTotal(carts) {
     (acc, el) => acc + el.product.price * el.quantity,
     0
   );
-  return parseFloat(total).toFixed(2);
+  const cartTotal = parseFloat(total).toFixed(2);
+  const stripeTotal = Number((total * 100).toFixed(2));
+  return { cartTotal, stripeTotal };
 }

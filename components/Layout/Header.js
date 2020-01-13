@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { IoMdCart, IoIosSearch } from "react-icons/io";
 import Link from "next/link";
 import { useCart } from "../../store/cart/cart.context";
@@ -6,11 +7,12 @@ import { useAuth } from "../../store/auth/auth.context";
 export default () => {
   const { carts } = useCart();
   const { currentUser, logout } = useAuth();
+  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
   return (
     <>
       <header className="header">
-        <div className="header-wrapper">
+        <ul className="header-wrapper">
           <Link href="/">
             <a className="site-title">Dress</a>
           </Link>
@@ -36,8 +38,29 @@ export default () => {
               </Link>
             </li>
             {currentUser ? (
-              <li onClick={logout}>
-                <span> Logout </span>
+              <li>
+                <div
+                  className="user"
+                  onClick={() => setIsOpenDropdown(!isOpenDropdown)}
+                >
+                  {" "}
+                  {currentUser.name
+                    .split(" ")[0]
+                    .charAt(0)
+                    .toUpperCase()}{" "}
+                </div>
+                {isOpenDropdown && (
+                  <ul className="dropdown">
+                    <li>
+                      <span>{currentUser.name}</span>
+                    </li>
+                    <li>
+                      <button className="btn" onClick={logout}>
+                        LOG OUT
+                      </button>
+                    </li>
+                  </ul>
+                )}
               </li>
             ) : (
               <li>
@@ -51,7 +74,7 @@ export default () => {
               </li>
             )}
           </ul>
-        </div>
+        </ul>
       </header>
       <style jsx>
         {`
@@ -141,6 +164,55 @@ export default () => {
           .search-button {
             background-color: transparent;
             border: 1px solid transparent;
+          }
+
+          .user {
+            background-color: var(--color-dark);
+            color: #fff;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            font-size: 1.6rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+          }
+
+          .btn {
+            width: 100%;
+            color: #fff;
+            background-color: var(--color-dark);
+            border: 1px solid var(--color-dark);
+            padding: 1.5rem 0;
+            display: block;
+            font-size: 1.8rem;
+            cursor: pointer;
+          }
+
+          .dropdown {
+            width: 20rem;
+            border: 1px solid rgba(0, 0, 0, 0.09);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 1rem;
+            background-color: #fff;
+            border-radius: 6px;
+            padding: 1rem;
+          }
+
+          .dropdown li {
+            padding: 1rem 0;
+          }
+
+          .dropdown li span {
+            font-size: 2rem;
+          }
+
+          .dropdown li:last-child {
+            border-top: 1px solid #eee;
           }
         `}
       </style>

@@ -6,6 +6,7 @@
 
 - Next js
 - React js
+- Node js
 - MongoDB
 - Stripe (for payment)
 

@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
+import { useAuth } from '../store/auth/auth.context';
 import * as Yup from 'yup';
-import { autoLogin } from '../utils/auth';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import baseURL from '../utils/baseURL';
-import axios from 'axios';
-import Spinner from '../components/Shared/Spinner';
+import Spinner from '../components/Shared/Loader/Spinner';
+import Alert from '../components/Shared/Alert';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
@@ -19,6 +18,11 @@ const LoginSchema = Yup.object().shape({
 
 const Login = () => {
   const [submit, setSubmit] = useState(false);
+  const { error, login, clearError } = useAuth();
+
+  useEffect(() => {
+    return () => error && clearError();
+  }, [error]);
 
   return (
     <>
@@ -31,24 +35,15 @@ const Login = () => {
             }}
             validationSchema={LoginSchema}
             onSubmit={async values => {
-              try {
-                setSubmit(true);
-                const { data } = await axios.post(
-                  `${baseURL}/api/login`,
-                  values
-                );
-                setSubmit(false);
-                autoLogin(data);
-              } catch (error) {
-                console.log(error);
-              } finally {
-                setSubmit(false);
-              }
+              setSubmit(true);
+              await login(values);
+              setSubmit(false);
             }}
           >
             {({ errors, touched, handleChange, handleSubmit, values }) => (
               <form onSubmit={handleSubmit} className="auth-form">
                 <h1 className="page-heading"> Login </h1>
+                {error && <Alert message={error} type="error" />}
                 <div className="group">
                   <input
                     className={`input ${errors.email &&

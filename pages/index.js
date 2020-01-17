@@ -4,13 +4,15 @@ import Layout from '../components/Layout';
 import baseURL from '../utils/baseURL';
 import Banner from '../components/Home/Banner';
 import ProductList from '../components/Shared/Products/ProductList';
-import Spinner from '../components/Shared/Spinner';
+import Spinner from '../components/Shared/Loader/Spinner';
+import SkeletonGrid from '../components/Shared/Loader/SkeletonGrid';
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [isLoadMore, setIsLoadMOre] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -19,6 +21,7 @@ const Home = () => {
         const { data } = await axios.get(`${baseURL}/api/products`, payload);
         const newProducts = products.concat(data.products);
         setProducts(products.concat(data.products));
+        setIsLoading(false);
         setIsLoadingMore(false);
         //check if theres still a products to show
         const hasLoadMore = newProducts.length >= data.totalProducts;
@@ -45,7 +48,12 @@ const Home = () => {
         <Banner />
         <div className="container">
           <div className="heading">Product Overview</div>
-          <ProductList products={products} />
+          {isLoading ? (
+            <SkeletonGrid number={20} />
+          ) : (
+            <ProductList products={products} />
+          )}
+
           {isLoadingMore && (
             <div className="loading-wrapper">
               <Spinner color={'var(--color-primary)'} width={80} height={80} />

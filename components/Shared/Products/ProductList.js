@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default ({ products }) => {
   return (
@@ -13,6 +13,7 @@ export default ({ products }) => {
                 </div>
                 <div className="product-info">
                   <div className="product-name">{product.name}</div>
+                  <div className="product-price">P{product.price}</div>
                 </div>
               </div>
             </a>
@@ -51,6 +52,12 @@ export default ({ products }) => {
           .product-name {
             font-size: 1.7rem;
             color: var(--color-dark);
+          }
+
+          .product-price {
+            color: var(--color-primary);
+            font-size: 1.8rem;
+            font-weight: 600;
           }
         `}
       </style>

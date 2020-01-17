@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
-import Layout from "../components/Layout";
-import { useAuth } from "../store/auth/auth.context";
-import { useCart } from "../store/cart/cart.context";
-import cookie from "js-cookie";
-import StripeCheckout from "react-stripe-checkout";
-import CartList from "../components/Cart/CartList";
-import CartSubTotal from "../components/Cart/CartSubTotal";
-import calculateCartTotal from "../utils/calculateCartTotal";
-import Link from "next/link";
-import axios from "axios";
-import baseURL from "../utils/baseURL";
-import Spinner from "../components/Shared/Spinner";
-import Router from "next/router";
+import { useState, useEffect } from 'react';
+import Layout from '../components/Layout';
+import { useAuth } from '../store/auth/auth.context';
+import { useCart } from '../store/cart/cart.context';
+import cookie from 'js-cookie';
+import StripeCheckout from 'react-stripe-checkout';
+import CartList from '../components/Cart/CartList';
+import CartSubTotal from '../components/Cart/CartSubTotal';
+import calculateCartTotal from '../utils/calculateCartTotal';
+import Link from 'next/link';
+import axios from 'axios';
+import baseURL from '../utils/baseURL';
+import Spinner from '../components/Shared/Loader/Spinner';
+import Router from 'next/router';
 
 const Cart = () => {
   const { currentUser } = useAuth();
@@ -32,13 +32,13 @@ const Cart = () => {
   const handleCheckout = async paymentData => {
     try {
       setSubmitting(true);
-      const token = cookie.get("token");
+      const token = cookie.get('token');
       const payload = { paymentData };
       const headers = { headers: { Authorization: token } };
       await axios.post(`${baseURL}/api/checkout`, payload, headers);
       setSuccess(true);
       setSubmitting(false);
-      Router.push("/account");
+      Router.push('/account');
     } catch (error) {
       console.log(error);
     }
@@ -67,12 +67,12 @@ const Cart = () => {
                 >
                   <div className="checkout-btn-wrapper">
                     <button className="checkout-btn" disabled={submitting}>
-                      {" "}
+                      {' '}
                       {submitting ? (
                         <Spinner color="#fff" width={40} height={40} />
                       ) : (
-                        "CHECK OUT"
-                      )}{" "}
+                        'CHECK OUT'
+                      )}{' '}
                     </button>
                   </div>
                 </StripeCheckout>

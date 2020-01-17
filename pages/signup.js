@@ -1,81 +1,114 @@
 import React, { useEffect, useState } from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import baseURL from '../utils/baseURL';
-import axios from 'axios';
+import Spinner from '../components/Shared/Loader/Spinner';
+import Alert from '../components/Shared/Alert';
+import { useAuth } from '../store/auth/auth.context';
 
 const SignUp = () => {
-  const userObj = {
-    email: '',
-    name: '',
-    password: ''
-  };
+  const [submit, setSubmit] = useState(false);
+  const { error, signUp, clearError } = useAuth();
 
-  const [user, setUser] = useState(userObj);
+  useEffect(() => {
+    return () => error && clearError();
+  }, [error]);
 
-  function handleChange(e) {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(`${baseURL}/api/signup`, user);
-      console.log(data);
-    } catch (error) {
-      console.log(error.response);
-    }
-  }
+  const Schema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    password: Yup.string()
+      .required('Password is required')
+      .min(6),
+    email: Yup.string()
+      .email('Invalid email')
+      .required('Email is required')
+  });
 
   return (
     <>
       <Layout>
         <div className="container">
-          <form onSubmit={handleSubmit} className="auth-form">
-            <h1 className="page-heading"> Sign Up </h1>
-            <div className="group">
-              <input
-                className="input"
-                type="text"
-                placeholder="Name"
-                name="name"
-                value={user.name}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="group">
-              <input
-                className="input"
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={user.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="group">
-              <input
-                className="input"
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={user.password}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="group">
-              <button type="submit" className="btn">
-                {' '}
-                Sign Up{' '}
-              </button>
-            </div>
-            <span className="link">
-              Already have an account?{' '}
-              <Link href="/login">
-                <a className="link link-text"> Login your Account.</a>
-              </Link>
-            </span>
-          </form>
+          <Formik
+            initialValues={{
+              name: '',
+              email: '',
+              password: ''
+            }}
+            validationSchema={Schema}
+            onSubmit={async values => {
+              setSubmit(true);
+              await signUp(values);
+              setSubmit(false);
+            }}
+          >
+            {({ errors, touched, handleChange, handleSubmit, values }) => (
+              <form onSubmit={handleSubmit} className="auth-form">
+                <h1 className="page-heading"> Sign Up </h1>
+                {error && <Alert message={error} type="error" />}
+                <div className="group">
+                  <input
+                    className={`input ${errors.name &&
+                      touched.name &&
+                      'input-error'}`}
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    value={values.name}
+                    onChange={handleChange}
+                  />
+                  {errors.name && touched.name ? (
+                    <div className="error">{errors.name}</div>
+                  ) : null}
+                </div>
+                <div className="group">
+                  <input
+                    className={`input ${errors.email &&
+                      touched.email &&
+                      'input-error'}`}
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                  />
+                  {errors.email && touched.email ? (
+                    <div className="error">{errors.email}</div>
+                  ) : null}
+                </div>
+                <div className="group">
+                  <input
+                    className={`input ${errors.password &&
+                      touched.password &&
+                      'input-error'}`}
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                  />
+                  {errors.password && touched.password ? (
+                    <div className="error">{errors.password}</div>
+                  ) : null}
+                </div>
+                <div className="group">
+                  <button type="submit" className="btn">
+                    {submit ? (
+                      <Spinner width={40} height={40} color="#fff" />
+                    ) : (
+                      'Sign Up'
+                    )}
+                  </button>
+                </div>
+                <span className="link">
+                  Already have an account?{' '}
+                  <Link href="/login">
+                    <a className="link link-text"> Login your Account.</a>
+                  </Link>
+                </span>
+              </form>
+            )}
+          </Formik>
         </div>
       </Layout>
       <style jsx>
@@ -132,6 +165,16 @@ const SignUp = () => {
 
           .link-text {
             color: var(--color-primary);
+          }
+
+          .error {
+            color: red;
+            font-size: 1.6rem;
+            padding: 0.2rem 0;
+          }
+
+          .auth-form .input-error {
+            border-bottom: 1px solid red;
           }
         `}
       </style>

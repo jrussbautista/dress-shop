@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Layout from "../components/Layout";
-import baseURL from "../utils/baseURL";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Layout from '../components/Layout';
+import baseURL from '../utils/baseURL';
+import axios from 'axios';
 
 const SignUp = () => {
   const userObj = {
-    email: "",
-    name: "",
-    password: ""
+    email: '',
+    name: '',
+    password: ''
   };
 
   const [user, setUser] = useState(userObj);
@@ -65,13 +65,16 @@ const SignUp = () => {
             </div>
             <div className="group">
               <button type="submit" className="btn">
-                {" "}
-                Sign Up{" "}
+                {' '}
+                Sign Up{' '}
               </button>
             </div>
-            <Link href="/login">
-              <a className="link"> Login your Account</a>
-            </Link>
+            <span className="link">
+              Already have an account?{' '}
+              <Link href="/login">
+                <a className="link link-text"> Login your Account.</a>
+              </Link>
+            </span>
           </form>
         </div>
       </Layout>
@@ -96,7 +99,6 @@ const SignUp = () => {
           .auth-form .input {
             width: 100%;
             height: 5rem;
-            padding: 0 1.5rem;
             font-size: 1.7rem;
             border: 1px solid transparent;
             border-bottom: 1px solid #666;
@@ -126,6 +128,10 @@ const SignUp = () => {
             color: var(--color-dark);
             display: inline-block;
             font-size: 1.7rem;
+          }
+
+          .link-text {
+            color: var(--color-primary);
           }
         `}
       </style>

@@ -38,7 +38,7 @@ const Cart = () => {
       await axios.post(`${baseURL}/api/checkout`, payload, headers);
       setSuccess(true);
       setSubmitting(false);
-      Router.push("/order");
+      Router.push("/account");
     } catch (error) {
       console.log(error);
     }

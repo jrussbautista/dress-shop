@@ -10,11 +10,13 @@
   "dependencies": {
     "axios": "^0.19.1",
     "bcryptjs": "^2.4.3",
+    "formik": "^2.1.2",
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.5",
     "next": "9.1.5",
     "nookies": "^2.0.8",
+    "nprogress": "^0.2.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-icons": "^3.8.0",
@@ -22,6 +24,16 @@
     "shortid": "^2.2.15",
     "stripe": "^8.0.1",
     "uuid": "^3.3.3",
-    "validator": "^12.1.0"
+    "validator": "^12.1.0",
+    "yup": "^0.28.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^1.7.0"
   }
 }

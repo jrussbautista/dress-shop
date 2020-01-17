@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Layout from "../components/Layout";
-import baseURL from "../utils/baseURL";
-import Banner from "../components/Home/Banner";
-import ProductList from "../components/Shared/Products/ProductList";
-import Spinner from "../components/Shared/Spinner";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Layout from '../components/Layout';
+import baseURL from '../utils/baseURL';
+import Banner from '../components/Home/Banner';
+import ProductList from '../components/Shared/Products/ProductList';
+import Spinner from '../components/Shared/Spinner';
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -48,7 +48,7 @@ const Home = () => {
           <ProductList products={products} />
           {isLoadingMore && (
             <div className="loading-wrapper">
-              <Spinner color={"var(--color-primary)"} width={80} height={80} />
+              <Spinner color={'var(--color-primary)'} width={80} height={80} />
             </div>
           )}
           {isLoadMore && !isLoadingMore && (

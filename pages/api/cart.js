@@ -104,8 +104,7 @@ async function handleDeleteRequest(req, res) {
       { user: userId },
       { $pull: { carts: { _id: cartId } } }
     );
-    console.log(cart);
-    res.send("test");
+    res.status(200).send("Successfully cart deleted");
   } catch (error) {
     console.error(error);
     res.status(500).send("Error in deleting cart");

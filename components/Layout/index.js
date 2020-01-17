@@ -1,8 +1,19 @@
-import Head from "next/head";
-import Header from "./Header";
-import GlobalStyle from "./GlobalStyle";
+import Head from 'next/head';
+import NProgress from 'nprogress';
+import Header from './Header';
+import Router from 'next/router';
+import GlobalStyle from './GlobalStyle';
 
-export default ({ children, title = "Dress Shop" }) => {
+NProgress.configure({ showSpinner: false });
+
+Router.onRouteChangeStart = url => {
+  NProgress.start();
+};
+
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
+
+export default ({ children, title = 'Dress Shop' }) => {
   return (
     <>
       <Head>

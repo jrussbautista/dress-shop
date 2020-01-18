@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { IoMdCart, IoIosSearch } from "react-icons/io";
-import Link from "next/link";
-import { useCart } from "../../store/cart/cart.context";
-import { useAuth } from "../../store/auth/auth.context";
+import { useState } from 'react';
+import { IoMdCart, IoIosSearch } from 'react-icons/io';
+import Link from 'next/link';
+import { useCart } from '../../store/cart/cart.context';
+import { useAuth } from '../../store/auth/auth.context';
 
 export default () => {
   const { carts } = useCart();
@@ -21,8 +21,8 @@ export default () => {
               <form className="search-form">
                 <input type="text" className="search-input" />
                 <button className="search-button">
-                  {" "}
-                  <IoIosSearch size={30} />{" "}
+                  {' '}
+                  <IoIosSearch size={30} />{' '}
                 </button>
               </form>
             </div>
@@ -43,11 +43,11 @@ export default () => {
                   className="user"
                   onClick={() => setIsOpenDropdown(!isOpenDropdown)}
                 >
-                  {" "}
+                  {' '}
                   {currentUser.name
-                    .split(" ")[0]
+                    .split(' ')[0]
                     .charAt(0)
-                    .toUpperCase()}{" "}
+                    .toUpperCase()}{' '}
                 </div>
                 {isOpenDropdown && (
                   <ul className="dropdown">
@@ -67,7 +67,7 @@ export default () => {
                 <Link href="/signup">
                   <a>Sign Up</a>
                 </Link>
-                <span> | </span>
+                <span style={{ fontWeight: '300' }}> | </span>
                 <Link href="/login">
                   <a>Log In</a>
                 </Link>
@@ -84,6 +84,7 @@ export default () => {
             top: 0;
             left: 0;
             background-color: #fff;
+            box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.06);
           }
           .site-title {
             font-size: 3rem;

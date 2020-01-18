@@ -3,7 +3,7 @@ export default () => {
     <>
       <style jsx global>
         {`
-          @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+          @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
           *,
           *::before,
@@ -35,6 +35,19 @@ export default () => {
 
           a {
             text-decoration: none;
+          }
+
+          // customize dots in banner
+          .dots {
+            bottom: 3rem;
+          }
+
+          .dots li button:before {
+            font-size: 1rem;
+          }
+
+          .slick-slider {
+            overflow: hidden;
           }
         `}
       </style>

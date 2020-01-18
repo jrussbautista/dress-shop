@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { useCart } from "../store/cart/cart.context";
-import Layout from "../components/Layout";
-import axios from "axios";
-import baseURL from "../utils/baseURL";
-import ProductAction from "../components/Product/ProductAction";
-import ProductInfo from "../components/Product/ProductInfo";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useCart } from '../store/cart/cart.context';
+import Layout from '../components/Layout';
+import axios from 'axios';
+import baseURL from '../utils/baseURL';
+import ProductAction from '../components/Product/ProductAction';
+import ProductInfo from '../components/Product/ProductInfo';
+import SkeletonProduct from '../components/Shared/Loader/SkeletonProduct';
 
 const Product = () => {
   const { id } = useRouter().query;
   const [loading, setLoading] = useState(true);
-  const [product, setProduct] = useState("");
+  const [product, setProduct] = useState('');
   const [qty, setQty] = useState(1);
   const { addCart } = useCart();
 
@@ -26,7 +27,7 @@ const Product = () => {
 
   // handle change quantity
   const handleChangeQty = action => {
-    if (action === "add") {
+    if (action === 'add') {
       setQty(qty => qty + 1);
     } else {
       if (qty > 1) setQty(qty => qty - 1);
@@ -41,10 +42,10 @@ const Product = () => {
 
   return (
     <Layout>
-      {loading ? (
-        <div> Loading....</div>
-      ) : (
-        <div className="container">
+      <div className="container">
+        {loading ? (
+          <SkeletonProduct />
+        ) : (
           <div className="product-container">
             <div className="main">
               <div className="cover-img">
@@ -60,8 +61,8 @@ const Product = () => {
               />
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
       <style jsx>{`
         .container {
           max-width: 120rem;

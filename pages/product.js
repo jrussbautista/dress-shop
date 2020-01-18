@@ -66,7 +66,7 @@ const Product = () => {
       <style jsx>{`
         .container {
           max-width: 120rem;
-          margin: 2rem auto;
+          margin: 3rem auto;
         }
         .product-container {
           display: flex;

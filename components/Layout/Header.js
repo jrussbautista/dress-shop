@@ -55,6 +55,13 @@ export default () => {
                       <span>{currentUser.name}</span>
                     </li>
                     <li>
+                      <Link href="/order">
+                        <a>
+                          <span> My orders </span>
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
                       <button className="btn" onClick={logout}>
                         LOG OUT
                       </button>
@@ -205,7 +212,7 @@ export default () => {
           }
 
           .dropdown li {
-            padding: 1rem 0;
+            padding: 0.8rem 0;
           }
 
           .dropdown li span {

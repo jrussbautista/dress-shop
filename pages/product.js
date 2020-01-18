@@ -21,7 +21,6 @@ const Product = () => {
     async function getProductInfo() {
       const payload = { params: { id } };
       const { data } = await axios.get(`${baseURL}/api/product`, payload);
-      console.log(data);
       setProduct(data.product);
       setRelatedProducts(data.relatedProducts);
       setLoading(false);

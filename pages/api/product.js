@@ -18,7 +18,11 @@ async function handleGetRequest(req, res) {
   try {
     const product = await Product.findOne({ _id: id });
     const { category } = product;
-    const relatedProducts = await Product.find({ category }).limit(8);
+    // find related products based on category
+    const relatedProducts = await Product.find({
+      category,
+      _id: { $ne: id }
+    }).limit(8);
     res.status(200).json({ product, relatedProducts });
   } catch (error) {
     console.error(error);

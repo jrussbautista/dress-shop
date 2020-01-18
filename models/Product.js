@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import shortid from "shortid";
+import mongoose from 'mongoose';
+import shortid from 'shortid';
 
 const { String, Number } = mongoose.Schema.Types;
 
@@ -24,8 +24,11 @@ const ProductSchema = new mongoose.Schema({
   imageURL: {
     type: String,
     required: true
+  },
+  category: {
+    type: String
   }
 });
 
 export default mongoose.models.Product ||
-  mongoose.model("Product", ProductSchema);
+  mongoose.model('Product', ProductSchema);

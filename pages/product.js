@@ -7,11 +7,13 @@ import baseURL from '../utils/baseURL';
 import ProductAction from '../components/Product/ProductAction';
 import ProductInfo from '../components/Product/ProductInfo';
 import SkeletonProduct from '../components/Shared/Loader/SkeletonProduct';
+import Recommended from '../components/Product/Recommended';
 
 const Product = () => {
   const { id } = useRouter().query;
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState('');
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [qty, setQty] = useState(1);
   const { addCart } = useCart();
 
@@ -19,7 +21,9 @@ const Product = () => {
     async function getProductInfo() {
       const payload = { params: { id } };
       const { data } = await axios.get(`${baseURL}/api/product`, payload);
-      setProduct(data);
+      console.log(data);
+      setProduct(data.product);
+      setRelatedProducts(data.relatedProducts);
       setLoading(false);
     }
     getProductInfo();
@@ -46,21 +50,24 @@ const Product = () => {
         {loading ? (
           <SkeletonProduct />
         ) : (
-          <div className="product-container">
-            <div className="main">
-              <div className="cover-img">
-                <img className="img" src={product.imageURL} alt="" />
+          <>
+            <div className="product-container">
+              <div className="main">
+                <div className="cover-img">
+                  <img className="img" src={product.imageURL} alt="" />
+                </div>
+              </div>
+              <div className="product-info">
+                <ProductInfo product={product} />
+                <ProductAction
+                  handleQty={handleChangeQty}
+                  qty={qty}
+                  handleAddToCart={handleAddToCart}
+                />
               </div>
             </div>
-            <div className="product-info">
-              <ProductInfo product={product} />
-              <ProductAction
-                handleQty={handleChangeQty}
-                qty={qty}
-                handleAddToCart={handleAddToCart}
-              />
-            </div>
-          </div>
+            <Recommended products={relatedProducts} />
+          </>
         )}
       </div>
       <style jsx>{`
@@ -71,6 +78,7 @@ const Product = () => {
         .product-container {
           display: flex;
           flex-wrap: wrap;
+          margin-bottom: 2rem;
         }
 
         .main,

@@ -25,8 +25,13 @@ const AuthProvider = ({ children, currentUser }) => {
   const setCurrentUser = async token => {
     const payload = { headers: { Authorization: token } };
     const { data } = await axios.get(`${baseURL}/api/account`, payload);
+    const isAdmin = data.role === 'admin';
     dispatch({ type: SET_CURRENT_USER, payload: data });
-    autoLogin(token);
+    if (isAdmin) {
+      autoLogin(token, '/admin');
+    } else {
+      autoLogin(token, '/');
+    }
   };
 
   const login = async user => {

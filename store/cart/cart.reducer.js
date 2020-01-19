@@ -1,11 +1,11 @@
-import { ADD_CART, REMOVE_CART, SET_CART, CLEAR_CART } from "./cart.types";
+import { ADD_CART, REMOVE_CART, SET_CART, CLEAR_CART } from './cart.types';
 
 export default (state, action) => {
   switch (action.type) {
     case CLEAR_CART:
       return { ...state, carts: [] };
     case SET_CART:
-      return { ...state, carts: action.payload };
+      return { ...state, carts: action.payload, loading: false };
     case ADD_CART:
       // check if new added cart is exist on cart
       const isCartExist = state.carts.find(

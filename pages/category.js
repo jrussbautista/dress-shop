@@ -48,7 +48,7 @@ const Category = () => {
           <Filter handleChange={handleFilterChange} active={sortByPrice} />
         </div>
         {isLoading ? (
-          <SkeletonGrid number={4} />
+          <SkeletonGrid number={20} />
         ) : (
           <ProductList products={products} />
         )}

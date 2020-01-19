@@ -2,9 +2,9 @@ import Router from 'next/router';
 import cookie from 'js-cookie';
 
 // handle auto login when created an account, and login
-function autoLogin(token) {
+function autoLogin(token, location) {
   cookie.set('token', token);
-  Router.push('/');
+  Router.push(location);
 }
 
 function redirectUser(ctx, location) {

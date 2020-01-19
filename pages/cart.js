@@ -12,10 +12,11 @@ import axios from 'axios';
 import baseURL from '../utils/baseURL';
 import Spinner from '../components/Shared/Loader/Spinner';
 import Router from 'next/router';
+import SkeletonCart from '../components/Shared/Loader/SkeletonCart';
 
 const Cart = () => {
   const { currentUser } = useAuth();
-  const { carts, removeCart, clearCart } = useCart();
+  const { carts, removeCart, clearCart, loading } = useCart();
   const { cartTotal, stripeTotal } = calculateCartTotal(carts);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -50,40 +51,46 @@ const Cart = () => {
         {currentUser ? (
           <div>
             <h1 className="page-title">Your Cart</h1>
-            {carts.length > 0 ? (
-              <>
-                <CartList carts={carts} removeCart={removeCart} />
-                <CartSubTotal total={cartTotal} />
-                <StripeCheckout
-                  name="Dress Shop"
-                  amount={stripeTotal}
-                  currency="PHP"
-                  shippingAddress={true}
-                  billingAddress={true}
-                  zipCode={true}
-                  stripeKey="pk_test_hsm6fyMNxWvCWNRY58tIAXAw006jqf8Kzt"
-                  token={handleCheckout}
-                  triggerEvent="onClick"
-                >
-                  <div className="checkout-btn-wrapper">
-                    <button className="checkout-btn" disabled={submitting}>
-                      {' '}
-                      {submitting ? (
-                        <Spinner color="#fff" width={40} height={40} />
-                      ) : (
-                        'CHECK OUT'
-                      )}{' '}
-                    </button>
-                  </div>
-                </StripeCheckout>
-              </>
+            {loading ? (
+              <SkeletonCart />
             ) : (
-              <div className="msg-container">
-                <div className="msg"> Your cart is empty :( </div>
-                <Link href="/">
-                  <a className="btn"> Go Shop Now </a>
-                </Link>
-              </div>
+              <>
+                {carts.length > 0 ? (
+                  <>
+                    <CartList carts={carts} removeCart={removeCart} />
+                    <CartSubTotal total={cartTotal} />
+                    <StripeCheckout
+                      name="Dress Shop"
+                      amount={stripeTotal}
+                      currency="PHP"
+                      shippingAddress={true}
+                      billingAddress={true}
+                      zipCode={true}
+                      stripeKey="pk_test_hsm6fyMNxWvCWNRY58tIAXAw006jqf8Kzt"
+                      token={handleCheckout}
+                      triggerEvent="onClick"
+                    >
+                      <div className="checkout-btn-wrapper">
+                        <button className="checkout-btn" disabled={submitting}>
+                          {' '}
+                          {submitting ? (
+                            <Spinner color="#fff" width={40} height={40} />
+                          ) : (
+                            'CHECK OUT'
+                          )}{' '}
+                        </button>
+                      </div>
+                    </StripeCheckout>
+                  </>
+                ) : (
+                  <div className="msg-container">
+                    <div className="msg"> Your cart is empty :( </div>
+                    <Link href="/">
+                      <a className="btn"> Go Shop Now </a>
+                    </Link>
+                  </div>
+                )}
+              </>
             )}
           </div>
         ) : (

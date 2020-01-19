@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const connection = {};
 
@@ -13,7 +13,7 @@ async function connectDb() {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
-  console.log("DB Connected");
+  console.log('DB Connected');
   connection.isConnected = db.connections[0].readyState;
 }
 

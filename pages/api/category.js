@@ -4,9 +4,21 @@ import Product from '../../models/Product';
 export default async (req, res) => {
   await connectDB();
   try {
-    let { category } = req.query;
+    let { category, price } = req.query;
     category = category.toLowerCase();
-    const products = await Product.find({ category });
+    let products = [];
+    let sort;
+
+    if (price) {
+      if (price === 'low') {
+        sort = 1;
+      } else {
+        sort = -1;
+      }
+      products = await Product.find({ category }).sort({ price: sort });
+    } else {
+      products = await Product.find({ category });
+    }
     res.status(200).json({ products });
   } catch (error) {
     console.error(error);

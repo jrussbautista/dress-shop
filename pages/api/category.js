@@ -4,21 +4,32 @@ import Product from '../../models/Product';
 export default async (req, res) => {
   await connectDB();
   try {
-    let { category, price } = req.query;
-    category = category.toLowerCase();
-    let products = [];
+    let { category, price, keyword } = req.query;
     let sort;
+    let products = [];
 
     if (price) {
-      if (price === 'low') {
-        sort = 1;
-      } else {
-        sort = -1;
-      }
-      products = await Product.find({ category }).sort({ price: sort });
+      sort = price === 'low' ? { price: 1 } : { price: -1 };
     } else {
-      products = await Product.find({ category });
+      sort = { _id: 'desc' };
     }
+
+    if (keyword) {
+      products = await Product.find({ $text: { $search: keyword } }).sort(sort);
+    } else if (category) {
+      products = await Product.find({ category }).sort(sort);
+    }
+
+    // if (price) {
+    //   if (price === 'low') {
+    //     sort = 1;
+    //   } else {
+    //     sort = -1;
+    //   }
+    //   products = await Product.find({ category }).sort({ price: sort });
+    // } else {
+    //   products = await Product.find({ category });
+    // }
     res.status(200).json({ products });
   } catch (error) {
     console.error(error);

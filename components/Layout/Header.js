@@ -3,11 +3,18 @@ import { IoMdCart, IoIosSearch } from 'react-icons/io';
 import Link from 'next/link';
 import { useCart } from '../../store/cart/cart.context';
 import { useAuth } from '../../store/auth/auth.context';
+import Router from 'next/router';
 
 export default () => {
   const { carts } = useCart();
   const { currentUser, logout } = useAuth();
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
+  const [search, setSearch] = useState('');
+
+  const handleSearchSubmit = e => {
+    e.preventDefault();
+    Router.push(`/category?keyword=${search}`);
+  };
 
   return (
     <>
@@ -18,9 +25,14 @@ export default () => {
           </Link>
           <ul className="header-right">
             <div className="search-container">
-              <form className="search-form">
-                <input type="text" className="search-input" />
-                <button className="search-button">
+              <form className="search-form" onSubmit={handleSearchSubmit}>
+                <input
+                  type="text"
+                  className="search-input"
+                  onChange={e => setSearch(e.target.value)}
+                  value={search}
+                />
+                <button className="search-button" type="submit">
                   {' '}
                   <IoIosSearch size={30} />{' '}
                 </button>

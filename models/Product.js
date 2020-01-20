@@ -6,7 +6,8 @@ const { String, Number } = mongoose.Schema.Types;
 const ProductSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    text: true
   },
   price: {
     type: Number,
@@ -29,6 +30,17 @@ const ProductSchema = new mongoose.Schema({
     type: String
   }
 });
+
+ProductSchema.index(
+  {
+    name: 'text'
+  },
+  {
+    weights: {
+      name: 3
+    }
+  }
+);
 
 export default mongoose.models.Product ||
   mongoose.model('Product', ProductSchema);

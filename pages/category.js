@@ -11,13 +11,14 @@ import Filter from '../components/Category/Filter';
 const Category = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { category, sortByPrice } = useRouter().query;
+  const router = useRouter();
+  const { category, sortByPrice, keyword } = router.query;
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         setIsLoading(true);
-        const payload = { params: { category, price: sortByPrice } };
+        const payload = { params: { category, price: sortByPrice, keyword } };
         const { data } = await axios.get(`${baseURL}/api/category`, payload);
         setProducts(data.products);
         setIsLoading(false);
@@ -26,18 +27,36 @@ const Category = () => {
       }
     };
     getProducts();
-  }, [category, sortByPrice]);
+  }, [category, sortByPrice, keyword]);
 
   const handleTabChange = selected => {
-    if (sortByPrice) {
-      Router.push(`/category?category=${selected}&sortByPrice=${sortByPrice}`);
+    if (keyword) {
+      if (sortByPrice) {
+        Router.push(
+          `/category?category=${selected}&sortByPrice=${sortByPrice}&keyword=${keyword}`
+        );
+      } else {
+        Router.push(`/category?category=${selected}&keyword=${keyword}`);
+      }
     } else {
-      Router.push(`/category?category=${selected}`);
+      if (sortByPrice) {
+        Router.push(
+          `/category?category=${selected}&sortByPrice=${sortByPrice}`
+        );
+      } else {
+        Router.push(`/category?category=${selected}`);
+      }
     }
   };
 
   const handleFilterChange = selected => {
-    Router.push(`/category?category=${category}&sortByPrice=${selected}`);
+    if (keyword) {
+      Router.push(
+        `/category?category=${category}&sortByPrice=${selected}&keyword=${keyword}`
+      );
+    } else {
+      Router.push(`/category?category=${category}&sortByPrice=${selected}`);
+    }
   };
 
   return (

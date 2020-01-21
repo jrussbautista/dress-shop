@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const SkeletonGrid = ({ number }) => {
   return (
     <>
@@ -58,6 +60,10 @@ const SkeletonGrid = ({ number }) => {
       </style>
     </>
   );
+};
+
+SkeletonGrid.propTypes = {
+  number: PropTypes.number.isRequired
 };
 
 export default SkeletonGrid;

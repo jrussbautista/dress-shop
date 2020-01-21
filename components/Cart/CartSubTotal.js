@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const CartSubTotal = ({ total }) => {
   return (
     <div className="subtotal">
@@ -26,6 +28,10 @@ const CartSubTotal = ({ total }) => {
       </style>
     </div>
   );
+};
+
+CartSubTotal.propTypes = {
+  total: PropTypes.number.isRequired
 };
 
 export default CartSubTotal;

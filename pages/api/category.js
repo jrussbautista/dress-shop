@@ -20,16 +20,6 @@ export default async (req, res) => {
       products = await Product.find({ category }).sort(sort);
     }
 
-    // if (price) {
-    //   if (price === 'low') {
-    //     sort = 1;
-    //   } else {
-    //     sort = -1;
-    //   }
-    //   products = await Product.find({ category }).sort({ price: sort });
-    // } else {
-    //   products = await Product.find({ category });
-    // }
     res.status(200).json({ products });
   } catch (error) {
     console.error(error);

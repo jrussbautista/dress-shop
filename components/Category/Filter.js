@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MdExpandMore } from 'react-icons/md';
+import PropTypes from 'prop-types';
 
 const Filter = ({ handleChange, active }) => {
   const [selected, setSelected] = useState(!active ? null : getActive(active));
@@ -87,6 +88,11 @@ const Filter = ({ handleChange, active }) => {
       `}</style>
     </div>
   );
+};
+
+Filter.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  active: PropTypes.string.isRequired
 };
 
 export default Filter;

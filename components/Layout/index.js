@@ -3,6 +3,7 @@ import NProgress from 'nprogress';
 import Header from './Header';
 import Router from 'next/router';
 import GlobalStyle from './GlobalStyle';
+import PropTypes from 'prop-types';
 
 NProgress.configure({ showSpinner: false });
 
@@ -13,7 +14,7 @@ Router.onRouteChangeStart = url => {
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
-export default ({ children, title = 'Dress Shop' }) => {
+const Layout = ({ children, title = 'Dress Shop' }) => {
   return (
     <>
       <Head>
@@ -25,3 +26,9 @@ export default ({ children, title = 'Dress Shop' }) => {
     </>
   );
 };
+
+Layout.propTypes = {
+  title: PropTypes.string
+};
+
+export default Layout;

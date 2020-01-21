@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const CartList = ({ carts, removeCart }) => {
   return (
     <div>
@@ -27,13 +29,13 @@ const CartList = ({ carts, removeCart }) => {
               P {parseFloat(cart.product.price * cart.quantity).toFixed(2)}
             </div>
             <div className="product-content">
-              {" "}
+              {' '}
               <button
                 className="btn-remove"
                 onClick={removeCart.bind(this, cart._id)}
               >
-                {" "}
-                Remove{" "}
+                {' '}
+                Remove{' '}
               </button>
             </div>
           </div>
@@ -124,6 +126,11 @@ const CartList = ({ carts, removeCart }) => {
       </style>
     </div>
   );
+};
+
+CartList.propTypes = {
+  carts: PropTypes.array.isRequired,
+  removeCart: PropTypes.func.isRequired
 };
 
 export default CartList;

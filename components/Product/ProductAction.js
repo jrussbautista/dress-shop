@@ -1,9 +1,11 @@
+import PropTypes from 'prop-types';
+
 const ProductAction = ({ handleQty, qty, handleAddToCart }) => {
   return (
     <>
       <div className="action">
         <div className="qty-container">
-          <button className="btn" onClick={() => handleQty("sub")}>
+          <button className="btn" onClick={() => handleQty('sub')}>
             -
           </button>
           <input
@@ -13,7 +15,7 @@ const ProductAction = ({ handleQty, qty, handleAddToCart }) => {
             value={qty}
             onChange={e => handleQty(e.target.value)}
           />
-          <button className="btn" onClick={() => handleQty("add")}>
+          <button className="btn" onClick={() => handleQty('add')}>
             +
           </button>
         </div>
@@ -68,6 +70,12 @@ const ProductAction = ({ handleQty, qty, handleAddToCart }) => {
       `}</style>
     </>
   );
+};
+
+ProductAction.propTypes = {
+  handleQty: PropTypes.func.isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
+  qty: PropTypes.number.isRequired
 };
 
 export default ProductAction;

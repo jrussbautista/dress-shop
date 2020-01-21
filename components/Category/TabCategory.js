@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const TabCategory = ({ active, onChangeTab }) => {
   return (
     <div>
@@ -41,6 +43,11 @@ const TabCategory = ({ active, onChangeTab }) => {
       </style>
     </div>
   );
+};
+
+Tab.propTypes = {
+  onChangeTab: PropTypes.func.isRequired,
+  active: PropTypes.string.isRequired
 };
 
 export default TabCategory;

@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 
-export default ({ products }) => {
+const ProductList = ({ products }) => {
   return (
     <>
       <div className="product-grid">
@@ -64,3 +65,9 @@ export default ({ products }) => {
     </>
   );
 };
+
+ProductList.propTypes = {
+  products: PropTypes.array.isRequired
+};
+
+export default ProductList;

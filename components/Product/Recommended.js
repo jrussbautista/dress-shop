@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductList from '../Shared/Products/ProductList';
+import PropTypes from 'prop-types';
 
 const Recommended = ({ products }) => {
   return (
@@ -18,6 +19,10 @@ const Recommended = ({ products }) => {
       `}</style>
     </div>
   );
+};
+
+Recommended.propTypes = {
+  products: PropTypes.array.isRequired
 };
 
 export default Recommended;

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const ProductInfo = ({ product }) => {
   return (
     <>
@@ -30,6 +32,10 @@ const ProductInfo = ({ product }) => {
       `}</style>
     </>
   );
+};
+
+ProductInfo.propTypes = {
+  product: PropTypes.object.isRequired
 };
 
 export default ProductInfo;

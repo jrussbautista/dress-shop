@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useCart } from '../store/cart/cart.context';
+import { useAuth } from '../store/auth/auth.context';
 import Layout from '../components/Layout';
 import axios from 'axios';
 import baseURL from '../utils/baseURL';
@@ -16,6 +17,7 @@ const Product = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [qty, setQty] = useState(1);
   const { addCart } = useCart();
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     async function getProductInfo() {
@@ -39,8 +41,12 @@ const Product = () => {
 
   //handle add to cart
   const handleAddToCart = () => {
-    const cartObj = { quantity: qty, product };
-    addCart(cartObj);
+    if (currentUser) {
+      const cartObj = { quantity: qty, product };
+      addCart(cartObj);
+    } else {
+      Router.push(`/login?ref=${product._id}`);
+    }
   };
 
   return (

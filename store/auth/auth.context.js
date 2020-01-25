@@ -8,7 +8,7 @@ import {
 import { autoLogin } from '../../utils/auth';
 import axios from 'axios';
 import cookie from 'js-cookie';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import reducer from './auth.reducer';
 import baseURL from '../../utils/baseURL';
 
@@ -30,7 +30,9 @@ const AuthProvider = ({ children, currentUser }) => {
     if (isAdmin) {
       autoLogin(token, '/admin');
     } else {
-      autoLogin(token, '/');
+      const { ref } = useRouter().query;
+      const url = ref ? `/product?id=${ref}` : '/';
+      autoLogin(token, url);
     }
   };
 

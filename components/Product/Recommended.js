@@ -9,7 +9,7 @@ const Recommended = ({ products }) => {
       <ProductList products={products} />
       <style jsx>{`
         .container {
-          padding: 3rem 0;
+          padding: 3rem 1.5rem;
         }
         .page-title {
           font-size: 3rem;

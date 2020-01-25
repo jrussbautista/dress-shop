@@ -45,9 +45,8 @@ const TabCategory = ({ active, onChangeTab }) => {
   );
 };
 
-Tab.propTypes = {
-  onChangeTab: PropTypes.func.isRequired,
-  active: PropTypes.string.isRequired
+TabCategory.propTypes = {
+  onChangeTab: PropTypes.func
 };
 
 export default TabCategory;

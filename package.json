@@ -26,7 +26,6 @@
     "shortid": "^2.2.15",
     "slick-carousel": "^1.8.1",
     "stripe": "^8.0.1",
-    "uuid": "^3.3.3",
     "validator": "^12.1.0",
     "yup": "^0.28.0"
   },

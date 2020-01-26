@@ -57,7 +57,6 @@ const Admin = () => {
       //save product to db
       await axios.post(`${baseURL}/api/products`, payload);
       reset();
-      setSubmit(false);
     } catch (error) {
       console.log(error.response);
     } finally {
@@ -83,6 +82,7 @@ const Admin = () => {
               placeholder="Product Name"
               onChange={handleChange}
               required={true}
+              value={product.name}
             />
           </div>
           <div className="group">
@@ -115,6 +115,7 @@ const Admin = () => {
               placeholder="Product Price"
               onChange={handleChange}
               required={true}
+              value={product.price}
             />
           </div>
           <div className="group">
@@ -124,6 +125,7 @@ const Admin = () => {
               placeholder="Product Description"
               onChange={handleChange}
               required={true}
+              value={product.description}
             />
           </div>
           <div className="group">
@@ -132,6 +134,7 @@ const Admin = () => {
               id=""
               onChange={handleChange}
               required={true}
+              value={product.category}
             >
               <option value="men">Men</option>
               <option value="women">Women</option>
@@ -159,8 +162,9 @@ const Admin = () => {
         }
 
         .preview-img {
-          width: 100%;
-          height: 100%;
+          width: 30rem;
+          height: 30rem;
+          object-fit: contain;
         }
 
         .form {
@@ -204,13 +208,14 @@ const Admin = () => {
 
         .img-upload-container {
           position: relative;
-          width: 20rem;
-          height: 20rem;
+          width: 30rem;
+          height: 30rem;
           border: 1px solid #eee;
           display: flex;
           align-items: center;
           justify-content: center;
           font-size: 1.8rem;
+          overflow: hidden;
         }
 
         .btn-upload-container input {

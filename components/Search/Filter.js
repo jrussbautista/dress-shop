@@ -51,11 +51,13 @@ const Filter = ({ handleChange, active }) => {
 
         .select {
           border: 1px solid #eee;
+          background: #fff;
           position: relative;
           font-size: 1.8rem;
           padding: 1rem 1rem;
           width: 21rem;
           cursor: pointer;
+          border-radius: 6px;
         }
 
         .select-item {

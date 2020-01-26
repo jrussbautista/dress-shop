@@ -5,10 +5,10 @@ import Layout from '../components/Layout';
 import ProductList from '../components/Shared/Products/ProductList';
 import baseURL from '../utils/baseURL';
 import SkeletonGrid from '../components/Shared/Loader/SkeletonGrid';
-import TabCategory from '../components/Category/TabCategory';
-import Filter from '../components/Category/Filter';
+import TabCategory from '../components/Search/TabCategory';
+import Filter from '../components/Search/Filter';
 
-const Category = () => {
+const Search = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
@@ -19,7 +19,7 @@ const Category = () => {
       try {
         setIsLoading(true);
         const payload = { params: { category, price: sortByPrice, keyword } };
-        const { data } = await axios.get(`${baseURL}/api/category`, payload);
+        const { data } = await axios.get(`${baseURL}/api/search`, payload);
         setProducts(data.products);
         setIsLoading(false);
       } catch (error) {
@@ -33,18 +33,16 @@ const Category = () => {
     if (keyword) {
       if (sortByPrice) {
         Router.push(
-          `/category?category=${selected}&sortByPrice=${sortByPrice}&keyword=${keyword}`
+          `/search?category=${selected}&sortByPrice=${sortByPrice}&keyword=${keyword}`
         );
       } else {
-        Router.push(`/category?category=${selected}&keyword=${keyword}`);
+        Router.push(`/search?category=${selected}&keyword=${keyword}`);
       }
     } else {
       if (sortByPrice) {
-        Router.push(
-          `/category?category=${selected}&sortByPrice=${sortByPrice}`
-        );
+        Router.push(`/search?category=${selected}&sortByPrice=${sortByPrice}`);
       } else {
-        Router.push(`/category?category=${selected}`);
+        Router.push(`/search?category=${selected}`);
       }
     }
   };
@@ -52,10 +50,10 @@ const Category = () => {
   const handleFilterChange = selected => {
     if (keyword) {
       Router.push(
-        `/category?category=${category}&sortByPrice=${selected}&keyword=${keyword}`
+        `/search?category=${category}&sortByPrice=${selected}&keyword=${keyword}`
       );
     } else {
-      Router.push(`/category?category=${category}&sortByPrice=${selected}`);
+      Router.push(`/search?category=${category}&sortByPrice=${selected}`);
     }
   };
 
@@ -83,10 +81,13 @@ const Category = () => {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          background: rgba(0, 0, 0, 0.03);
+          padding: 1rem;
+          border-radius: 4px;
         }
       `}</style>
     </Layout>
   );
 };
 
-export default Category;
+export default Search;

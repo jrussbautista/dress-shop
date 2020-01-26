@@ -31,11 +31,14 @@ const TabCategory = ({ active, onChangeTab }) => {
             font-size: 2.2rem;
             border-bottom: 2px solid transparent;
             cursor: pointer;
+            background: #fff;
+            margin-right: 1rem;
+            border-radius: 6px;
         }
 
         .tab .active {
-            border-bottom: 2px solid var(--color-primary);
-            color: var(--color-primary);
+            background: var(--color-primary); 
+            color: #fff;
             font-weight: 600;
         }
             

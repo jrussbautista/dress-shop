@@ -13,7 +13,7 @@ export default () => {
 
   const handleSearchSubmit = e => {
     e.preventDefault();
-    Router.push(`/category?keyword=${search}`);
+    Router.push(`/search?keyword=${search}`);
   };
 
   return (

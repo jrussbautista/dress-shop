@@ -35,7 +35,8 @@ class MyApp extends App {
         redirectUser(ctx, '/login');
       }
     } else {
-      const isProtectedRoute = ctx.pathname === '/account';
+      const isProtectedRoute =
+        ctx.pathname === '/account' || ctx.pathname === '/admin';
       if (isProtectedRoute) redirectUser(ctx, '/login');
     }
 

@@ -29,7 +29,7 @@ const Categories = () => {
         <div className="category-container">
           {categories.map(category => (
             <div className="list" key={category._id}>
-              <Link href={`/category?category=${category.name.toLowerCase()}`}>
+              <Link href={`/search?category=${category.name.toLowerCase()}`}>
                 <a>
                   <div
                     className="category-img"

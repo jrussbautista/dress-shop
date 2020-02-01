@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
+import { Alert, Spinner } from '../components/Shared';
+import { useAuth } from '../store';
 import * as Yup from 'yup';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import Spinner from '../components/Shared/Loader/Spinner';
-import Alert from '../components/Shared/Alert';
-import { useAuth } from '../store/auth/auth.context';
 
 const SignUp = () => {
   const [submit, setSubmit] = useState(false);

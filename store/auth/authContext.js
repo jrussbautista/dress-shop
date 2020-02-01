@@ -4,12 +4,12 @@ import {
   SET_CURRENT_USER,
   SET_AUTH_ERROR,
   CLEAR_AUTH_ERROR
-} from './auth.types';
+} from './authTypes';
 import { autoLogin } from '../../utils/auth';
 import axios from 'axios';
 import cookie from 'js-cookie';
 import Router, { useRouter } from 'next/router';
-import reducer from './auth.reducer';
+import reducer from './authReducer';
 import baseURL from '../../utils/baseURL';
 
 const AuthContext = createContext();

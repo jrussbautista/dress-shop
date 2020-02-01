@@ -1,4 +1,4 @@
-import { ADD_CART, REMOVE_CART, SET_CART, CLEAR_CART } from './cart.types';
+import { ADD_CART, REMOVE_CART, SET_CART, CLEAR_CART } from './cartTypes';
 
 export default (state, action) => {
   switch (action.type) {

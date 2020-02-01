@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { IoMdCart, IoIosSearch } from 'react-icons/io';
 import Link from 'next/link';
-import { useCart } from '../../store/cart/cart.context';
-import { useAuth } from '../../store/auth/auth.context';
+import { useCart } from '../../store/cart/cartContext';
+import { useAuth } from '../../store/auth/authContext';
 import Router from 'next/router';
 
 export default () => {

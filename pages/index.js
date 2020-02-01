@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Spinner } from '../components/Shared';
 import axios from 'axios';
 import Layout from '../components/Layout';
 import baseURL from '../utils/baseURL';
 import Banner from '../components/Home/Banner';
 import ProductList from '../components/Shared/Products/ProductList';
-import Spinner from '../components/Shared/Loader/Spinner';
 import SkeletonGrid from '../components/Shared/Loader/SkeletonGrid';
 import Categories from '../components/Home/Categories';
 

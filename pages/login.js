@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
-import { useAuth } from '../store/auth/auth.context';
+import { useAuth } from '../store';
 import * as Yup from 'yup';
 import Link from 'next/link';
 import Layout from '../components/Layout';

@@ -3,7 +3,7 @@ import {
   SET_CURRENT_USER,
   SET_AUTH_ERROR,
   CLEAR_AUTH_ERROR
-} from './auth.types';
+} from './authTypes';
 
 export default (state, action) => {
   switch (action.type) {

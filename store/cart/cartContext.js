@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext, useEffect } from 'react';
-import { ADD_CART, REMOVE_CART, SET_CART, CLEAR_CART } from './cart.types';
-import { useAuth } from '../auth/auth.context';
-import reducer from './cart.reducer';
+import { ADD_CART, REMOVE_CART, SET_CART, CLEAR_CART } from './cartTypes';
+import { useAuth } from '../auth/authContext';
+import reducer from './cartReducer';
 import baseURL from '../../utils/baseURL';
 import axios from 'axios';
 import cookie from 'js-cookie';

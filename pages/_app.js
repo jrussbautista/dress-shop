@@ -1,12 +1,10 @@
 import React from 'react';
 import App from 'next/app';
-import { AuthProvider } from '../store/auth/auth.context';
-import { CartProvider } from '../store/cart/cart.context';
+import { AuthProvider, ModalProvider, CartProvider } from '../store';
 import { parseCookies, destroyCookie } from 'nookies';
 import axios from 'axios';
 import baseURL from '../utils/baseURL';
 import { redirectUser } from '../utils/auth';
-import { ModalProvider } from '../store/modal/modal.context';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {

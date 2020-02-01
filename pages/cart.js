@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
-import { useAuth } from '../store/auth/auth.context';
-import { useCart } from '../store/cart/cart.context';
+import { useAuth, useCart } from '../store';
 import cookie from 'js-cookie';
 import StripeCheckout from 'react-stripe-checkout';
 import CartList from '../components/Cart/CartList';

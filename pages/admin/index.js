@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdAdd } from 'react-icons/io';
-import { useModal } from '../../store/modal/modal.context';
+import { useModal } from '../../store';
+import { useToast } from '../../hooks';
+import { Modal, Toast } from '../../components/Shared';
 import Layout from '../../components/Layout';
-import useToast from '../../hooks/useToast';
-import Modal from '../../components/Shared/Modal';
 import ProductForm from '../../components/Admin/Home/ProductForm';
 import ProductTable from '../../components/Admin/Home/ProductTable';
 import axios from 'axios';
 import baseURL from '../../utils/baseURL';
-import Toast from '../../components/Shared/Alert/Toast';
 
 const Admin = () => {
   const { show, closeModal, openModal } = useModal();
@@ -27,10 +26,6 @@ const Admin = () => {
     }
     getProducts();
   }, []);
-
-  function delay() {
-    return new Promise(resolve => setTimeout(resolve, 3000));
-  }
 
   async function handleDeleteProduct(id) {
     try {

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
-import { useCart } from '../store/cart/cart.context';
-import { useAuth } from '../store/auth/auth.context';
+import { useCart, useAuth } from '../store';
+import { useToast } from '../hooks';
+import { Toast } from '../components/Shared';
 import Layout from '../components/Layout';
 import axios from 'axios';
 import baseURL from '../utils/baseURL';
@@ -9,8 +10,6 @@ import ProductAction from '../components/Product/ProductAction';
 import ProductInfo from '../components/Product/ProductInfo';
 import SkeletonProduct from '../components/Shared/Loader/SkeletonProduct';
 import Recommended from '../components/Product/Recommended';
-import Toast from '../components/Shared/Alert/Toast';
-import useToast from '../hooks/useToast';
 
 const Product = () => {
   const { id } = useRouter().query;

@@ -9,6 +9,8 @@ import ProductAction from '../components/Product/ProductAction';
 import ProductInfo from '../components/Product/ProductInfo';
 import SkeletonProduct from '../components/Shared/Loader/SkeletonProduct';
 import Recommended from '../components/Product/Recommended';
+import Toast from '../components/Shared/Alert/Toast';
+import useToast from '../hooks/useToast';
 
 const Product = () => {
   const { id } = useRouter().query;
@@ -18,6 +20,7 @@ const Product = () => {
   const [qty, setQty] = useState(1);
   const { addCart } = useCart();
   const { currentUser } = useAuth();
+  const { isOpen, showToast } = useToast();
 
   useEffect(() => {
     async function getProductInfo() {
@@ -44,6 +47,7 @@ const Product = () => {
     if (currentUser) {
       const cartObj = { quantity: qty, product };
       addCart(cartObj);
+      showToast();
     } else {
       Router.push(`/login?ref=${product._id}`);
     }
@@ -56,6 +60,7 @@ const Product = () => {
           <SkeletonProduct />
         ) : (
           <>
+            <Toast isOpen={isOpen} message={`Successfully added to cart`} />
             <div className="product-container">
               <div className="main">
                 <div className="cover-img">

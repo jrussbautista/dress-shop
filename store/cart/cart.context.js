@@ -42,7 +42,6 @@ const CartProvider = ({ children }) => {
       const headers = { headers: { Authorization: token } };
       const data = { quantity: cart.quantity, productId: cart.product._id };
       const res = await axios.post(`${baseURL}/api/cart`, data, headers);
-      console.log(res);
     } catch (error) {
       console.log(error);
     }

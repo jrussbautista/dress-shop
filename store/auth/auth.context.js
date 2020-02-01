@@ -21,6 +21,7 @@ const AuthProvider = ({ children, currentUser }) => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { ref } = useRouter().query;
 
   const setCurrentUser = async token => {
     const payload = { headers: { Authorization: token } };
@@ -30,7 +31,6 @@ const AuthProvider = ({ children, currentUser }) => {
     if (isAdmin) {
       autoLogin(token, '/admin');
     } else {
-      const { ref } = useRouter().query;
       const url = ref ? `/product?id=${ref}` : '/';
       autoLogin(token, url);
     }

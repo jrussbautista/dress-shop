@@ -2,7 +2,7 @@ import { FaCheck } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
-const Popup = ({ message, isOpen }) =>
+const Toast = ({ message, isOpen }) =>
   isOpen
     ? ReactDOM.createPortal(
         <div className="popup-container">
@@ -38,8 +38,8 @@ const Popup = ({ message, isOpen }) =>
       )
     : null;
 
-Popup.propTypes = {
+Toast.propTypes = {
   message: PropTypes.string
 };
 
-export default Popup;
+export default Toast;

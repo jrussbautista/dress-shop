@@ -6,6 +6,7 @@ import { parseCookies, destroyCookie } from 'nookies';
 import axios from 'axios';
 import baseURL from '../utils/baseURL';
 import { redirectUser } from '../utils/auth';
+import { ModalProvider } from '../store/modal/modal.context';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -60,7 +61,9 @@ class MyApp extends App {
     return (
       <AuthProvider currentUser={currentUser}>
         <CartProvider>
-          <Component {...pageProps} />
+          <ModalProvider>
+            <Component {...pageProps} />
+          </ModalProvider>
         </CartProvider>
       </AuthProvider>
     );

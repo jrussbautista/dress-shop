@@ -33,7 +33,7 @@ const CartProvider = ({ children }) => {
       }
     };
     if (currentUser) getUserCart();
-  }, []);
+  }, [currentUser]);
 
   const addCart = async cart => {
     dispatch({ type: ADD_CART, payload: cart });

@@ -58,7 +58,7 @@ const Cart = () => {
                 {carts.length > 0 ? (
                   <>
                     <CartList carts={carts} removeCart={removeCart} />
-                    <CartSubTotal total={cartTotal} />
+                    <CartSubTotal total={Number(cartTotal)} />
                     <StripeCheckout
                       name="Dress Shop"
                       amount={stripeTotal}

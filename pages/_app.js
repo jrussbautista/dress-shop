@@ -1,6 +1,11 @@
 import React from 'react';
 import App from 'next/app';
-import { AuthProvider, ModalProvider, CartProvider } from '../store';
+import {
+  AuthProvider,
+  ModalProvider,
+  CartProvider,
+  ShopProvider
+} from '../store';
 import { parseCookies, destroyCookie } from 'nookies';
 import axios from 'axios';
 import baseURL from '../utils/baseURL';
@@ -60,7 +65,9 @@ class MyApp extends App {
       <AuthProvider currentUser={currentUser}>
         <CartProvider>
           <ModalProvider>
-            <Component {...pageProps} />
+            <ShopProvider>
+              <Component {...pageProps} />
+            </ShopProvider>
           </ModalProvider>
         </CartProvider>
       </AuthProvider>

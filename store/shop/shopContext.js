@@ -1,25 +1,50 @@
-import React, { createContext, useState, useReducer } from 'react';
+import React, { createContext, useReducer, useContext } from 'react';
 import reducer from './shopReducer';
+import { LOAD_PRODUCTS, LOAD_MORE_PRODUCTS } from './shopTypes';
+import axios from 'axios';
+import baseURL from '../../utils/baseURL';
 
 const ShopContext = createContext();
 
 const ShopProvider = ({ children }) => {
   const initState = {
     products: [],
-    isLoading: true
+    isLoading: true,
+    hasLoadMore: false,
+    currentPage: 1
   };
 
   const [state, dispatch] = useReducer(reducer, initState);
 
+  async function fetchProducts(page) {
+    const payload = { params: { page, limit: 5 } };
+    const { data } = await axios.get(`${baseURL}/api/products`, payload);
+    return data;
+  }
+
   async function loadProducts() {
-    console.log('load products');
+    const data = await fetchProducts(state.currentPage);
+    dispatch({ type: LOAD_PRODUCTS, payload: data });
+  }
+
+  async function loadMore() {
+    const data = await fetchProducts(state.currentPage + 1);
+    dispatch({ type: LOAD_MORE_PRODUCTS, payload: data });
   }
 
   return (
-    <ShopContext.Provider value={{ products: state.products, loadProducts }}>
+    <ShopContext.Provider
+      value={{
+        ...state,
+        loadProducts,
+        loadMore
+      }}
+    >
       {children}
     </ShopContext.Provider>
   );
 };
 
-export { ShopProvider };
+const useShop = () => useContext(ShopContext);
+
+export { ShopProvider, useShop };

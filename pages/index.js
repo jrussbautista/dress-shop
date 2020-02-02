@@ -1,84 +1,65 @@
 import { useEffect, useState } from 'react';
-import { ShopProvider } from '../store';
+import { useShop } from '../store';
 import { Spinner } from '../components/Shared';
-import axios from 'axios';
 import Layout from '../components/Layout';
-import baseURL from '../utils/baseURL';
 import Banner from '../components/Home/Banner';
 import ProductList from '../components/Shared/Products/ProductList';
 import SkeletonGrid from '../components/Shared/Loader/SkeletonGrid';
 import Categories from '../components/Home/Categories';
 
 const Home = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [products, setProducts] = useState([]);
-  const [isLoadMore, setIsLoadMOre] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    isLoading,
+    products,
+    loadProducts,
+    hasLoadMore,
+    loadMore
+  } = useShop();
 
   useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const payload = { params: { page: currentPage, limit: 5 } };
-        const { data } = await axios.get(`${baseURL}/api/products`, payload);
-        const newProducts = products.concat(data.products);
-        setProducts(products.concat(data.products));
-        setIsLoading(false);
-        setIsLoadingMore(false);
-        //check if theres still a products to show
-        const hasLoadMore = newProducts.length >= data.totalProducts;
-        if (!hasLoadMore) {
-          setIsLoadMOre(true);
-        } else {
-          setIsLoadMOre(false);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchProducts();
-  }, [currentPage]);
+    products.length === 0 && loadProducts();
+  }, []);
 
-  const handleLoadMore = () => {
-    setCurrentPage(page => page + 1);
+  const handleLoadMore = async () => {
     setIsLoadingMore(true);
+    await loadMore();
+    setIsLoadingMore(false);
   };
 
   return (
     <>
-      <ShopProvider>
-        <Layout>
-          <Banner />
-          <div className="container">
-            <div className="heading">Shop Categories</div>
-            <Categories />
-            <div className="heading">Product Overview</div>
-            {isLoading ? (
-              <SkeletonGrid number={20} />
-            ) : (
-              <>
-                <ProductList products={products} />
-                {isLoadingMore && (
-                  <div className="loading-wrapper">
-                    <Spinner
-                      color={'var(--color-primary)'}
-                      width={80}
-                      height={80}
-                    />
-                  </div>
-                )}
-                {isLoadMore && !isLoadingMore && (
-                  <div className="load-more">
-                    <button className="btn" onClick={handleLoadMore}>
-                      Load More
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-        </Layout>
-      </ShopProvider>
+      <Layout>
+        <Banner />
+        <div className="container">
+          <div className="heading">Shop Categories</div>
+          <Categories />
+          <div className="heading">Product Overview</div>
+          {isLoading ? (
+            <SkeletonGrid number={20} />
+          ) : (
+            <>
+              <ProductList products={products} />
+              {isLoadingMore && (
+                <div className="loading-wrapper">
+                  <Spinner
+                    color={'var(--color-primary)'}
+                    width={80}
+                    height={80}
+                  />
+                </div>
+              )}
+              {hasLoadMore && (
+                <div className="load-more">
+                  <button className="btn" onClick={handleLoadMore}>
+                    Load More
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </Layout>
       <style jsx>
         {`
           .container {

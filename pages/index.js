@@ -18,6 +18,7 @@ const Home = () => {
   } = useShop();
 
   useEffect(() => {
+    //load only if products is empty
     products.length === 0 && loadProducts();
   }, []);
 
@@ -49,7 +50,7 @@ const Home = () => {
                   />
                 </div>
               )}
-              {hasLoadMore && (
+              {hasLoadMore && !isLoadingMore && (
                 <div className="load-more">
                   <button className="btn" onClick={handleLoadMore}>
                     Load More

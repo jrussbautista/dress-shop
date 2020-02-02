@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { IoMdAdd } from 'react-icons/io';
 import { useModal } from '../../store';
 import { useToast } from '../../hooks';
-import { Modal, Toast } from '../../components/Shared';
+import { Modal, Toast, Spinner } from '../../components/Shared';
 import Layout from '../../components/Layout';
 import ProductForm from '../../components/Admin/Home/ProductForm';
 import ProductTable from '../../components/Admin/Home/ProductTable';
@@ -14,14 +14,17 @@ const Admin = () => {
   const { isOpen, showToast } = useToast();
   const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getProducts() {
       try {
-        const { data } = await axios.get(`${baseURL}/api/products`);
+        const payload = { params: { page: 1, limit: 10 } };
+        const { data } = await axios.get(`${baseURL}/api/products`, payload);
         setProducts(data.products);
+        setLoading(false);
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
       }
     }
     getProducts();
@@ -38,10 +41,16 @@ const Admin = () => {
     }
   }
 
+  function addProduct(product) {
+    setProducts([product, ...products]);
+    showToast();
+    setMessage('Product successfully added');
+  }
+
   function addProductFormModal() {
     return (
       <Modal show={show} close={closeModal} title={`Add Product`}>
-        <ProductForm />
+        <ProductForm onSubmit={val => addProduct(val)} onClose={closeModal} />
       </Modal>
     );
   }
@@ -81,16 +90,27 @@ const Admin = () => {
             <IoMdAdd />
           </button>
         </div>
-        <ProductTable
-          products={products}
-          deleteProduct={id => openModal(confirmDeleteModal(id))}
-        />
+        {loading ? (
+          <div className="loading-container">
+            <Spinner width="80" height="90" color={`var(--color-primary)`} />
+          </div>
+        ) : (
+          <ProductTable
+            products={products}
+            deleteProduct={id => openModal(confirmDeleteModal(id))}
+          />
+        )}
       </div>{' '}
       <style jsx>{`
         .container {
           max-width: 120rem;
           margin: 3rem auto;
           padding: 0 2rem;
+        }
+
+        .loading-container {
+          margin: 10rem 0;
+          text-align: center;
         }
         .page-title {
           font-size: 2.5rem;

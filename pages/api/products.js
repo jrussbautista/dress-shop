@@ -15,19 +15,19 @@ export default async (req, res) => {
 };
 
 async function handleGet(req, res) {
-  let { currentPage, pageSize } = req.query;
+  let { page, limit } = req.query;
   let products = [];
   const totalProducts = await Product.countDocuments();
-  currentPage = Number(currentPage);
-  pageSize = Number(pageSize);
+  page = Number(page);
+  limit = Number(limit);
 
-  if (currentPage === 1) {
-    products = await Product.find().limit(pageSize);
+  if (page === 1) {
+    products = await Product.find().limit(limit);
   } else {
-    const skips = pageSize * (currentPage - 1);
+    const skips = limit * (page - 1);
     products = await Product.find()
       .skip(skips)
-      .limit(pageSize);
+      .limit(limit);
   }
   res.status(200).json({ products, totalProducts });
 }
@@ -42,7 +42,7 @@ async function handlePost(req, res) {
       imageURL,
       category
     }).save();
-    res.status(201).json(product);
+    res.status(201).json({ success: true, product });
   } catch (error) {
     console.error(error);
     res.status(500).send('Error in creating product');

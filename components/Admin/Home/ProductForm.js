@@ -3,7 +3,7 @@ import axios from 'axios';
 import baseURL from '../../../utils/baseURL';
 import Spinner from '../../Shared/Loader/Spinner';
 
-const ProductForm = () => {
+const ProductForm = ({ onSubmit, onClose }) => {
   const initState = {
     name: '',
     price: '',
@@ -54,8 +54,10 @@ const ProductForm = () => {
       const imageURL = await imageUpload();
       const payload = { ...product, imageURL };
       //save product to db
-      await axios.post(`${baseURL}/api/products`, payload);
+      const { data } = await axios.post(`${baseURL}/api/products`, payload);
       reset();
+      onClose();
+      onSubmit(data.product);
     } catch (error) {
       console.log(error.response);
     } finally {

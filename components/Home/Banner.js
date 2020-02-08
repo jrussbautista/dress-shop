@@ -55,6 +55,12 @@ const Banner = () => {
             width: 100%;
           }
 
+          @media only screen and (max-width: 768px) {
+            .banner {
+              height: 40rem;
+            }
+          }
+
           .banner img {
             position: absolute;
             top: 0;

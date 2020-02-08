@@ -14,7 +14,7 @@ const SkeletonCategory = () => {
         {`
           .grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
             grid-gap: 2rem;
             padding: 0 2rem;
           }

@@ -95,6 +95,14 @@ const Product = () => {
           flex-basis: 50%;
         }
 
+        @media only screen and (max-width: 768px) {
+          .main,
+          .product-info {
+            flex-basis: 100%;
+            margin-bottom: 2rem;
+          }
+        }
+
         .cover-img {
           position: relative;
           padding-bottom: 100%;

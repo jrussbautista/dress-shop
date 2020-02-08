@@ -17,26 +17,28 @@ const CartList = ({ carts, removeCart }) => {
               <div className="product-img">
                 <img src={cart.product.imageURL} alt="" />
               </div>
-              <div>
+              <div className="product-info">
                 <div className="product-name">{cart.product.name}</div>
+                <div className="product-price product-content">
+                  P{cart.product.price}
+                </div>
+                <div className="product-qty product-content">
+                  x {cart.quantity}{' '}
+                </div>
+                <div className="total product-content">
+                  P {parseFloat(cart.product.price * cart.quantity).toFixed(2)}
+                </div>
+                <div className="product-content">
+                  {' '}
+                  <button
+                    className="btn-remove"
+                    onClick={removeCart.bind(this, cart._id)}
+                  >
+                    {' '}
+                    Remove{' '}
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="product-price product-content">
-              P{cart.product.price}
-            </div>
-            <div className="product-qty product-content">{cart.quantity} </div>
-            <div className="total product-content">
-              P {parseFloat(cart.product.price * cart.quantity).toFixed(2)}
-            </div>
-            <div className="product-content">
-              {' '}
-              <button
-                className="btn-remove"
-                onClick={removeCart.bind(this, cart._id)}
-              >
-                {' '}
-                Remove{' '}
-              </button>
             </div>
           </div>
         ))}
@@ -44,7 +46,7 @@ const CartList = ({ carts, removeCart }) => {
       <style jsx>
         {`
           .cart-header {
-            display: flex;
+            display: none;
             font-size: 2rem;
             border-bottom: 1px solid #e8e8e1;
             padding: 2rem 0;
@@ -52,7 +54,7 @@ const CartList = ({ carts, removeCart }) => {
           }
 
           .cart-header-product {
-            width: 45%;
+            width: 30rem;
             text-align: left;
           }
 
@@ -68,15 +70,16 @@ const CartList = ({ carts, removeCart }) => {
 
           .product {
             display: flex;
-            width: 45%;
+            width: 100%;
+          }
+
+          .product-info {
+            flex: 1;
           }
 
           .product-content {
             flex: 1;
-            text-align: center;
             display: flex;
-            align-items: center;
-            justify-content: center;
           }
 
           .product-info {
@@ -84,7 +87,7 @@ const CartList = ({ carts, removeCart }) => {
           }
 
           .product-name {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 600;
           }
 
@@ -117,10 +120,26 @@ const CartList = ({ carts, removeCart }) => {
             color: #fff;
             background-color: var(--color-dark);
             border: 1px solid var(--color-dark);
-            padding: 1rem 1.2rem;
+            padding: 0 2rem;
             display: block;
             font-size: 1.5rem;
             cursor: pointer;
+            height: 4.5rem;
+          }
+
+          @media only screen and (min-width: 768px) {
+            .product-info {
+              display: flex;
+            }
+
+            .product-info div {
+              justify-content: center;
+              padding: 1rem 0;
+            }
+
+            .cart-header {
+              display: flex;
+            }
           }
         `}
       </style>

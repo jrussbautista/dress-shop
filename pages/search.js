@@ -79,11 +79,18 @@ const Search = () => {
         .sort-container {
           margin: 4rem 0;
           display: flex;
+          flex-wrap: wrap;
           align-items: center;
           justify-content: space-between;
           background: rgba(0, 0, 0, 0.03);
           padding: 1rem;
           border-radius: 4px;
+        }
+
+        @media only screen and (max-width: 600px) {
+          .sort-container {
+            justify-content: center;
+          }
         }
       `}</style>
     </Layout>

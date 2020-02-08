@@ -17,6 +17,13 @@ export default () => {
             --color-gray: #f5f5f5;
             --color-dark: #222;
           }
+
+          @media only screen and (max-width: 768px) {
+            html {
+              font-size: 50%;
+            }
+          }
+
           body {
             font-family: Poppins, sans-serif;
             margin: 0;

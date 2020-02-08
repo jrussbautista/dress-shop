@@ -20,13 +20,18 @@ const SkeletonProduct = () => {
       <style jsx>{`
         .skeleton-container {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          grid-gap: 2rem;
         }
 
         .main-cover {
           position: relative;
           padding-bottom: 100%;
           background-color: #eee;
+        }
+
+        .left {
+          padding: 0 2rem;
         }
 
         .box {

@@ -71,7 +71,7 @@ const Home = () => {
           .heading {
             padding: 1.5rem;
             font-weight: 700;
-            font-size: 36px;
+            font-size: 3rem;
             line-height: 1.1;
             text-transform: uppercase;
           }

@@ -32,8 +32,8 @@ const TabCategory = ({ active, onChangeTab }) => {
             border-bottom: 2px solid transparent;
             cursor: pointer;
             background: #fff;
-            margin-right: 1rem;
             border-radius: 6px;
+            margin: 1rem 1rem 1rem 0;
         }
 
         .tab .active {

@@ -198,7 +198,7 @@ export default () => {
             width: 2.5rem;
             height: 2.5rem;
             position: absolute;
-            top: -6px;
+            top: -1.2rem;
             left: 3.3rem;
             background-color: var(--color-primary);
             color: #fff;

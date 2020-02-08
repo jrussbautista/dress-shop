@@ -128,6 +128,13 @@ const SignUp = () => {
             margin: 0 auto;
           }
 
+          @media only screen and (max-width: 600px) {
+            .auth-form {
+              width: 100%;
+              padding: 2rem;
+            }
+          }
+
           .auth-form .input {
             width: 100%;
             height: 5rem;

@@ -9,6 +9,12 @@ const SkeletonBanner = () => {
             position: relative;
             background-color: #eee;
           }
+
+          @media only screen and (max-width: 768px) {
+            .container {
+              height: 40rem;
+            }
+          }
         `}
       </style>
     </>

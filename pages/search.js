@@ -12,14 +12,14 @@ const Search = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const { category, sortByPrice, keyword } = router.query;
+  const { category, sort, keyword } = router.query;
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         setIsLoading(true);
-        const payload = { params: { category, price: sortByPrice, keyword } };
-        const { data } = await axios.get(`${baseURL}/api/search`, payload);
+        const payload = { params: { category, sort, keyword } };
+        const { data } = await axios.get(`${baseURL}/api/products`, payload);
         setProducts(data.products);
         setIsLoading(false);
       } catch (error) {
@@ -27,20 +27,20 @@ const Search = () => {
       }
     };
     getProducts();
-  }, [category, sortByPrice, keyword]);
+  }, [category, sort, keyword]);
 
   const handleTabChange = selected => {
     if (keyword) {
-      if (sortByPrice) {
+      if (sort) {
         Router.push(
-          `/search?category=${selected}&sortByPrice=${sortByPrice}&keyword=${keyword}`
+          `/search?category=${selected}&sort=${selected}&keyword=${keyword}`
         );
       } else {
         Router.push(`/search?category=${selected}&keyword=${keyword}`);
       }
     } else {
-      if (sortByPrice) {
-        Router.push(`/search?category=${selected}&sortByPrice=${sortByPrice}`);
+      if (sort) {
+        Router.push(`/search?category=${selected}&sort=${sort}`);
       } else {
         Router.push(`/search?category=${selected}`);
       }
@@ -49,11 +49,9 @@ const Search = () => {
 
   const handleFilterChange = selected => {
     if (keyword) {
-      Router.push(
-        `/search?category=${category}&sortByPrice=${selected}&keyword=${keyword}`
-      );
+      Router.push(`/search?&sort=${selected}&keyword=${keyword}`);
     } else {
-      Router.push(`/search?category=${category}&sortByPrice=${selected}`);
+      Router.push(`/search?&sort=${selected}`);
     }
   };
 
@@ -62,7 +60,7 @@ const Search = () => {
       <div className="container">
         <div className="sort-container">
           <TabCategory active={category} onChangeTab={handleTabChange} />
-          <Filter handleChange={handleFilterChange} active={sortByPrice} />
+          <Filter handleChange={handleFilterChange} active={sort} />
         </div>
         {isLoading ? (
           <SkeletonGrid number={20} />

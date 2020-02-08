@@ -15,6 +15,7 @@ export default () => {
 
   const handleSearchSubmit = e => {
     e.preventDefault();
+    setIsOpenSearch(false);
     Router.push(`/search?keyword=${search}`);
   };
 

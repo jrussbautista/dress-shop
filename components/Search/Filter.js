@@ -13,7 +13,7 @@ const Filter = ({ handleChange, active }) => {
   };
 
   function getActive(active) {
-    return active === 'low' ? 'Price:  Low to High' : 'Price:  High to Low';
+    return active === 'price' ? 'Price:  Low to High' : 'Price:  High to Low';
   }
 
   return (
@@ -33,8 +33,8 @@ const Filter = ({ handleChange, active }) => {
         </div>
         {openDropdown && (
           <ul className="dropdown">
-            <li onClick={() => handleDropdown('low')}> Low to High </li>
-            <li onClick={() => handleDropdown('high')}> High to Low </li>
+            <li onClick={() => handleDropdown('price')}> Low to High </li>
+            <li onClick={() => handleDropdown('-price')}> High to Low </li>
           </ul>
         )}
       </div>

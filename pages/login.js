@@ -8,7 +8,6 @@ import Layout from '../components/Layout';
 import Spinner from '../components/Shared/Loader/Spinner';
 import Alert from '../components/Shared/Alert';
 import PageLoader from '../components/Shared/Loader/PageLoader';
-import { set } from 'mongoose';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()

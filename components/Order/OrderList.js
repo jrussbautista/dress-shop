@@ -91,7 +91,7 @@ const OrderList = () => {
               ))}
             </ul>
           ) : (
-            <div> You have no orders yet.</div>
+            <div className="msg"> You have no orders yet.</div>
           )}
         </>
       )}
@@ -166,6 +166,11 @@ const OrderList = () => {
           display: flex;
           justify-content: flex-end;
           align-items: center;
+        }
+
+        .msg {
+          text-align: center;
+          font-size: 2rem;
         }
       `}</style>
     </div>

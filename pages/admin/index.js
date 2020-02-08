@@ -20,7 +20,8 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const limit = 5;
   const router = useRouter();
-  const { page } = router.query;
+  let { page } = router.query;
+  page = page ? page : 1;
 
   useEffect(() => {
     async function getProducts() {

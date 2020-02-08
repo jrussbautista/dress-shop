@@ -69,6 +69,13 @@ export default () => {
                       <li>
                         <span>{currentUser.name}</span>
                       </li>
+                      {currentUser && currentUser.role === 'admin' && (
+                        <li>
+                          <Link href="/admin">
+                            <a> Admin Home </a>
+                          </Link>
+                        </li>
+                      )}
                       <li>
                         <Link href="/order">
                           <a>
@@ -89,7 +96,10 @@ export default () => {
                   <Link href="/signup">
                     <a>Sign Up</a>
                   </Link>
-                  <span style={{ fontWeight: '300' }}> | </span>
+                  <span style={{ fontWeight: '300', padding: '0 1rem' }}>
+                    {' '}
+                    |{' '}
+                  </span>
                   <Link href="/login">
                     <a>Log In</a>
                   </Link>
@@ -102,8 +112,7 @@ export default () => {
                 type="button"
                 onClick={setIsOpenSearch.bind(this, true)}
               >
-                {' '}
-                <IoIosSearch size={30} />{' '}
+                <IoIosSearch size={30} />
               </button>
               <li>
                 <Link href="/cart">
@@ -117,11 +126,39 @@ export default () => {
               </li>
               <li>
                 {currentUser ? (
-                  <Link href="/order">
-                    <a>
+                  <>
+                    <span
+                      onClick={setIsOpenDropdown.bind(this, !isOpenDropdown)}
+                    >
                       <AccountIcon />
-                    </a>
-                  </Link>
+                    </span>
+                    {isOpenDropdown && (
+                      <ul className="dropdown">
+                        <li>
+                          <span>{currentUser.name}</span>
+                        </li>
+                        {currentUser && currentUser.role === 'admin' && (
+                          <li>
+                            <Link href="/admin">
+                              <a> Admin Home </a>
+                            </Link>
+                          </li>
+                        )}
+                        <li>
+                          <Link href="/order">
+                            <a>
+                              <span> My orders </span>
+                            </a>
+                          </Link>
+                        </li>
+                        <li>
+                          <button className="btn" onClick={logout}>
+                            LOG OUT
+                          </button>
+                        </li>
+                      </ul>
+                    )}
+                  </>
                 ) : (
                   <Link href="/login">
                     <a>
@@ -190,8 +227,11 @@ export default () => {
           .header-right a {
             display: flex;
             align-items: center;
-            padding-left: 0.6rem;
             color: #3d3d3d;
+          }
+
+          .header-right a:hover {
+            color: var(--color-primary);
           }
 
           .cart-num {

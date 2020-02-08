@@ -8,7 +8,7 @@ const ProductForm = ({ onSubmit, onClose }) => {
     name: '',
     price: '',
     description: '',
-    category: ''
+    category: 'men'
   };
 
   const [product, setProduct] = useState(initState);

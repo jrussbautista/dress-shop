@@ -17,7 +17,7 @@ const ShopProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initState);
 
   async function fetchProducts(page) {
-    const payload = { params: { page, limit: 5 } };
+    const payload = { params: { page, limit: 12 } };
     const { data } = await axios.get(`${baseURL}/api/products`, payload);
     return data;
   }

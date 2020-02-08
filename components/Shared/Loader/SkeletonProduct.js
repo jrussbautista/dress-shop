@@ -19,9 +19,22 @@ const SkeletonProduct = () => {
       </div>
       <style jsx>{`
         .skeleton-container {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          display: flex;
+          flex-wrap: wrap;
           grid-gap: 2rem;
+        }
+
+        .left,
+        .right {
+          flex-basis: 50%;
+        }
+
+        @media only screen and (max-width: 768px) {
+          .left,
+          .right {
+            flex-basis: 100%;
+            margin-bottom: 2rem;
+          }
         }
 
         .main-cover {

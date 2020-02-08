@@ -14,6 +14,7 @@ const Order = () => {
           .container {
             max-width: 1200px;
             margin: 2rem auto;
+            padding: 0 2rem;
           }
           .page-title {
             font-size: 3rem;

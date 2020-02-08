@@ -4,6 +4,7 @@ import baseURL from '../../utils/baseURL';
 import axios from 'axios';
 import cookie from 'js-cookie';
 import SkeletonOrders from '../Shared/Loader/SkeletonOrders';
+import formatDate from '../../utils/formatDate';
 
 const OrderList = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -40,7 +41,9 @@ const OrderList = () => {
                     <div className="date">
                       {' '}
                       Date Ordered:{' '}
-                      <span className="date-text">{order.createdAt}</span>
+                      <span className="date-text">
+                        {formatDate(order.createdAt)}
+                      </span>
                     </div>
                     <div className="products">
                       {order.products.map(order => (

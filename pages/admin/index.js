@@ -8,27 +8,34 @@ import ProductForm from '../../components/Admin/Home/ProductForm';
 import ProductTable from '../../components/Admin/Home/ProductTable';
 import axios from 'axios';
 import baseURL from '../../utils/baseURL';
+import Pagination from '../../components/Shared/Pagination';
+import { useRouter } from 'next/router';
 
 const Admin = () => {
   const { show, closeModal, openModal } = useModal();
   const { isOpen, showToast } = useToast();
   const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
+  const [totalProducts, setTotalProducts] = useState(null);
   const [loading, setLoading] = useState(true);
+  const limit = 5;
+  const router = useRouter();
+  const { page } = router.query;
 
   useEffect(() => {
     async function getProducts() {
       try {
-        const payload = { params: { page: 1, limit: 10 } };
+        const payload = { params: { page, limit } };
         const { data } = await axios.get(`${baseURL}/api/products`, payload);
         setProducts(data.products);
+        setTotalProducts(data.totalProducts);
         setLoading(false);
       } catch (error) {
         console.log(error.response);
       }
     }
     getProducts();
-  }, []);
+  }, [page]);
 
   async function handleDeleteProduct(id) {
     try {
@@ -95,10 +102,13 @@ const Admin = () => {
             <Spinner width="80" height="90" color={`var(--color-primary)`} />
           </div>
         ) : (
-          <ProductTable
-            products={products}
-            deleteProduct={id => openModal(confirmDeleteModal(id))}
-          />
+          <>
+            <ProductTable
+              products={products}
+              deleteProduct={id => openModal(confirmDeleteModal(id))}
+            />
+            <Pagination total={totalProducts} limit={limit} activePage={page} />
+          </>
         )}
       </div>{' '}
       <style jsx>{`

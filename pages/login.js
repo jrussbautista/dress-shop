@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Router from 'next/router';
 import { Formik } from 'formik';
 import { useAuth } from '../store';
 import * as Yup from 'yup';
@@ -6,6 +7,8 @@ import Link from 'next/link';
 import Layout from '../components/Layout';
 import Spinner from '../components/Shared/Loader/Spinner';
 import Alert from '../components/Shared/Alert';
+import PageLoader from '../components/Shared/Loader/PageLoader';
+import { set } from 'mongoose';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
@@ -18,15 +21,29 @@ const LoginSchema = Yup.object().shape({
 
 const Login = () => {
   const [submit, setSubmit] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
   const { error, login, clearError } = useAuth();
+  const isCurrent = useRef(false);
 
   useEffect(() => {
     return () => error && clearError();
   }, [error]);
 
+  useEffect(() => {
+    let isMounted = false;
+    Router.onRouteChangeStart = () => {
+      if (!isMounted && isCurrent.current) {
+        setShowLoader(true);
+        isMounted = true;
+      }
+    };
+  }, []);
+
   return (
     <>
       <Layout>
+        {showLoader && <PageLoader />}
+
         <div className="container">
           <Formik
             initialValues={{
@@ -38,6 +55,7 @@ const Login = () => {
               setSubmit(true);
               await login(values);
               setSubmit(false);
+              if (!error) isCurrent.current = true;
             }}
           >
             {({ errors, touched, handleChange, handleSubmit, values }) => (

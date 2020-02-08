@@ -174,8 +174,13 @@ export default () => {
           <div className="close" onClick={setIsOpenSearch.bind(this, false)}>
             <IoIosClose size={60} />
           </div>
-          <form>
-            <input type="text" placeholder="Search Product..." />
+          <form onSubmit={handleSearchSubmit}>
+            <input
+              type="text"
+              placeholder="Search Product..."
+              onChange={e => setSearch(e.target.value)}
+              value={search}
+            />
             <button type="submit">Search</button>
           </form>
         </div>

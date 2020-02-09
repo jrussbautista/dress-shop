@@ -244,8 +244,8 @@ export default () => {
             width: 2.5rem;
             height: 2.5rem;
             position: absolute;
-            top: -1.2rem;
-            left: 3.3rem;
+            top: -1.3rem;
+            left: 3rem;
             background-color: var(--color-primary);
             color: #fff;
             font-size: 1.4rem;

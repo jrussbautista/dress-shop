@@ -25,9 +25,15 @@ const ProductList = ({ products }) => {
         {`
           .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+            grid-template-columns: 1fr 1fr;
             grid-gap: 2rem;
             padding: 0 2rem;
+          }
+
+          @media only screen and (min-width: 768px) {
+            .product-grid {
+              grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+            }
           }
 
           .product-img-cover {

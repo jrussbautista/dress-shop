@@ -22,6 +22,7 @@ const ProductInfo = ({ product }) => {
           margin-top: 2rem;
           font-size: 2rem;
           font-weight: 600;
+          color: var(--color-primary);
         }
 
         .product-desc {

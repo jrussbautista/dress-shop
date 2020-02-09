@@ -35,6 +35,10 @@ const Product = () => {
   // handle change quantity
   const handleChangeQty = action => {
     if (action === 'add') {
+      if (qty >= 10) {
+        alert('Ops you can buy up to 10 max');
+        return;
+      }
       setQty(qty => qty + 1);
     } else {
       if (qty > 1) setQty(qty => qty - 1);

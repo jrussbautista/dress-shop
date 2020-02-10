@@ -40,8 +40,10 @@ const AuthProvider = ({ children, currentUser }) => {
     try {
       const { data } = await axios.post(`${baseURL}/api/login`, user);
       setCurrentUser(data);
+      return 'success';
     } catch (error) {
       dispatch({ type: SET_AUTH_ERROR, payload: error.response.data });
+      return 'error';
     }
   };
 

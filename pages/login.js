@@ -20,28 +20,16 @@ const LoginSchema = Yup.object().shape({
 
 const Login = () => {
   const [submit, setSubmit] = useState(false);
-  const [showLoader, setShowLoader] = useState(false);
   const { error, login, clearError } = useAuth();
-  const isCurrent = useRef(false);
 
   useEffect(() => {
     return () => error && clearError();
   }, [error]);
 
-  useEffect(() => {
-    let isMounted = false;
-    Router.onRouteChangeStart = () => {
-      if (!isMounted && isCurrent.current) {
-        setShowLoader(true);
-        isMounted = true;
-      }
-    };
-  }, []);
-
   return (
     <>
       <Layout>
-        {showLoader && <PageLoader />}
+        {submit && <PageLoader />}
 
         <div className="container">
           <Formik
@@ -52,9 +40,8 @@ const Login = () => {
             validationSchema={LoginSchema}
             onSubmit={async values => {
               setSubmit(true);
-              await login(values);
-              setSubmit(false);
-              if (!error) isCurrent.current = true;
+              const res = await login(values);
+              if (res === 'error') setSubmit(false);
             }}
           >
             {({ errors, touched, handleChange, handleSubmit, values }) => (
@@ -94,11 +81,7 @@ const Login = () => {
                 </div>
                 <div className="group">
                   <button type="submit" className="btn" disabled={submit}>
-                    {submit ? (
-                      <Spinner width={40} height={40} color="#fff" />
-                    ) : (
-                      'Login'
-                    )}
+                    Login
                   </button>
                 </div>
                 <span className="link">

@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext } from 'react';
+import axios from 'axios';
 import { LOAD_PRODUCTS, LOAD_MORE_PRODUCTS } from './shopTypes';
 import reducer from './shopReducer';
-import axios from 'axios';
 import baseURL from '../../utils/baseURL';
 
 const ShopContext = createContext();

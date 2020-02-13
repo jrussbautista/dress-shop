@@ -1,16 +1,16 @@
-import React, { createContext, useReducer, useContext } from 'react';
-import {
-  LOGOUT_USER,
-  SET_CURRENT_USER,
-  SET_AUTH_ERROR,
-  CLEAR_AUTH_ERROR
-} from './authTypes';
-import { autoLogin } from '../../utils/auth';
 import axios from 'axios';
 import cookie from 'js-cookie';
 import Router, { useRouter } from 'next/router';
-import reducer from './authReducer';
+import React, { createContext, useContext, useReducer } from 'react';
+import { autoLogin } from '../../utils/auth';
 import baseURL from '../../utils/baseURL';
+import reducer from './authReducer';
+import {
+  CLEAR_AUTH_ERROR,
+  LOGOUT_USER,
+  SET_AUTH_ERROR,
+  SET_CURRENT_USER
+} from './authTypes';
 
 const AuthContext = createContext();
 
@@ -51,8 +51,10 @@ const AuthProvider = ({ children, currentUser }) => {
     try {
       const { data } = await axios.post(`${baseURL}/api/signup`, user);
       setCurrentUser(data);
+      return 'success';
     } catch (error) {
       dispatch({ type: SET_AUTH_ERROR, payload: error.response.data });
+      return 'error';
     }
   };
 

@@ -1,31 +1,30 @@
-import mongoose from "mongoose";
-import jwt from "jsonwebtoken";
-import Cart from "../../models/Cart";
-import Product from "../../models/Product";
-import connectDB from "../../utils/connectDB";
+import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
+import Cart from '../../models/Cart';
+import connectDB from '../../utils/connectDB';
 
 const { ObjectId } = mongoose.Types;
 
 export default async (req, res) => {
   await connectDB();
   switch (req.method) {
-    case "GET":
+    case 'GET':
       await handleGetRequest(req, res);
       break;
-    case "POST":
+    case 'POST':
       await handlePostRequest(req, res);
       break;
-    case "DELETE":
+    case 'DELETE':
       await handleDeleteRequest(req, res);
       break;
     default:
-      res.status(422).send("Unknown method");
+      res.status(422).send('Unknown method');
   }
 };
 
 async function handleGetRequest(req, res) {
   if (!req.headers.authorization) {
-    return res.status(401).send("No authorization token");
+    return res.status(401).send('No authorization token');
   }
   try {
     const { userId } = jwt.verify(
@@ -33,20 +32,20 @@ async function handleGetRequest(req, res) {
       process.env.JWT_SECRET
     );
     const cart = await Cart.findOne({ user: userId }).populate({
-      path: "carts.product",
-      model: "Product"
+      path: 'carts.product',
+      model: 'Product'
     });
     res.status(200).json(cart);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error in fetching cart");
+    res.status(500).send('Error in fetching cart');
   }
 }
 
 async function handlePostRequest(req, res) {
   const { productId, quantity } = req.body;
   if (!req.headers.authorization) {
-    return res.status(401).send("No authorization token");
+    return res.status(401).send('No authorization token');
   }
   try {
     const { userId } = jwt.verify(
@@ -63,9 +62,9 @@ async function handlePostRequest(req, res) {
       if (productExist) {
         //add 1 to quantity of product
         await Cart.findOneAndUpdate(
-          { _id: cart._id, "carts.product": productId },
+          { _id: cart._id, 'carts.product': productId },
           {
-            $inc: { "carts.$.quantity": quantity }
+            $inc: { 'carts.$.quantity': quantity }
           }
         );
       } else {
@@ -83,17 +82,17 @@ async function handlePostRequest(req, res) {
         carts: [{ quantity, product: productId }]
       }).save();
     }
-    res.status(200).send("Successfully added to cart");
+    res.status(200).send('Successfully added to cart');
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error in adding cart");
+    res.status(500).send('Error in adding cart');
   }
 }
 
 async function handleDeleteRequest(req, res) {
   const { cartId } = req.query;
   if (!req.headers.authorization) {
-    return res.status(401).send("No authorization token");
+    return res.status(401).send('No authorization token');
   }
   try {
     const { userId } = jwt.verify(
@@ -104,9 +103,9 @@ async function handleDeleteRequest(req, res) {
       { user: userId },
       { $pull: { carts: { _id: cartId } } }
     );
-    res.status(200).send("Successfully cart deleted");
+    res.status(200).send('Successfully cart deleted');
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error in deleting cart");
+    res.status(500).send('Error in deleting cart');
   }
 }

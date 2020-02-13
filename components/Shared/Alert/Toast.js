@@ -1,6 +1,6 @@
-import { FaCheck } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import { FaCheck } from 'react-icons/fa';
 
 const Toast = ({ message, isOpen }) =>
   isOpen
@@ -14,8 +14,8 @@ const Toast = ({ message, isOpen }) =>
               top: 50%;
               left: 50%;
               transform: translate(-50%, -50%);
-              height: 300px;
-              width: 300px;
+              height: 30rem;
+              width: 30rem;
               background: rgba(0, 0, 0, 0.8);
               z-index: 10;
               border-radius: 15px;

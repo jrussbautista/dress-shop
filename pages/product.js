@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import Router, { useRouter } from 'next/router';
-import { useCart, useAuth } from '../store';
-import { useToast } from '../hooks';
-import { Toast } from '../components/Shared';
-import Layout from '../components/Layout';
 import axios from 'axios';
-import baseURL from '../utils/baseURL';
+import Router, { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import Layout from '../components/Layout';
 import ProductAction from '../components/Product/ProductAction';
 import ProductInfo from '../components/Product/ProductInfo';
-import SkeletonProduct from '../components/Shared/Loader/SkeletonProduct';
 import Recommended from '../components/Product/Recommended';
+import { Toast } from '../components/Shared';
+import SkeletonProduct from '../components/Shared/Loader/SkeletonProduct';
+import { useToast } from '../hooks';
+import { useAuth, useCart } from '../store';
+import baseURL from '../utils/baseURL';
 
 const Product = () => {
   const { id } = useRouter().query;

@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Router from 'next/router';
 import { Formik } from 'formik';
-import { useAuth } from '../store';
-import * as Yup from 'yup';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import * as Yup from 'yup';
 import Layout from '../components/Layout';
-import Spinner from '../components/Shared/Loader/Spinner';
 import Alert from '../components/Shared/Alert';
 import PageLoader from '../components/Shared/Loader/PageLoader';
+import { useAuth } from '../store';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()

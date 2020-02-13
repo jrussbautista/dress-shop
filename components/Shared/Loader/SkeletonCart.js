@@ -3,11 +3,8 @@ const SkeletonCart = () => {
     <>
       {[...Array(3)].map((_, i) => (
         <div className="container" key={i}>
-          <div style={{ display: 'flex', width: '45%' }}>
+          <div style={{ display: 'flex', width: '20rem' }}>
             <div className="box"></div>
-            <div>
-              <div className="line"></div>
-            </div>
           </div>
           <div className="right">
             <div className="line"></div>
@@ -44,10 +41,11 @@ const SkeletonCart = () => {
         .right {
           flex: 1;
           display: flex;
+          flex-direction: column;
         }
 
         .right .line {
-          margin-top: 3rem;
+          margin-top: 2rem;
         }
 
         .bottom {
@@ -55,6 +53,17 @@ const SkeletonCart = () => {
           align-items: center;
           justify-content: flex-end;
           padding: 2rem;
+        }
+
+        @media only screen and (min-width: 768px) {
+          .right {
+            flex-direction: row;
+          }
+
+          .right .line {
+            width: 20rem;
+            flex: 1;
+          }
         }
       `}</style>
     </>

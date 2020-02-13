@@ -1,6 +1,6 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import axios from 'axios';
 import baseURL from '../../utils/baseURL';
 import SkeletonBanner from '../Shared/Loader/SkeletonBanner';
 
@@ -42,7 +42,10 @@ const Banner = () => {
         <Slider {...settings}>
           {banners.map(banner => (
             <div className="banner" key={banner._id}>
-              <img src={banner.imageURL} alt="" />
+              <div
+                className="img"
+                style={{ backgroundImage: `url(${banner.imageURL})` }}
+              ></div>
             </div>
           ))}
         </Slider>
@@ -50,25 +53,26 @@ const Banner = () => {
       <style jsx>
         {`
           .banner {
-            height: 60rem;
+            height: 50rem;
             position: relative;
             width: 100%;
           }
 
           @media only screen and (max-width: 768px) {
             .banner {
-              height: 40rem;
+              height: 35rem;
             }
           }
 
-          .banner img {
+          .banner .img {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background-position: center center;
+            background-size: cover;
           }
         `}
       </style>

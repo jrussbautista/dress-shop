@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
-import Layout from '../components/Layout';
-import { useAuth, useCart } from '../store';
+import axios from 'axios';
 import cookie from 'js-cookie';
+import Link from 'next/link';
+import Router from 'next/router';
+import { useEffect, useState } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import CartList from '../components/Cart/CartList';
 import CartSubTotal from '../components/Cart/CartSubTotal';
-import calculateCartTotal from '../utils/calculateCartTotal';
-import Link from 'next/link';
-import axios from 'axios';
-import baseURL from '../utils/baseURL';
-import Spinner from '../components/Shared/Loader/Spinner';
-import Router from 'next/router';
+import Layout from '../components/Layout';
 import SkeletonCart from '../components/Shared/Loader/SkeletonCart';
+import Spinner from '../components/Shared/Loader/Spinner';
+import { useAuth, useCart } from '../store';
+import baseURL from '../utils/baseURL';
+import calculateCartTotal from '../utils/calculateCartTotal';
 
 const Cart = () => {
   const { currentUser } = useAuth();

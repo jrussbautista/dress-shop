@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Router, { useRouter } from 'next/router';
 import axios from 'axios';
+import Router, { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import Filter from '../components/Search/Filter';
+import TabCategory from '../components/Search/TabCategory';
+import SkeletonGrid from '../components/Shared/Loader/SkeletonGrid';
 import ProductList from '../components/Shared/Products/ProductList';
 import baseURL from '../utils/baseURL';
-import SkeletonGrid from '../components/Shared/Loader/SkeletonGrid';
-import TabCategory from '../components/Search/TabCategory';
-import Filter from '../components/Search/Filter';
 
 const Search = () => {
   const [products, setProducts] = useState([]);

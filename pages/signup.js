@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
-import { Alert, Spinner } from '../components/Shared';
-import { useAuth } from '../store';
-import * as Yup from 'yup';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import * as Yup from 'yup';
 import Layout from '../components/Layout';
+import { Alert } from '../components/Shared';
+import PageLoader from '../components/Shared/Loader/PageLoader';
+import { useAuth } from '../store';
 
 const SignUp = () => {
   const [submit, setSubmit] = useState(false);
@@ -27,6 +28,7 @@ const SignUp = () => {
   return (
     <>
       <Layout>
+        {submit && <PageLoader />}
         <div className="container">
           <Formik
             initialValues={{
@@ -37,8 +39,8 @@ const SignUp = () => {
             validationSchema={Schema}
             onSubmit={async values => {
               setSubmit(true);
-              await signUp(values);
-              setSubmit(false);
+              const res = await signUp(values);
+              if (res === 'error') setSubmit(false);
             }}
           >
             {({ errors, touched, handleChange, handleSubmit, values }) => (
@@ -91,12 +93,8 @@ const SignUp = () => {
                   ) : null}
                 </div>
                 <div className="group">
-                  <button type="submit" className="btn">
-                    {submit ? (
-                      <Spinner width={40} height={40} color="#fff" />
-                    ) : (
-                      'Sign Up'
-                    )}
+                  <button type="submit" className="btn" disabled={submit}>
+                    Sign Up
                   </button>
                 </div>
                 <span className="link">

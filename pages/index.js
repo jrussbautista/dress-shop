@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useShop } from '../store';
-import { Spinner } from '../components/Shared';
-import Layout from '../components/Layout';
+
 import Banner from '../components/Home/Banner';
+import Categories from '../components/Home/Categories';
+import Layout from '../components/Layout';
 import ProductList from '../components/Shared/Products/ProductList';
 import SkeletonGrid from '../components/Shared/Loader/SkeletonGrid';
-import Categories from '../components/Home/Categories';
+import { Spinner } from '../components/Shared';
+import { useShop } from '../store';
 
 const Home = () => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);

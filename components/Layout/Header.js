@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { IoMdCart, IoIosSearch, IoIosClose } from 'react-icons/io';
 import { AccountIcon } from '../../components/Shared/Icons';
 import Link from 'next/link';
@@ -6,7 +6,7 @@ import { useCart } from '../../store/cart/cartContext';
 import { useAuth } from '../../store/auth/authContext';
 import Router from 'next/router';
 
-export default () => {
+const Header = () => {
   const { carts } = useCart();
   const { currentUser, logout } = useAuth();
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -414,3 +414,5 @@ export default () => {
     </>
   );
 };
+
+export default memo(Header);

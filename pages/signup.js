@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import { Alert } from '../components/Shared';
 import PageLoader from '../components/Shared/Loader/PageLoader';
 import { useAuth } from '../store';
+import { checkToken } from '../utils/auth';
 
 const SignUp = () => {
   const [submit, setSubmit] = useState(false);
@@ -131,7 +132,7 @@ const SignUp = () => {
               width: 100%;
               padding: 2rem;
             }
-          }
+          } 
 
           .auth-form .input {
             width: 100%;
@@ -184,6 +185,10 @@ const SignUp = () => {
       </style>
     </>
   );
+};
+
+SignUp.getInitialProps = async ctx => {
+  checkToken(ctx);
 };
 
 export default SignUp;

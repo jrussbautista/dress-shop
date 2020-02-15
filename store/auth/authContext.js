@@ -1,7 +1,7 @@
 import axios from 'axios';
 import cookie from 'js-cookie';
 import Router, { useRouter } from 'next/router';
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useMemo } from 'react';
 import { autoLogin } from '../../utils/auth';
 import baseURL from '../../utils/baseURL';
 import reducer from './authReducer';
@@ -23,9 +23,7 @@ const AuthProvider = ({ children, currentUser }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { ref } = useRouter().query;
 
-  const setCurrentUser = async token => {
-    const payload = { headers: { Authorization: token } };
-    const { data } = await axios.get(`${baseURL}/api/account`, payload);
+  const setCurrentUser = async (data, token) => {
     const isAdmin = data.role === 'admin';
     dispatch({ type: SET_CURRENT_USER, payload: data });
     if (isAdmin) {
@@ -39,7 +37,7 @@ const AuthProvider = ({ children, currentUser }) => {
   const login = async user => {
     try {
       const { data } = await axios.post(`${baseURL}/api/login`, user);
-      setCurrentUser(data);
+      setCurrentUser(data.data, data.token);
       return 'success';
     } catch (error) {
       dispatch({ type: SET_AUTH_ERROR, payload: error.response.data });
@@ -50,7 +48,7 @@ const AuthProvider = ({ children, currentUser }) => {
   const signUp = async user => {
     try {
       const { data } = await axios.post(`${baseURL}/api/signup`, user);
-      setCurrentUser(data);
+      setCurrentUser(data.data, data.token);
       return 'success';
     } catch (error) {
       dispatch({ type: SET_AUTH_ERROR, payload: error.response.data });
@@ -69,20 +67,18 @@ const AuthProvider = ({ children, currentUser }) => {
     dispatch({ type: CLEAR_AUTH_ERROR });
   };
 
-  return (
-    <AuthContext.Provider
-      value={{
-        currentUser: state.currentUser,
-        error: state.error,
-        logout,
-        login,
-        signUp,
-        clearError
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+  const value = useMemo(
+    () => ({
+      ...state,
+      logout,
+      login,
+      signUp,
+      clearError
+    }),
+    [state, logout, login, signUp, clearError]
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 const useAuth = () => useContext(AuthContext);

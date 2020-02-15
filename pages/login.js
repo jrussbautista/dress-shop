@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import Alert from '../components/Shared/Alert';
 import PageLoader from '../components/Shared/Loader/PageLoader';
 import { useAuth } from '../store';
+import { checkToken } from '../utils/auth';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
@@ -169,6 +170,10 @@ const Login = () => {
       </style>
     </>
   );
+};
+
+Login.getInitialProps = async ctx => {
+  checkToken(ctx);
 };
 
 export default Login;

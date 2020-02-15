@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import Cart from '../../models/Cart';
+import Product from '../../models/Product';
 import connectDB from '../../utils/connectDB';
 
 const { ObjectId } = mongoose.Types;
@@ -38,7 +39,7 @@ async function handleGetRequest(req, res) {
     res.status(200).json(cart);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error in fetching cart');
+    res.status(500).json(error);
   }
 }
 

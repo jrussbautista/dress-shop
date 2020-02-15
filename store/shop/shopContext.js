@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from 'react';
+import React, { createContext, useReducer, useContext, useMemo } from 'react';
 import axios from 'axios';
 import { LOAD_PRODUCTS, LOAD_MORE_PRODUCTS } from './shopTypes';
 import reducer from './shopReducer';
@@ -32,17 +32,16 @@ const ShopProvider = ({ children }) => {
     dispatch({ type: LOAD_MORE_PRODUCTS, payload: data });
   }
 
-  return (
-    <ShopContext.Provider
-      value={{
-        ...state,
-        loadProducts,
-        loadMore
-      }}
-    >
-      {children}
-    </ShopContext.Provider>
+  const value = useMemo(
+    () => ({
+      ...state,
+      loadProducts,
+      loadMore
+    }),
+    [state, loadMore, loadProducts]
   );
+
+  return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 };
 
 const useShop = () => useContext(ShopContext);

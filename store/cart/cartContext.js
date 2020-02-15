@@ -1,6 +1,12 @@
 import axios from 'axios';
 import cookie from 'js-cookie';
-import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useMemo
+} from 'react';
 import baseURL from '../../utils/baseURL';
 import { useAuth } from '../auth/authContext';
 import reducer from './cartReducer';
@@ -29,7 +35,7 @@ const CartProvider = ({ children }) => {
           dispatch({ type: SET_CART, payload: [] });
         }
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
       }
     };
     if (currentUser) getUserCart();
@@ -63,19 +69,17 @@ const CartProvider = ({ children }) => {
     dispatch({ type: CLEAR_CART });
   };
 
-  return (
-    <CartContext.Provider
-      value={{
-        carts: state.carts,
-        addCart,
-        removeCart,
-        clearCart,
-        loading: state.loading
-      }}
-    >
-      {children}
-    </CartContext.Provider>
+  const value = useMemo(
+    () => ({
+      ...state,
+      addCart,
+      removeCart,
+      clearCart
+    }),
+    [state]
   );
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
 const useCart = () => useContext(CartContext);

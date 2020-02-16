@@ -4,7 +4,11 @@
 
 ### [Live demo](https://dress-shop.now.sh)
 
+### Screenshots
+
 ![Thumbnail](dress-thumbnail.png)
+
+![Mobile](dress-thumbnail-1.png)
 
 ## Stacks
 
@@ -13,10 +17,13 @@
 - Node js
 - MongoDB
 - Stripe (for payment)
+- Now (for deployment)
 
 ## Requirements
 
-add a .env and .env.build at root folder of project and add the following
+- Node.js
+- Now.js
+- add a .env and .env.build at root folder of project and add the following
 
 ```
 MONGO_URL="your mongo db uri"
@@ -28,7 +35,14 @@ CLOUDINARY_URL= "your cloudinary url"
 ## Installation
 
 ```
-git clone
+git clone https://github.com/jrussumbrella/dress-shop-web.git
+cd dress-shop
 npm install or yarn install
 now dev
+```
+
+## Deployment
+
+```
+now --prod
 ```

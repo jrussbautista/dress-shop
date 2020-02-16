@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import baseURL from '../../utils/baseURL';
 import SkeletonBanner from '../Shared/Loader/SkeletonBanner';
+import Error from 'next/error';
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const settings = {
     dots: true,
@@ -26,13 +28,17 @@ const Banner = () => {
         setBanners(data.banners);
         setIsLoading(false);
       } catch (error) {
-        console.log(error.response);
+        setError(error);
       } finally {
         setIsLoading(false);
       }
     };
     getBanners();
   }, []);
+
+  if (error) {
+    return <Error statusCode={error.statusCode} />;
+  }
 
   return (
     <>

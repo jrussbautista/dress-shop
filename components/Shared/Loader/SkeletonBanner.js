@@ -5,14 +5,14 @@ const SkeletonBanner = () => {
       <style jsx>
         {`
           .container {
-            height: 60rem;
+            height: 55rem;
             position: relative;
             background-color: #eee;
           }
 
           @media only screen and (max-width: 768px) {
             .container {
-              height: 40rem;
+              height: 35rem;
             }
           }
         `}

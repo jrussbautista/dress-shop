@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import Banner from '../components/Home/Banner';
 import Categories from '../components/Home/Categories';
 import Layout from '../components/Layout';
@@ -46,8 +45,8 @@ const Home = () => {
                 <div className="loading-wrapper">
                   <Spinner
                     color={'var(--color-primary)'}
-                    width={80}
-                    height={80}
+                    width={60}
+                    height={60}
                   />
                 </div>
               )}

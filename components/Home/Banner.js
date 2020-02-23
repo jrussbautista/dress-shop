@@ -59,7 +59,7 @@ const Banner = () => {
       <style jsx>
         {`
           .banner {
-            height: 50rem;
+            height: 55rem;
             position: relative;
             width: 100%;
           }
@@ -77,8 +77,9 @@ const Banner = () => {
             right: 0;
             width: 100%;
             height: 100%;
-            background-position: center center;
+            background-position: center top;
             background-size: cover;
+            background-repeat: no-repeat;
           }
         `}
       </style>

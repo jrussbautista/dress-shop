@@ -6,13 +6,7 @@
 
 ## Screenshots
 
-### Web View
-
 ![Thumbnail](dress-thumbnail.png)
-
-### Mobile Web View
-
-<img src="./dress-thumbnail-1.png" alt="dress" height="450" >
 
 ## Stacks
 

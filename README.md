@@ -1,14 +1,18 @@
 # DRESS SHOP
 
-### A fullstack e-commerce website for clothing store.
+### A full stack e-commerce website for clothing store.
 
 ### [Live demo](https://dress-shop.now.sh)
 
-### Screenshots
+## Screenshots
+
+### Web View
 
 ![Thumbnail](dress-thumbnail.png)
 
-![Mobile](dress-thumbnail-1.png)
+### Mobile Web View
+
+<img src="./dress-thumbnail-1.png" alt="dress" height="450" >
 
 ## Stacks
 
@@ -16,13 +20,14 @@
 - React js
 - Node js
 - MongoDB
+- Cloudinary (for image hosting)
 - Stripe (for payment)
 - Now (for deployment)
 
 ## Requirements
 
 - Node.js
-- Now.js
+- Now
 - add a .env and .env.build at root folder of project and add the following
 
 ```

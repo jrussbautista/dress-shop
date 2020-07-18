@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const LOAD_PRODUCTS = 'LOAD_PRODUCTS';","map":{"version":3,"sources":["/home/russ/projects/dress-shop/store/shop/shopTypes.js"],"names":["LOAD_PRODUCTS"],"mappings":"AAAA,OAAO,MAAMA,aAAa,GAAG,eAAtB","sourcesContent":["export const LOAD_PRODUCTS = 'LOAD_PRODUCTS';\n"]},"metadata":{},"sourceType":"module"}

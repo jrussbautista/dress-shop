@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5e3e88581c9d440000d0f600"},"name":"women","imageURL":"https://res.cloudinary.com/djlbfjouc/image/upload/v1582518195/banner-2_htripb.jpg"}
+{"_id":{"$oid":"5e3e88ca1c9d440000d0f601"},"imageURL":"https://res.cloudinary.com/djlbfjouc/image/upload/v1582518190/banner-1_sysmlz.jpg","name":"Men"}
+{"_id":{"$oid":"5e3e89061c9d440000d0f602"},"imageURL":"https://res.cloudinary.com/djlbfjouc/image/upload/v1582518206/banner-3_mczlxb.jpg","name":"women"}

@@ -1,1 +1,0 @@
-{"ast":null,"code":"export const LOGOUT_USER = \"LOGOUT_USER\";","map":{"version":3,"sources":["/home/russ/projects/dress-shop/store/auth/auth.types.js"],"names":["LOGOUT_USER"],"mappings":"AAAA,OAAO,MAAMA,WAAW,GAAG,aAApB","sourcesContent":["export const LOGOUT_USER = \"LOGOUT_USER\";\n"]},"metadata":{},"sourceType":"module"}

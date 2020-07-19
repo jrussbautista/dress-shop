@@ -1,4 +1,5 @@
 export * from './Alert';
+export * from './Button';
 export * from './ErrorPage';
 export * from './Icons';
 export * from './Layout';

@@ -2,15 +2,14 @@ import { Formik } from 'formik';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
-import { PageLoader, Alert } from '../shared';
+import { PageLoader, Button } from '../shared';
 import { useAuth, useToast } from '../store';
 import { AuthService } from '../services';
 
 const SignUp = () => {
   const { setCurrentUser } = useAuth();
   const { setToast } = useToast();
-
-  const [submit, setSubmit] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const Schema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
@@ -18,25 +17,28 @@ const SignUp = () => {
     email: Yup.string().email('Invalid email').required('Email is required'),
   });
 
+  const initialValues = {
+    email: '',
+    password: '',
+    name: '',
+  };
+
   return (
     <>
-      {submit && <PageLoader />}
+      {submitting && <PageLoader />}
       <div className="container">
         <Formik
-          initialValues={{
-            name: '',
-            email: '',
-            password: '',
-          }}
+          initialValues={initialValues}
           validationSchema={Schema}
           onSubmit={async (values) => {
             try {
+              setSubmitting(true);
               const { user, token } = await AuthService.signUp(values);
               setCurrentUser(user, token);
             } catch (error) {
               setToast('error', error.response.data.error.message);
             } finally {
-              setSubmit(false);
+              setSubmitting(false);
             }
           }}
         >
@@ -89,9 +91,17 @@ const SignUp = () => {
                 ) : null}
               </div>
               <div className="group">
-                <button type="submit" className="btn" disabled={submit}>
-                  Sign Up
-                </button>
+                <Button
+                  type="submit"
+                  title="Sign Up"
+                  disabled={submitting}
+                  style={{
+                    width: '100%',
+                    height: '6rem',
+                    fontSize: '1.8rem',
+                    backgroundColor: 'var(--color-dark)',
+                  }}
+                />
               </div>
               <span className="link">
                 Already have an account?{' '}
@@ -126,7 +136,7 @@ const SignUp = () => {
               width: 100%;
               padding: 2rem;
             }
-          } 
+          }
 
           .auth-form .input {
             width: 100%;
@@ -137,22 +147,11 @@ const SignUp = () => {
           }
 
           .auth-form .input:focus {
-             outline: none;
+            outline: none;
           }
 
           .group {
             margin-top: 2.5rem;
-          }
-
-          .auth-form .btn {
-            width: 100%;
-            height 6rem;
-            background-color: var(--color-dark);
-            color: #fff;
-            font-size: 2rem;
-            font-family: inherit;
-            border: 1px solid var(--color-dark);
-            cursor: pointer;
           }
 
           .link {

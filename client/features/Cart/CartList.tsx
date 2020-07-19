@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Cart } from '../../types';
+import { Button } from '../../shared';
 
 interface Props {
   carts: Cart[];
@@ -50,14 +51,12 @@ export const CartList: React.FC<Props> = ({ carts, removeCart }) => {
                   className="product-content"
                   style={{ justifyContent: 'flex-end' }}
                 >
-                  {' '}
-                  <button
-                    className="btn-remove"
+                  <Button
+                    type="button"
                     onClick={() => removeCart(cart._id, cart.product._id)}
-                  >
-                    {' '}
-                    Remove{' '}
-                  </button>
+                    title="Remove"
+                    style={{ height: '4.5rem' }}
+                  />
                 </div>
               </div>
             </div>
@@ -136,17 +135,6 @@ export const CartList: React.FC<Props> = ({ carts, removeCart }) => {
 
           .total {
             font-size: 2rem;
-          }
-
-          .btn-remove {
-            color: #fff;
-            background-color: var(--color-dark);
-            border: 1px solid var(--color-dark);
-            padding: 0 2rem;
-            display: block;
-            font-size: 1.5rem;
-            cursor: pointer;
-            height: 4.5rem;
           }
 
           @media only screen and (min-width: 768px) {

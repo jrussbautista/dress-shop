@@ -2,12 +2,12 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { CartList, CartSubTotal } from '../features/Cart';
 import { useAuth, useCart } from '../store';
-import calculateCartTotal from '../utils/calculateCartTotal';
 import { GetServerSideProps } from 'next';
 import { CartService } from '../services';
 import { parseCookies } from 'nookies';
 import { Carts, Cart as CartType } from '../types';
-import { ErrorPage } from '../shared';
+import { ErrorPage, Button } from '../shared';
+import calculateCartTotal from '../utils/calculateCartTotal';
 
 interface Props extends Carts {
   error: string | null;
@@ -48,26 +48,28 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
                 <CartList carts={myCarts} removeCart={handleRemoveCart} />
                 <CartSubTotal total={Number(cartTotal)} />
                 <div className="checkout-btn-wrapper">
-                  <Link href="/checkout">
-                    <a className="checkout-btn">CHECK OUT</a>
-                  </Link>
+                  <Button
+                    href="/checkout"
+                    title="Check Out"
+                    style={{ width: '15rem' }}
+                  />
                 </div>
               </>
             ) : (
               <div className="msg-container">
                 <div className="msg"> Your cart is empty :( </div>
-                <Link href="/">
-                  <a className="btn"> Go Shop Now </a>
-                </Link>
+                <Button
+                  href="/"
+                  title="Go Shop Now"
+                  style={{ width: '15rem' }}
+                />
               </div>
             )}
           </div>
         ) : (
           <div className="msg-container">
             <h1 className="page-title"> Please login to see your cart </h1>
-            <Link href="/login">
-              <a className="btn"> Login </a>
-            </Link>
+            <Button href="/login" title="Log In" style={{ width: '15rem' }} />
           </div>
         )}
       </div>
@@ -87,24 +89,6 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-          }
-
-          .checkout-btn,
-          .btn {
-            width: 20rem;
-            color: #fff;
-            background-color: var(--color-dark);
-            border: 1px solid var(--color-dark);
-            height: 6rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            cursor: pointer;
-          }
-
-          .btn {
-            margin: 5rem 0;
           }
 
           .msg {

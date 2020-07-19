@@ -2,7 +2,7 @@
 
 ### A full stack e-commerce website for clothing store.
 
-### [Live demo](https://dress-shop-client.vercel.app/)
+### [Live demo](https://dress-shop.vercel.app/)
 
 ## Screenshots
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../../shared';
 
 interface Props {
   handleQty(type: string): void;
@@ -28,9 +29,13 @@ export const ProductAction: React.FC<Props> = ({
             +
           </button>
         </div>
-        <button className="btn-add-cart" onClick={handleAddToCart}>
-          Add to Cart
-        </button>
+        <Button
+          type="button"
+          onClick={handleAddToCart}
+          variant="primary"
+          title="Add to Cart"
+          style={{ borderRadius: '50px', width: '20rem' }}
+        />
       </div>
       <style jsx>{`
         .action {
@@ -60,21 +65,6 @@ export const ProductAction: React.FC<Props> = ({
           width: 5rem;
           border: 1px solid transparent;
           background-color: #fff;
-        }
-
-        .btn-add-cart {
-          background-color: var(--color-primary);
-          color: #fff;
-          border: 1px solid var(--color-primary);
-          font-size: 2rem;
-          border-radius: 50px;
-          width: 20rem;
-          font-family: inherit;
-          cursor: pointer;
-        }
-
-        .btn-add-cart:focus {
-          outline: none;
         }
       `}</style>
     </>

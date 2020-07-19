@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import Link from 'next/link';
 import { useState } from 'react';
 import * as Yup from 'yup';
-import { PageLoader } from '../shared';
+import { PageLoader, Button } from '../shared';
 import { useAuth, useToast } from '../store';
 import { AuthService } from '../services';
 
@@ -12,30 +12,32 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login: React.FC = () => {
-  const [submit, setSubmit] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const { setCurrentUser } = useAuth();
   const { setToast } = useToast();
 
+  const initialValues = {
+    email: '',
+    password: '',
+  };
+
   return (
     <>
-      {submit && <PageLoader />}
+      {submitting && <PageLoader />}
       <div className="container">
         <Formik
-          initialValues={{
-            email: '',
-            password: '',
-          }}
+          initialValues={initialValues}
           validationSchema={LoginSchema}
           onSubmit={async ({ email, password }) => {
-            setSubmit(true);
             try {
+              setSubmitting(true);
               const { user, token } = await AuthService.login(email, password);
               setCurrentUser(user, token);
             } catch (error) {
               setToast('error', error.response.data.error.message);
             } finally {
-              setSubmit(false);
+              setSubmitting(false);
             }
           }}
         >
@@ -74,9 +76,17 @@ const Login: React.FC = () => {
                 ) : null}
               </div>
               <div className="group">
-                <button type="submit" className="btn" disabled={submit}>
-                  Login
-                </button>
+                <Button
+                  type="submit"
+                  title="Log In"
+                  disabled={submitting}
+                  style={{
+                    width: '100%',
+                    height: '6rem',
+                    fontSize: '1.8rem',
+                    backgroundColor: 'var(--color-dark)',
+                  }}
+                />
               </div>
               <span className="link">
                 Don't have an account?{' '}
@@ -122,22 +132,11 @@ const Login: React.FC = () => {
           }
 
           .auth-form .input:focus {
-             outline: none;
+            outline: none;
           }
 
           .group {
             margin-top: 2.5rem;
-          }
-
-          .auth-form .btn {
-            width: 100%;
-            height 6rem;
-            background-color: var(--color-dark);
-            color: #fff;
-            font-size: 2rem;
-            font-family: inherit;
-            border: 1px solid var(--color-dark);
-            cursor: pointer;
           }
 
           .link {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { HomeBanner, HomeCategories } from '../features/Home';
-import { ProductList, ProductsSkeleton, Spinner } from '../shared';
+import { ProductList, ProductsSkeleton, Spinner, Button } from '../shared';
 import { useShop } from '../store';
 import { GetServerSideProps } from 'next';
 import { BannerService, CategoryService } from '../services';
@@ -52,9 +52,17 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
             )}
             {hasLoadMore && !isLoadingMore && (
               <div className="load-more">
-                <button className="btn" onClick={handleLoadMore}>
-                  Load More
-                </button>
+                <Button
+                  title="Load More"
+                  onClick={handleLoadMore}
+                  type="button"
+                  variant="outline"
+                  style={{
+                    borderRadius: '50px',
+                    fontSize: '1.6rem',
+                    width: '20rem',
+                  }}
+                />
               </div>
             )}
 
@@ -86,18 +94,6 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
             display: flex;
             justify-content: center;
             margin: 5rem 0;
-          }
-
-          .load-more .btn {
-            background-color: #fff;
-            color: var(--color-primary);
-            font-size: 2rem;
-            width: 25rem;
-            height: 6rem;
-            line-height 6rem;
-            border-radius: 5rem;
-            border: 1px solid var(--color-primary);
-            cursor: pointer;
           }
 
           .load-more .btn:focus {

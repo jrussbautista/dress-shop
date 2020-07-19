@@ -5,10 +5,11 @@ import { parseCookies, destroyCookie } from 'nookies';
 import { redirectUser } from '../utils/auth';
 import { AuthService } from '../services/authService';
 import { Layout } from '../shared';
+import { User } from '../types';
 import '../styles/global.css';
 
 interface MyAppProps extends AppProps {
-  currentUser: any;
+  currentUser: User | any;
 }
 
 const MyApp = ({ Component, pageProps, currentUser }: MyAppProps) => {
@@ -32,10 +33,11 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     return { ...appProps };
   }
 
-  let currentUser: any = {};
+  let currentUser: User | null = null;
 
   if (isServer) {
     try {
+      currentUser;
       const { data } = await AuthService.getMe(token);
       currentUser = data.data.user;
     } catch (error) {

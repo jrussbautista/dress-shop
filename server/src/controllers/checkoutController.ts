@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Cart } from '../models';
+import { Cart, User } from '../models';
 import { User as UserType } from '../types';
 import { createPaymentIntent as stripeCreatePaymentIntent } from '../lib/stripe';
 
@@ -19,8 +19,8 @@ const getCarts = async (req: Request) => {
 export const createPaymentIntent = async (req: Request, res: Response) => {
   try {
     const carts = await getCarts(req);
+    // calculate stripe amount
     const stripeAmount = calculateCartTotal(carts) * 100;
-
     const clientSecret = await stripeCreatePaymentIntent(stripeAmount);
 
     res.status(200).json({
@@ -33,6 +33,10 @@ export const createPaymentIntent = async (req: Request, res: Response) => {
     console.log(error);
     res.status(500).json({ message: error.message, success: false });
   }
+};
+
+const createOrder = async (session: { customer_email: string }) => {
+  const user = await User.findOne({ email: session.customer_email });
 };
 
 export const triggerWebhook = async (req: Request, res: Response) => {
@@ -48,6 +52,7 @@ export const triggerWebhook = async (req: Request, res: Response) => {
   switch (event.type) {
     case 'payment_intent.succeeded':
       const paymentIntent = event.data.object;
+      console.log(paymentIntent);
       console.log('PaymentIntent was successful!');
       break;
     case 'payment_method.attached':

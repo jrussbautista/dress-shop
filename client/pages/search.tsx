@@ -1,7 +1,7 @@
 import Router, { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { SearchFilter, SearchTabCategory } from '../features/Search';
-import { ProductList, ProductsSkeleton } from '../shared';
+import { ProductList, ProductsSkeleton, ErrorPage } from '../shared';
 import { ProductService } from '../services/productService';
 import { Product } from '../types';
 
@@ -13,6 +13,7 @@ interface IParams {
 
 const Search: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [error, setError] = useState<null | string>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { query, pathname } = useRouter();
   let { category, sort, keyword } = query;
@@ -42,7 +43,7 @@ const Search: React.FC = () => {
         setProducts(products);
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
+        setError('Error in fetching products. Please try again.');
       }
     };
     getProducts();
@@ -55,6 +56,10 @@ const Search: React.FC = () => {
   const handleFilterChange = (selected: string) => {
     Router.push({ pathname, query: { ...query, sort: selected } });
   };
+
+  if (error) {
+    return <ErrorPage message={error} />;
+  }
 
   return (
     <>

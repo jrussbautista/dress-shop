@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { IoMdCart, IoIosSearch } from 'react-icons/io';
 import { useAuth, useCart } from '../../store';
 import { capitalizeFirstLetter } from '../../utils/helpers';
+import { Button } from '../Button';
 
 interface Props {}
 
@@ -77,9 +78,12 @@ export const DesktopMenu: React.FC<Props> = () => {
                   </Link>
                 </li>
                 <li>
-                  <button className="btn" onClick={logout}>
-                    LOG OUT
-                  </button>
+                  <Button
+                    type="button"
+                    title="Log Out"
+                    onClick={logout}
+                    style={{ width: '100%' }}
+                  />
                 </li>
               </ul>
             )}
@@ -212,17 +216,6 @@ export const DesktopMenu: React.FC<Props> = () => {
 
         .dropdown li:last-child {
           border-top: 1px solid #eee;
-        }
-
-        .btn {
-          width: 100%;
-          color: #fff;
-          background-color: var(--color-dark);
-          border: 1px solid var(--color-dark);
-          padding: 1.5rem 0;
-          display: block;
-          font-size: 1.8rem;
-          cursor: pointer;
         }
 
         @media only screen and (min-width: 1024px) {

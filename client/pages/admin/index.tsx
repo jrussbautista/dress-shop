@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdAdd } from 'react-icons/io';
 import { useModal } from '../../store';
-import { useToast } from '../../hooks';
-import { Modal, Toast, Spinner } from '../../shared';
-import ProductForm from '../../features/Admin/Home/ProductForm';
-import ProductTable from '../../features/Admin/Home/ProductTable';
+import { Modal, Spinner } from '../../shared';
+import { ProductTable, ProductForm } from '../../features/Admin';
 import { Pagination } from '../../shared';
 import { useRouter } from 'next/router';
 import { Product } from '../../types';
 
 const Admin = () => {
   const { show, closeModal, openModal } = useModal();
-  const { isOpen, showToast } = useToast();
-  const [message, setMessage] = useState('');
   const [products, setProducts] = useState<Product[]>([]);
   const [totalProducts, setTotalProducts] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,8 +45,6 @@ const Admin = () => {
 
   function addProduct(product: Product) {
     setProducts([product, ...products]);
-    showToast();
-    setMessage('Product successfully added');
   }
 
   function addProductFormModal() {

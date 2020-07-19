@@ -4,7 +4,7 @@ import CardSection from './CheckOutStripeCard';
 import { CheckOutService } from '../../services';
 import { useAuth, useToast, useCart } from '../../store';
 import { parseCookies } from 'nookies';
-import { PageLoader, Alert } from '../../shared';
+import { PageLoader, Alert, Button } from '../../shared';
 import Router from 'next/router';
 import { StripeCardElement } from '@stripe/stripe-js';
 
@@ -83,28 +83,16 @@ export const CheckoutStripeForm = () => {
         )}
 
         <CardSection onChange={handleChange} />
-        <button disabled={processing || disabled || succeeded} className="btn">
-          {processing ? '...' : 'Confirm order'}
-        </button>
+        <Button
+          disabled={processing || disabled || succeeded}
+          type="submit"
+          title="Confirm Order"
+          style={{ width: '100%', marginTop: 20 }}
+        />
       </form>
       <style jsx>{`
         .alert-container {
           margin-bottom: 1rem;
-        }
-
-        .btn {
-          margin-top: 2em;
-          background-color: var(--color-dark);
-          color: #fff;
-          width: 100%;
-          height: 50px;
-          font-size: 17px;
-          border: 1px solid var(--color-dark);
-          display: block;
-        }
-
-        .btn:disabled {
-          opacity: 0.5;
         }
       `}</style>
     </>

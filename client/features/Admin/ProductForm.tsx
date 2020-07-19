@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Spinner } from '../../../shared';
 
-const ProductForm = ({ onSubmit, onClose }) => {
+export const ProductForm = ({ onSubmit, onClose }) => {
   const initState = {
     name: '',
     price: '',
@@ -236,5 +236,3 @@ const ProductForm = ({ onSubmit, onClose }) => {
     </>
   );
 };
-
-export default ProductForm;

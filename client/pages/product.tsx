@@ -5,7 +5,7 @@ import {
   ProductInfo,
   ProductRecommended,
 } from '../features/Product';
-import { PopUp } from '../shared';
+import { PopUp, Meta } from '../shared';
 import { usePopUp } from '../hooks';
 import { useAuth, useCart, useToast } from '../store';
 import { Product as ProductTypes, AddCart } from '../types';
@@ -66,6 +66,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
 
   return (
     <>
+      <Meta title={product.name} />
       <div className="container">
         <PopUp isOpen={isOpen} message={`Successfully added to cart`} />
         <div className="product-container">

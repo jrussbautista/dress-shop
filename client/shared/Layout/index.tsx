@@ -36,6 +36,7 @@ export const Layout: React.FC<Props> = ({ children, title = 'Dress Shop' }) => {
     <>
       <Head>
         <title>{title}</title>
+        <meta property="og:title" content={title} key="title" />
       </Head>
       <Header />
       <main>{children}</main>

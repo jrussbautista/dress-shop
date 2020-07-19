@@ -1,7 +1,11 @@
 import Router, { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { SearchFilter, SearchTabCategory } from '../features/Search';
-import { ProductList, ProductsSkeleton, ErrorPage } from '../shared';
+import {
+  SearchFilter,
+  SearchTabCategory,
+  SearchProducts,
+} from '../features/Search';
+import { ProductsSkeleton, ErrorPage, Meta } from '../shared';
 import { ProductService } from '../services/productService';
 import { Product } from '../types';
 
@@ -63,6 +67,7 @@ const Search: React.FC = () => {
 
   return (
     <>
+      <Meta title="Search" />
       <div className="container">
         <div className="sort-container">
           <SearchTabCategory active={category} onChangeTab={handleTabChange} />
@@ -71,7 +76,7 @@ const Search: React.FC = () => {
         {isLoading ? (
           <ProductsSkeleton number={20} />
         ) : (
-          <ProductList products={products} />
+          <SearchProducts products={products} />
         )}
       </div>
       <style jsx>{`

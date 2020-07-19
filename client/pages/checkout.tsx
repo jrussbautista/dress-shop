@@ -13,6 +13,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { STRIPE_CLIENT_KEY } from '../utils/constants';
 import calculateCartTotal from '../utils/calculateCartTotal';
+import { Meta } from '../shared';
 
 interface Props {
   carts: Cart[];
@@ -26,6 +27,7 @@ const Checkout: React.FC<Props> = ({ carts, error }) => {
 
   return (
     <>
+      <Meta title="Check Out" />
       <div className="container">
         <div className="wrapper">
           <div className="left">

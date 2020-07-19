@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import Link from 'next/link';
 import { useState } from 'react';
 import * as Yup from 'yup';
-import { PageLoader, Button } from '../shared';
+import { PageLoader, Button, Meta } from '../shared';
 import { useAuth, useToast } from '../store';
 import { AuthService } from '../services';
 
@@ -24,6 +24,7 @@ const Login: React.FC = () => {
 
   return (
     <>
+      <Meta title="Log In" />
       {submitting && <PageLoader />}
       <div className="container">
         <Formik

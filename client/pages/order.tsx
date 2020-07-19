@@ -1,11 +1,13 @@
 import React from 'react';
 import { OrderList } from '../features/Order';
+import { Meta } from '../shared';
 
 const Order = () => {
   return (
     <>
+      <Meta title="My Orders" />
       <div className="container">
-        <h1 className="page-title">Your Orders</h1>
+        <h1 className="page-title">My Orders</h1>
         <OrderList />
       </div>
       <style jsx>{`

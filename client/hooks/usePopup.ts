@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useToast = () => {
+export const usePopUp = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   function toggle() {

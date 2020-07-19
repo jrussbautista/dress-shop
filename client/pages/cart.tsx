@@ -7,6 +7,7 @@ import { GetServerSideProps } from 'next';
 import { CartService } from '../services';
 import { parseCookies } from 'nookies';
 import { Carts, Cart as CartType } from '../types';
+import { ErrorPage } from '../shared';
 
 interface Props extends Carts {
   error: string | null;
@@ -31,7 +32,9 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
   };
 
   if (error) {
-    return <> Something went wrong </>;
+    return (
+      <ErrorPage message="Error in getting carts. Please try again later." />
+    );
   }
 
   return (

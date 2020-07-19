@@ -1,4 +1,5 @@
 export * from './Alert';
+export * from './ErrorPage';
 export * from './Icons';
 export * from './Layout';
 export * from './Modal';

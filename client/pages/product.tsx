@@ -6,14 +6,14 @@ import {
   ProductRecommended,
 } from '../features/Product';
 import { PopUp } from '../shared';
-import { useToast } from '../hooks';
-import { useAuth, useCart } from '../store';
-import { Product as ProductTypes, Cart, AddCart } from '../types';
+import { usePopUp } from '../hooks';
+import { useAuth, useCart, useToast } from '../store';
+import { Product as ProductTypes, AddCart } from '../types';
 import { GetServerSideProps } from 'next';
 import { ProductService } from '../services/productService';
 import { CartService } from '../services';
 import { parseCookies } from 'nookies';
-import { ErrorPage } from '../shared/ErrorPage';
+import { ErrorPage } from '../shared';
 
 interface Props {
   product: ProductTypes;
@@ -25,13 +25,14 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
   const [qty, setQty] = useState(1);
   const { addCart } = useCart();
   const { currentUser } = useAuth();
-  const { isOpen, showToast } = useToast();
+  const { isOpen, showToast } = usePopUp();
+  const { setToast } = useToast();
 
   // handle change quantity
   const handleChangeQty = (action: string) => {
     if (action === 'add') {
       if (qty >= 10) {
-        alert('Ops you can buy up to 10 max');
+        setToast('error', 'Ops you can add to cart up to 10 max only');
         return;
       }
       setQty((qty) => qty + 1);
@@ -43,17 +44,19 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
   //handle add to cart
   const handleAddToCart = async () => {
     try {
-      if (currentUser) {
-        const cartObj: AddCart = { quantity: qty, product };
-        const { token } = parseCookies({});
-        addCart(cartObj);
-        await CartService.addCart(token, qty, product._id);
-        showToast();
-      } else {
+      if (!currentUser) {
+        setToast('error', 'Please log in first');
         Router.push(`/login?ref=${product._id}`);
+        return;
       }
+
+      const cartObj: AddCart = { quantity: qty, product };
+      const { token } = parseCookies({});
+      showToast();
+      addCart(cartObj);
+      await CartService.addCart(token, qty, product._id);
     } catch (error) {
-      console.log(error.response.data.message);
+      setToast('error', 'Error in adding cart. Please try again later.');
     }
   };
 

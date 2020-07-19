@@ -1,5 +1,5 @@
-export const IS_PROD = process.env.NODE_ENV;
-export const PORT = IS_PROD || 5000;
+export const IS_PROD = process.env.NODE_ENV === 'production';
+export const PORT = process.env.PORT || 5000;
 export const DATABASE_URI = IS_PROD
   ? process.env.DATABASE_URI_PROD
   : process.env.DATABASE_URI_LOCAL;

@@ -1,7 +1,7 @@
 export const IS_PROD = process.env.NODE_ENV === 'production';
 
 export const API_URL = IS_PROD
-  ? 'https://dress-shop.now.sh/api'
+  ? 'https://dress-shop-api.vercel.app/api'
   : 'http://localhost:5000/api';
 
 export const PAGE_LIMIT = 12;

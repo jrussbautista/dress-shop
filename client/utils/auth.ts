@@ -17,7 +17,7 @@ function redirectUser(ctx: NextPageContext, location: string) {
   }
 }
 
-function checkToken(ctx) {
+function checkToken(ctx: NextPageContext) {
   if (ctx.req) {
     const { token } = parseCookies(ctx);
     if (token) redirectUser(ctx, '/');

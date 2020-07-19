@@ -8,7 +8,7 @@ import {
 import { PopUp } from '../shared';
 import { useToast } from '../hooks';
 import { useAuth, useCart } from '../store';
-import { Product as ProductTypes, Cart } from '../types';
+import { Product as ProductTypes, Cart, AddCart } from '../types';
 import { GetServerSideProps } from 'next';
 import { ProductService } from '../services/productService';
 import { CartService } from '../services';
@@ -44,7 +44,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
   const handleAddToCart = async () => {
     try {
       if (currentUser) {
-        const cartObj: Cart = { quantity: qty, product };
+        const cartObj: AddCart = { quantity: qty, product };
         const { token } = parseCookies({});
         addCart(cartObj);
         await CartService.addCart(token, qty, product._id);

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "dev": "nodemon src/index.ts",
-    "start": "npm run build && node ./build/src/index.js"
+    "start": "npm run build && node ./build/index.js"
   },
   "keywords": [],
   "author": "",

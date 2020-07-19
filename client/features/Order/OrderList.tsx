@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import formatDate from '../../utils/formatDate';
+import { Product } from '../../types';
+
+interface Order {
+  _id: string;
+  products: Product[];
+  quantity: number;
+  createdAt: Date;
+  total: number;
+}
+
+type Orders = Order[];
 
 export const OrderList = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState<Orders>([]);
 
   // useEffect(() => {
   //   const getOrders = async () => {

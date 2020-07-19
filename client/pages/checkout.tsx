@@ -6,7 +6,6 @@ import {
   CheckOutList,
   CheckOutPaypal,
   CheckoutStripeForm,
-  CheckOutSuccess,
 } from '../features/CheckOut';
 import { CartService } from '../services';
 import { getCurrency } from '../utils/helpers';
@@ -51,9 +50,8 @@ const Checkout: React.FC<Props> = ({ carts, error }) => {
               <CheckoutStripeForm />
             </Elements>
             <div className="with-or">
-              {' '}
-              <span className="line"></span> <span className="middle">or</span>{' '}
-              <span className="line"></span>{' '}
+              <span className="line"></span> <span className="middle">or</span>
+              <span className="line"></span>
             </div>
             <CheckOutPaypal />
           </div>

@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
+import { IoMdClose } from 'react-icons/io';
 import { useToast } from '../../store';
 
 export const Toast = () => {
-  const { type, message, isActive } = useToast();
+  const { type, message, isActive, removeToast } = useToast();
 
   return (
     <>
@@ -22,7 +23,10 @@ export const Toast = () => {
         }}
       >
         <div className={`alert ${type}`} role={type}>
-          {message}
+          <div>{message}</div>
+          <div className="close" onClick={removeToast}>
+            <IoMdClose />
+          </div>
         </div>
       </motion.div>
 
@@ -33,6 +37,8 @@ export const Toast = () => {
           font-size: 1.7rem;
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
             0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          display: flex;
+          justify-content: space-between;
         }
         .success {
           background-color: var(--color-success);
@@ -41,6 +47,14 @@ export const Toast = () => {
         .error {
           background-color: var(--color-danger);
           color: var(--color-danger-light);
+        }
+
+        .close {
+          padding: 0 1rem;
+          cursor: pointer;
+          font-size: 2rem;
+          display: flex;
+          align-items: center;
         }
       `}</style>
     </>

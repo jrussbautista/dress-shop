@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import baseURL from '../../../utils/baseURL';
-import Spinner from '../../Shared/Loader/Spinner';
+import { Spinner } from '../../../shared';
 
 const ProductForm = ({ onSubmit, onClose }) => {
   const initState = {
     name: '',
     price: '',
     description: '',
-    category: 'men'
+    category: 'men',
   };
 
   const [product, setProduct] = useState(initState);
@@ -16,7 +15,7 @@ const ProductForm = ({ onSubmit, onClose }) => {
   const [file, setFile] = useState('');
   const [submit, setSubmit] = useState(false);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     if (e.target.name === 'file') {
       let reader = new FileReader();
       reader.onloadend = () => {
@@ -27,7 +26,7 @@ const ProductForm = ({ onSubmit, onClose }) => {
     } else {
       setProduct({
         ...product,
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
       });
     }
   };
@@ -46,18 +45,18 @@ const ProductForm = ({ onSubmit, onClose }) => {
     }
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setSubmit(true);
-      //get url of image
-      const imageURL = await imageUpload();
-      const payload = { ...product, imageURL };
-      //save product to db
-      const { data } = await axios.post(`${baseURL}/api/products`, payload);
-      reset();
-      onClose();
-      onSubmit(data.product);
+      // setSubmit(true);
+      // //get url of image
+      // const imageURL = await imageUpload();
+      // const payload = { ...product, imageURL };
+      // //save product to db
+      // const { data } = await axios.post(`${baseURL}/api/products`, payload);
+      // reset();
+      // onClose();
+      // onSubmit(data.product);
     } catch (error) {
       console.log(error.response);
     } finally {

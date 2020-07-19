@@ -23,7 +23,7 @@ export const ToastProvider: React.FC = ({ children }) => {
   const [state, setState] = useState(initialState);
 
   const removeToast = () => {
-    setState(initialState);
+    setState({ ...state, isActive: false });
   };
 
   const setToast = (type: string, message: string) => {

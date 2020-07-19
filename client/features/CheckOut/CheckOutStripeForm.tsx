@@ -6,6 +6,7 @@ import { useAuth, useToast, useCart } from '../../store';
 import { parseCookies } from 'nookies';
 import { PageLoader, Alert } from '../../shared';
 import Router from 'next/router';
+import { StripeCardElement } from '@stripe/stripe-js';
 
 export const CheckoutStripeForm = () => {
   const [succeeded, setSucceeded] = useState(false);
@@ -49,19 +50,19 @@ export const CheckoutStripeForm = () => {
     const result = await stripe.confirmCardPayment(clientSecret, {
       receipt_email: currentUser?.email,
       payment_method: {
-        card: elements.getElement(CardElement),
+        card: elements.getElement(CardElement) as StripeCardElement,
         billing_details: {
           name: currentUser?.name,
         },
       },
     });
 
-    if (result.error) {
+    if (result.error?.message) {
       setToast('error', result.error.message);
       setProcessing(false);
     } else {
       // The payment has been processed!
-      if (result.paymentIntent.status === 'succeeded') {
+      if (result.paymentIntent?.status === 'succeeded') {
         clearCart();
         setToast('success', 'Order Success. Thank you for your order');
         setError(null);

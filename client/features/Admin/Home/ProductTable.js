@@ -16,7 +16,7 @@ const ProductTable = ({ products, deleteProduct }) => {
             </tr>
           </thead>
           <tbody>
-            {products.map(product => (
+            {products.map((product) => (
               <tr key={product._id}>
                 <td>
                   <div className="product-info">

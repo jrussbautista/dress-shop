@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npx tsc",
     "dev": "nodemon src/index.ts",
-    "start": "npm run build && node ./build/index.js"
+    "start": "npm run build && node ./build/index.js",
+    "seed": "ts-node temp/seed.ts"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.23",
     "passport": "^0.4.1",
+    "passport-google-oauth2": "^0.2.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "stripe": "^8.75.0"
@@ -28,6 +30,8 @@
     "@types/cors": "^2.8.6",
     "@types/mongoose": "^5.7.31",
     "@types/passport": "^1.0.4",
+    "@types/passport-google-oauth2": "^0.1.3",
+    "@types/passport-google-oauth20": "^2.0.3",
     "@types/passport-jwt": "^3.0.3",
     "@types/passport-local": "^1.0.33",
     "nodemon": "^2.0.4",

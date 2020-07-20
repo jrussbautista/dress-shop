@@ -15,6 +15,7 @@ export const MobileSearch: React.FC<Props> = ({
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsOpenSearch(false);
     Router.push(`/search?keyword=${search}`);
   };
 

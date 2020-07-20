@@ -12,6 +12,7 @@ import {
   checkOutRoutes,
 } from './routes';
 import { PORT } from './config';
+import passport from 'passport';
 
 // initialize passport
 require('./lib/passport');
@@ -24,6 +25,7 @@ const start = async () => {
 
   app.use(cors());
   app.use(express.json());
+  app.use(passport.initialize());
 
   // setup routes
   app.use('/api/auth', authRoutes);

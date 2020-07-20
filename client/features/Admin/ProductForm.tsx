@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Spinner } from '../../../shared';
+import { Spinner } from '../../shared';
 
-export const ProductForm = ({ onSubmit, onClose }) => {
+export const ProductForm: React.FC<any> = ({ onSubmit, onClose }) => {
   const initState = {
     name: '',
     price: '',
@@ -15,53 +15,53 @@ export const ProductForm = ({ onSubmit, onClose }) => {
   const [file, setFile] = useState('');
   const [submit, setSubmit] = useState(false);
 
-  const handleChange = (e) => {
-    if (e.target.name === 'file') {
-      let reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result);
-      };
-      reader.readAsDataURL(event.target.files[0]);
-      setFile(e.target.files[0]);
-    } else {
-      setProduct({
-        ...product,
-        [e.target.name]: e.target.value,
-      });
-    }
+  const handleChange = (e: React.ChangeEvent) => {
+    // if (e.target.name === 'file') {
+    //   let reader = new FileReader();
+    //   reader.onloadend = () => {
+    //     setImagePreview(reader.result);
+    //   };
+    //   reader.readAsDataURL(event.target.files[0]);
+    //   setFile(e.target.files[0]);
+    // } else {
+    //   setProduct({
+    //     ...product,
+    //     [e.target.name]: e.target.value,
+    //   });
+    // }
   };
 
   const imageUpload = async () => {
-    try {
-      let data = new FormData();
-      data.append('file', file);
-      data.append('upload_preset', 'dress-shop');
-      data.append('cloud_name', 'djlbfjouc');
-      //upload image to cloudinary
-      const res = await axios.post(process.env.CLOUDINARY_URL, data);
-      return res.data.secure_url;
-    } catch (error) {
-      console.log(error.response);
-    }
+    // try {
+    //   let data = new FormData();
+    //   data.append('file', file);
+    //   data.append('upload_preset', 'dress-shop');
+    //   data.append('cloud_name', 'djlbfjouc');
+    //   //upload image to cloudinary
+    //   const res = await axios.post(process.env.CLOUDINARY_URL, data);
+    //   return res.data.secure_url;
+    // } catch (error) {
+    //   console.log(error.response);
+    // }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // setSubmit(true);
-      // //get url of image
-      // const imageURL = await imageUpload();
-      // const payload = { ...product, imageURL };
-      // //save product to db
-      // const { data } = await axios.post(`${baseURL}/api/products`, payload);
-      // reset();
-      // onClose();
-      // onSubmit(data.product);
-    } catch (error) {
-      console.log(error.response);
-    } finally {
-      setSubmit(false);
-    }
+  const handleSubmit = async () => {
+    // e.preventDefault();
+    // try {
+    //   // setSubmit(true);
+    //   // //get url of image
+    //   // const imageURL = await imageUpload();
+    //   // const payload = { ...product, imageURL };
+    //   // //save product to db
+    //   // const { data } = await axios.post(`${baseURL}/api/products`, payload);
+    //   // reset();
+    //   // onClose();
+    //   // onSubmit(data.product);
+    // } catch (error) {
+    //   console.log(error.response);
+    // } finally {
+    //   setSubmit(false);
+    // }
   };
 
   const reset = () => {

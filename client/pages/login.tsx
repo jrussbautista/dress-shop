@@ -1,10 +1,12 @@
 import { Formik } from 'formik';
+import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { PageLoader, Button, Meta } from '../shared';
 import { useAuth, useToast } from '../store';
 import { AuthService } from '../services';
+import { AuthSocial } from '../features/Auth';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Password is required').min(6),
@@ -12,10 +14,29 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login: React.FC = () => {
+  const { query } = useRouter();
+  const token: string = query.token as string;
+
   const [submitting, setSubmitting] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(token ? true : false);
 
   const { setCurrentUser } = useAuth();
   const { setToast } = useToast();
+
+  useEffect(() => {
+    const verifyToken = async () => {
+      if (!token) return;
+      try {
+        setIsVerifying(true);
+        const { data } = await AuthService.getMe(token);
+        setCurrentUser(data.data.user, token);
+        Router.push('/');
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    verifyToken();
+  }, []);
 
   const initialValues = {
     email: '',
@@ -25,79 +46,89 @@ const Login: React.FC = () => {
   return (
     <>
       <Meta title="Log In" />
-      {submitting && <PageLoader />}
+      {(submitting || isVerifying) && <PageLoader />}
       <div className="container">
-        <Formik
-          initialValues={initialValues}
-          validationSchema={LoginSchema}
-          onSubmit={async ({ email, password }) => {
-            try {
-              setSubmitting(true);
-              const { user, token } = await AuthService.login(email, password);
-              setCurrentUser(user, token);
-            } catch (error) {
-              setToast('error', error.response.data.error.message);
-            } finally {
-              setSubmitting(false);
-            }
-          }}
-        >
-          {({ errors, touched, handleChange, handleSubmit, values }) => (
-            <form onSubmit={handleSubmit} className="auth-form">
-              <h1 className="page-heading"> Login </h1>
-              <div className="group">
-                <input
-                  className={`input ${
-                    errors.email && touched.email && 'input-error'
-                  }`}
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                  value={values.email}
-                  onChange={handleChange}
-                />
-                {errors.email && touched.email ? (
-                  <div className="error">{errors.email}</div>
-                ) : null}
-              </div>
+        {!isVerifying && (
+          <Formik
+            initialValues={initialValues}
+            validationSchema={LoginSchema}
+            onSubmit={async ({ email, password }) => {
+              try {
+                setSubmitting(true);
+                const { user, token } = await AuthService.login(
+                  email,
+                  password
+                );
+                setCurrentUser(user, token);
+              } catch (error) {
+                setToast('error', error.response.data.error.message);
+              } finally {
+                setSubmitting(false);
+              }
+            }}
+          >
+            {({ errors, touched, handleChange, handleSubmit, values }) => (
+              <form onSubmit={handleSubmit} className="auth-form">
+                <h1 className="page-heading"> Login </h1>
+                <div className="group">
+                  <input
+                    className={`input ${
+                      errors.email && touched.email && 'input-error'
+                    }`}
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                  />
+                  {errors.email && touched.email ? (
+                    <div className="error">{errors.email}</div>
+                  ) : null}
+                </div>
 
-              <div className="group">
-                <input
-                  className={`input ${
-                    errors.password && touched.password && 'input-error'
-                  }`}
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={values.password}
-                  onChange={handleChange}
-                />
-                {errors.password && touched.password ? (
-                  <div className="error">{errors.password}</div>
-                ) : null}
-              </div>
-              <div className="group">
-                <Button
-                  type="submit"
-                  title="Log In"
-                  disabled={submitting}
-                  style={{
-                    width: '100%',
-                    height: '6rem',
-                    fontSize: '1.8rem',
-                    backgroundColor: 'var(--color-dark)',
-                  }}
-                />
-              </div>
-              <span className="link">
-                Don't have an account?{' '}
-                <Link href="/signup">
-                  <a className="link link-text"> Create an account.</a>
-                </Link>
-              </span>
-            </form>
-          )}
-        </Formik>
+                <div className="group">
+                  <input
+                    className={`input ${
+                      errors.password && touched.password && 'input-error'
+                    }`}
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                  />
+                  {errors.password && touched.password ? (
+                    <div className="error">{errors.password}</div>
+                  ) : null}
+                </div>
+                <div className="group">
+                  <Button
+                    type="submit"
+                    title="Log In"
+                    disabled={submitting}
+                    style={{
+                      width: '100%',
+                      fontSize: '1.8rem',
+                      backgroundColor: 'var(--color-dark)',
+                    }}
+                  />
+                </div>
+                <div className="link">
+                  Don't have an account?{' '}
+                  <Link href="/signup">
+                    <a className="link link-text"> Create an account.</a>
+                  </Link>
+                </div>
+                <div className="or">
+                  <span className="line"></span>
+                  <span className="text">or</span>
+                  <span className="line"></span>
+                </div>
+                <AuthSocial />
+              </form>
+            )}
+          </Formik>
+        )}
       </div>
       <style jsx>
         {`
@@ -141,10 +172,10 @@ const Login: React.FC = () => {
           }
 
           .link {
-            margin-top: 1rem;
+            margin-top: 2rem;
             color: var(--color-dark);
-            display: inline-block;
             font-size: 1.7rem;
+            text-align: center;
           }
 
           .link-text {
@@ -159,6 +190,24 @@ const Login: React.FC = () => {
 
           .auth-form .input-error {
             border-bottom: 1px solid red;
+          }
+
+          .or {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .or .line {
+            flex: 1;
+            background: rgb(232, 233, 234);
+            color: rgb(134, 144, 153);
+            height: 1px;
+          }
+
+          .or .text {
+            padding: 0 1rem;
           }
         `}
       </style>

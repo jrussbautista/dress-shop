@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { JWT_EXPIRES_IN, JWT_SECRET_KEY } from '../config';
+import { JWT_EXPIRES_IN, JWT_SECRET_KEY, CLIENT_PUBLIC_URL } from '../config';
 import { User } from '../types';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
@@ -22,6 +22,18 @@ export const sendResponseToken = ({
   });
 
   res.status(statusCode).json({ data: { user, token }, success: true });
+};
+
+export const loginViaGoogle = async (req: Request, res: Response) => {
+  const user = req.user as User;
+
+  const payload = {
+    user_id: user._id,
+  };
+  const token = jwt.sign(payload, JWT_SECRET_KEY, {
+    expiresIn: JWT_EXPIRES_IN,
+  });
+  res.redirect(`${CLIENT_PUBLIC_URL}/login?token=${token}`);
 };
 
 export const login = async (

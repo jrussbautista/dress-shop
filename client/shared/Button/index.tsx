@@ -6,9 +6,10 @@ interface Props {
   href?: string;
   type?: 'button' | 'reset' | 'submit';
   title: string;
-  variant?: 'primary' | 'outline';
+  variant?: 'primary' | 'outline' | 'light';
   style?: React.CSSProperties;
   disabled?: boolean;
+  icon?: React.ReactElement;
 }
 
 export const Button: React.FC<Props> = ({
@@ -19,6 +20,7 @@ export const Button: React.FC<Props> = ({
   style,
   variant,
   disabled,
+  icon,
 }) => {
   return (
     <>
@@ -40,6 +42,7 @@ export const Button: React.FC<Props> = ({
           style={style}
           disabled={disabled}
         >
+          {icon && <span className="icon">{icon}</span>}
           {title}
         </button>
       )}
@@ -84,6 +87,18 @@ export const Button: React.FC<Props> = ({
         .outline:hover {
           background-color: var(--color-primary);
           color: #fff;
+        }
+
+        .light {
+          background-color: #fff;
+          color: #3d3d3d;
+          border: 1px solid rgb(205, 209, 212);
+        }
+
+        .icon {
+          width: 20px;
+          height: 20px;
+          margin-right: 1rem;
         }
       `}</style>
     </>

@@ -1,3 +1,2 @@
-import AccountIcon from './AccountIcon';
-
-export { AccountIcon };
+export * from './IconAccount';
+export * from './IconGoogle';

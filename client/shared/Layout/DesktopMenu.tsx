@@ -68,7 +68,11 @@ export const DesktopMenu: React.FC<Props> = () => {
               className="user"
               onClick={() => setIsOpenDropdown(!isOpenDropdown)}
             >
-              {capitalizeFirstLetter(currentUser.name)}
+              {currentUser.imageURL ? (
+                <img src={currentUser.imageURL} alt={currentUser.name} />
+              ) : (
+                capitalizeFirstLetter(currentUser.name)
+              )}
             </div>
             {isOpenDropdown && (
               <ul className="dropdown">
@@ -187,6 +191,12 @@ export const DesktopMenu: React.FC<Props> = () => {
           align-items: center;
           justify-content: center;
           cursor: pointer;
+          overflow: hidden;
+        }
+
+        .user img {
+          width: 100%;
+          height: 100%;
         }
 
         .icon-container svg {

@@ -1,6 +1,6 @@
 import { FaTrash } from 'react-icons/fa';
 
-export const ProductTable = ({ products, deleteProduct }) => {
+export const ProductTable: React.FC<any> = ({ products, deleteProduct }) => {
   return (
     <div className="table-container">
       {products.length === 0 ? (
@@ -16,7 +16,7 @@ export const ProductTable = ({ products, deleteProduct }) => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {products.map((product: any) => (
               <tr key={product._id}>
                 <td>
                   <div className="product-info">

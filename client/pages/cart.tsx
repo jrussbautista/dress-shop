@@ -62,7 +62,7 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
                 <Button
                   href="/"
                   title="Go Shop Now"
-                  style={{ width: '15rem' }}
+                  style={{ width: '20rem' }}
                 />
               </div>
             )}

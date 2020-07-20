@@ -6,3 +6,6 @@ export const DATABASE_URI = IS_PROD
 export const JWT_SECRET_KEY = `${process.env.JWT_SECRET}`;
 export const JWT_EXPIRES_IN = '7d';
 export const STRIPE_SECRET_KEY = `${process.env.STRIPE_SECRET_API_KEY}`;
+export const GOOGLE_CLIENT_ID = `${process.env.GOOGLE_CLIENT_ID}`;
+export const GOOGLE_SECRET_KEY = `${process.env.GOOGLE_CLIENT_SECRET}`;
+export const CLIENT_PUBLIC_URL = `${process.env.CLIENT_PUBLIC_URL}`;

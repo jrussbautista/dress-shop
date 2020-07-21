@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IoMdCart, IoIosSearch } from 'react-icons/io';
-import { AccountIcon } from '../Icons';
+import { IconAccount } from '../Icons';
 import { useAuth, useCart } from '../../store';
 import Link from 'next/link';
 import { MobileSearch } from './MobileSearch';

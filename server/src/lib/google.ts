@@ -5,11 +5,15 @@ const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 
 export const Google = {
   verifyIdToken: async (token: string) => {
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: GOOGLE_CLIENT_ID,
-    });
-    const payload = ticket.getPayload();
-    return payload;
+    try {
+      const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: GOOGLE_CLIENT_ID,
+      });
+      const payload = ticket.getPayload();
+      return payload;
+    } catch (error) {
+      throw error;
+    }
   },
 };

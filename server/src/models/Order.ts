@@ -1,10 +1,14 @@
 import { Schema, model, Document, Types } from 'mongoose';
-import { Product } from '../types';
+
+interface Product {
+  quantity: number;
+  product: Types.ObjectId;
+}
 
 export interface OrderDocument extends Document {
   user: Types.ObjectId;
-  quantity: number;
   products: Product[];
+  total: number;
 }
 
 const OrderSchema = new Schema(

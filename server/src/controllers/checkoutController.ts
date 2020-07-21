@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Cart, User } from '../models';
+import { Cart, User, Order, Product } from '../models';
 import { User as UserType } from '../types';
 import { createPaymentIntent as stripeCreatePaymentIntent } from '../lib/stripe';
 
@@ -35,31 +35,32 @@ export const createPaymentIntent = async (req: Request, res: Response) => {
   }
 };
 
-const createOrder = async (session: { customer_email: string }) => {
-  const user = await User.findOne({ email: session.customer_email });
+const createOrder = async (stripeData: any, res: Response) => {
+  const user = await User.findOne({
+    email: stripeData.receipt_email,
+  });
+  if (!user)
+    return res.status(404).json({ error: { message: 'User not found' } });
+  const total = stripeData.amount / 100;
+  const carts = await Cart.find({ user: user._id });
+  const products = carts.map((cart) => ({
+    quantity: cart.quantity,
+    product: cart.product,
+  }));
+  await Order.create({ user: user._id, total, products });
 };
 
 export const triggerWebhook = async (req: Request, res: Response) => {
-  let event;
-
-  try {
-    event = JSON.parse(req.body);
-  } catch (err) {
-    res.status(400).send(`Webhook Error: ${err.message}`);
-  }
+  const event = req.body;
 
   // Handle the event
   switch (event.type) {
     case 'payment_intent.succeeded':
       const paymentIntent = event.data.object;
+      await createOrder(paymentIntent, res);
       console.log(paymentIntent);
       console.log('PaymentIntent was successful!');
       break;
-    case 'payment_method.attached':
-      const paymentMethod = event.data.object;
-      console.log('PaymentMethod was attached to a Customer!');
-      break;
-    // ... handle other event types
     default:
       // Unexpected event type
       return res.status(400).end();

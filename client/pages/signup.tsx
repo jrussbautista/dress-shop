@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { PageLoader, Button, Meta } from '../shared';
 import { useAuth, useToast } from '../store';
 import { AuthService } from '../services';
+import { AuthSocial } from '../features/Auth';
 
 const SignUp = () => {
   const { setCurrentUser } = useAuth();
@@ -107,9 +108,15 @@ const SignUp = () => {
               <span className="link">
                 Already have an account?{' '}
                 <Link href="/login">
-                  <a className="link link-text"> Login your Account.</a>
+                  <a className="   link-text"> Login your Account.</a>
                 </Link>
               </span>
+              <div className="or">
+                <span className="line"></span>
+                <span className="text">or</span>
+                <span className="line"></span>
+              </div>
+              <AuthSocial />
             </form>
           )}
         </Formik>
@@ -156,10 +163,11 @@ const SignUp = () => {
           }
 
           .link {
-            margin-top: 1rem;
+            margin-top: 2rem;
             color: var(--color-dark);
-            display: inline-block;
+            display: block;
             font-size: 1.7rem;
+            text-align: center;
           }
 
           .link-text {
@@ -174,6 +182,24 @@ const SignUp = () => {
 
           .auth-form .input-error {
             border-bottom: 1px solid red;
+          }
+
+          .or {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .or .line {
+            flex: 1;
+            background: rgb(232, 233, 234);
+            color: rgb(134, 144, 153);
+            height: 1px;
+          }
+
+          .or .text {
+            padding: 0 1rem;
           }
         `}
       </style>

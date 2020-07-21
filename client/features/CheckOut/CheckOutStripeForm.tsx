@@ -53,6 +53,7 @@ export const CheckoutStripeForm = () => {
         card: elements.getElement(CardElement) as StripeCardElement,
         billing_details: {
           name: currentUser?.name,
+          email: currentUser?.email,
         },
       },
     });

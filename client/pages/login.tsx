@@ -1,7 +1,6 @@
 import { Formik } from 'formik';
-import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import * as Yup from 'yup';
 import { PageLoader, Button, Meta } from '../shared';
 import { useAuth, useToast } from '../store';
@@ -14,29 +13,10 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login: React.FC = () => {
-  const { query } = useRouter();
-  const token: string = query.token as string;
-
   const [submitting, setSubmitting] = useState(false);
-  const [isVerifying, setIsVerifying] = useState(token ? true : false);
 
   const { setCurrentUser } = useAuth();
   const { setToast } = useToast();
-
-  useEffect(() => {
-    const verifyToken = async () => {
-      if (!token) return;
-      try {
-        setIsVerifying(true);
-        const { data } = await AuthService.getMe(token);
-        setCurrentUser(data.data.user, token);
-        Router.push('/');
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    verifyToken();
-  }, []);
 
   const initialValues = {
     email: '',
@@ -46,89 +26,84 @@ const Login: React.FC = () => {
   return (
     <>
       <Meta title="Log In" />
-      {(submitting || isVerifying) && <PageLoader />}
+      {submitting && <PageLoader />}
       <div className="container">
-        {!isVerifying && (
-          <Formik
-            initialValues={initialValues}
-            validationSchema={LoginSchema}
-            onSubmit={async ({ email, password }) => {
-              try {
-                setSubmitting(true);
-                const { user, token } = await AuthService.login(
-                  email,
-                  password
-                );
-                setCurrentUser(user, token);
-              } catch (error) {
-                setToast('error', error.response.data.error.message);
-              } finally {
-                setSubmitting(false);
-              }
-            }}
-          >
-            {({ errors, touched, handleChange, handleSubmit, values }) => (
-              <form onSubmit={handleSubmit} className="auth-form">
-                <h1 className="page-heading"> Login </h1>
-                <div className="group">
-                  <input
-                    className={`input ${
-                      errors.email && touched.email && 'input-error'
-                    }`}
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    value={values.email}
-                    onChange={handleChange}
-                  />
-                  {errors.email && touched.email ? (
-                    <div className="error">{errors.email}</div>
-                  ) : null}
-                </div>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={LoginSchema}
+          onSubmit={async ({ email, password }) => {
+            try {
+              setSubmitting(true);
+              const { user, token } = await AuthService.login(email, password);
+              setCurrentUser(user, token);
+            } catch (error) {
+              setToast('error', error.response.data.error.message);
+            } finally {
+              setSubmitting(false);
+            }
+          }}
+        >
+          {({ errors, touched, handleChange, handleSubmit, values }) => (
+            <form onSubmit={handleSubmit} className="auth-form">
+              <h1 className="page-heading"> Login </h1>
+              <div className="group">
+                <input
+                  className={`input ${
+                    errors.email && touched.email && 'input-error'
+                  }`}
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                />
+                {errors.email && touched.email ? (
+                  <div className="error">{errors.email}</div>
+                ) : null}
+              </div>
 
-                <div className="group">
-                  <input
-                    className={`input ${
-                      errors.password && touched.password && 'input-error'
-                    }`}
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={values.password}
-                    onChange={handleChange}
-                  />
-                  {errors.password && touched.password ? (
-                    <div className="error">{errors.password}</div>
-                  ) : null}
-                </div>
-                <div className="group">
-                  <Button
-                    type="submit"
-                    title="Log In"
-                    disabled={submitting}
-                    style={{
-                      width: '100%',
-                      fontSize: '1.8rem',
-                      backgroundColor: 'var(--color-dark)',
-                    }}
-                  />
-                </div>
-                <div className="link">
-                  Don't have an account?{' '}
-                  <Link href="/signup">
-                    <a className="link link-text"> Create an account.</a>
-                  </Link>
-                </div>
-                <div className="or">
-                  <span className="line"></span>
-                  <span className="text">or</span>
-                  <span className="line"></span>
-                </div>
-                <AuthSocial />
-              </form>
-            )}
-          </Formik>
-        )}
+              <div className="group">
+                <input
+                  className={`input ${
+                    errors.password && touched.password && 'input-error'
+                  }`}
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
+                />
+                {errors.password && touched.password ? (
+                  <div className="error">{errors.password}</div>
+                ) : null}
+              </div>
+              <div className="group">
+                <Button
+                  type="submit"
+                  title="Log In"
+                  disabled={submitting}
+                  style={{
+                    width: '100%',
+                    fontSize: '1.8rem',
+                    backgroundColor: 'var(--color-dark)',
+                  }}
+                />
+              </div>
+              <div className="link">
+                Don't have an account?{' '}
+                <Link href="/signup">
+                  <a className="link link-text"> Create an account.</a>
+                </Link>
+              </div>
+              <div className="or">
+                <span className="line"></span>
+                <span className="text">or</span>
+                <span className="line"></span>
+              </div>
+              <AuthSocial />
+            </form>
+          )}
+        </Formik>
       </div>
       <style jsx>
         {`

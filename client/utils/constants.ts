@@ -4,7 +4,7 @@ export const API_URL = IS_PROD
   ? 'https://dress-shop-api.vercel.app/api'
   : 'http://localhost:5000/api';
 
-export const GOOGLE_LOGIN_URL = `${API_URL}/auth/google`;
+export const GOOGLE_CLIENT_ID = `${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`;
 
 export const PAGE_LIMIT = 12;
 export const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;

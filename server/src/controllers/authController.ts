@@ -1,15 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
-import { JWT_EXPIRES_IN, JWT_SECRET_KEY, CLIENT_PUBLIC_URL } from '../config';
-import { User } from '../types';
+import { JWT_EXPIRES_IN, JWT_SECRET_KEY } from '../config';
+import { User as UserType, Role } from '../types';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
+import { Google } from '../lib/google';
+import { User, UserDocument } from '../models';
 
 export const sendResponseToken = ({
   user,
   res,
   statusCode,
 }: {
-  user: User;
+  user: UserType | UserDocument;
   statusCode: number;
   res: Response;
 }) => {
@@ -25,15 +27,36 @@ export const sendResponseToken = ({
 };
 
 export const loginViaGoogle = async (req: Request, res: Response) => {
-  const user = req.user as User;
+  const idToken = req.body.idToken;
+  const response = await Google.verifyIdToken(idToken);
+  if (!response)
+    return res.status(200).json({
+      error: { message: 'Error in logging in. Please try again later' },
+    });
 
-  const payload = {
-    user_id: user._id,
-  };
-  const token = jwt.sign(payload, JWT_SECRET_KEY, {
-    expiresIn: JWT_EXPIRES_IN,
+  const name = response.name as string;
+  const email = response.email as string;
+  const googleId = response.sub;
+  const imageURL = response.picture;
+
+  let user = await User.findOne({
+    googleId,
+    email,
   });
-  res.redirect(`${CLIENT_PUBLIC_URL}/login?token=${token}`);
+
+  // create user if does not exists in db
+  if (!user) {
+    user = await User.create({
+      googleId,
+      name,
+      imageURL,
+      email,
+      carts: [],
+      role: Role.User,
+    });
+  }
+
+  sendResponseToken({ user, res, statusCode: 200 });
 };
 
 export const login = async (

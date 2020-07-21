@@ -1,53 +1,9 @@
 import passport from 'passport';
 import { Strategy as localStrategy } from 'passport-local';
 import { Strategy as JWTstrategy, ExtractJwt } from 'passport-jwt';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
 import { User } from '../models';
-import { Role, User as UserType } from '../types';
-import { JWT_SECRET_KEY, GOOGLE_CLIENT_ID, GOOGLE_SECRET_KEY } from '../config';
-
-passport.serializeUser((user: UserType, done) => {
-  done(null, user._id);
-});
-
-passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
-    done(null, user);
-  });
-});
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_SECRET_KEY,
-      callbackURL: 'http://localhost:5000/api/auth/google/callback',
-      passReqToCallback: true,
-    },
-    async function (
-      request: any,
-      accessToken: any,
-      refreshToken: any,
-      profile: any,
-      done: any
-    ) {
-      try {
-        let user = await User.findOne({ email: profile.emails[0].value });
-        // save user to db if not exist
-        if (!user) {
-          user = await new User({
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            imageURL: profile.photos[0].value,
-          }).save();
-        }
-        done(null, user);
-      } catch (error) {
-        done(error);
-      }
-    }
-  )
-);
+import { Role } from '../types';
+import { JWT_SECRET_KEY } from '../config';
 
 //This verifies that the token sent by the user is valid
 passport.use(

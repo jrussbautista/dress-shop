@@ -11,6 +11,16 @@ const getMe = async (token: string) => {
   return await axios.get(`${API_URL}/auth/me`, { params: { token } });
 };
 
+const verifyGoogleIdToken = async (idToken: string): Promise<UserData> => {
+  const url = `${API_URL}/auth/google`;
+  const { data } = await axios.post(url, { idToken });
+  const userData: UserData = {
+    user: data.data.user,
+    token: data.data.token,
+  };
+  return userData;
+};
+
 const login = async (email: string, password: string): Promise<UserData> => {
   const url = `${API_URL}/auth/login`;
   const { data } = await axios.post(url, { email, password });
@@ -43,4 +53,5 @@ export const AuthService = {
   getMe,
   login,
   signUp,
+  verifyGoogleIdToken,
 };

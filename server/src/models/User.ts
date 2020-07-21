@@ -6,9 +6,10 @@ export interface UserDocument extends Document {
   name: string;
   email: string;
   imageURL?: string;
-  password: string;
+  password?: string;
   role: Role;
   carts: Types.ObjectId[];
+  googleId?: string;
   matchesPassword: (password: string) => Promise<boolean>;
 }
 
@@ -19,6 +20,7 @@ const UserSchema = new Schema(
     imageURL: String,
     password: String,
     role: String,
+    googleId: String,
     carts: [
       {
         type: 'ObjectId',

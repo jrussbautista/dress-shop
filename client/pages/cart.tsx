@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useState } from 'react';
 import { CartList, CartSubTotal } from '../features/Cart';
 import { useAuth, useCart } from '../store';

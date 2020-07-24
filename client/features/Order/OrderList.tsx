@@ -1,39 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import formatDate from '../../utils/formatDate';
-import { Product } from '../../types';
+import { Order } from '../../types';
 
-interface Order {
-  _id: string;
-  products: Product[];
-  quantity: number;
-  createdAt: Date;
-  total: number;
+interface Props {
+  orders: Order[];
 }
 
-type Orders = Order[];
-
-export const OrderList = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [orders, setOrders] = useState<Orders>([]);
-
-  // useEffect(() => {
-  //   const getOrders = async () => {
-  //     try {
-  //       const token = cookie.get('token');
-  //       const payload = { headers: { Authorization: token } };
-  //       const { data } = await axios.get(`${baseURL}/api/orders`, payload);
-  //       setOrders(data.orders);
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.log(error.response.data);
-  //     } finally {
-  //       // setIsLoading(false);
-  //     }
-  //   };
-  //   getOrders();
-  // }, []);
-
+export const OrderList: React.FC<Props> = ({ orders }) => {
   return (
     <div>
       {orders.length > 0 ? (
@@ -86,7 +60,7 @@ export const OrderList = () => {
                   ))}
                 </div>
                 <div className="order-bottom">
-                  <span className="total-text">Order Total:</span>{' '}
+                  <span className="total-text">Order Total:</span>
                   <span className="total-price">P{order.total}</span>
                 </div>
               </div>

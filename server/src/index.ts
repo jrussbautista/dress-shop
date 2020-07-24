@@ -10,6 +10,7 @@ import {
   bannerRoutes,
   categoryRoutes,
   checkOutRoutes,
+  orderRoutes,
 } from './routes';
 import { PORT } from './config';
 import passport from 'passport';
@@ -34,6 +35,7 @@ const start = async () => {
   app.use('/api/carts', cartRoutes);
   app.use('/api/checkout', checkOutRoutes);
   app.use('/api/products', productRoutes);
+  app.use('/api/orders', orderRoutes);
 
   app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);

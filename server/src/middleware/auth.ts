@@ -13,8 +13,10 @@ export const protect = (req: Request, res: Response, next: NextFunction) => {
     }
     if (!user)
       return res.status(401).json({
-        message: 'Not Authorized',
-        name: 'AUTHENTICATION_FAILURE',
+        error: {
+          message: 'Not Authorized',
+          name: 'AUTHENTICATION_FAILURE',
+        },
         success: false,
       });
     req.user = user;
@@ -27,8 +29,11 @@ export const authorize = (roles: string) => {
     const user = req.user as User;
     if (!roles.includes(user.role)) {
       return res.status(403).json({
-        name: 'Unauthorized',
-        message: 'You are not authorize to perform this action',
+        error: {
+          name: 'Unauthorized',
+          message: 'You are not authorize to perform this action',
+        },
+        success: false,
       });
     }
     next();

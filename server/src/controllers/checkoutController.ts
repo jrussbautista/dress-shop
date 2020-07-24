@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Cart, User, Order, Product } from '../models';
+import { Cart, User, Order } from '../models';
 import { User as UserType } from '../types';
 import { createPaymentIntent as stripeCreatePaymentIntent } from '../lib/stripe';
 
@@ -48,11 +48,17 @@ const createOrder = async (stripeData: any, res: Response) => {
     product: cart.product,
   }));
   await Order.create({ user: user._id, total, products });
+  // remove user carts
+  await User.findOneAndUpdate(
+    { _id: user.id },
+    {
+      carts: [],
+    }
+  );
 };
 
 export const triggerWebhook = async (req: Request, res: Response) => {
   const event = req.body;
-
   // Handle the event
   switch (event.type) {
     case 'payment_intent.succeeded':

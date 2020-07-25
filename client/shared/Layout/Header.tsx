@@ -37,7 +37,7 @@ const Header = () => {
             align-items: center;
             max-width: 120rem;
             margin: 0 auto;
-            height: 9rem;
+            height: 8rem;
             padding: 0 2rem;
           }
 

@@ -38,7 +38,7 @@ const SignUp = () => {
               const { user, token } = await AuthService.signUp(values);
               setCurrentUser(user, token);
             } catch (error) {
-              setToast('error', error.response.data.error.message);
+              setToast('error', error.message);
             } finally {
               setSubmitting(false);
             }
@@ -54,6 +54,7 @@ const SignUp = () => {
                   }`}
                   type="text"
                   placeholder="Name"
+                  autoComplete="true"
                   name="name"
                   value={values.name}
                   onChange={handleChange}
@@ -69,6 +70,7 @@ const SignUp = () => {
                   }`}
                   type="email"
                   placeholder="Email"
+                  autoComplete="true"
                   name="email"
                   value={values.email}
                   onChange={handleChange}
@@ -83,6 +85,7 @@ const SignUp = () => {
                     errors.password && touched.password && 'input-error'
                   }`}
                   type="password"
+                  autoComplete="true"
                   placeholder="Password"
                   name="password"
                   value={values.password}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
 import Router from 'next/router';
+import { Button } from '../Button';
 
 interface Props {
   isOpenSearch: boolean;
@@ -23,7 +24,7 @@ export const MobileSearch: React.FC<Props> = ({
     <>
       <div className={`mobile-search ${isOpenSearch ? 'open' : ''}`}>
         <div className="close" onClick={() => setIsOpenSearch(false)}>
-          <IoIosClose size={60} />
+          <IoIosClose size={50} />
         </div>
         <form onSubmit={handleSearchSubmit}>
           <input
@@ -32,7 +33,7 @@ export const MobileSearch: React.FC<Props> = ({
             onChange={(e) => setSearch(e.target.value)}
             value={search}
           />
-          <button type="submit">Search</button>
+          <Button type="submit" title="Search" style={{ marginTop: 20 }} />
         </form>
       </div>
       <style jsx>{`
@@ -60,7 +61,7 @@ export const MobileSearch: React.FC<Props> = ({
 
         .mobile-search .close {
           position: absolute;
-          top: 3rem;
+          bottom: 6rem;
           left: 50%;
           transform: translateX(-50%);
           cursor: pointer;
@@ -76,20 +77,11 @@ export const MobileSearch: React.FC<Props> = ({
           height: 6rem;
           border: 1px solid transparent;
           border-bottom: 1px solid var(--color-dark);
-          font-size: 2rem;
+          font-size: 1.5rem;
         }
 
         .mobile-search input:focus {
           outline: none;
-        }
-
-        .mobile-search button {
-          margin-top: 2rem;
-          background-color: var(--color-dark);
-          color: #fff;
-          border: 1px solid transparent;
-          height: 6rem;
-          font-size: 2rem;
         }
       `}</style>
     </>

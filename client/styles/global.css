@@ -10,6 +10,7 @@ html {
   box-sizing: border-box;
   --color-primary: #d82c23;
   --color-gray: #f5f5f5;
+  --color-gray-dark: #efefef;
   --color-dark: #222;
   --color-red: #eb1a0f;
   --color-success: #8bc34a;

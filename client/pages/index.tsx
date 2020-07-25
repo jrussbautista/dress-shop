@@ -6,6 +6,7 @@ import { GetServerSideProps } from 'next';
 import { BannerService, CategoryService } from '../services';
 import { Banner, Category } from '../types';
 import { useScrollRestoration } from '../hooks';
+import { MobileBottomMenu } from '../shared';
 
 interface Props {
   banners: Banner[];
@@ -41,6 +42,7 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
         ) : (
           <>
             <ProductList products={products} />
+
             {isLoadingMore && (
               <div className="loading-wrapper">
                 <Spinner
@@ -50,6 +52,7 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
                 />
               </div>
             )}
+
             {hasLoadMore && !isLoadingMore && (
               <div className="load-more">
                 <Button
@@ -74,6 +77,7 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
           </>
         )}
       </div>
+      <MobileBottomMenu />
       <style jsx>
         {`
           .container {

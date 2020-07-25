@@ -4,6 +4,7 @@ export * from './ErrorPage';
 export * from './Icons';
 export * from './Layout';
 export * from './Meta';
+export * from './MobileBottomMenu';
 export * from './Modal';
 export * from './PageLoader';
 export * from './Pagination';

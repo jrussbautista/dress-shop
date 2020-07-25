@@ -5,3 +5,4 @@ export * from './bannerRoutes';
 export * from './categoryRoutes';
 export * from './checkoutRoutes';
 export * from './orderRoutes';
+export * from './userRoutes';

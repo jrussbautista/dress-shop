@@ -3,6 +3,7 @@ import {
   SET_CURRENT_USER,
   SET_AUTH_ERROR,
   CLEAR_AUTH_ERROR,
+  UPDATE_USER,
 } from './authTypes';
 import { User } from '../../types';
 
@@ -22,8 +23,9 @@ export default (state: State, action: Action) => {
     case SET_CURRENT_USER:
       return { ...state, currentUser: action.payload };
     case SET_AUTH_ERROR:
-      console.log(action.payload);
       return { ...state, error: action.payload };
+    case UPDATE_USER:
+      return { ...state, currentUser: action.payload };
     case CLEAR_AUTH_ERROR:
       return { ...state, error: null };
     default:

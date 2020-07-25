@@ -37,7 +37,7 @@ const Login: React.FC = () => {
               const { user, token } = await AuthService.login(email, password);
               setCurrentUser(user, token);
             } catch (error) {
-              setToast('error', error.response.data.error.message);
+              setToast('error', error.message);
             } finally {
               setSubmitting(false);
             }
@@ -51,6 +51,7 @@ const Login: React.FC = () => {
                   className={`input ${
                     errors.email && touched.email && 'input-error'
                   }`}
+                  autoComplete="true"
                   type="email"
                   placeholder="Email"
                   name="email"
@@ -67,6 +68,7 @@ const Login: React.FC = () => {
                   className={`input ${
                     errors.password && touched.password && 'input-error'
                   }`}
+                  autoComplete="true"
                   type="password"
                   placeholder="Password"
                   name="password"

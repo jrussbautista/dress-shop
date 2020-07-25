@@ -5,7 +5,7 @@ import {
   SearchTabCategory,
   SearchProducts,
 } from '../features/Search';
-import { ProductsSkeleton, ErrorPage, Meta } from '../shared';
+import { ProductsSkeleton, ErrorPage, Meta, MobileBottomMenu } from '../shared';
 import { ProductService } from '../services/productService';
 import { Product } from '../types';
 
@@ -78,6 +78,7 @@ const Search: React.FC = () => {
         ) : (
           <SearchProducts products={products} />
         )}
+        <MobileBottomMenu />
       </div>
       <style jsx>{`
         .container {

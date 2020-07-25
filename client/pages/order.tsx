@@ -60,7 +60,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const result = await OrderService.fetchOrders(token);
     orders = result.orders;
   } catch (error) {
-    console.log(error.response);
     return {
       props: {
         error: 'Error in getting your order. Please try again',

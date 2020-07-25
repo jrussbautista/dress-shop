@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { JWT_EXPIRES_IN, JWT_SECRET_KEY } from '../config';
 import { User as UserType, Role } from '../types';
-import passport from 'passport';
-import jwt from 'jsonwebtoken';
 import { Google } from '../lib/google';
 import { User, UserDocument } from '../models';
+import passport from 'passport';
+import jwt from 'jsonwebtoken';
 
 export const sendResponseToken = ({
   user,
@@ -23,6 +23,9 @@ export const sendResponseToken = ({
     expiresIn: JWT_EXPIRES_IN,
   });
 
+  // remove password from response
+  user.password = undefined;
+
   res.status(statusCode).json({ data: { user, token }, success: true });
 };
 
@@ -33,7 +36,7 @@ export const loginViaGoogle = async (req: Request, res: Response) => {
   try {
     const response = await Google.verifyIdToken(idToken);
     if (!response)
-      return res.status(200).json({
+      return res.status(500).json({
         error: { message: 'Error in logging in. Please try again later' },
       });
 
@@ -44,7 +47,6 @@ export const loginViaGoogle = async (req: Request, res: Response) => {
 
     let user = await User.findOne({
       googleId,
-      email,
     });
 
     // create user if does not exists in db
@@ -111,4 +113,38 @@ export const signUp = async (
 
 export const getMe = async (req: Request, res: Response) => {
   res.status(200).json({ data: { user: req.user } });
+};
+
+export const changePassword = async (req: Request, res: Response) => {
+  try {
+    const user = req.user as UserType;
+    const { newPassword, oldPassword, confirmNewPassword } = req.body;
+
+    if (newPassword !== confirmNewPassword) {
+      return res.status(402).json({
+        error: {
+          message: 'New Password and Confirm New Password does not match',
+        },
+      });
+    }
+
+    const foundUser = await User.findById(user._id).select('+password');
+
+    if (!foundUser)
+      return res.status(404).json({ error: { message: 'User not found ' } });
+
+    const isPasswordCorrect = await foundUser.matchesPassword(oldPassword);
+
+    if (!isPasswordCorrect)
+      return res
+        .status(401)
+        .json({ error: { message: 'Old password is wrong' } });
+
+    foundUser.password = newPassword;
+    await foundUser.save();
+
+    sendResponseToken({ user: foundUser, res, statusCode: 200 });
+  } catch (error) {
+    res.status(500).json({ error: { message: 'Error in updating password.' } });
+  }
 };

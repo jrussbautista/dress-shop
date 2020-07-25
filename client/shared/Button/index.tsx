@@ -10,6 +10,7 @@ interface Props {
   style?: React.CSSProperties;
   disabled?: boolean;
   icon?: React.ReactElement;
+  text?: boolean;
 }
 
 export const Button: React.FC<Props> = ({
@@ -21,6 +22,7 @@ export const Button: React.FC<Props> = ({
   variant,
   disabled,
   icon,
+  text,
 }) => {
   return (
     <>
@@ -38,7 +40,7 @@ export const Button: React.FC<Props> = ({
         <button
           type={type}
           onClick={onClick}
-          className={`btn ${variant ? variant : ''}`}
+          className={`btn ${variant ? variant : ''} ${text ? 'text' : ''}`}
           style={style}
           disabled={disabled}
         >
@@ -60,6 +62,12 @@ export const Button: React.FC<Props> = ({
           border-radius: var(--border-radius);
           border: 1px solid var(--color-dark);
           width: auto;
+        }
+
+        .text {
+          background-color: transparent;
+          color: var(--color-primary);
+          border: 1px solid transparent;
         }
 
         .btn:disabled {

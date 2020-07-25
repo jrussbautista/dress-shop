@@ -5,7 +5,7 @@ import { GetServerSideProps } from 'next';
 import { CartService } from '../services';
 import { parseCookies } from 'nookies';
 import { Carts, Cart as CartType } from '../types';
-import { ErrorPage, Button, Meta } from '../shared';
+import { ErrorPage, Button, Meta, MobileBottomMenu } from '../shared';
 import calculateCartTotal from '../utils/calculateCartTotal';
 
 interface Props extends Carts {
@@ -73,6 +73,7 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
           </div>
         )}
       </div>
+      <MobileBottomMenu />
       <style jsx>
         {`
           .container {

@@ -3,10 +3,11 @@ import { Button, IconGoogle } from '../../shared';
 import { GoogleLogin } from 'react-google-login';
 import { GOOGLE_CLIENT_ID } from '../../utils/constants';
 import { AuthService } from '../../services';
-import { useAuth } from '../../store';
+import { useAuth, useToast } from '../../store';
 
 export const AuthSocial = () => {
   const { setCurrentUser } = useAuth();
+  const { setToast } = useToast();
 
   const handleOnSuccess = async (response: any) => {
     try {
@@ -15,7 +16,7 @@ export const AuthSocial = () => {
       );
       setCurrentUser(user, token);
     } catch (error) {
-      console.log(error);
+      setToast('error', error.message);
     }
   };
 

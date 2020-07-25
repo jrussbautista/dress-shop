@@ -11,9 +11,11 @@ import {
   categoryRoutes,
   checkOutRoutes,
   orderRoutes,
+  userRoutes,
 } from './routes';
 import { PORT } from './config';
 import passport from 'passport';
+import bodyParser from 'body-parser';
 
 // initialize passport
 require('./lib/passport');
@@ -25,7 +27,7 @@ const start = async () => {
   await connectDb();
 
   app.use(cors());
-  app.use(express.json());
+  app.use(bodyParser.json({ limit: '50mb' }));
   app.use(passport.initialize());
 
   // setup routes
@@ -34,8 +36,9 @@ const start = async () => {
   app.use('/api/categories', categoryRoutes);
   app.use('/api/carts', cartRoutes);
   app.use('/api/checkout', checkOutRoutes);
-  app.use('/api/products', productRoutes);
   app.use('/api/orders', orderRoutes);
+  app.use('/api/products', productRoutes);
+  app.use('/api/users', userRoutes);
 
   app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);

@@ -71,17 +71,24 @@ export const DesktopMenu: React.FC<Props> = () => {
               {currentUser.imageURL ? (
                 <img src={currentUser.imageURL} alt={currentUser.name} />
               ) : (
-                capitalizeFirstLetter(currentUser.name)
+                <div className="user-text-container">
+                  {capitalizeFirstLetter(currentUser.name)}
+                </div>
               )}
             </div>
             {isOpenDropdown && (
               <ul className="dropdown">
-                <li>
+                <li onClick={() => setIsOpenDropdown(false)}>
+                  <Link href="/profile">
+                    <a>My Profile </a>
+                  </Link>
+                </li>
+                <li onClick={() => setIsOpenDropdown(false)}>
                   <Link href="/order">
                     <a>My orders</a>
                   </Link>
                 </li>
-                <li>
+                <li onClick={() => setIsOpenDropdown(false)}>
                   <Button
                     type="button"
                     title="Log Out"
@@ -146,18 +153,19 @@ export const DesktopMenu: React.FC<Props> = () => {
         }
 
         .search-form {
-          border: 1px solid #d3d3d3;
           width: 30rem;
           display: flex;
           height: 5rem;
           border-radius: 5rem;
           padding: 0 1rem 0 2rem;
+          background-color: var(--color-gray-dark);
         }
 
         .search-input {
           border: 1px solid transparent;
           width: 100%;
           font-size: 1.5rem;
+          background-color: transparent;
         }
 
         .search-input:focus {
@@ -180,23 +188,29 @@ export const DesktopMenu: React.FC<Props> = () => {
         }
 
         .user {
-          background-color: var(--color-dark);
           color: #fff;
           width: 4rem;
           height: 4rem;
           border-radius: 50%;
           font-size: 1.6rem;
           font-weight: 600;
+          cursor: pointer;
+          overflow: hidden;
+        }
+
+        .user-text-container {
+          background-color: var(--color-dark);
           display: flex;
           align-items: center;
           justify-content: center;
-          cursor: pointer;
-          overflow: hidden;
+          width: 100%;
+          height: 100%;
         }
 
         .user img {
           width: 100%;
           height: 100%;
+          object-fit: contain;
         }
 
         .icon-container svg {
@@ -216,8 +230,17 @@ export const DesktopMenu: React.FC<Props> = () => {
           padding: 1rem;
         }
 
-        .dropdown li {
+        .dropdown li:not(:last-child) {
+          border-bottom: 1px solid #ccc;
+        }
+
+        .dropdown li:last-child {
           padding: 0.8rem 0;
+        }
+
+        .dropdown li a {
+          padding: 0.8rem 0;
+          width: 100%;
         }
 
         .dropdown li span {

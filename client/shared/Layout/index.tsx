@@ -40,6 +40,11 @@ export const Layout: React.FC<Props> = ({ children, title = 'Dress Shop' }) => {
       </Head>
       <Header />
       <main>{children}</main>
+      <style jsx>{`
+        main {
+          margin-bottom: 10rem;
+        }
+      `}</style>
     </>
   );
 };

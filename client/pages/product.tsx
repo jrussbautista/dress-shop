@@ -5,7 +5,7 @@ import {
   ProductInfo,
   ProductRecommended,
 } from '../features/Product';
-import { PopUp, Meta } from '../shared';
+import { PopUp, Meta, MobileBottomMenu } from '../shared';
 import { usePopUp } from '../hooks';
 import { useAuth, useCart, useToast } from '../store';
 import { Product as ProductTypes, AddCart } from '../types';
@@ -85,6 +85,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
           </div>
         </div>
         <ProductRecommended products={relatedProducts} />
+        <MobileBottomMenu />
       </div>
       <style jsx>{`
         .container {
@@ -100,13 +101,14 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
 
         .main,
         .product-info {
-          flex-basis: 50%;
+          flex-basis: 100%;
         }
 
-        @media only screen and (max-width: 768px) {
+        @media only screen and (min-width: 1024px) {
           .main,
           .product-info {
-            flex-basis: 100%;
+            flex-basis: 50%;
+            padding: 0 2rem;
             margin-bottom: 2rem;
           }
         }
@@ -122,7 +124,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
           position: absolute;
           top: 0;
           left: 0;
-          object-fit: contain;
+          object-fit: cover;
         }
       `}</style>
     </>

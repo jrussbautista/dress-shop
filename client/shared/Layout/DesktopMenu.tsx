@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
-import { IoMdCart, IoIosSearch } from 'react-icons/io';
+import { IoMdCart } from 'react-icons/io';
 import { useAuth, useCart } from '../../store';
 import { capitalizeFirstLetter } from '../../utils/helpers';
 import { Button } from '../Button';
+import { SearchBar } from '../SearchBar';
 
 interface Props {}
 
 export const DesktopMenu: React.FC<Props> = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
-  const [search, setSearch] = useState('');
 
   const { currentUser, logout } = useAuth();
   const { cartsNum } = useCart();
@@ -29,27 +29,15 @@ export const DesktopMenu: React.FC<Props> = () => {
     setIsOpenDropdown(false);
   };
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    Router.push(`/search?keyword=${search}`);
+  const handleSearchSubmit = (searchText: string) => {
+    Router.push(`/search?keyword=${searchText}`);
   };
 
   return (
     <>
       <div className="desktop-menu header-item">
         <div className="search-container">
-          <form className="search-form" onSubmit={handleSearchSubmit}>
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Search Product..."
-              onChange={(e) => setSearch(e.target.value)}
-              value={search}
-            />
-            <button className="search-button" type="submit">
-              <IoIosSearch size={30} />
-            </button>
-          </form>
+          <SearchBar onSubmit={handleSearchSubmit} />
         </div>
         <li>
           <Link href="/cart">
@@ -144,32 +132,6 @@ export const DesktopMenu: React.FC<Props> = () => {
           display: flex;
           align-items: center;
           padding: 0 2rem;
-        }
-
-        .search-button {
-          background-color: transparent;
-          border: 1px solid transparent;
-          cursor: pointer;
-        }
-
-        .search-form {
-          width: 30rem;
-          display: flex;
-          height: 5rem;
-          border-radius: 5rem;
-          padding: 0 1rem 0 2rem;
-          background-color: var(--color-gray-dark);
-        }
-
-        .search-input {
-          border: 1px solid transparent;
-          width: 100%;
-          font-size: 1.5rem;
-          background-color: transparent;
-        }
-
-        .search-input:focus {
-          outline: none;
         }
 
         .cart-num {

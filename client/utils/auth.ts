@@ -1,30 +1,35 @@
 import Router from 'next/router';
-import { setCookie, parseCookies } from 'nookies';
+import { setCookie } from 'nookies';
 import { NextPageContext } from 'next';
 
 // handle auto login when created an account, and login
-function autoLogin(token: string, location: string) {
+export const autoLogin = (token: string, location: string) => {
   setCookie({}, 'token', token, {});
   Router.push(location);
-}
+};
 
-function redirectUser(ctx: NextPageContext, location: string) {
+export const redirectUser = (ctx: NextPageContext, location: string) => {
   if (ctx.req && ctx.res) {
     ctx.res.writeHead(302, { Location: location });
     ctx.res.end();
   } else {
     Router.push(location);
   }
-}
+};
 
-function checkToken(ctx: NextPageContext) {
-  if (ctx.req) {
-    const { token } = parseCookies(ctx);
-    if (token) redirectUser(ctx, '/');
-  } else {
-    const token = parseCookies({}, 'token');
-    if (token) redirectUser(ctx, '/');
+export const protectedRoutes = (pathname: string) => {
+  const protectedRoutes = ['/profile', '/checkout', '/order'];
+
+  if (protectedRoutes.includes(pathname)) {
+    return true;
   }
-}
 
-export { autoLogin, redirectUser, checkToken };
+  return false;
+};
+
+export const checkProtectedRoutes = (ctx: NextPageContext) => {
+  const isProtectedRoutes = protectedRoutes(ctx.pathname);
+  if (isProtectedRoutes) {
+    redirectUser(ctx, '/login');
+  }
+};

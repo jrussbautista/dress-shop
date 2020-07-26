@@ -25,8 +25,7 @@ export const ProductsSkeleton: React.FC<Props> = ({ number }) => {
           .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-gap: 2rem;
-            padding: 0 2rem;
+            grid-gap: 1.5rem;
           }
 
           @media only screen and (min-width: 768px) {

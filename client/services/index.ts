@@ -3,3 +3,4 @@ export * from './cartService';
 export * from './bannerService';
 export * from './categoryService';
 export * from './checkoutServices';
+export * from './productService';

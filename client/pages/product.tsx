@@ -111,7 +111,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
       <style jsx>{`
         .container {
           max-width: 120rem;
-          margin: 3rem auto;
+          margin: 0 auto;
         }
 
         .product-container {
@@ -123,6 +123,10 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
         .main,
         .product-info {
           flex-basis: 100%;
+        }
+
+        .product-info {
+          padding: 2rem;
         }
 
         .cover-img {
@@ -149,8 +153,12 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
           .main,
           .product-info {
             flex-basis: 50%;
-            padding: 0 2rem;
             margin-bottom: 2rem;
+            padding: 0 2rem;
+          }
+
+          .container {
+            margin: 3rem auto;
           }
         }
       `}</style>

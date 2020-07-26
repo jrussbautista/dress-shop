@@ -29,7 +29,7 @@ export const HomeCategories: React.FC<Props> = ({ categories }) => {
 
       <style jsx>{`
         .category-container {
-          padding: 1rem 2rem 3rem 1rem;
+          padding: 1.5rem 2rem 3rem 1.5rem;
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
           grid-gap: 2rem;

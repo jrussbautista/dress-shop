@@ -105,13 +105,15 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
             {getCurrency(cart.product.price)}
           </div>
           <div className="product-qty product-content">
-            <InputQuantity
-              isUpdating={isUpdating}
-              value={qty}
-              onButtonClick={handleBtnChangeQty}
-              onChangeInput={handleInputChangeQty}
-              onChangeBlur={handleChangeBlur}
-            />
+            <div className="qty-container">
+              <InputQuantity
+                isUpdating={isUpdating}
+                value={qty}
+                onButtonClick={handleBtnChangeQty}
+                onChangeInput={handleInputChangeQty}
+                onChangeBlur={handleChangeBlur}
+              />
+            </div>
           </div>
           <div className="total product-content">{total}</div>
           <div className="product-action">
@@ -142,7 +144,7 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
         }
 
         .product-info {
-          padding: 0 1rem;
+          padding: 0 2rem;
         }
 
         .product-name {
@@ -160,12 +162,12 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
         .product-img img {
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          object-fit: cover;
         }
 
         .product-price {
-          color: var(--color-primary);
           font-size: 2rem;
+          margin-bottom: 1rem;
         }
 
         .product-qty {
@@ -175,7 +177,6 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
         .product-action {
           display: flex;
           flex: 1;
-          padding: 1rem 0;
           align-items: flex-start;
         }
 
@@ -187,18 +188,23 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
           cursor: pointer;
         }
 
+        .qty-container {
+          margin-bottom: 1rem;
+        }
+
         .total {
           font-size: 2rem;
+          color: var(--color-primary);
         }
 
         @media only screen and (min-width: 1024px) {
           .product-info {
             display: flex;
+            padding: 0 1rem;
           }
 
           .product-info .product-content {
             justify-content: center;
-            padding: 1rem 0;
           }
 
           .product-action {

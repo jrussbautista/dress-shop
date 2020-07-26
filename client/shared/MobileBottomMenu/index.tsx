@@ -10,12 +10,6 @@ export const MobileBottomMenu = () => {
   const { currentUser } = useAuth();
   const { cartsNum } = useCart();
 
-  const [isOpenSearch, setIsOpenSearch] = useState(false);
-
-  const handleOpenSearch = () => {
-    setIsOpenSearch(true);
-  };
-
   return (
     <>
       <div className="bottom-menu">
@@ -30,12 +24,14 @@ export const MobileBottomMenu = () => {
           </Link>
         </div>
         <div className={`list ${pathname === '/search' ? 'active' : ''}`}>
-          <div className="link" onClick={handleOpenSearch}>
-            <div className="icon">
-              <FiSearch />
-            </div>
-            <span className="title"> Search </span>
-          </div>
+          <Link href="/search">
+            <a className="link">
+              <div className="icon">
+                <FiSearch />
+              </div>
+              <span className="title"> Search </span>
+            </a>
+          </Link>
         </div>
         <div className={`list ${pathname === '/cart' ? 'active' : ''}`}>
           <Link href="/cart">
@@ -58,10 +54,6 @@ export const MobileBottomMenu = () => {
             </a>
           </Link>
         </div>
-        <MobileSearch
-          isOpenSearch={isOpenSearch}
-          setIsOpenSearch={setIsOpenSearch}
-        />
       </div>
       <style jsx>{`
         .bottom-menu {

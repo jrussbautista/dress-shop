@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { HomeBanner, HomeCategories } from '../features/Home';
-import { ProductList, ProductsSkeleton, Spinner, Button } from '../shared';
+import { HomeBanner, HomeCategories, HomeProducts } from '../features/Home';
+import { Spinner, Button } from '../shared';
 import { useShop } from '../store';
 import { GetServerSideProps } from 'next';
 import { BannerService, CategoryService } from '../services';
@@ -15,14 +15,9 @@ interface Props {
 
 const Home: React.FC<Props> = ({ banners, categories }) => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const { isLoading, products, loadProducts, hasLoadMore } = useShop();
+  const { isLoading, loadProducts, hasLoadMore } = useShop();
 
   useScrollRestoration();
-
-  useEffect(() => {
-    //load only if products is empty
-    products.length === 0 && loadProducts();
-  }, []);
 
   const handleLoadMore = async () => {
     setIsLoadingMore(true);
@@ -37,44 +32,35 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
         <div className="heading">Shop Categories</div>
         <HomeCategories categories={categories} />
         <div className="heading">Product Overview</div>
-        {isLoading ? (
-          <ProductsSkeleton number={20} />
-        ) : (
-          <>
-            <ProductList products={products} />
 
-            {isLoadingMore && (
-              <div className="loading-wrapper">
-                <Spinner
-                  color={'var(--color-primary)'}
-                  width={60}
-                  height={60}
-                />
-              </div>
-            )}
+        <HomeProducts />
 
-            {hasLoadMore && !isLoadingMore && (
-              <div className="load-more">
-                <Button
-                  title="Load More"
-                  onClick={handleLoadMore}
-                  type="button"
-                  variant="outline"
-                  style={{
-                    borderRadius: '50px',
-                    fontSize: '1.6rem',
-                    width: '20rem',
-                  }}
-                />
-              </div>
-            )}
+        {isLoadingMore && (
+          <div className="loading-wrapper">
+            <Spinner color={'var(--color-primary)'} width={60} height={60} />
+          </div>
+        )}
 
-            {!hasLoadMore && (
-              <div className="reached-end">
-                No more products. You have reached the end.
-              </div>
-            )}
-          </>
+        {!isLoading && hasLoadMore && !isLoadingMore && (
+          <div className="load-more">
+            <Button
+              title="Load More"
+              onClick={handleLoadMore}
+              type="button"
+              variant="outline"
+              style={{
+                borderRadius: '50px',
+                fontSize: '1.6rem',
+                width: '20rem',
+              }}
+            />
+          </div>
+        )}
+
+        {!hasLoadMore && (
+          <div className="reached-end">
+            No more products. You have reached the end.
+          </div>
         )}
       </div>
       <MobileBottomMenu />

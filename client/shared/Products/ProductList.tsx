@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
-import { Product } from '../../types';
+import { Products } from '../../types';
 
 interface Props {
-  products: Product[];
+  products: Products;
 }
 
 export const ProductList: React.FC<Props> = ({ products }) => {
@@ -31,14 +31,7 @@ export const ProductList: React.FC<Props> = ({ products }) => {
           .product-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-gap: 2rem;
-            padding: 0 2rem;
-          }
-
-          @media only screen and (min-width: 768px) {
-            .product-grid {
-              grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
-            }
+            grid-gap: 1.5rem;
           }
 
           .product-img-cover {
@@ -70,6 +63,12 @@ export const ProductList: React.FC<Props> = ({ products }) => {
             color: var(--color-primary);
             font-size: 1.8rem;
             font-weight: 600;
+          }
+
+          @media only screen and (min-width: 768px) {
+            .product-grid {
+              grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+            }
           }
         `}
       </style>

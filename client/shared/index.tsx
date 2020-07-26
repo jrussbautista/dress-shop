@@ -12,4 +12,5 @@ export * from './Pagination';
 export * from './PopUp';
 export * from './Products';
 export * from './Spinner';
+export * from './SearchBar';
 export * from './Toast';

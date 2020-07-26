@@ -1,57 +1,17 @@
 import Router, { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   SearchFilter,
   SearchTabCategory,
   SearchProducts,
 } from '../features/Search';
-import { ProductsSkeleton, ErrorPage, Meta, MobileBottomMenu } from '../shared';
-import { ProductService } from '../services/productService';
-import { Product } from '../types';
-
-interface IParams {
-  category: string;
-  sort: string;
-  keyword: string;
-}
+import { Meta, MobileBottomMenu, SearchBar } from '../shared';
 
 const Search: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [error, setError] = useState<null | string>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const { query, pathname } = useRouter();
-  let { category, sort, keyword } = query;
+  let { category, sort } = query;
   category = (category as string) || '';
   sort = (sort as string) || '';
-
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        setIsLoading(true);
-
-        let params: IParams | {} = {};
-
-        if (category) {
-          params = { ...params, category };
-        }
-        if (sort) {
-          params = { ...params, sort };
-        }
-        if (keyword) {
-          params = { ...params, keyword };
-        }
-
-        const payload = { params };
-
-        const { products } = await ProductService.fetchProducts(payload);
-        setProducts(products);
-        setIsLoading(false);
-      } catch (error) {
-        setError('Error in fetching products. Please try again.');
-      }
-    };
-    getProducts();
-  }, [category, sort, keyword]);
 
   const handleTabChange = (selected: string) => {
     Router.push({ pathname, query: { ...query, category: selected } });
@@ -61,45 +21,64 @@ const Search: React.FC = () => {
     Router.push({ pathname, query: { ...query, sort: selected } });
   };
 
-  if (error) {
-    return <ErrorPage message={error} />;
-  }
+  const handleSearchSubmit = (searchText: string) => {
+    Router.push(`/search?keyword=${searchText}`);
+  };
 
   return (
     <>
       <Meta title="Search" />
       <div className="container">
+        <div className="search-bar-container">
+          <SearchBar
+            onSubmit={handleSearchSubmit}
+            style={{ width: '100%' }}
+            isFocus
+          />
+        </div>
         <div className="sort-container">
           <SearchTabCategory active={category} onChangeTab={handleTabChange} />
           <SearchFilter handleChange={handleFilterChange} active={sort} />
         </div>
-        {isLoading ? (
-          <ProductsSkeleton number={20} />
-        ) : (
-          <SearchProducts products={products} />
-        )}
+
+        <SearchProducts />
         <MobileBottomMenu />
       </div>
       <style jsx>{`
         .container {
           max-width: 120rem;
-          margin: 3rem auto;
+          margin: 0 auto;
+        }
+
+        .search-bar-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+          position: sticky;
+          top: 8rem;
+          z-index: 9;
+          background-color: #fff;
         }
 
         .sort-container {
-          margin: 4rem 0;
+          margin: 0 0 2rem 0;
           display: flex;
           flex-wrap: wrap;
           align-items: center;
-          justify-content: space-between;
+          justify-content: center;
           background: rgba(0, 0, 0, 0.03);
           padding: 1rem;
           border-radius: 4px;
         }
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (min-width: 1024px) {
           .sort-container {
-            justify-content: center;
+            justify-content: space-between;
+          }
+
+          .search-bar-container {
+            display: none;
           }
         }
       `}</style>

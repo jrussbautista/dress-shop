@@ -7,7 +7,7 @@ interface BannersData {
   banners: Banner[];
 }
 
-const getBanners = async (): Promise<BannersData | undefined> => {
+const getBanners = async (): Promise<BannersData> => {
   try {
     const { data } = await axios.get(`${API_URL}/banners`);
 

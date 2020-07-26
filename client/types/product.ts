@@ -7,3 +7,5 @@ export type Product = {
   stocks: string;
   price: number;
 };
+
+export type Products = Product[];

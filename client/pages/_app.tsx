@@ -2,7 +2,7 @@ import React from 'react';
 import App, { AppProps, AppContext } from 'next/app';
 import { StoreProvider } from '../store';
 import { parseCookies, destroyCookie } from 'nookies';
-import { redirectUser } from '../utils/auth';
+import { checkProtectedRoutes } from '../utils/auth';
 import { AuthService } from '../services/authService';
 import { Layout } from '../shared';
 import { User } from '../types';
@@ -23,13 +23,14 @@ const MyApp = ({ Component, pageProps, currentUser }: MyAppProps) => {
 };
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
-  // calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(appContext);
   const { token } = parseCookies(appContext.ctx);
 
   const isServer = appContext.ctx.req;
+  const ctx = appContext.ctx;
 
   if (!token) {
+    checkProtectedRoutes(ctx);
     return { ...appProps };
   }
 
@@ -37,12 +38,11 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
   if (isServer) {
     try {
-      currentUser;
       const { data } = await AuthService.getMe(token);
       currentUser = data.data.user;
     } catch (error) {
-      destroyCookie(appContext.ctx, 'token');
-      redirectUser(appContext.ctx, '/login');
+      destroyCookie(ctx, 'token');
+      checkProtectedRoutes(ctx);
     }
   }
 

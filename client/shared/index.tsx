@@ -2,6 +2,7 @@ export * from './Alert';
 export * from './Button';
 export * from './ErrorPage';
 export * from './Icons';
+export * from './InputQuantity';
 export * from './Layout';
 export * from './Meta';
 export * from './MobileBottomMenu';

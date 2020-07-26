@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_URL } from '../utils/constants';
 import { User } from '../types';
+import { catchError } from '../utils/catchError';
 
 interface UserData {
   user: User;
@@ -33,7 +34,7 @@ const verifyGoogleIdToken = async (idToken: string): Promise<UserData> => {
     };
     return userData;
   } catch (error) {
-    throw new Error(error.response.data.error.message);
+    throw new Error(catchError(error));
   }
 };
 
@@ -47,7 +48,7 @@ const login = async (email: string, password: string): Promise<UserData> => {
     };
     return userData;
   } catch (error) {
-    throw new Error(error.response.data.error.message);
+    throw new Error(catchError(error));
   }
 };
 
@@ -59,7 +60,7 @@ const signUp = async ({
   email: string;
   password: string;
   name: string;
-}): Promise<UserData> => {
+}): Promise<UserData | undefined> => {
   try {
     const url = `${API_URL}/auth/signUp`;
     const { data } = await axios.post(url, { email, password, name });
@@ -69,7 +70,7 @@ const signUp = async ({
     };
     return userData;
   } catch (error) {
-    throw new Error(error.response.data.error.message);
+    throw new Error(catchError(error));
   }
 };
 
@@ -84,7 +85,7 @@ export const changePassword = async (
     });
     return result;
   } catch (error) {
-    throw new Error(error.response.data.error.message);
+    throw new Error(catchError(error));
   }
 };
 
@@ -105,9 +106,7 @@ export const updateProfile = async (
 
     return userData;
   } catch (error) {
-    const errorMessage =
-      error.response.data?.error?.message || error.response.statusText;
-    throw new Error(errorMessage);
+    throw new Error(catchError(error));
   }
 };
 

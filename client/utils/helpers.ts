@@ -5,3 +5,7 @@ export const capitalizeFirstLetter = (word: string) => {
 export const getCurrency = (price: number) => {
   return `P${price}`;
 };
+
+export const formatDate = (date: Date) => {
+  return new Date(date).toLocaleDateString('en-US');
+};

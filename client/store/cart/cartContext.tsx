@@ -1,8 +1,9 @@
-import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 import { useAuth } from '../auth/authContext';
 import reducer from './cartReducer';
 import { ADD_CART, CLEAR_CART, REMOVE_CART, SET_CART } from './cartTypes';
 import { AddCart, Cart } from '../../types';
+import { parseCookies } from 'nookies';
 
 interface InitialStateType {
   carts: string[];
@@ -28,6 +29,7 @@ const CartProvider: React.FC = ({ children }) => {
   const initialState = {
     cartsNum: currentUser ? currentUser.carts.length : 0,
     carts: currentUser ? currentUser.carts : [],
+    myCarts: [],
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);

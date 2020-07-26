@@ -1,13 +1,14 @@
-import Link from 'next/link';
+import React, { useState } from 'react';
 import { Cart } from '../../types';
-import { Button } from '../../shared';
+import { CartItem } from './CartItem';
 
 interface Props {
   carts: Cart[];
   removeCart(cartId: string, productId: string): void;
+  updateQty(cartId: string, qty: number): void;
 }
 
-export const CartList: React.FC<Props> = ({ carts, removeCart }) => {
+export const CartList: React.FC<Props> = ({ carts, removeCart, updateQty }) => {
   return (
     <div>
       <>
@@ -21,46 +22,12 @@ export const CartList: React.FC<Props> = ({ carts, removeCart }) => {
           </div>
         </div>
         {carts.map((cart) => (
-          <div key={cart.product._id} className="product-list">
-            <div className="product">
-              <div className="product-img">
-                <Link href={`/product?id=${cart.product._id}`}>
-                  <a>
-                    <img src={cart.product.imageURL} alt="" />
-                  </a>
-                </Link>
-              </div>
-
-              <div className="product-info">
-                <div className="product-name">
-                  <Link href={`/product?id=${cart.product._id}`}>
-                    <a>{cart.product.name}</a>
-                  </Link>
-                </div>
-
-                <div className="product-price product-content">
-                  P{cart.product.price}
-                </div>
-                <div className="product-qty product-content">
-                  x {cart.quantity}{' '}
-                </div>
-                <div className="total product-content">
-                  P{parseFloat((cart.product.price * cart.quantity).toFixed(2))}
-                </div>
-                <div
-                  className="product-content"
-                  style={{ justifyContent: 'flex-end' }}
-                >
-                  <Button
-                    type="button"
-                    onClick={() => removeCart(cart._id, cart.product._id)}
-                    title="Remove"
-                    style={{ height: '4.5rem' }}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <CartItem
+            cart={cart}
+            key={cart._id}
+            removeCart={removeCart}
+            updateQty={updateQty}
+          />
         ))}
       </>
       <style jsx>
@@ -83,70 +50,7 @@ export const CartList: React.FC<Props> = ({ carts, removeCart }) => {
             text-align: center;
           }
 
-          .product-list {
-            display: flex;
-            margin-top: 2rem;
-          }
-
-          .product {
-            display: flex;
-            width: 100%;
-          }
-
-          .product-info {
-            flex: 1;
-          }
-
-          .product-content {
-            flex: 1;
-            display: flex;
-          }
-
-          .product-info {
-            padding: 0 1rem;
-          }
-
-          .product-name {
-            font-size: 1.7rem;
-            font-weight: 600;
-            width: 20rem;
-          }
-
-          .product-img {
-            width: 12rem;
-            height: 12rem;
-            overflow: hidden;
-          }
-
-          .product-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-          }
-
-          .product-price {
-            color: var(--color-primary);
-            font-size: 2rem;
-          }
-
-          .product-qty {
-            font-size: 2rem;
-          }
-
-          .total {
-            font-size: 2rem;
-          }
-
-          @media only screen and (min-width: 768px) {
-            .product-info {
-              display: flex;
-            }
-
-            .product-info div {
-              justify-content: center;
-              padding: 1rem 0;
-            }
-
+          @media only screen and (min-width: 1024px) {
             .cart-header {
               display: flex;
             }

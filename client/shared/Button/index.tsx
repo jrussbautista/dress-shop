@@ -5,7 +5,7 @@ interface Props {
   onClick?(): void;
   href?: string;
   type?: 'button' | 'reset' | 'submit';
-  title: string;
+  title?: string;
   variant?: 'primary' | 'outline' | 'light';
   style?: React.CSSProperties;
   disabled?: boolean;

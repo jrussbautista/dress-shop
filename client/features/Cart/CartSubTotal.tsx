@@ -1,3 +1,5 @@
+import { getCurrency } from '../../utils/helpers';
+
 interface Props {
   total: number;
 }
@@ -6,7 +8,7 @@ export const CartSubTotal: React.FC<Props> = ({ total }) => {
   return (
     <div className="subtotal">
       <div className="label"> Sub Total </div>
-      <div className="price"> P {total} </div>
+      <div className="price"> {getCurrency(total)} </div>
       <style jsx>
         {`
           .subtotal {

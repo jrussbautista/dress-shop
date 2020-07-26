@@ -9,7 +9,7 @@ import { User } from '../types';
 import '../styles/global.css';
 
 interface MyAppProps extends AppProps {
-  currentUser: User | any;
+  currentUser: User | null;
 }
 
 const MyApp = ({ Component, pageProps, currentUser }: MyAppProps) => {

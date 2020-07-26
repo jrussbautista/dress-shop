@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import formatDate from '../../utils/formatDate';
+import { formatDate } from '../../utils/helpers';
 import { Order } from '../../types';
 
 interface Props {
@@ -16,22 +16,21 @@ export const OrderList: React.FC<Props> = ({ orders }) => {
             <li key={order._id} className="list">
               <div>
                 <div className="date">
-                  {' '}
-                  Date Ordered:{' '}
+                  Date Ordered:
                   <span className="date-text">
                     {formatDate(order.createdAt)}
                   </span>
                 </div>
                 <div className="products">
-                  {order.products.map((order: any) => (
-                    <div key={order._id} className="product-list">
+                  {order.products.map((product) => (
+                    <div key={product.product._id} className="product-list">
                       <div className="product-wrapper">
-                        <Link href={`/product?id=${order.product._id}`}>
+                        <Link href={`/product?id=${product.product._id}`}>
                           <a>
                             <div className="image-wrapper">
                               <img
-                                src={order.product.imageURL}
-                                alt={order.product.name}
+                                src={product.product.imageURL}
+                                alt={product.product.name}
                                 className="product-image"
                               />
                             </div>
@@ -40,19 +39,19 @@ export const OrderList: React.FC<Props> = ({ orders }) => {
 
                         <div className="product-info">
                           <div>
-                            <Link href={`/product?id=${order.product._id}`}>
+                            <Link href={`/product?id=${product.product._id}`}>
                               <a>
                                 <div className="product-name">
-                                  {order.product.name}
+                                  {product.product.name}
                                 </div>
                               </a>
                             </Link>
                             <div className="product-quantity">
-                              1 x {order.quantity}
+                              1 x {product.quantity}
                             </div>
                           </div>
                           <div className="product-price">
-                            P{order.product.price * order.quantity}
+                            P{product.product.price * product.quantity}
                           </div>
                         </div>
                       </div>

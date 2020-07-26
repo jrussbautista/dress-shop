@@ -1,11 +1,7 @@
 import Router from 'next/router';
 import React, { useState } from 'react';
-import {
-  ProductAction,
-  ProductInfo,
-  ProductRecommended,
-} from '../features/Product';
-import { PopUp, Meta, MobileBottomMenu } from '../shared';
+import { ProductInfo, ProductRecommended } from '../features/Product';
+import { PopUp, Meta, MobileBottomMenu, InputQuantity } from '../shared';
 import { usePopUp } from '../hooks';
 import { useAuth, useCart, useToast } from '../store';
 import { Product as ProductTypes, AddCart } from '../types';
@@ -13,7 +9,7 @@ import { GetServerSideProps } from 'next';
 import { ProductService } from '../services/productService';
 import { CartService } from '../services';
 import { parseCookies } from 'nookies';
-import { ErrorPage } from '../shared';
+import { ErrorPage, Button } from '../shared';
 
 interface Props {
   product: ProductTypes;
@@ -22,22 +18,31 @@ interface Props {
 }
 
 const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState<string | number>(1);
   const { addCart } = useCart();
   const { currentUser } = useAuth();
   const { isOpen, showToast } = usePopUp();
   const { setToast } = useToast();
 
+  const handleChangeInputQty = (value: string | number) => {
+    if (Number(value) > 10) {
+      setToast('error', 'Ops up to 10 max only');
+      setQty(10);
+      return;
+    }
+    setQty(value);
+  };
+
   // handle change quantity
-  const handleChangeQty = (action: string) => {
+  const handleButtonChangeQty = (action: string) => {
     if (action === 'add') {
       if (qty >= 10) {
         setToast('error', 'Ops you can add to cart up to 10 max only');
         return;
       }
-      setQty((qty) => qty + 1);
+      setQty((qty) => Number(qty) + 1);
     } else {
-      if (qty > 1) setQty((qty) => qty - 1);
+      if (qty > 1) setQty((qty) => Number(qty) - 1);
     }
   };
 
@@ -50,13 +55,19 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
         return;
       }
 
-      const cartObj: AddCart = { quantity: qty, product };
+      const cartObj: AddCart = { quantity: Number(qty), product };
       const { token } = parseCookies({});
       showToast();
       addCart(cartObj);
-      await CartService.addCart(token, qty, product._id);
+      await CartService.addCart(token, Number(qty), product._id);
     } catch (error) {
-      setToast('error', 'Error in adding cart. Please try again later.');
+      setToast('error', error.message);
+    }
+  };
+
+  const handleChangeBlur = (val: string) => {
+    if (!val) {
+      setQty(1);
     }
   };
 
@@ -77,11 +88,21 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
           </div>
           <div className="product-info">
             <ProductInfo product={product} />
-            <ProductAction
-              handleQty={handleChangeQty}
-              qty={qty}
-              handleAddToCart={handleAddToCart}
-            />
+            <div className="product-action">
+              <InputQuantity
+                value={qty}
+                onButtonClick={handleButtonChangeQty}
+                onChangeBlur={handleChangeBlur}
+                onChangeInput={handleChangeInputQty}
+              />
+              <Button
+                type="button"
+                onClick={handleAddToCart}
+                variant="primary"
+                title="Add to Cart"
+                style={{ borderRadius: '50px', width: '20rem', marginLeft: 20 }}
+              />
+            </div>
           </div>
         </div>
         <ProductRecommended products={relatedProducts} />
@@ -104,15 +125,6 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
           flex-basis: 100%;
         }
 
-        @media only screen and (min-width: 1024px) {
-          .main,
-          .product-info {
-            flex-basis: 50%;
-            padding: 0 2rem;
-            margin-bottom: 2rem;
-          }
-        }
-
         .cover-img {
           position: relative;
           padding-bottom: 100%;
@@ -125,6 +137,21 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
           top: 0;
           left: 0;
           object-fit: cover;
+        }
+
+        .product-action {
+          display: flex;
+          align-items: center;
+          margin: 1rem 0;
+        }
+
+        @media only screen and (min-width: 1024px) {
+          .main,
+          .product-info {
+            flex-basis: 50%;
+            padding: 0 2rem;
+            margin-bottom: 2rem;
+          }
         }
       `}</style>
     </>

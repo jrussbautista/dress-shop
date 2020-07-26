@@ -13,21 +13,23 @@ interface Props extends Carts {
 }
 
 const Cart: React.FC<Props> = ({ carts, error }) => {
-  const [myCarts, setMyCarts] = useState(carts);
   const { currentUser } = useAuth();
   const { removeCart } = useCart();
+
+  const [myCarts, setMyCarts] = useState(carts);
   const { cartTotal } = calculateCartTotal(myCarts);
 
   const handleRemoveCart = async (cartId: string, productId: string) => {
-    try {
-      const { token } = parseCookies({});
-      await CartService.removeCart(token, cartId);
-      const filterCarts = myCarts.filter((cart) => cart._id !== cartId);
-      setMyCarts(filterCarts);
-      removeCart(productId);
-    } catch (error) {
-      console.log(error);
-    }
+    const filterCarts = myCarts.filter((cart) => cart._id !== cartId);
+    setMyCarts(filterCarts);
+    removeCart(productId);
+  };
+
+  const handleUpdateCartQty = async (cartId: string, quantity: number) => {
+    const newCarts = myCarts.map((cart) =>
+      cart._id === cartId ? { ...cart, quantity } : cart
+    );
+    setMyCarts(newCarts);
   };
 
   if (error) {
@@ -45,7 +47,11 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
             <h1 className="page-title">Your Cart</h1>
             {myCarts.length > 0 ? (
               <>
-                <CartList carts={myCarts} removeCart={handleRemoveCart} />
+                <CartList
+                  carts={myCarts}
+                  removeCart={handleRemoveCart}
+                  updateQty={handleUpdateCartQty}
+                />
                 <CartSubTotal total={Number(cartTotal)} />
                 <div className="checkout-btn-wrapper">
                   <Button

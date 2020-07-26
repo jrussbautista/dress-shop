@@ -19,10 +19,6 @@ export const ProductInfo: React.FC<Props> = ({ product }) => {
           font-weight: 600;
         }
 
-        .product-wrapper {
-          padding: 0 1.5rem;
-        }
-
         .product-price {
           margin-top: 2rem;
           font-size: 2rem;

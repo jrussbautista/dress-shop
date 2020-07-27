@@ -43,6 +43,15 @@ export const fetchProduct = async (id: string): Promise<ProductData> => {
   }
 };
 
+export const deleteProduct = async (token: string, id: string) => {
+  try {
+    const url = `${API_URL}/products/${id}`;
+    return await axios.delete(url, { params: { token, id } });
+  } catch (error) {
+    throw new Error(catchError(error));
+  }
+};
+
 export const ProductService = {
   fetchProducts,
   fetchProduct,

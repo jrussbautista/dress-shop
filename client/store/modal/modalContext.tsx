@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useMemo } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 import ReactDOM from 'react-dom';
 
 interface InitialStateType {
@@ -15,7 +15,7 @@ const initialState = {
 
 const ModalContext = createContext<InitialStateType>(initialState);
 
-const ModalProvider: React.FC = ({ children }) => {
+export const ModalProvider: React.FC = ({ children }) => {
   const [show, setShow] = useState(false);
   const [modal, setModal] = useState(null);
 
@@ -37,6 +37,4 @@ const ModalProvider: React.FC = ({ children }) => {
   );
 };
 
-const useModal = () => useContext(ModalContext);
-
-export { ModalProvider, useModal };
+export const useModal = () => useContext(ModalContext);

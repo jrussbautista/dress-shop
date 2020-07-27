@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { formatDate } from '../../utils/helpers';
+import { formatDate, getCurrency } from '../../utils/helpers';
 import { Order } from '../../types';
 
 interface Props {
@@ -47,11 +47,13 @@ export const OrderList: React.FC<Props> = ({ orders }) => {
                               </a>
                             </Link>
                             <div className="product-quantity">
-                              1 x {product.quantity}
+                              x {product.quantity}
                             </div>
                           </div>
                           <div className="product-price">
-                            P{product.product.price * product.quantity}
+                            {getCurrency(
+                              product.product.price * product.quantity
+                            )}
                           </div>
                         </div>
                       </div>
@@ -60,7 +62,9 @@ export const OrderList: React.FC<Props> = ({ orders }) => {
                 </div>
                 <div className="order-bottom">
                   <span className="total-text">Order Total:</span>
-                  <span className="total-price">P{order.total}</span>
+                  <span className="total-price">
+                    {getCurrency(order.total)}
+                  </span>
                 </div>
               </div>
             </li>
@@ -90,6 +94,7 @@ export const OrderList: React.FC<Props> = ({ orders }) => {
 
         .date-text {
           color: gray;
+          padding: 0 0.5rem;
         }
 
         .product-info {

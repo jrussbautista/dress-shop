@@ -1,31 +1,37 @@
 import React, { useRef, useEffect } from 'react';
+import Router from 'next/router';
+import { CheckOutService } from '../../services';
+import { parseCookies } from 'nookies';
+import { useToast, useCart } from '../../store';
 
 export const CheckOutPaypal = () => {
   const paypalButtonsRef = useRef<HTMLDivElement>(null);
+  const { token } = parseCookies({});
+  const { setToast } = useToast();
+  const { clearCart } = useCart();
 
   useEffect(() => {
     if (window.paypal) {
       window.paypal
         .Buttons({
-          createOrder: function (data: any, actions: any) {
-            return actions.order.create({
-              purchase_units: [
-                {
-                  amount: {
-                    value: '0.01',
-                  },
-                },
-              ],
-            });
+          createOrder: function () {
+            return CheckOutService.createPaypalTransaction(token).then(
+              (data) => {
+                return data.orderID;
+              }
+            );
           },
           onError: function (error: any) {
-            console.log(error);
+            setToast('error', error.message);
           },
           onApprove: function (data: any, actions: any) {
-            return actions.order.capture().then(function (details: any) {
-              alert(
-                'Transaction completed by ' + details.payer.name.given_name
-              );
+            return CheckOutService.capturePaypalTransaction(
+              token,
+              data.orderID
+            ).then(() => {
+              setToast('success', 'Successfully transaction completed');
+              clearCart();
+              Router.push('/order');
             });
           },
           style: {

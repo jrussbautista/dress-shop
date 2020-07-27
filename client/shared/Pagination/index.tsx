@@ -41,9 +41,9 @@ export const Pagination: React.FC<Props> = ({ total, limit, activePage }) => {
 
         .pagination li {
           font-size: 1.8rem;
-          background-color: var(--color-dark);
-          color: #fff;
+          background-color: #fff;
           margin-right: 1rem;
+          border-radius: var(--border-radius);
         }
 
         .pagination .active {
@@ -52,9 +52,13 @@ export const Pagination: React.FC<Props> = ({ total, limit, activePage }) => {
 
         .pagination li a,
         .pagination li span {
-          color: #fff;
+          color: var(--color-dark);
           padding: 1rem 2rem;
           display: block;
+        }
+
+        .pagination .active span {
+          color: #fff;
         }
       `}</style>
     </>

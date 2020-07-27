@@ -66,6 +66,21 @@ export const store = async (req: Request, res: Response) => {
   }
 };
 
+export const remove = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  let product = await Product.findOne({ _id: id });
+
+  if (!product)
+    return res
+      .status(404)
+      .json({ message: 'Product not found', success: false });
+
+  product.remove();
+
+  res.status(200).json({ data: {}, success: true });
+};
+
 export const update = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

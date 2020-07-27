@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { HomeBanner, HomeCategories, HomeProducts } from '../features/Home';
 import { Spinner, Button } from '../shared';
 import { useShop } from '../store';

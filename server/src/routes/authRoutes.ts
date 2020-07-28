@@ -7,11 +7,12 @@ import {
   changePassword,
 } from '../controllers/authController';
 import { protect } from '../middleware';
+import { validate, loginValidation, signUpValidation } from '../validation';
 
 const router = Router();
 
-router.route('/signup').post(signUp);
-router.route('/login').post(login);
+router.route('/signup').post(signUpValidation(), validate, signUp);
+router.route('/login').post(loginValidation(), validate, login);
 router.route('/google').post(loginViaGoogle);
 
 router.use(protect);

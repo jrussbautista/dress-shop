@@ -2,6 +2,7 @@ import axios from 'axios';
 import { API_URL } from '../utils/constants';
 import { User } from '../types';
 import { catchError } from '../utils/catchError';
+import { setAuthToken } from '../utils/auth';
 
 interface UserData {
   user: User;
@@ -20,8 +21,20 @@ interface UserFields {
   image: string | ArrayBuffer | null;
 }
 
-const getMe = async (token: string) => {
-  return await axios.get(`${API_URL}/auth/me`, { params: { token } });
+const getMe = async (token: string): Promise<UserData> => {
+  setAuthToken(token);
+  try {
+    const { data } = await axios.get(`${API_URL}/auth/me`);
+
+    const userData: UserData = {
+      token: data.data.token,
+      user: data.data.user,
+    };
+
+    return userData;
+  } catch (error) {
+    throw new Error(catchError(error));
+  }
 };
 
 const verifyGoogleIdToken = async (idToken: string): Promise<UserData> => {
@@ -60,7 +73,7 @@ const signUp = async ({
   email: string;
   password: string;
   name: string;
-}): Promise<UserData | undefined> => {
+}): Promise<UserData> => {
   try {
     const url = `${API_URL}/auth/signUp`;
     const { data } = await axios.post(url, { email, password, name });
@@ -79,10 +92,9 @@ export const changePassword = async (
   passwordFields: UserPasswordData
 ) => {
   try {
+    setAuthToken(token);
     const url = `${API_URL}/auth/change-password`;
-    const result = await axios.patch(url, passwordFields, {
-      params: { token },
-    });
+    const result = await axios.patch(url, passwordFields);
     return result;
   } catch (error) {
     throw new Error(catchError(error));
@@ -95,9 +107,10 @@ export const updateProfile = async (
   userFields: UserFields
 ) => {
   try {
+    setAuthToken(token);
     const url = `${API_URL}/users/${userId}`;
     const { data } = await axios.patch(url, userFields, {
-      params: { token, id: userId },
+      params: { id: userId },
     });
 
     const userData: { user: User } = {

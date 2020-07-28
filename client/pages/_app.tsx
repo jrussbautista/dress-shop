@@ -38,8 +38,8 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
   if (isServer) {
     try {
-      const { data } = await AuthService.getMe(token);
-      currentUser = data.data.user;
+      const { user } = await AuthService.getMe(token);
+      currentUser = user;
     } catch (error) {
       destroyCookie(ctx, 'token');
       checkProtectedRoutes(ctx);

@@ -36,9 +36,9 @@ class MyDocument extends Document {
             type="text/css"
             href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
           />
-          <script
+          {/* <script
             src={`https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=PHP`}
-          />
+          /> */}
         </Head>
         <body>
           <Main />

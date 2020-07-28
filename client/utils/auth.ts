@@ -1,6 +1,7 @@
 import Router from 'next/router';
-import { setCookie } from 'nookies';
+import { setCookie, parseCookies } from 'nookies';
 import { NextPageContext } from 'next';
+import axios from 'axios';
 
 // handle auto login when created an account, and login
 export const autoLogin = (token: string, location: string) => {
@@ -30,6 +31,15 @@ export const protectedRoutes = (pathname: string) => {
 export const checkProtectedRoutes = (ctx: NextPageContext) => {
   const isProtectedRoutes = protectedRoutes(ctx.pathname);
   if (isProtectedRoutes) {
-    redirectUser(ctx, '/login');
+    redirectUser(ctx, '/auth?type=login');
+  }
+};
+
+export const setAuthToken = (token: string) => {
+  axios.defaults.headers.common['Authorization'] = '';
+  delete axios.defaults.headers.common['Authorization'];
+
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   }
 };

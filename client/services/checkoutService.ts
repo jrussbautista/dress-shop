@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_URL } from '../utils/constants';
 import { catchError } from '../utils/catchError';
+import { setAuthToken } from '../utils/auth';
 
 interface IntentPayment {
   clientSecret: string;
@@ -12,8 +13,9 @@ interface PaypalTransaction {
 
 const createPaymentIntent = async (token: string): Promise<IntentPayment> => {
   try {
+    setAuthToken(token);
     const url = `${API_URL}/checkout/stripe/create-payment-intent`;
-    const { data } = await axios.post(url, {}, { params: { token } });
+    const { data } = await axios.post(url);
     const intentPaymentData: IntentPayment = {
       clientSecret: data.data.clientSecret,
     };
@@ -25,8 +27,9 @@ const createPaymentIntent = async (token: string): Promise<IntentPayment> => {
 
 export const createPaypalTransaction = async (token: string) => {
   try {
+    setAuthToken(token);
     const url = `${API_URL}/checkout/create-paypal-transaction`;
-    const { data } = await axios.post(url, {}, { params: { token } });
+    const { data } = await axios.post(url);
 
     const paypalTransaction: PaypalTransaction = {
       orderID: data.data.orderID,
@@ -43,8 +46,9 @@ export const capturePaypalTransaction = async (
   orderID: string
 ) => {
   try {
+    setAuthToken(token);
     const url = `${API_URL}/checkout/capture-paypal-transaction`;
-    return await axios.post(url, { orderID }, { params: { token } });
+    return await axios.post(url, { orderID });
   } catch (error) {
     throw new Error(catchError(error));
   }

@@ -9,11 +9,10 @@ export const AuthSocial = () => {
   const { setCurrentUser } = useAuth();
   const { setToast } = useToast();
 
-  const handleOnSuccess = async (response: any) => {
+  const handleOnSuccess = async (response: any): Promise<void> => {
     try {
-      const { user, token } = await AuthService.verifyGoogleIdToken(
-        response.tokenId
-      );
+      const tokenId = response.tokenId;
+      const { user, token } = await AuthService.verifyGoogleIdToken(tokenId);
       setCurrentUser(user, token);
     } catch (error) {
       setToast('error', error.message);

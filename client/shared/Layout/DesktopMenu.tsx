@@ -7,9 +7,7 @@ import { capitalizeFirstLetter } from '../../utils/helpers';
 import { Button } from '../Button';
 import { SearchBar } from '../SearchBar';
 
-interface Props {}
-
-export const DesktopMenu: React.FC<Props> = () => {
+export const DesktopMenu: React.FC = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
 
@@ -89,11 +87,11 @@ export const DesktopMenu: React.FC<Props> = () => {
           </li>
         ) : (
           <li ref={dropdownRef}>
-            <Link href="/signup">
+            <Link href="/auth?type=register">
               <a>Sign Up</a>
             </Link>
             <span style={{ fontWeight: 'normal', padding: '0 1rem' }}> | </span>
-            <Link href="/login">
+            <Link href="/auth?type=login">
               <a>Log In</a>
             </Link>
           </li>

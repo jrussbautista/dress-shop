@@ -1,9 +1,8 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { useAuth } from '../auth/authContext';
 import reducer from './cartReducer';
-import { ADD_CART, CLEAR_CART, REMOVE_CART, SET_CART } from './cartTypes';
-import { AddCart, Cart } from '../../types';
-import { parseCookies } from 'nookies';
+import { ADD_CART, CLEAR_CART, REMOVE_CART } from './cartTypes';
+import { AddCart } from '../../types';
 
 interface InitialStateType {
   carts: string[];

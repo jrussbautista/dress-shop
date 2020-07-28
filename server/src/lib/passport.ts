@@ -10,7 +10,7 @@ passport.use(
   new JWTstrategy(
     {
       secretOrKey: JWT_SECRET_KEY,
-      jwtFromRequest: ExtractJwt.fromUrlQueryParameter('token'),
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     },
     async (token, done) => {
       try {
@@ -70,7 +70,9 @@ passport.use(
       try {
         const user = await User.findOne({ email });
         if (!user) {
-          return done(null, false, { message: 'User not found' });
+          return done(null, false, {
+            message: 'Email or Password is incorrect',
+          });
         }
 
         const isPasswordMatch = await user.matchesPassword(password);

@@ -6,3 +6,9 @@ export type User = {
   carts: string[];
   role?: string;
 };
+
+export type UserFields = {
+  name: string;
+  password: string;
+  email: string;
+};

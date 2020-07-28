@@ -5,7 +5,9 @@ import { User as UserTypes } from '../types';
 export const index = async (req: Request, res: Response) => {
   try {
     const user = req.user as UserTypes;
-    const carts = await Cart.find({ user: user._id }).populate('product');
+    const carts = await Cart.find({ user: user._id })
+      .populate('product')
+      .sort('-createdAt');
     res.status(200).json({ success: true, data: { carts } });
   } catch (error) {
     res

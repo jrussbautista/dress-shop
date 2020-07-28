@@ -4,6 +4,14 @@ import { CheckOutService } from '../../services';
 import { parseCookies } from 'nookies';
 import { useToast, useCart } from '../../store';
 
+interface ErrorMsg {
+  message: string;
+}
+
+interface PaypalData {
+  orderID: string;
+}
+
 export const CheckOutPaypal = () => {
   const paypalButtonsRef = useRef<HTMLDivElement>(null);
   const { token } = parseCookies({});
@@ -21,10 +29,10 @@ export const CheckOutPaypal = () => {
               }
             );
           },
-          onError: function (error: any) {
+          onError: function (error: ErrorMsg) {
             setToast('error', error.message);
           },
-          onApprove: function (data: any, actions: any) {
+          onApprove: function (data: PaypalData) {
             return CheckOutService.capturePaypalTransaction(
               token,
               data.orderID
@@ -43,6 +51,14 @@ export const CheckOutPaypal = () => {
   }, []);
 
   return (
-    <div style={{ position: 'relative', zIndex: 1 }} ref={paypalButtonsRef} />
+    <>
+      <div className="paypal" ref={paypalButtonsRef} />
+      <style jsx>{`
+      .paypal {
+        position: relative, 
+        z-index: 1 
+      }
+  `}</style>
+    </>
   );
 };

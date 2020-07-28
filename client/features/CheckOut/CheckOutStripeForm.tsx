@@ -6,7 +6,10 @@ import { useAuth, useToast, useCart } from '../../store';
 import { parseCookies } from 'nookies';
 import { PageLoader, Alert, Button } from '../../shared';
 import Router from 'next/router';
-import { StripeCardElement } from '@stripe/stripe-js';
+import {
+  StripeCardElement,
+  StripeCardElementChangeEvent,
+} from '@stripe/stripe-js';
 
 export const CheckoutStripeForm = () => {
   const [succeeded, setSucceeded] = useState(false);
@@ -33,7 +36,7 @@ export const CheckoutStripeForm = () => {
       });
   }, []);
 
-  const handleChange = async (event: any) => {
+  const handleChange = async (event: StripeCardElementChangeEvent) => {
     setDisabled(event.empty);
     setError(event.error ? event.error.message : '');
   };
@@ -84,6 +87,7 @@ export const CheckoutStripeForm = () => {
         )}
 
         <CardSection onChange={handleChange} />
+
         <Button
           disabled={processing || disabled || succeeded}
           type="submit"

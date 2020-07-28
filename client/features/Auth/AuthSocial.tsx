@@ -5,6 +5,11 @@ import { GOOGLE_CLIENT_ID } from '../../utils/constants';
 import { AuthService } from '../../services';
 import { useAuth, useToast } from '../../store';
 
+interface GoogleError {
+  error: string;
+  details: string;
+}
+
 export const AuthSocial = () => {
   const { setCurrentUser } = useAuth();
   const { setToast } = useToast();
@@ -19,8 +24,9 @@ export const AuthSocial = () => {
     }
   };
 
-  const handleOnFailure = (response: any) => {
-    console.log(response);
+  const handleOnFailure = (response: GoogleError) => {
+    if (response.error === 'popup_closed_by_user') return;
+    setToast('error', response.details);
   };
 
   return (

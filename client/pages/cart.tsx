@@ -100,6 +100,7 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
 
           .msg {
             font-size: 2.2rem;
+            margin: 2rem 0;
           }
 
           .msg-container {

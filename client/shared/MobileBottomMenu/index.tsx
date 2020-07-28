@@ -45,7 +45,7 @@ export const MobileBottomMenu = () => {
           </Link>
         </div>
         <div className={`list ${pathname === '/profile' ? 'active' : ''}`}>
-          <Link href={`${currentUser ? '/profile' : '/login'}`}>
+          <Link href={`${currentUser ? '/profile' : '/auth?type=login'}`}>
             <a className="link">
               <div className="icon">
                 <FiUser />

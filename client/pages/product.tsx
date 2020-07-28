@@ -51,7 +51,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
     try {
       if (!currentUser) {
         setToast('error', 'Please log in first');
-        Router.push(`/login?ref=${product._id}`);
+        Router.push(`/auth?type=login&ref=${product._id}`);
         return;
       }
 

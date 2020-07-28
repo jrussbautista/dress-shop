@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { LoginForm, SignUpForm, AuthSocial } from '../features/Auth';
 import { AuthLink } from '../features/Auth/AuthLink';
+import { MobileBottomMenu } from '../shared';
 
 const Auth = () => {
   const { query } = useRouter();
@@ -22,6 +23,7 @@ const Auth = () => {
           </div>
           <AuthSocial />
         </div>
+        <MobileBottomMenu />
         <style jsx>{`
           .auth-container {
             width: 50rem;

@@ -7,7 +7,12 @@ import {
   changePassword,
 } from '../controllers/authController';
 import { protect } from '../middleware';
-import { validate, loginValidation, signUpValidation } from '../validation';
+import {
+  validate,
+  loginValidation,
+  signUpValidation,
+  changePasswordValidation,
+} from '../validation';
 
 const router = Router();
 
@@ -19,6 +24,8 @@ router.use(protect);
 
 router.route('/me').get(getMe);
 
-router.route('/change-password').patch(changePassword);
+router
+  .route('/change-password')
+  .patch(changePasswordValidation(), validate, changePassword);
 
 export { router as authRoutes };

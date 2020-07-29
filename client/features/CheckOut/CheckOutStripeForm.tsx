@@ -6,12 +6,9 @@ import { useAuth, useToast, useCart } from '../../store';
 import { parseCookies } from 'nookies';
 import { PageLoader, Alert, Button } from '../../shared';
 import Router from 'next/router';
-import {
-  StripeCardElement,
-  StripeCardElementChangeEvent,
-} from '@stripe/stripe-js';
+import { StripeCardElement, StripeCardElementChangeEvent } from '@stripe/stripe-js';
 
-export const CheckoutStripeForm = () => {
+export const CheckoutStripeForm: React.FC = () => {
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState<null | string>(null);
   const [processing, setProcessing] = useState(false);
@@ -31,7 +28,7 @@ export const CheckoutStripeForm = () => {
       .then((data) => {
         setClientSecret(data.clientSecret);
       })
-      .catch((err) => {
+      .catch(() => {
         setError('Error in creating payment intent');
       });
   }, []);

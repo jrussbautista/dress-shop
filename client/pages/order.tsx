@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { GetServerSideProps } from 'next';
 import { OrderList } from '../features/Order';
 import { Meta } from '../shared';
@@ -15,8 +15,6 @@ interface Props {
 }
 
 const Order: React.FC<Props> = ({ orders, error }) => {
-  const [myOrders, setMyOrders] = useState<Orders>(orders);
-
   if (error) {
     return <ErrorPage message={error} />;
   }
@@ -26,7 +24,7 @@ const Order: React.FC<Props> = ({ orders, error }) => {
       <Meta title="My Orders" />
       <div className="container">
         <h1 className="page-title">My Orders</h1>
-        <OrderList orders={myOrders} />
+        <OrderList orders={orders} />
       </div>
       <style jsx>{`
         .container {
@@ -55,7 +53,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   let orders: Orders = [];
-  let error: null | string = null;
+  const error: null | string = null;
   try {
     const result = await OrderService.fetchOrders(token);
     orders = result.orders;

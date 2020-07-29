@@ -7,10 +7,14 @@ import {
   remove,
 } from '../controllers/productController';
 import { authorize, protect } from '../middleware';
+import { productValidation, validate } from '../validation';
 
 const router = Router();
 
-router.route('/').get(index).post(protect, authorize('admin'), store);
+router
+  .route('/')
+  .get(index)
+  .post(protect, authorize('admin'), productValidation(), validate, store);
 
 router
   .route('/:id')

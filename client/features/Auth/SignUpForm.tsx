@@ -10,7 +10,7 @@ const Schema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
 });
 
-export const SignUpForm = () => {
+export const SignUpForm: React.FC = () => {
   const { signUp } = useAuth();
   const { setToast } = useToast();
 
@@ -45,9 +45,7 @@ export const SignUpForm = () => {
             <h1 className="page-heading"> Sign Up </h1>
             <div className="group">
               <input
-                className={`input ${
-                  errors.name && touched.name && 'input-error'
-                }`}
+                className={`input ${errors.name && touched.name && 'input-error'}`}
                 type="text"
                 placeholder="Name"
                 autoComplete="true"
@@ -55,15 +53,11 @@ export const SignUpForm = () => {
                 value={values.name}
                 onChange={handleChange}
               />
-              {errors.name && touched.name ? (
-                <div className="error">{errors.name}</div>
-              ) : null}
+              {errors.name && touched.name ? <div className="error">{errors.name}</div> : null}
             </div>
             <div className="group">
               <input
-                className={`input ${
-                  errors.email && touched.email && 'input-error'
-                }`}
+                className={`input ${errors.email && touched.email && 'input-error'}`}
                 type="email"
                 placeholder="Email"
                 autoComplete="true"
@@ -71,15 +65,11 @@ export const SignUpForm = () => {
                 value={values.email}
                 onChange={handleChange}
               />
-              {errors.email && touched.email ? (
-                <div className="error">{errors.email}</div>
-              ) : null}
+              {errors.email && touched.email ? <div className="error">{errors.email}</div> : null}
             </div>
             <div className="group">
               <input
-                className={`input ${
-                  errors.password && touched.password && 'input-error'
-                }`}
+                className={`input ${errors.password && touched.password && 'input-error'}`}
                 type="password"
                 autoComplete="true"
                 placeholder="Password"

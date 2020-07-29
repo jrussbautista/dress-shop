@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Cart } from '../../types';
 import { CartItem } from './CartItem';
 
@@ -22,12 +22,7 @@ export const CartList: React.FC<Props> = ({ carts, removeCart, updateQty }) => {
           </div>
         </div>
         {carts.map((cart) => (
-          <CartItem
-            cart={cart}
-            key={cart._id}
-            removeCart={removeCart}
-            updateQty={updateQty}
-          />
+          <CartItem cart={cart} key={cart._id} removeCart={removeCart} updateQty={updateQty} />
         ))}
       </>
       <style jsx>

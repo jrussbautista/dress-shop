@@ -21,9 +21,7 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
   const [qty, setQty] = useState<string | number>(cart.quantity);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const total = getCurrency(
-    parseFloat((cart.product.price * cart.quantity).toFixed(2))
-  );
+  const total = getCurrency(parseFloat((cart.product.price * cart.quantity).toFixed(2)));
 
   const handleRemoveCartAsync = async () => {
     try {
@@ -101,9 +99,7 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
             </Link>
           </div>
 
-          <div className="product-price product-content">
-            {getCurrency(cart.product.price)}
-          </div>
+          <div className="product-price product-content">{getCurrency(cart.product.price)}</div>
           <div className="product-qty product-content">
             <div className="qty-container">
               <InputQuantity

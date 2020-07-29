@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { HomeBanner, HomeCategories, HomeProducts } from '../features/Home';
 import { Spinner, Button } from '../shared';
 import { useShop } from '../store';
@@ -58,9 +58,7 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
         )}
 
         {!hasLoadMore && (
-          <div className="reached-end">
-            No more products. You have reached the end.
-          </div>
+          <div className="reached-end">No more products. You have reached the end.</div>
         )}
       </div>
       <MobileBottomMenu />

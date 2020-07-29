@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { CartList, CartSubTotal } from '../features/Cart';
-import { useAuth, useCart } from '../store';
-import { GetServerSideProps } from 'next';
-import { CartService } from '../services';
-import { parseCookies } from 'nookies';
-import { Carts, Cart as CartType } from '../types';
-import { ErrorPage, Button, Meta, MobileBottomMenu } from '../shared';
-import calculateCartTotal from '../utils/calculateCartTotal';
+import { useState } from "react";
+import { CartList, CartSubTotal } from "../features/Cart";
+import { useAuth, useCart } from "../store";
+import { GetServerSideProps } from "next";
+import { CartService } from "../services";
+import { parseCookies } from "nookies";
+import { Carts, Cart as CartType } from "../types";
+import { ErrorPage, Button, Meta, MobileBottomMenu } from "../shared";
+import calculateCartTotal from "../utils/calculateCartTotal";
 
 interface Props extends Carts {
   error: string | null;
@@ -57,7 +57,7 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
                   <Button
                     href="/checkout"
                     title="Check Out"
-                    style={{ width: '15rem' }}
+                    style={{ width: "15rem" }}
                   />
                 </div>
               </>
@@ -67,7 +67,7 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
                 <Button
                   href="/"
                   title="Go Shop Now"
-                  style={{ width: '20rem' }}
+                  style={{ width: "20rem" }}
                 />
               </div>
             )}
@@ -75,7 +75,7 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
         ) : (
           <div className="msg-container">
             <h1 className="page-title"> Please login to see your cart </h1>
-            <Button href="/login" title="Log In" style={{ width: '15rem' }} />
+            <Button href="/login" title="Log In" style={{ width: "15rem" }} />
           </div>
         )}
       </div>
@@ -132,12 +132,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let carts: CartType[] = [];
   let error: null | string = null;
   try {
-    const result = await CartService.fetchCarts(token);
-    carts = result.carts;
+    const { carts: myCarts } = await CartService.fetchCarts(token);
+    carts = myCarts;
   } catch (error) {
     return {
       props: {
-        error: 'something went wrong',
+        error: "something went wrong",
         carts: [],
       },
     };

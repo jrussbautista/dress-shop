@@ -17,9 +17,7 @@ export const OrderList: React.FC<Props> = ({ orders }) => {
               <div>
                 <div className="date">
                   Date Ordered:
-                  <span className="date-text">
-                    {formatDate(order.createdAt)}
-                  </span>
+                  <span className="date-text">{formatDate(order.createdAt)}</span>
                 </div>
                 <div className="products">
                   {order.products.map((product) => (
@@ -41,19 +39,13 @@ export const OrderList: React.FC<Props> = ({ orders }) => {
                           <div>
                             <Link href={`/product?id=${product.product._id}`}>
                               <a>
-                                <div className="product-name">
-                                  {product.product.name}
-                                </div>
+                                <div className="product-name">{product.product.name}</div>
                               </a>
                             </Link>
-                            <div className="product-quantity">
-                              x {product.quantity}
-                            </div>
+                            <div className="product-quantity">x {product.quantity}</div>
                           </div>
                           <div className="product-price">
-                            {getCurrency(
-                              product.product.price * product.quantity
-                            )}
+                            {getCurrency(product.product.price * product.quantity)}
                           </div>
                         </div>
                       </div>
@@ -62,9 +54,7 @@ export const OrderList: React.FC<Props> = ({ orders }) => {
                 </div>
                 <div className="order-bottom">
                   <span className="total-text">Order Total:</span>
-                  <span className="total-price">
-                    {getCurrency(order.total)}
-                  </span>
+                  <span className="total-price">{getCurrency(order.total)}</span>
                 </div>
               </div>
             </li>

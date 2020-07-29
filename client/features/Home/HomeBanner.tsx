@@ -21,12 +21,9 @@ export const HomeBanner: React.FC<Props> = ({ banners }) => {
   return (
     <>
       <Slider {...settings}>
-        {banners.map((banner: any) => (
+        {banners.map((banner) => (
           <div className="banner" key={banner._id}>
-            <div
-              className="img"
-              style={{ backgroundImage: `url(${banner.imageURL})` }}
-            ></div>
+            <div className="img" style={{ backgroundImage: `url(${banner.imageURL})` }}></div>
           </div>
         ))}
       </Slider>

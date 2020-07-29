@@ -7,10 +7,7 @@ export const SearchTabCategory: React.FC<Props> = ({ active, onChangeTab }) => {
   return (
     <div>
       <ul className="tab">
-        <li
-          className={`${active === 'men' ? 'active' : ''}`}
-          onClick={() => onChangeTab('men')}
-        >
+        <li className={`${active === 'men' ? 'active' : ''}`} onClick={() => onChangeTab('men')}>
           Men
         </li>
         <li

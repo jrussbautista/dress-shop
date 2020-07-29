@@ -14,11 +14,7 @@ export const CheckOutList: React.FC<Props> = ({ items }) => {
           <div key={item._id} className="item-container">
             <div className="info">
               <div className="main">
-                <img
-                  className="image"
-                  src={item.product.imageURL}
-                  alt={item.product.name}
-                />
+                <img className="image" src={item.product.imageURL} alt={item.product.name} />
                 <div>{item.product.name}</div>
               </div>
 
@@ -30,9 +26,7 @@ export const CheckOutList: React.FC<Props> = ({ items }) => {
                 <div className="price">{getCurrency(item.product.price)}</div>
               </div>
               <div className="content" style={{ textAlign: 'right' }}>
-                <div className="order-total">
-                  {getCurrency(item.product.price * item.quantity)}
-                </div>
+                <div className="order-total">{getCurrency(item.product.price * item.quantity)}</div>
               </div>
             </div>
           </div>

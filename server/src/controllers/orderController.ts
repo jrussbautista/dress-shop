@@ -8,10 +8,8 @@ export const index = async (req: Request, res: Response) => {
     const orders = await Order.find({ user: user._id })
       .populate('products.product')
       .sort('-createdAt');
-    res.status(200).json({ data: { orders }, success: true });
+    res.status(200).json({ data: { orders } });
   } catch (error) {
-    return res
-      .status(500)
-      .json({ error: { message: 'Error in getting orders' } });
+    return res.status(500).json({ message: 'Error in getting orders' });
   }
 };

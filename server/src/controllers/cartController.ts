@@ -8,11 +8,9 @@ export const index = async (req: Request, res: Response) => {
     const carts = await Cart.find({ user: user._id })
       .populate('product')
       .sort('-createdAt');
-    res.status(200).json({ success: true, data: { carts } });
+    res.status(200).json({ data: { carts } });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: { message: 'Error in getting product' }, success: false });
+    res.status(500).json({ message: 'Error in getting product' });
   }
 };
 
@@ -43,11 +41,9 @@ export const store = async (req: Request, res: Response) => {
       });
     }
 
-    res.status(200).json({ success: true, data: { cart } });
+    res.status(200).json({ data: { cart } });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: { message: 'Error in getting product' }, success: false });
+    res.status(500).json({ message: 'Error in getting product' });
   }
 };
 
@@ -57,16 +53,12 @@ export const remove = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     const cart = await Cart.findOne({ _id: id });
-    if (!cart)
-      return res
-        .status(404)
-        .json({ message: 'Cart not found', success: false });
+    if (!cart) return res.status(404).json({ message: 'Cart not found' });
 
     // make sure viewer is the owner of the cart
     if (user._id.toString() !== cart.user.toString()) {
-      return res.status(402).json({
-        error: { message: 'You cannot perform this operation' },
-        success: false,
+      return res.status(405).json({
+        message: 'You cannot perform this operation',
       });
     }
 
@@ -77,11 +69,9 @@ export const remove = async (req: Request, res: Response) => {
 
     await cart.remove();
 
-    res.status(200).json({ success: true });
+    res.status(204);
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: { message: 'Error in getting product' }, success: false });
+    res.status(500).json({ message: 'Error in getting product' });
   }
 };
 
@@ -93,16 +83,12 @@ export const update = async (req: Request, res: Response) => {
     const { quantity } = req.body;
 
     let cart = await Cart.findOne({ _id: id });
-    if (!cart)
-      return res
-        .status(404)
-        .json({ message: 'Cart not found', success: false });
+    if (!cart) return res.status(404).json({ message: 'Cart not found' });
 
     // make sure viewer is the owner of the cart
     if (user._id.toString() !== cart.user.toString()) {
-      return res.status(402).json({
-        error: { message: 'You cannot perform this operation' },
-        success: false,
+      return res.status(405).json({
+        message: 'You cannot perform this operation',
       });
     }
 
@@ -112,10 +98,8 @@ export const update = async (req: Request, res: Response) => {
       { new: true }
     );
 
-    return res.status(200).json({ success: true, data: { cart } });
+    return res.status(200).json({ data: { cart } });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: { message: 'Error in getting product' }, success: false });
+    res.status(500).json({ message: 'Error in getting product' });
   }
 };

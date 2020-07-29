@@ -1,11 +1,11 @@
-import axios from 'axios';
-import { API_URL } from '../utils/constants';
-import { Carts } from '../types';
-import { catchError } from '../utils/catchError';
-import { setAuthToken } from '../utils/auth';
+import axios from "axios";
+import { API_URL } from "../utils/constants";
+import { Cart } from "../types";
+import { catchError } from "../utils/catchError";
+import { setAuthToken } from "../utils/auth";
 
 interface CartsData {
-  carts: Carts;
+  carts: Cart[];
 }
 
 const fetchCarts = async (token: string): Promise<CartsData> => {

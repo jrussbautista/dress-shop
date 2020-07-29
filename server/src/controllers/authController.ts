@@ -82,7 +82,7 @@ export const login = async (
     }
 
     if (!user) {
-      return res.status(500).json({ error: { message: info.message } });
+      return res.status(500).json({ message: info.message });
     }
 
     sendResponseToken({ user, res, statusCode: 200 });
@@ -104,7 +104,7 @@ export const signUp = async (
     }
 
     if (!user) {
-      return res.status(500).json({ error: { message: info.message } });
+      return res.status(500).json({ message: info.message });
     }
 
     sendResponseToken({ user, res, statusCode: 201 });
@@ -122,29 +122,24 @@ export const changePassword = async (req: Request, res: Response) => {
 
     if (newPassword !== confirmNewPassword) {
       return res.status(402).json({
-        error: {
-          message: 'New Password and Confirm New Password does not match',
-        },
+        message: 'New Password and Confirm New Password does not match',
       });
     }
 
     const foundUser = await User.findById(user._id).select('+password');
 
-    if (!foundUser)
-      return res.status(404).json({ error: { message: 'User not found ' } });
+    if (!foundUser) return res.status(404).json({ message: 'User not found ' });
 
     const isPasswordCorrect = await foundUser.matchesPassword(oldPassword);
 
     if (!isPasswordCorrect)
-      return res
-        .status(401)
-        .json({ error: { message: 'Old password is wrong' } });
+      return res.status(401).json({ message: 'Old password is incorrect' });
 
     foundUser.password = newPassword;
     await foundUser.save();
 
     sendResponseToken({ user: foundUser, res, statusCode: 200 });
   } catch (error) {
-    res.status(500).json({ error: { message: 'Error in updating password.' } });
+    res.status(500).json({ message: 'Error in updating password.' });
   }
 };

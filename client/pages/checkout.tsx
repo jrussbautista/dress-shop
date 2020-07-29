@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
 import { Cart } from '../types';
-import {
-  CheckOutList,
-  CheckOutPaypal,
-  CheckoutStripeForm,
-} from '../features/CheckOut';
+import { CheckOutList, CheckOutPaypal, CheckoutStripeForm } from '../features/CheckOut';
 import { CartService } from '../services';
 import { getCurrency } from '../utils/helpers';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { STRIPE_CLIENT_KEY } from '../utils/constants';
 import calculateCartTotal from '../utils/calculateCartTotal';
-import { Meta } from '../shared';
+import { Meta, ErrorPage } from '../shared';
 
 interface Props {
   carts: Cart[];
@@ -24,6 +20,8 @@ const stripePromise = loadStripe(STRIPE_CLIENT_KEY);
 
 const Checkout: React.FC<Props> = ({ carts, error }) => {
   const { cartTotal } = calculateCartTotal(carts);
+
+  if (error) return <ErrorPage message={error} />;
 
   return (
     <>
@@ -144,7 +142,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   let carts: Cart[] = [];
-  let error: null | string = null;
+  const error: null | string = null;
   try {
     const result = await CartService.fetchCarts(token);
     carts = result.carts;

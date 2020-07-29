@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { MdExpandMore } from 'react-icons/md';
 
 interface Props {
@@ -26,10 +26,7 @@ export const SearchFilter: React.FC<Props> = ({ handleChange, active }) => {
       <span className="label"> Sort by </span>
       <div className="select">
         {' '}
-        <div
-          className="select-item"
-          onClick={() => setOpenDropdown(!openDropdown)}
-        >
+        <div className="select-item" onClick={() => setOpenDropdown(!openDropdown)}>
           <span>{!selected ? 'Price' : selected}</span>
           <span>
             <MdExpandMore size={24} />

@@ -1,10 +1,6 @@
 import Router, { useRouter } from 'next/router';
 import React from 'react';
-import {
-  SearchFilter,
-  SearchTabCategory,
-  SearchProducts,
-} from '../features/Search';
+import { SearchFilter, SearchTabCategory, SearchProducts } from '../features/Search';
 import { Meta, MobileBottomMenu, SearchBar } from '../shared';
 
 const Search: React.FC = () => {
@@ -30,11 +26,7 @@ const Search: React.FC = () => {
       <Meta title="Search" />
       <div className="container">
         <div className="search-bar-container">
-          <SearchBar
-            onSubmit={handleSearchSubmit}
-            style={{ width: '100%' }}
-            isFocus
-          />
+          <SearchBar onSubmit={handleSearchSubmit} style={{ width: '100%' }} isFocus />
         </div>
         <div className="sort-container">
           <SearchTabCategory active={category} onChangeTab={handleTabChange} />

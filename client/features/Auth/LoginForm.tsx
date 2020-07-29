@@ -9,7 +9,7 @@ const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
 });
 
-export const LoginForm = () => {
+export const LoginForm: React.FC = () => {
   const { login } = useAuth();
 
   const { setToast } = useToast();
@@ -44,9 +44,7 @@ export const LoginForm = () => {
             <h1 className="page-heading"> Login </h1>
             <div className="group">
               <input
-                className={`input ${
-                  errors.email && touched.email && 'input-error'
-                }`}
+                className={`input ${errors.email && touched.email && 'input-error'}`}
                 autoComplete="true"
                 type="email"
                 placeholder="Email"
@@ -54,16 +52,12 @@ export const LoginForm = () => {
                 value={values.email}
                 onChange={handleChange}
               />
-              {errors.email && touched.email ? (
-                <div className="error">{errors.email}</div>
-              ) : null}
+              {errors.email && touched.email ? <div className="error">{errors.email}</div> : null}
             </div>
 
             <div className="group">
               <input
-                className={`input ${
-                  errors.password && touched.password && 'input-error'
-                }`}
+                className={`input ${errors.password && touched.password && 'input-error'}`}
                 autoComplete="true"
                 type="password"
                 placeholder="Password"

@@ -4,7 +4,7 @@ import { LoginForm, SignUpForm, AuthSocial } from '../features/Auth';
 import { AuthLink } from '../features/Auth/AuthLink';
 import { MobileBottomMenu } from '../shared';
 
-const Auth = () => {
+const Auth: React.FC = () => {
   const { query } = useRouter();
   const type = query.type as string;
 

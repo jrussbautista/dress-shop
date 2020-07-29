@@ -23,20 +23,15 @@ export const CheckOutPaypal = () => {
       window.paypal
         .Buttons({
           createOrder: function () {
-            return CheckOutService.createPaypalTransaction(token).then(
-              (data) => {
-                return data.orderID;
-              }
-            );
+            return CheckOutService.createPaypalTransaction(token).then((data) => {
+              return data.orderID;
+            });
           },
           onError: function (error: ErrorMsg) {
             setToast('error', error.message);
           },
           onApprove: function (data: PaypalData) {
-            return CheckOutService.capturePaypalTransaction(
-              token,
-              data.orderID
-            ).then(() => {
+            return CheckOutService.capturePaypalTransaction(token, data.orderID).then(() => {
               setToast('success', 'Successfully transaction completed');
               clearCart();
               Router.push('/order');

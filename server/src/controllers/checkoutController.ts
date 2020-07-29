@@ -49,11 +49,9 @@ export const createPaymentIntent = async (req: Request, res: Response) => {
       data: {
         clientSecret,
       },
-      success: true,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: error.message, success: false });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -107,7 +105,6 @@ export const createPaypalTransaction = async (req: Request, res: Response) => {
     data: {
       orderID: order.result.id,
     },
-    success: true,
   });
 };
 

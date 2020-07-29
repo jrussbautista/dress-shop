@@ -60,9 +60,7 @@ export const SearchProducts: React.FC = () => {
         ) : (
           <>
             {products.length === 0 ? (
-              <div className="message">
-                No products found. Try searching for other keyword.
-              </div>
+              <div className="message">No products found. Try searching for other keyword.</div>
             ) : (
               <ProductList products={products} />
             )}

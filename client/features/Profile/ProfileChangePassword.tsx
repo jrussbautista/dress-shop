@@ -4,7 +4,7 @@ import { useToast } from '../../store';
 import { AuthService } from '../../services';
 import { parseCookies } from 'nookies';
 
-export const ProfileChangePassword = () => {
+export const ProfileChangePassword: React.FC = () => {
   const { setToast } = useToast();
 
   const initialState = {
@@ -93,11 +93,7 @@ export const ProfileChangePassword = () => {
               />
             </div>
             <div className="group bottom">
-              <Button
-                type="submit"
-                title="Save Password"
-                disabled={submitting}
-              />
+              <Button type="submit" title="Save Password" disabled={submitting} />
             </div>
           </div>
         </form>

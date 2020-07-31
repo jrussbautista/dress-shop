@@ -1,3 +1,4 @@
+import React from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { useModal } from '../../store';
 
@@ -13,9 +14,9 @@ export const Modal: React.FC<Props> = ({ children, title }) => {
       <div className="modal-body">
         <div className="modal-header">
           <div className="modal-title">{title}</div>
-          <div className="close" onClick={closeModal}>
+          <button type="button" className="close" onClick={closeModal}>
             <IoMdClose size={32} />
-          </div>
+          </button>
         </div>
         <div className="modal-content">{children}</div>
       </div>

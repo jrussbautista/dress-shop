@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import Head from 'next/head';
 import NProgress from 'nprogress';
@@ -40,7 +41,6 @@ export const Layout: React.FC<Props> = ({ children, title = 'Dress Shop' }) => {
       </Head>
       <Header />
       <main>{children}</main>
-
       <style jsx>{`
         main {
           min-height:

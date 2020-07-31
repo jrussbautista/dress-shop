@@ -1,8 +1,9 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { IoMdClose } from 'react-icons/io';
 import { useToast } from '../../store';
 
-export const Toast = () => {
+export const Toast: React.FC = () => {
   const { type, message, isActive, removeToast } = useToast();
 
   return (
@@ -24,9 +25,9 @@ export const Toast = () => {
       >
         <div className={`alert ${type}`} role={type}>
           <div>{message}</div>
-          <div className="close" onClick={removeToast}>
+          <button className="close" onClick={removeToast}>
             <IoMdClose />
-          </div>
+          </button>
         </div>
       </motion.div>
 
@@ -35,8 +36,7 @@ export const Toast = () => {
           border-radius: 6px;
           padding: 2rem 1.5rem;
           font-size: 1.7rem;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
           display: flex;
           justify-content: space-between;
         }

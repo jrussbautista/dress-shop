@@ -1,12 +1,12 @@
 import React from 'react';
 import App, { AppProps, AppContext } from 'next/app';
-import { StoreProvider } from '../store';
+import { StoreProvider } from 'store';
 import { parseCookies, destroyCookie } from 'nookies';
-import { checkProtectedRoutes } from '../utils/auth';
-import { AuthService } from '../services/authService';
-import { Layout } from '../shared';
-import { User } from '../types';
-import '../styles/global.css';
+import { checkProtectedRoutes } from 'utils/auth';
+import { AuthService } from 'services/authService';
+import { Layout } from 'shared';
+import { User } from 'types';
+import 'styles/global.css';
 
 interface MyAppProps extends AppProps {
   currentUser: User | null;

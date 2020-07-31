@@ -1,11 +1,11 @@
-export const capitalizeFirstLetter = (word: string) => {
+export const capitalizeFirstLetter = (word: string): string => {
   return word.charAt(0).toUpperCase();
 };
 
-export const getCurrency = (price: number) => {
+export const getCurrency = (price: number): string => {
   return `P${price}`;
 };
 
-export const formatDate = (date: Date) => {
+export const formatDate = (date: Date): string => {
   return new Date(date).toLocaleDateString('en-US');
 };

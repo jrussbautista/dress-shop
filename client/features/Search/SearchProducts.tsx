@@ -18,6 +18,7 @@ export const SearchProducts: React.FC = () => {
   let { category, sort, keyword } = query;
   category = (category as string) || '';
   sort = (sort as string) || '';
+  keyword = (keyword as string) || '';
 
   useEffect(() => {
     const getProducts = async () => {

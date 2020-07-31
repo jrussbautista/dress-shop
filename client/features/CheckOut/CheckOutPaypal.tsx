@@ -12,7 +12,7 @@ interface PaypalData {
   orderID: string;
 }
 
-export const CheckOutPaypal = () => {
+export const CheckOutPaypal: React.FC = () => {
   const paypalButtonsRef = useRef<HTMLDivElement>(null);
   const { token } = parseCookies({});
   const { setToast } = useToast();

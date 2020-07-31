@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { DesktopMenu } from './DesktopMenu';
 import { MobileMenu } from './MobileMenu';
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <>
       <header className="header">

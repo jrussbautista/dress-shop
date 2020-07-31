@@ -18,12 +18,12 @@ const initialState = {
   isLoading: true,
   hasLoadMore: false,
   currentPage: 1,
-  loadProducts: () => {},
+  loadProducts: () => null,
 };
 
 const ShopContext = createContext<InitialStateType>(initialState);
 
-const ShopProvider: React.FC = ({ children }) => {
+export const ShopProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   async function loadProducts() {
@@ -34,13 +34,7 @@ const ShopProvider: React.FC = ({ children }) => {
     dispatch({ type: LOAD_PRODUCTS, payload: data });
   }
 
-  return (
-    <ShopContext.Provider value={{ ...state, loadProducts }}>
-      {children}
-    </ShopContext.Provider>
-  );
+  return <ShopContext.Provider value={{ ...state, loadProducts }}>{children}</ShopContext.Provider>;
 };
 
-const useShop = () => useContext(ShopContext);
-
-export { ShopProvider, useShop };
+export const useShop = (): InitialStateType => useContext(ShopContext);

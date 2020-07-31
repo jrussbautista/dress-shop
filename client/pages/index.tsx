@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { HomeBanner, HomeCategories, HomeProducts } from '../features/Home';
-import { Spinner, Button } from '../shared';
-import { useShop } from '../store';
+import { HomeBanner, HomeCategories, HomeProducts } from 'features/Home';
+import { Spinner, Button } from 'shared';
+import { useShop } from 'store';
 import { GetServerSideProps } from 'next';
-import { BannerService, CategoryService } from '../services';
-import { Banner, Category } from '../types';
-import { useScrollRestoration } from '../hooks';
-import { MobileBottomMenu } from '../shared';
+import { BannerService, CategoryService } from 'services';
+import { Banner, Category } from 'types';
+import { useScrollRestoration } from 'hooks';
+import { MobileBottomMenu } from 'shared';
 
 interface Props {
   banners: Banner[];

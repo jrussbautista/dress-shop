@@ -12,7 +12,7 @@ interface InitialState {
   image: string | ArrayBuffer | null;
 }
 
-export const ProfileEditForm = () => {
+export const ProfileEditForm: React.FC = () => {
   const { currentUser, updateUser } = useAuth();
   const { setToast } = useToast();
 
@@ -39,11 +39,7 @@ export const ProfileEditForm = () => {
     try {
       setUpdating(true);
       const { token } = parseCookies({});
-      const { user } = await AuthService.updateProfile(
-        token,
-        currentUser?._id,
-        userInfo
-      );
+      const { user } = await AuthService.updateProfile(token, currentUser?._id, userInfo);
       updateUser(user);
       setToast('success', 'Successfully profile updated');
     } catch (error) {
@@ -64,10 +60,7 @@ export const ProfileEditForm = () => {
         return;
       }
 
-      if (
-        selectedFile.type !== 'image/png' &&
-        selectedFile.type !== 'image/jpeg'
-      ) {
+      if (selectedFile.type !== 'image/png' && selectedFile.type !== 'image/jpeg') {
         setToast('error', 'Invalid file type');
         return;
       }
@@ -79,7 +72,7 @@ export const ProfileEditForm = () => {
   };
 
   const imageChange = (file: Blob) => {
-    let reader = new FileReader();
+    const reader = new FileReader();
     reader.onloadend = () => {
       setUserInfo({ ...userInfo, image: reader.result });
     };
@@ -93,10 +86,7 @@ export const ProfileEditForm = () => {
         <div className="user-picture-container">
           <div className="user-avatar">
             {userInfo.image ? (
-              <div
-                style={{ backgroundImage: `url(${userInfo.image})` }}
-                className="image"
-              />
+              <div style={{ backgroundImage: `url(${userInfo.image})` }} className="image" />
             ) : (
               <>
                 {currentUser?.imageURL ? (
@@ -115,11 +105,7 @@ export const ProfileEditForm = () => {
             )}
           </div>
           <div className="upload-container">
-            <input
-              type="file"
-              onChange={handleChange}
-              accept="image/x-png,image/jpeg"
-            />
+            <input type="file" onChange={handleChange} accept="image/x-png,image/jpeg" />
             <Button type="button" title="Change Photo" text />
           </div>
         </div>

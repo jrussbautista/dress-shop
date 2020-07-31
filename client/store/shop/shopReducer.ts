@@ -13,9 +13,9 @@ type Action = {
   payload?: any;
 };
 
-export default (state: State, action: Action) => {
+export default (state: State, action: Action): State => {
   switch (action.type) {
-    case LOAD_PRODUCTS:
+    case LOAD_PRODUCTS: {
       const products = action.payload.products;
       const newProducts = state.products.concat(products);
       const totalProducts = action.payload.total;
@@ -28,6 +28,7 @@ export default (state: State, action: Action) => {
         hasLoadMore,
         currentPage: state.currentPage + 1,
       };
+    }
     default:
       return state;
   }

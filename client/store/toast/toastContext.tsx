@@ -13,8 +13,8 @@ const initialState = {
   isActive: false,
   type: '',
   message: '',
-  setToast: () => {},
-  removeToast: () => {},
+  setToast: () => null,
+  removeToast: () => null,
 };
 
 export const ToastContext = createContext<InitialState>(initialState);
@@ -41,4 +41,4 @@ export const ToastProvider: React.FC = ({ children }) => {
   );
 };
 
-export const useToast = () => useContext(ToastContext);
+export const useToast = (): InitialState => useContext(ToastContext);

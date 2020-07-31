@@ -1,13 +1,18 @@
 import { useEffect } from 'react';
 
-let cachedScrollPositions: any = [];
+interface IShouldRestore {
+  x: number;
+  y: number;
+}
+
+const cachedScrollPositions: any = [];
 import Router from 'next/router';
 
-export const useScrollRestoration = () => {
+export const useScrollRestoration = (): void => {
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
-      let shouldScrollRestore: any;
+      let shouldScrollRestore: IShouldRestore | null;
 
       Router.events.on('routeChangeStart', () => {
         cachedScrollPositions.push([window.scrollX, window.scrollY]);
@@ -17,7 +22,7 @@ export const useScrollRestoration = () => {
         if (shouldScrollRestore) {
           const { x, y } = shouldScrollRestore;
           window.scrollTo(x, y);
-          shouldScrollRestore = false;
+          shouldScrollRestore = null;
         }
       });
 

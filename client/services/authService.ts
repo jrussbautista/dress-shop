@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { API_URL } from '../utils/constants';
-import { User } from '../types';
-import { catchError } from '../utils/catchError';
-import { setAuthToken } from '../utils/auth';
+import { API_URL } from 'utils/constants';
+import { User } from 'types';
+import { catchError } from 'utils/catchError';
+import { setAuthToken } from 'utils/auth';
 
 interface UserData {
   user: User;
@@ -90,12 +90,16 @@ const signUp = async ({
 export const changePassword = async (
   token: string,
   passwordFields: UserPasswordData
-) => {
+): Promise<UserData> => {
   try {
     setAuthToken(token);
     const url = `${API_URL}/auth/change-password`;
-    const result = await axios.patch(url, passwordFields);
-    return result;
+    const { data } = await axios.patch(url, passwordFields);
+    const userData: UserData = {
+      user: data.data.user,
+      token: data.data.token,
+    };
+    return userData;
   } catch (error) {
     throw new Error(catchError(error));
   }
@@ -105,7 +109,7 @@ export const updateProfile = async (
   token: string,
   userId: string,
   userFields: UserFields
-) => {
+): Promise<{ user: User }> => {
   try {
     setAuthToken(token);
     const url = `${API_URL}/users/${userId}`;

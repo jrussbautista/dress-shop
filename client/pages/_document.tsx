@@ -1,11 +1,6 @@
-import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-  DocumentContext,
-} from 'next/document';
-import { PAYPAL_CLIENT_ID } from '../utils/constants';
+import React from 'react';
+import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
+import { PAYPAL_CLIENT_ID } from 'utils/constants';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -19,11 +14,7 @@ class MyDocument extends Document {
         <Head>
           <meta name="description" content="Dress Shop" />
           <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-            key="viewport"
-          />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
           <link rel="stylesheet" href="/css/nprogress.css" />
           <link
             rel="stylesheet"

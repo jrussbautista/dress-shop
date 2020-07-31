@@ -42,47 +42,45 @@ export const DesktopMenu: React.FC = () => {
             <a>
               <IoMdCart size={30} />
               Cart
-              {currentUser && cartsNum > 0 && (
-                <div className="cart-num">{cartsNum}</div>
-              )}
+              {currentUser && cartsNum > 0 && <div className="cart-num">{cartsNum}</div>}
             </a>
           </Link>
         </li>
         {currentUser ? (
           <li ref={dropdownRef}>
-            <div
+            <button
+              type="button"
               className="user"
               onClick={() => setIsOpenDropdown(!isOpenDropdown)}
             >
               {currentUser.imageURL ? (
                 <img src={currentUser.imageURL} alt={currentUser.name} />
               ) : (
-                <div className="user-text-container">
-                  {capitalizeFirstLetter(currentUser.name)}
-                </div>
+                <div className="user-text-container">{capitalizeFirstLetter(currentUser.name)}</div>
               )}
-            </div>
+            </button>
+
             {isOpenDropdown && (
-              <ul className="dropdown">
-                <li onClick={() => setIsOpenDropdown(false)}>
+              <div className="dropdown">
+                <button type="button" onClick={() => setIsOpenDropdown(false)}>
                   <Link href="/profile">
                     <a>My Profile </a>
                   </Link>
-                </li>
-                <li onClick={() => setIsOpenDropdown(false)}>
+                </button>
+                <button type="button" onClick={() => setIsOpenDropdown(false)}>
                   <Link href="/order">
                     <a>My orders</a>
                   </Link>
-                </li>
-                <li onClick={() => setIsOpenDropdown(false)}>
+                </button>
+                <button type="button" onClick={() => setIsOpenDropdown(false)}>
                   <Button
                     type="button"
                     title="Log Out"
                     onClick={logout}
                     style={{ width: '100%' }}
                   />
-                </li>
-              </ul>
+                </button>
+              </div>
             )}
           </li>
         ) : (

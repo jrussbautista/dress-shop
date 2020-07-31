@@ -10,7 +10,7 @@ interface GoogleError {
   details: string;
 }
 
-export const AuthSocial = () => {
+export const AuthSocial: React.FC = () => {
   const { setCurrentUser } = useAuth();
   const { setToast } = useToast();
 

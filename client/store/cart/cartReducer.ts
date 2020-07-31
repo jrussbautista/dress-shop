@@ -11,17 +11,15 @@ type Action = {
   payload?: any;
 };
 
-export default (state: State, action: Action) => {
+export default (state: State, action: Action): State => {
   switch (action.type) {
     case CLEAR_CART:
       return { ...state, carts: [] };
     case SET_CART:
-      return { ...state, carts: action.payload, loading: false };
-    case ADD_CART:
+      return { ...state, carts: action.payload };
+    case ADD_CART: {
       // check if new added cart is exist on cart
-      const isCartExist = state.carts.some(
-        (cart) => cart === action.payload.product._id
-      );
+      const isCartExist = state.carts.some((cart) => cart === action.payload.product._id);
 
       if (isCartExist) {
         return state;
@@ -32,12 +30,12 @@ export default (state: State, action: Action) => {
           cartsNum: state.cartsNum + 1,
         };
       }
-
-    case REMOVE_CART:
-      const filteredCarts = state.carts.filter(
-        (cart) => cart !== action.payload
-      );
+    }
+    case REMOVE_CART: {
+      const filteredCarts = state.carts.filter((cart) => cart !== action.payload);
       return { ...state, carts: filteredCarts, cartsNum: state.cartsNum - 1 };
+    }
+
     default:
       return state;
   }

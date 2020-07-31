@@ -15,7 +15,7 @@ interface ErrorData {
   message: string;
 }
 
-export const catchError = (error: ErrorData) => {
+export const catchError = (error: ErrorData): string | undefined => {
   let errorMsg: string | undefined = '';
   if (error.response) {
     errorMsg = error.response?.data?.message;

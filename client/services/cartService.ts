@@ -1,8 +1,8 @@
-import axios from "axios";
-import { API_URL } from "../utils/constants";
-import { Cart } from "../types";
-import { catchError } from "../utils/catchError";
-import { setAuthToken } from "../utils/auth";
+import axios from 'axios';
+import { API_URL } from 'utils/constants';
+import { Cart } from 'types';
+import { catchError } from 'utils/catchError';
+import { setAuthToken } from 'utils/auth';
 
 interface CartsData {
   carts: Cart[];
@@ -21,7 +21,7 @@ const fetchCarts = async (token: string): Promise<CartsData> => {
   }
 };
 
-const addCart = async (token: string, quantity: number, productId: string) => {
+const addCart = async (token: string, quantity: number, productId: string): Promise<void> => {
   try {
     setAuthToken(token);
     const url = `${API_URL}/carts`;
@@ -32,7 +32,7 @@ const addCart = async (token: string, quantity: number, productId: string) => {
   }
 };
 
-const removeCart = async (token: string, cartId: string) => {
+const removeCart = async (token: string, cartId: string): Promise<void> => {
   try {
     setAuthToken(token);
     const url = `${API_URL}/carts/${cartId}`;
@@ -42,7 +42,7 @@ const removeCart = async (token: string, cartId: string) => {
   }
 };
 
-const updateCart = async (token: string, cartId: string, quantity: number) => {
+const updateCart = async (token: string, cartId: string, quantity: number): Promise<void> => {
   try {
     setAuthToken(token);
     const url = `${API_URL}/carts/${cartId}`;

@@ -15,10 +15,7 @@ export const MobileMenu: React.FC = () => {
         >
           <FiMenu />
         </button>
-        <Sidebar
-          isOpen={isOpenSideBar}
-          onClose={() => setIsOpenSideBar(false)}
-        />
+        <Sidebar isOpen={isOpenSideBar} onClose={() => setIsOpenSideBar(false)} />
       </div>
       <style jsx>{`
         .header-item {

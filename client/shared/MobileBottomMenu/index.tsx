@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { FiHome, FiSearch, FiShoppingCart, FiUser } from 'react-icons/fi';
 import Link from 'next/link';
 import { useAuth, useCart } from '../../store';
-import { MobileSearch } from '../Layout/MobileSearch';
 
-export const MobileBottomMenu = () => {
+export const MobileBottomMenu: React.FC = () => {
   const { pathname } = useRouter();
   const { currentUser } = useAuth();
   const { cartsNum } = useCart();

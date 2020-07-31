@@ -27,10 +27,10 @@ interface Props {
 const CardSection: React.FC<Props> = ({ onChange }) => {
   return (
     <>
-      <label>
+      <div>
         <span className="label"> Card Details </span>
         <CardElement onChange={onChange} options={CARD_ELEMENT_OPTIONS} />
-      </label>
+      </div>
       <style jsx>{`
         .label {
           font-size: 1.7rem;

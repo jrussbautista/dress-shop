@@ -8,7 +8,8 @@ import {
 import { User } from '../../types';
 
 type State = {
-  currentUser: User;
+  currentUser: User | null;
+  error: null | string;
 };
 
 type Action = {
@@ -16,7 +17,7 @@ type Action = {
   payload?: any;
 };
 
-export default (state: State, action: Action) => {
+export default (state: State, action: Action): State => {
   switch (action.type) {
     case LOGOUT_USER:
       return { ...state, currentUser: null };

@@ -15,20 +15,19 @@ interface InitialStateType {
 const initialState = {
   carts: [],
   cartsNum: 0,
-  addCart: () => {},
-  removeCart: () => {},
-  clearCart: () => {},
+  addCart: () => null,
+  removeCart: () => null,
+  clearCart: () => null,
 };
 
 const CartContext = createContext<InitialStateType>(initialState);
 
-const CartProvider: React.FC = ({ children }) => {
+export const CartProvider: React.FC = ({ children }) => {
   const { currentUser } = useAuth();
 
   const initialState = {
     cartsNum: currentUser ? currentUser.carts.length : 0,
     carts: currentUser ? currentUser.carts : [],
-    myCarts: [],
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -52,6 +51,4 @@ const CartProvider: React.FC = ({ children }) => {
   );
 };
 
-const useCart = () => useContext(CartContext);
-
-export { CartProvider, useCart };
+export const useCart = (): InitialStateType => useContext(CartContext);

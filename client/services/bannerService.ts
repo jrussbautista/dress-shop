@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { API_URL } from '../utils/constants';
-import { Banner } from '../types';
-import { catchError } from '../utils/catchError';
+import { API_URL } from 'utils/constants';
+import { Banner } from 'types';
+import { catchError } from 'utils/catchError';
 
 interface BannersData {
   banners: Banner[];

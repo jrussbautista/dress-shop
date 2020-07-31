@@ -26,16 +26,26 @@ export const SearchFilter: React.FC<Props> = ({ handleChange, active }) => {
       <span className="label"> Sort by </span>
       <div className="select">
         {' '}
-        <div className="select-item" onClick={() => setOpenDropdown(!openDropdown)}>
+        <button
+          className="select-item"
+          onClick={() => setOpenDropdown(!openDropdown)}
+          type="button"
+        >
           <span>{!selected ? 'Price' : selected}</span>
           <span>
             <MdExpandMore size={24} />
           </span>
-        </div>
+        </button>
         {openDropdown && (
           <ul className="dropdown">
-            <li onClick={() => handleDropdown('price')}> Low to High </li>
-            <li onClick={() => handleDropdown('-price')}> High to Low </li>
+            <button className="item" type="button" onClick={() => handleDropdown('price')}>
+              {' '}
+              Low to High{' '}
+            </button>
+            <button className="item" type="button" onClick={() => handleDropdown('-price')}>
+              {' '}
+              High to Low{' '}
+            </button>
           </ul>
         )}
       </div>

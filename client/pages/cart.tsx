@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { CartList, CartSubTotal } from "../features/Cart";
-import { useAuth, useCart } from "../store";
-import { GetServerSideProps } from "next";
-import { CartService } from "../services";
-import { parseCookies } from "nookies";
-import { Carts, Cart as CartType } from "../types";
-import { ErrorPage, Button, Meta, MobileBottomMenu } from "../shared";
-import calculateCartTotal from "../utils/calculateCartTotal";
+import React, { useState } from 'react';
+import { CartList, CartSubTotal } from '../features/Cart';
+import { useAuth, useCart } from '../store';
+import { GetServerSideProps } from 'next';
+import { CartService } from '../services';
+import { parseCookies } from 'nookies';
+import { Carts, Cart as CartType } from '../types';
+import { ErrorPage, Button, Meta, MobileBottomMenu } from '../shared';
+import calculateCartTotal from '../utils/calculateCartTotal';
 
 interface Props extends Carts {
   error: string | null;
@@ -26,16 +26,12 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
   };
 
   const handleUpdateCartQty = async (cartId: string, quantity: number) => {
-    const newCarts = myCarts.map((cart) =>
-      cart._id === cartId ? { ...cart, quantity } : cart
-    );
+    const newCarts = myCarts.map((cart) => (cart._id === cartId ? { ...cart, quantity } : cart));
     setMyCarts(newCarts);
   };
 
   if (error) {
-    return (
-      <ErrorPage message="Error in getting carts. Please try again later." />
-    );
+    return <ErrorPage message="Error in getting carts. Please try again later." />;
   }
 
   return (
@@ -54,28 +50,20 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
                 />
                 <CartSubTotal total={Number(cartTotal)} />
                 <div className="checkout-btn-wrapper">
-                  <Button
-                    href="/checkout"
-                    title="Check Out"
-                    style={{ width: "15rem" }}
-                  />
+                  <Button href="/checkout" title="Check Out" style={{ width: '15rem' }} />
                 </div>
               </>
             ) : (
               <div className="msg-container">
                 <div className="msg"> Your cart is empty :( </div>
-                <Button
-                  href="/"
-                  title="Go Shop Now"
-                  style={{ width: "20rem" }}
-                />
+                <Button href="/" title="Go Shop Now" style={{ width: '20rem' }} />
               </div>
             )}
           </div>
         ) : (
           <div className="msg-container">
             <h1 className="page-title"> Please login to see your cart </h1>
-            <Button href="/login" title="Log In" style={{ width: "15rem" }} />
+            <Button href="/login" title="Log In" style={{ width: '15rem' }} />
           </div>
         )}
       </div>
@@ -130,14 +118,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   let carts: CartType[] = [];
-  let error: null | string = null;
+  const error: null | string = null;
+
   try {
     const { carts: myCarts } = await CartService.fetchCarts(token);
     carts = myCarts;
   } catch (error) {
     return {
       props: {
-        error: "something went wrong",
+        error: 'Something went wrong',
         carts: [],
       },
     };

@@ -9,8 +9,8 @@ interface InitialStateType {
 
 const initialState = {
   show: false,
-  openModal: () => {},
-  closeModal: () => {},
+  openModal: () => null,
+  closeModal: () => null,
 };
 
 const ModalContext = createContext<InitialStateType>(initialState);
@@ -37,4 +37,4 @@ export const ModalProvider: React.FC = ({ children }) => {
   );
 };
 
-export const useModal = () => useContext(ModalContext);
+export const useModal = (): InitialStateType => useContext(ModalContext);

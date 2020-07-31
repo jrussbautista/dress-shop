@@ -28,11 +28,7 @@ export const Button: React.FC<Props> = ({
     <>
       {href ? (
         <Link href={href}>
-          <a
-            role="button"
-            className={`btn ${variant ? variant : ''}`}
-            style={style}
-          >
+          <a role="button" className={`btn ${variant ? variant : ''}`} style={style}>
             {title}
           </a>
         </Link>

@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface Props {
   active: string;
   onChangeTab(active: string): void;
@@ -5,18 +7,23 @@ interface Props {
 
 export const SearchTabCategory: React.FC<Props> = ({ active, onChangeTab }) => {
   return (
-    <div>
-      <ul className="tab">
-        <li className={`${active === 'men' ? 'active' : ''}`} onClick={() => onChangeTab('men')}>
+    <>
+      <div className="tab">
+        <button
+          type="button"
+          className={`list ${active === 'men' ? 'active' : ''}`}
+          onClick={() => onChangeTab('men')}
+        >
           Men
-        </li>
-        <li
-          className={`${active === 'women' ? 'active' : ''}`}
+        </button>
+        <button
+          type="button"
+          className={`list ${active === 'women' ? 'active' : ''}`}
           onClick={() => onChangeTab('women')}
         >
           Women
-        </li>
-      </ul>
+        </button>
+      </div>
       <style>
         {`
 
@@ -25,7 +32,7 @@ export const SearchTabCategory: React.FC<Props> = ({ active, onChangeTab }) => {
             align-items: center;
         }
 
-        .tab li {
+        .tab .list {
             padding: 1rem 5rem;
             text-align: center;
             font-size: 2.2rem;
@@ -44,6 +51,6 @@ export const SearchTabCategory: React.FC<Props> = ({ active, onChangeTab }) => {
             
             `}
       </style>
-    </div>
+    </>
   );
 };

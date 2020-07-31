@@ -1,11 +1,11 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { OrderList } from '../features/Order';
-import { Meta } from '../shared';
-import { Order as OrderType } from '../types';
-import { OrderService } from '../services/orderService';
+import { OrderList } from 'features/Order';
+import { Meta } from 'shared';
+import { Order as OrderType } from 'types';
+import { OrderService } from 'services/orderService';
 import { parseCookies } from 'nookies';
-import { ErrorPage } from '../shared';
+import { ErrorPage } from 'shared';
 
 type Orders = OrderType[];
 

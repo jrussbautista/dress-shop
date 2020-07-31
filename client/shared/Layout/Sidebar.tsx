@@ -26,24 +26,24 @@ export const Sidebar: React.FC<Props> = ({ isOpen, onClose }) => {
         <div className="title">
           <span> Dress </span>
         </div>
-        <div className="list" onClick={handleClose}>
+        <button className="list" type="button" onClick={handleClose}>
           <Link href="/">
             <a className="link">Home</a>
           </Link>
-        </div>
+        </button>
         <div className="title">
           <span> Categories </span>
         </div>
-        <div className="list" onClick={handleClose}>
+        <button type="button" className="list" onClick={handleClose}>
           <Link href="/search?category=men">
             <a className="link">Men</a>
           </Link>
-        </div>
-        <div className="list" onClick={handleClose}>
+        </button>
+        <button type="button" className="list" onClick={handleClose}>
           <Link href="/search?category=women">
             <a className="link">Women</a>
           </Link>
-        </div>
+        </button>
         {currentUser && (
           <div className="list">
             <Button
@@ -56,7 +56,15 @@ export const Sidebar: React.FC<Props> = ({ isOpen, onClose }) => {
         )}
       </div>
 
-      {isOpen && <div className="overlay" onClick={onClose}></div>}
+      {isOpen && (
+        <div
+          className="overlay"
+          role="button"
+          tabIndex={-1}
+          onClick={onClose}
+          onKeyDown={onClose}
+        ></div>
+      )}
       <style jsx>{`
         .sidebar {
           width: 40%;

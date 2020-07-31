@@ -16,30 +16,28 @@ type ProviderProps = {
 
 const ProviderComposer: React.FC<ProviderProps> = ({ contexts, children }) =>
   contexts.reduceRight(
-    (kids: React.ReactNode, parent: any) =>
+    (
+      kids: React.ReactNode,
+      parent: React.DetailedReactHTMLElement<{ children: React.ReactNode }, HTMLElement>
+    ) =>
       React.cloneElement(parent, {
         children: kids,
       }),
     children
   );
 
-const StoreProvider: React.FC<InitialStateProps> = ({
-  children,
-  currentUser,
-}) => {
+export const StoreProvider: React.FC<InitialStateProps> = ({ children, currentUser }) => {
   return (
     <ProviderComposer
       contexts={[
-        <AuthProvider currentUser={currentUser} />,
-        <CartProvider />,
-        <ModalProvider />,
-        <ShopProvider />,
-        <ToastProvider />,
+        <AuthProvider currentUser={currentUser} key="1" />,
+        <CartProvider key="2" />,
+        <ModalProvider key="3" />,
+        <ShopProvider key="4" />,
+        <ToastProvider key="5" />,
       ]}
     >
       {children}
     </ProviderComposer>
   );
 };
-
-export { StoreProvider };

@@ -6,7 +6,7 @@ interface Props {
   height: number;
 }
 
-export const Spinner: React.FC<Props> = ({ color, width, height }) => {
+export const Spinner: React.FC<Props> = ({ color, width }) => {
   return (
     <>
       <div className="lds-ring">

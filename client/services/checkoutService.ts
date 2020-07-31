@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { API_URL } from '../utils/constants';
-import { catchError } from '../utils/catchError';
-import { setAuthToken } from '../utils/auth';
+import { API_URL } from 'utils/constants';
+import { catchError } from 'utils/catchError';
+import { setAuthToken } from 'utils/auth';
 
 interface IntentPayment {
   clientSecret: string;
@@ -25,7 +25,7 @@ const createPaymentIntent = async (token: string): Promise<IntentPayment> => {
   }
 };
 
-export const createPaypalTransaction = async (token: string) => {
+export const createPaypalTransaction = async (token: string): Promise<PaypalTransaction> => {
   try {
     setAuthToken(token);
     const url = `${API_URL}/checkout/create-paypal-transaction`;
@@ -41,10 +41,7 @@ export const createPaypalTransaction = async (token: string) => {
   }
 };
 
-export const capturePaypalTransaction = async (
-  token: string,
-  orderID: string
-) => {
+export const capturePaypalTransaction = async (token: string, orderID: string): Promise<void> => {
   try {
     setAuthToken(token);
     const url = `${API_URL}/checkout/capture-paypal-transaction`;

@@ -1,19 +1,21 @@
 import axios from 'axios';
-import { API_URL } from '../utils/constants';
-import { Product } from '../types';
-import { catchError } from '../utils/catchError';
+import { API_URL } from 'utils/constants';
+import { Product } from 'types';
+import { catchError } from 'utils/catchError';
 
-type ProductsData = {
+interface ProductsData {
   products: Product[];
   total: number;
-};
+}
 
-type ProductData = {
+interface ProductData {
   product: Product;
   relatedProducts: Product[];
-};
+}
 
-const fetchProducts = async (payload?: Object): Promise<ProductsData> => {
+type ProductPayload = { params: unknown };
+
+const fetchProducts = async (payload?: ProductPayload): Promise<ProductsData> => {
   try {
     const url = `${API_URL}/products`;
     const { data } = await axios.get(url, payload);

@@ -9,6 +9,7 @@ import reducer from './authReducer';
 
 interface InitialStateType {
   currentUser: User | null;
+  error: null | string;
   logout(): void;
   setCurrentUser(user: User, token: string): void;
   updateUser(user: User): void;
@@ -18,11 +19,12 @@ interface InitialStateType {
 
 const initialState = {
   currentUser: null,
-  logout: () => {},
-  login: () => {},
-  signUp: () => {},
-  setCurrentUser: () => {},
-  updateUser: () => {},
+  error: null,
+  logout: () => null,
+  login: () => null,
+  signUp: () => null,
+  setCurrentUser: () => null,
+  updateUser: () => null,
 };
 
 const AuthContext = createContext<InitialStateType>(initialState);
@@ -31,9 +33,10 @@ type Props = {
   currentUser: User | null;
 };
 
-const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
+export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
   const initialState = {
     currentUser,
+    error: null,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -45,22 +48,24 @@ const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
     autoLogin(token, url);
   };
 
-  const login = async (email: string, password: string) => {
-    try {
-      const { user, token } = await AuthService.login(email, password);
-      setCurrentUser(user, token);
-    } catch (error) {
-      throw error;
-    }
+  const login = (email: string, password: string) => {
+    AuthService.login(email, password)
+      .then(({ user, token }) => {
+        setCurrentUser(user, token);
+      })
+      .catch((error) => {
+        throw error;
+      });
   };
 
-  const signUp = async (userFields: UserFields) => {
-    try {
-      const { user, token } = await AuthService.signUp(userFields);
-      setCurrentUser(user, token);
-    } catch (error) {
-      throw error;
-    }
+  const signUp = (userFields: UserFields) => {
+    AuthService.signUp(userFields)
+      .then(({ user, token }) => {
+        setCurrentUser(user, token);
+      })
+      .catch((error) => {
+        throw error;
+      });
   };
 
   const logout = () => {
@@ -74,14 +79,10 @@ const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
   };
 
   return (
-    <AuthContext.Provider
-      value={{ ...state, setCurrentUser, logout, updateUser, login, signUp }}
-    >
+    <AuthContext.Provider value={{ ...state, setCurrentUser, logout, updateUser, login, signUp }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-const useAuth = () => useContext(AuthContext);
-
-export { AuthProvider, useAuth };
+export const useAuth = (): InitialStateType => useContext(AuthContext);

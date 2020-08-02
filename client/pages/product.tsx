@@ -1,7 +1,7 @@
 import Router from 'next/router';
 import React, { useState } from 'react';
-import { ProductInfo, ProductRecommended } from 'features/Product';
-import { PopUp, Meta, MobileBottomMenu, InputQuantity } from 'shared';
+import { ProductInfo, ProductRecommended } from 'components/domain/Product';
+import { PopUp, Meta, MobileBottomMenu, InputQuantity } from 'components/shared';
 import { usePopUp } from 'hooks';
 import { useAuth, useCart, useToast } from 'store';
 import { Product as ProductTypes, AddCart } from 'types';
@@ -9,7 +9,7 @@ import { GetServerSideProps } from 'next';
 import { ProductService } from 'services/productService';
 import { CartService } from 'services';
 import { parseCookies } from 'nookies';
-import { ErrorPage, Button } from 'shared';
+import { ErrorPage, Button } from 'components/shared';
 
 interface Props {
   product: ProductTypes;

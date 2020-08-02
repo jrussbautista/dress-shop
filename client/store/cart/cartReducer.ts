@@ -1,8 +1,7 @@
 import { ADD_CART, REMOVE_CART, SET_CART, CLEAR_CART } from './cartTypes';
-import { Cart } from '../../types';
 
 type State = {
-  carts: Cart[];
+  carts: string[];
   cartsNum: number;
 };
 

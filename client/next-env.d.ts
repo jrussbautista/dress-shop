@@ -1,4 +1,4 @@
 interface Window {
-  GA_INITIALIZED: Object;
+  GA_INITIALIZED: any;
   paypal: any;
 }

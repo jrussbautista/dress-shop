@@ -1,7 +1,7 @@
 import Router, { useRouter } from 'next/router';
 import React from 'react';
-import { SearchFilter, SearchTabCategory, SearchProducts } from 'features/Search';
-import { Meta, MobileBottomMenu, SearchBar } from 'shared';
+import { SearchFilter, SearchTabCategory, SearchProducts } from 'components/domain/Search';
+import { Meta, MobileBottomMenu, SearchBar } from 'components/shared';
 
 const Search: React.FC = () => {
   const { query, pathname } = useRouter();

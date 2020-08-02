@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { CartList, CartSubTotal } from '../features/Cart';
-import { useAuth, useCart } from '../store';
+import { CartList, CartSubTotal } from 'components/domain/Cart';
+import { useAuth, useCart } from 'store';
 import { GetServerSideProps } from 'next';
-import { CartService } from '../services';
+import { CartService } from 'services';
 import { parseCookies } from 'nookies';
-import { Carts, Cart as CartType } from '../types';
-import { ErrorPage, Button, Meta, MobileBottomMenu } from '../shared';
-import calculateCartTotal from '../utils/calculateCartTotal';
+import { Carts, Cart as CartType } from 'types';
+import { ErrorPage, Button, Meta, MobileBottomMenu } from 'components/shared';
+import calculateCartTotal from 'utils/calculateCartTotal';
 
 interface Props extends Carts {
   error: string | null;

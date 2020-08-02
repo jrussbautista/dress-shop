@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { LoginForm, SignUpForm, AuthSocial } from 'features/Auth';
-import { AuthLink } from 'features/Auth/AuthLink';
-import { MobileBottomMenu } from 'shared';
+import { LoginForm, SignUpForm, AuthSocial } from 'components/domain/Auth';
+import { AuthLink } from 'components/domain/Auth';
+import { MobileBottomMenu } from 'components/shared';
 
 const Auth: React.FC = () => {
   const { query } = useRouter();

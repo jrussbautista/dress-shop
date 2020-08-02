@@ -2,14 +2,14 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
 import { Cart } from '../types';
-import { CheckOutList, CheckOutPaypal, CheckoutStripeForm } from '../features/CheckOut';
-import { CartService } from '../services';
-import { getCurrency } from '../utils/helpers';
+import { CheckOutList, CheckOutPaypal, CheckoutStripeForm } from 'components/domain/CheckOut';
+import { CartService } from 'services';
+import { getCurrency } from 'utils/helpers';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { STRIPE_CLIENT_KEY } from '../utils/constants';
-import calculateCartTotal from '../utils/calculateCartTotal';
-import { Meta, ErrorPage } from '../shared';
+import { STRIPE_CLIENT_KEY } from 'utils/constants';
+import calculateCartTotal from 'utils/calculateCartTotal';
+import { Meta, ErrorPage } from 'components/shared';
 
 interface Props {
   carts: Cart[];

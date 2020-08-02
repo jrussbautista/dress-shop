@@ -4,7 +4,7 @@ import { StoreProvider } from 'store';
 import { parseCookies, destroyCookie } from 'nookies';
 import { checkProtectedRoutes } from 'utils/auth';
 import { AuthService } from 'services/authService';
-import { Layout } from 'shared';
+import { Layout } from 'components/shared';
 import { User } from 'types';
 import 'styles/global.css';
 
@@ -12,7 +12,7 @@ interface MyAppProps extends AppProps {
   currentUser: User | null;
 }
 
-const MyApp = ({ Component, pageProps, currentUser }: MyAppProps) => {
+const MyApp = ({ Component, pageProps, currentUser }: MyAppProps): JSX.Element => {
   return (
     <StoreProvider currentUser={currentUser}>
       <Layout>

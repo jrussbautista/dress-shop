@@ -3,9 +3,11 @@ import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/do
 import { PAYPAL_CLIENT_ID } from 'utils/constants';
 
 class MyDocument extends Document {
+  /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+
+    return initialProps;
   }
 
   render() {

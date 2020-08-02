@@ -1,8 +1,8 @@
 import React, { createContext, useReducer, useContext } from 'react';
 import { LOAD_PRODUCTS } from './shopTypes';
-import { ProductService } from '../../services/productService';
-import { Product } from '../../types';
-import { PAGE_LIMIT } from '../../utils/constants';
+import { ProductService } from 'services/productService';
+import { Product } from 'types';
+import { PAGE_LIMIT } from 'utils/constants';
 import reducer from './shopReducer';
 
 interface InitialStateType {

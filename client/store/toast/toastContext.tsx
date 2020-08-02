@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { Toast } from '../../shared';
+import { Toast } from 'components/shared';
 
 interface InitialState {
   isActive: boolean;

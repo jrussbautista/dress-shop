@@ -1,13 +1,14 @@
-import { Request, Response } from 'express';
-import { Cart, User, Order } from '../models';
-import { User as UserType } from '../types';
-import { createPaymentIntent as stripeCreatePaymentIntent } from '../lib/stripe';
-const paypal = require('@paypal/checkout-server-sdk');
-import { client } from '../lib/paypal';
+import { Request, Response } from "express";
+import { Cart, User, Order } from "../models";
+import { User as UserType } from "../types";
+import { createPaymentIntent as stripeCreatePaymentIntent } from "../lib/stripe";
+import mongoose from "mongoose";
+const paypal = require("@paypal/checkout-server-sdk");
+import { client } from "../lib/paypal";
 
 const getCarts = async (req: Request) => {
   const user = req.user as UserType;
-  return await Cart.find({ user: user._id }).populate('product');
+  return await Cart.find({ user: user._id }).populate("product");
 };
 
 const calculateCartTotal = async (req: Request): Promise<number> => {
@@ -35,6 +36,12 @@ const createOrder = async (userId: string, amount: number) => {
       carts: [],
     }
   );
+
+  await Cart.remove({
+    _id: {
+      $in: carts.map((cart) => mongoose.Types.ObjectId(cart._id.toString())),
+    },
+  });
 };
 
 // send client secret to client
@@ -60,14 +67,14 @@ export const triggerWebhook = async (req: Request, res: Response) => {
   const event = req.body;
   // Handle the event
   switch (event.type) {
-    case 'payment_intent.succeeded':
+    case "payment_intent.succeeded":
       const paymentIntent = event.data.object;
 
       const user = await User.findOne({ email: paymentIntent.receipt_email });
       const amount = paymentIntent.amount / 100;
 
       await createOrder(user?._id, amount);
-      console.log('PaymentIntent was successful!');
+      console.log("PaymentIntent was successful!");
       break;
     default:
       // Unexpected event type
@@ -81,13 +88,13 @@ export const triggerWebhook = async (req: Request, res: Response) => {
 export const createPaypalTransaction = async (req: Request, res: Response) => {
   const total = await calculateCartTotal(req);
   const request = new paypal.orders.OrdersCreateRequest();
-  request.prefer('return=representation');
+  request.prefer("return=representation");
   request.requestBody({
-    intent: 'CAPTURE',
+    intent: "CAPTURE",
     purchase_units: [
       {
         amount: {
-          currency_code: 'PHP',
+          currency_code: "PHP",
           value: total,
         },
       },

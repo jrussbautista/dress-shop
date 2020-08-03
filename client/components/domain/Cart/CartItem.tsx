@@ -23,7 +23,7 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
 
   const total = getCurrency(parseFloat((cart.product.price * cart.quantity).toFixed(2)));
 
-  const handleRemoveCartAsync = async () => {
+  const handleRemoveCart = async () => {
     try {
       await CartService.removeCart(token, cart._id);
       removeCart(cart._id, cart.product._id);
@@ -113,7 +113,7 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
           </div>
           <div className="total product-content">{total}</div>
           <div className="product-action">
-            <button className="btn-cart-action" onClick={handleRemoveCartAsync}>
+            <button className="btn-cart-action" onClick={handleRemoveCart}>
               Delete
             </button>
           </div>

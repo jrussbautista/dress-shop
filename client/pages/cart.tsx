@@ -19,7 +19,7 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
   const [myCarts, setMyCarts] = useState(carts);
   const { cartTotal } = calculateCartTotal(myCarts);
 
-  const handleRemoveCart = async (cartId: string, productId: string) => {
+  const handleRemoveCart = (cartId: string, productId: string) => {
     const filterCarts = myCarts.filter((cart) => cart._id !== cartId);
     setMyCarts(filterCarts);
     removeCart(productId);

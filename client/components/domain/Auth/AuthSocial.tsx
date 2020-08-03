@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, IconGoogle } from 'components/shared';
+import React, { useState } from 'react';
+import { Button, IconGoogle, PageLoader } from 'components/shared';
 import { GoogleLogin } from 'react-google-login';
 import { GOOGLE_CLIENT_ID } from 'utils/constants';
 import { AuthService } from 'services';
@@ -11,16 +11,20 @@ interface GoogleError {
 }
 
 export const AuthSocial: React.FC = () => {
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const { setCurrentUser } = useAuth();
   const { setToast } = useToast();
 
   const handleOnSuccess = async (response: any): Promise<void> => {
     try {
+      setIsLoggingIn(true);
       const tokenId = response.tokenId;
       const { user, token } = await AuthService.verifyGoogleIdToken(tokenId);
       setCurrentUser(user, token);
     } catch (error) {
       setToast('error', error.message);
+    } finally {
+      setIsLoggingIn(false);
     }
   };
 
@@ -31,6 +35,7 @@ export const AuthSocial: React.FC = () => {
 
   return (
     <>
+      {isLoggingIn && <PageLoader />}
       <div className="container">
         <GoogleLogin
           clientId={GOOGLE_CLIENT_ID}

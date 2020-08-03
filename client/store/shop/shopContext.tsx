@@ -16,7 +16,7 @@ interface InitialStateType {
 const initialState = {
   products: [],
   isLoading: true,
-  hasLoadMore: false,
+  hasLoadMore: true,
   currentPage: 1,
   loadProducts: () => null,
 };

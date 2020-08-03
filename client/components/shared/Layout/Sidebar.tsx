@@ -26,24 +26,42 @@ export const Sidebar: React.FC<Props> = ({ isOpen, onClose }) => {
         <div className="title">
           <span> Dress </span>
         </div>
-        <button className="list" type="button" onClick={handleClose}>
+        <div
+          className="list"
+          role="link"
+          tabIndex={-1}
+          onClick={handleClose}
+          onKeyDown={handleClose}
+        >
           <Link href="/">
             <a className="link">Home</a>
           </Link>
-        </button>
+        </div>
         <div className="title">
           <span> Categories </span>
         </div>
-        <button type="button" className="list" onClick={handleClose}>
+        <div
+          className="list"
+          role="link"
+          tabIndex={-1}
+          onClick={handleClose}
+          onKeyDown={handleClose}
+        >
           <Link href="/search?category=men">
             <a className="link">Men</a>
           </Link>
-        </button>
-        <button type="button" className="list" onClick={handleClose}>
+        </div>
+        <div
+          className="list"
+          role="link"
+          tabIndex={-1}
+          onClick={handleClose}
+          onKeyDown={handleClose}
+        >
           <Link href="/search?category=women">
             <a className="link">Women</a>
           </Link>
-        </button>
+        </div>
         {currentUser && (
           <div className="list">
             <Button

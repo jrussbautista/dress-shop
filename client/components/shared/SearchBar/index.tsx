@@ -19,6 +19,7 @@ export const SearchBar: React.FC<Props> = ({ onSubmit, style, isFocus }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!searchText.trim().length) return;
     onSubmit(searchText);
   };
 

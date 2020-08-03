@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface PopUp {
   isOpen: boolean;
@@ -9,15 +9,20 @@ interface PopUp {
 export const usePopUp = (): PopUp => {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsOpen(false);
+    }, 3000);
+    // clear time out when component unmount
+    return () => clearTimeout(timeout);
+  }, [isOpen]);
+
   function toggle() {
     setIsOpen(!isOpen);
   }
 
   function showToast() {
     setIsOpen(true);
-    setTimeout(() => {
-      setIsOpen(false);
-    }, 3000);
   }
 
   return { isOpen, showToast, toggle };

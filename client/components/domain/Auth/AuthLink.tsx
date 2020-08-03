@@ -10,7 +10,7 @@ export const AuthLink: React.FC<Props> = ({ type }) => {
     <>
       {type === 'login' ? (
         <div className="link">
-          Don`lsquo`t have an account?
+          Don{`'`}t have an account?
           <Link href="/auth?type=register">
             <a className="link link-text"> Create an account.</a>
           </Link>

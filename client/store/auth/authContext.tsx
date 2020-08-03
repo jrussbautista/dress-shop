@@ -2,9 +2,8 @@ import Router, { useRouter } from 'next/router';
 import React, { createContext, useContext, useReducer } from 'react';
 import { autoLogin } from 'utils/auth';
 import { LOGOUT_USER, SET_CURRENT_USER, UPDATE_USER } from './authTypes';
-import { User, UserFields } from 'types';
+import { User } from 'types';
 import { destroyCookie } from 'nookies';
-import { AuthService } from 'services';
 import reducer from './authReducer';
 
 interface InitialStateType {
@@ -13,16 +12,12 @@ interface InitialStateType {
   logout(): void;
   setCurrentUser(user: User, token: string): void;
   updateUser(user: User): void;
-  login(email: string, password: string): void;
-  signUp(userFields: UserFields): void;
 }
 
 const initialState = {
   currentUser: null,
   error: null,
   logout: () => null,
-  login: () => null,
-  signUp: () => null,
   setCurrentUser: () => null,
   updateUser: () => null,
 };
@@ -48,26 +43,6 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
     autoLogin(token, url);
   };
 
-  const login = (email: string, password: string) => {
-    AuthService.login(email, password)
-      .then(({ user, token }) => {
-        setCurrentUser(user, token);
-      })
-      .catch((error) => {
-        throw error;
-      });
-  };
-
-  const signUp = (userFields: UserFields) => {
-    AuthService.signUp(userFields)
-      .then(({ user, token }) => {
-        setCurrentUser(user, token);
-      })
-      .catch((error) => {
-        throw error;
-      });
-  };
-
   const logout = () => {
     destroyCookie({}, 'token');
     Router.push('/auth?type=login');
@@ -79,7 +54,7 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ ...state, setCurrentUser, logout, updateUser, login, signUp }}>
+    <AuthContext.Provider value={{ ...state, setCurrentUser, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

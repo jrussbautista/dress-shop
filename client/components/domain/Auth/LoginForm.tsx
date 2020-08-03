@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Meta, Button, PageLoader } from 'components/shared';
 import { useAuth, useToast } from 'store';
+import { AuthService } from 'services';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Password is required').min(6),
@@ -10,7 +11,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 export const LoginForm: React.FC = () => {
-  const { login } = useAuth();
+  const { setCurrentUser } = useAuth();
 
   const { setToast } = useToast();
 
@@ -28,15 +29,15 @@ export const LoginForm: React.FC = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={LoginSchema}
-        onSubmit={async ({ email, password }) => {
-          try {
-            setSubmitting(true);
-            await login(email, password);
-          } catch (error) {
-            setToast('error', error.message);
-          } finally {
-            setSubmitting(false);
-          }
+        onSubmit={({ email, password }) => {
+          AuthService.login(email, password)
+            .then(({ user, token }) => {
+              setCurrentUser(user, token);
+            })
+            .catch((error) => {
+              setToast('error', error.message);
+            })
+            .finally(() => setSubmitting(false));
         }}
       >
         {({ errors, touched, handleChange, handleSubmit, values }) => (
@@ -97,13 +98,6 @@ export const LoginForm: React.FC = () => {
             margin: 0 auto;
           }
 
-          @media only screen and (max-width: 600px) {
-            .auth-form {
-              width: 100%;
-              padding: 2rem;
-            }
-          }
-
           .auth-form .input {
             width: 100%;
             height: 5rem;
@@ -128,6 +122,12 @@ export const LoginForm: React.FC = () => {
 
           .auth-form .input-error {
             border-bottom: 1px solid red;
+          }
+
+          @media only screen and (max-width: 600px) {
+            .auth-form {
+              width: 100%;
+            }
           }
         `}
       </style>

@@ -1,7 +1,6 @@
-import axios from 'axios';
-import { API_URL } from 'utils/constants';
 import { Category } from 'types';
 import { catchError } from 'utils/catchError';
+import apiClient from 'api/apiClient';
 
 interface CategoriesData {
   categories: Category[];
@@ -9,7 +8,7 @@ interface CategoriesData {
 
 const getCategories = async (): Promise<CategoriesData> => {
   try {
-    const { data } = await axios.get(`${API_URL}/categories`);
+    const { data } = await apiClient.get(`/categories`);
 
     const categoriesData: CategoriesData = {
       categories: data.data.categories,

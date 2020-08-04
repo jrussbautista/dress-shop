@@ -4,7 +4,7 @@ import { parseCookies } from 'nookies';
 import { Cart } from '../types';
 import { CheckOutList, CheckOutPaypal, CheckoutStripeForm } from 'components/domain/CheckOut';
 import { CartService } from 'services';
-import { getCurrency } from 'utils/helpers';
+import { formatPrice } from 'utils/helpers';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { STRIPE_CLIENT_KEY } from 'utils/constants';
@@ -35,11 +35,11 @@ const Checkout: React.FC<Props> = ({ carts, error }) => {
               <div className="payment-wrapper">
                 <div className="list">
                   <div className="label"> Sub Total </div>
-                  <div className="item"> {getCurrency(cartTotal)} </div>
+                  <div className="item"> {formatPrice(cartTotal)} </div>
                 </div>
                 <div className="list">
                   <div className="label"> Total </div>
-                  <div className="item total">{getCurrency(cartTotal)}</div>
+                  <div className="item total">{formatPrice(cartTotal)}</div>
                 </div>
               </div>
             </div>

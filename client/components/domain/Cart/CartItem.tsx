@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getCurrency } from 'utils/helpers';
+import { formatPrice } from 'utils/helpers';
 import Link from 'next/link';
 import { Cart } from 'types';
 import { useToast } from 'store';
@@ -21,7 +21,7 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
   const [qty, setQty] = useState<string | number>(cart.quantity);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const total = getCurrency(parseFloat((cart.product.price * cart.quantity).toFixed(2)));
+  const total = formatPrice(parseFloat((cart.product.price * cart.quantity).toFixed(2)));
 
   const handleRemoveCart = async () => {
     try {
@@ -99,7 +99,7 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
             </Link>
           </div>
 
-          <div className="product-price product-content">{getCurrency(cart.product.price)}</div>
+          <div className="product-price product-content">{formatPrice(cart.product.price)}</div>
           <div className="product-qty product-content">
             <div className="qty-container">
               <InputQuantity

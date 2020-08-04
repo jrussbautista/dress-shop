@@ -1,6 +1,6 @@
 import React from 'react';
 import { Cart } from 'types';
-import { getCurrency } from 'utils/helpers';
+import { formatPrice } from 'utils/helpers';
 
 interface Props {
   items: Cart[];
@@ -23,10 +23,10 @@ export const CheckOutList: React.FC<Props> = ({ items }) => {
                 <div className="qty">{item.quantity}</div>
               </div>
               <div className="content">
-                <div className="price">{getCurrency(item.product.price)}</div>
+                <div className="price">{formatPrice(item.product.price)}</div>
               </div>
               <div className="content" style={{ textAlign: 'right' }}>
-                <div className="order-total">{getCurrency(item.product.price * item.quantity)}</div>
+                <div className="order-total">{formatPrice(item.product.price * item.quantity)}</div>
               </div>
             </div>
           </div>

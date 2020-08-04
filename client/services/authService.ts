@@ -1,8 +1,7 @@
-import axios from 'axios';
-import { API_URL } from 'utils/constants';
 import { User } from 'types';
 import { catchError } from 'utils/catchError';
 import { setAuthToken } from 'utils/auth';
+import apiClient from 'api/apiClient';
 
 interface UserData {
   user: User;
@@ -24,7 +23,7 @@ interface UserFields {
 const getMe = async (token: string): Promise<UserData> => {
   setAuthToken(token);
   try {
-    const { data } = await axios.get(`${API_URL}/auth/me`);
+    const { data } = await apiClient.get(`/auth/me`);
 
     const userData: UserData = {
       token: data.data.token,
@@ -39,8 +38,8 @@ const getMe = async (token: string): Promise<UserData> => {
 
 const verifyGoogleIdToken = async (idToken: string): Promise<UserData> => {
   try {
-    const url = `${API_URL}/auth/google`;
-    const { data } = await axios.post(url, { idToken });
+    const url = `/auth/google`;
+    const { data } = await apiClient.post(url, { idToken });
     const userData: UserData = {
       user: data.data.user,
       token: data.data.token,
@@ -53,8 +52,8 @@ const verifyGoogleIdToken = async (idToken: string): Promise<UserData> => {
 
 const login = async (email: string, password: string): Promise<UserData> => {
   try {
-    const url = `${API_URL}/auth/login`;
-    const { data } = await axios.post(url, { email, password });
+    const url = `/auth/login`;
+    const { data } = await apiClient.post(url, { email, password });
     const userData: UserData = {
       user: data.data.user,
       token: data.data.token,
@@ -75,8 +74,8 @@ const signUp = async ({
   name: string;
 }): Promise<UserData> => {
   try {
-    const url = `${API_URL}/auth/signUp`;
-    const { data } = await axios.post(url, { email, password, name });
+    const url = `/auth/signUp`;
+    const { data } = await apiClient.post(url, { email, password, name });
     const userData: UserData = {
       user: data.data.user,
       token: data.data.token,
@@ -93,8 +92,8 @@ export const changePassword = async (
 ): Promise<UserData> => {
   try {
     setAuthToken(token);
-    const url = `${API_URL}/auth/change-password`;
-    const { data } = await axios.patch(url, passwordFields);
+    const url = `/auth/change-password`;
+    const { data } = await apiClient.patch(url, passwordFields);
     const userData: UserData = {
       user: data.data.user,
       token: data.data.token,
@@ -112,8 +111,8 @@ export const updateProfile = async (
 ): Promise<{ user: User }> => {
   try {
     setAuthToken(token);
-    const url = `${API_URL}/users/${userId}`;
-    const { data } = await axios.patch(url, userFields, {
+    const url = `/users/${userId}`;
+    const { data } = await apiClient.patch(url, userFields, {
       params: { id: userId },
     });
 

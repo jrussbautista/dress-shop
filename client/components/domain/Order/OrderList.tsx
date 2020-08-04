@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { formatDate, getCurrency } from 'utils/helpers';
+import { formatDate, formatPrice } from 'utils/helpers';
 import { Order } from 'types';
 
 interface Props {
@@ -45,7 +45,7 @@ export const OrderList: React.FC<Props> = ({ orders }) => {
                             <div className="product-quantity">x {product.quantity}</div>
                           </div>
                           <div className="product-price">
-                            {getCurrency(product.product.price * product.quantity)}
+                            {formatPrice(product.product.price * product.quantity)}
                           </div>
                         </div>
                       </div>
@@ -54,7 +54,7 @@ export const OrderList: React.FC<Props> = ({ orders }) => {
                 </div>
                 <div className="order-bottom">
                   <span className="total-text">Order Total:</span>
-                  <span className="total-price">{getCurrency(order.total)}</span>
+                  <span className="total-price">{formatPrice(order.total)}</span>
                 </div>
               </div>
             </li>

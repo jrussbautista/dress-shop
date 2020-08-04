@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { API_URL } from 'utils/constants';
+import apiClient from 'api/apiClient';
 import { Banner } from 'types';
 import { catchError } from 'utils/catchError';
 
@@ -9,7 +8,7 @@ interface BannersData {
 
 const getBanners = async (): Promise<BannersData> => {
   try {
-    const { data } = await axios.get(`${API_URL}/banners`);
+    const { data } = await apiClient.get(`/banners`);
 
     const bannersData: BannersData = {
       banners: data.data.banners,

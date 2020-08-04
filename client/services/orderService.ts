@@ -1,8 +1,7 @@
-import axios from 'axios';
-import { API_URL } from 'utils/constants';
 import { Order } from 'types';
 import { catchError } from 'utils/catchError';
 import { setAuthToken } from 'utils/auth';
+import apiClient from 'api/apiClient';
 
 interface OrdersData {
   orders: Order[];
@@ -11,7 +10,7 @@ interface OrdersData {
 const fetchOrders = async (token: string): Promise<OrdersData> => {
   try {
     setAuthToken(token);
-    const { data } = await axios.get(`${API_URL}/orders`, {
+    const { data } = await apiClient.get('/orders', {
       params: { token },
     });
 

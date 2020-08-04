@@ -2,7 +2,7 @@ export const capitalizeFirstLetter = (word: string): string => {
   return word.charAt(0).toUpperCase();
 };
 
-export const getCurrency = (price: number): string => {
+export const formatPrice = (price: number): string => {
   return `P${price}`;
 };
 

@@ -1,7 +1,6 @@
-import axios from 'axios';
-import { API_URL } from 'utils/constants';
 import { Product } from 'types';
 import { catchError } from 'utils/catchError';
+import apiClient from 'api/apiClient';
 
 interface ProductsData {
   products: Product[];
@@ -17,8 +16,8 @@ type ProductPayload = { params: unknown };
 
 const fetchProducts = async (payload?: ProductPayload): Promise<ProductsData> => {
   try {
-    const url = `${API_URL}/products`;
-    const { data } = await axios.get(url, payload);
+    const url = `/products`;
+    const { data } = await apiClient.get(url, payload);
 
     const productsData: ProductsData = {
       products: data.data.products,
@@ -32,8 +31,8 @@ const fetchProducts = async (payload?: ProductPayload): Promise<ProductsData> =>
 
 export const fetchProduct = async (id: string): Promise<ProductData> => {
   try {
-    const url = `${API_URL}/products/${id}`;
-    const { data } = await axios.get(url);
+    const url = `/products/${id}`;
+    const { data } = await apiClient.get(url);
 
     const productData: ProductData = {
       product: data.data.product,

@@ -1,8 +1,7 @@
-import axios from 'axios';
-import { API_URL } from 'utils/constants';
 import { Cart } from 'types';
 import { catchError } from 'utils/catchError';
 import { setAuthToken } from 'utils/auth';
+import apiClient from 'api/apiClient';
 
 interface CartsData {
   carts: Cart[];
@@ -11,7 +10,7 @@ interface CartsData {
 const fetchCarts = async (token: string): Promise<CartsData> => {
   try {
     setAuthToken(token);
-    const { data } = await axios.get(`${API_URL}/carts`);
+    const { data } = await apiClient.get(`/carts`);
     const cartsData: CartsData = {
       carts: data.data.carts,
     };
@@ -24,9 +23,9 @@ const fetchCarts = async (token: string): Promise<CartsData> => {
 const addCart = async (token: string, quantity: number, productId: string): Promise<void> => {
   try {
     setAuthToken(token);
-    const url = `${API_URL}/carts`;
+    const url = `/carts`;
     const data = { quantity, productId };
-    return await axios.post(url, data);
+    return await apiClient.post(url, data);
   } catch (error) {
     throw new Error(catchError(error));
   }
@@ -35,8 +34,8 @@ const addCart = async (token: string, quantity: number, productId: string): Prom
 const removeCart = async (token: string, cartId: string): Promise<void> => {
   try {
     setAuthToken(token);
-    const url = `${API_URL}/carts/${cartId}`;
-    return await axios.delete(url, { params: { token } });
+    const url = `/carts/${cartId}`;
+    return await apiClient.delete(url, { params: { token } });
   } catch (error) {
     throw new Error(catchError(error));
   }
@@ -45,8 +44,8 @@ const removeCart = async (token: string, cartId: string): Promise<void> => {
 const updateCart = async (token: string, cartId: string, quantity: number): Promise<void> => {
   try {
     setAuthToken(token);
-    const url = `${API_URL}/carts/${cartId}`;
-    return await axios.patch(url, { quantity });
+    const url = `/carts/${cartId}`;
+    return await apiClient.patch(url, { quantity });
   } catch (error) {
     throw new Error(catchError(error));
   }

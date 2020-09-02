@@ -1,9 +1,9 @@
-import passport from 'passport';
-import { Strategy as localStrategy } from 'passport-local';
-import { Strategy as JWTstrategy, ExtractJwt } from 'passport-jwt';
-import { User } from '../models';
-import { Role } from '../types';
-import { JWT_SECRET_KEY } from '../config';
+import passport from "passport";
+import { Strategy as localStrategy } from "passport-local";
+import { Strategy as JWTstrategy, ExtractJwt } from "passport-jwt";
+import { User } from "../models";
+import { Role } from "../types";
+import { JWT_SECRET_KEY } from "../config";
 
 //This verifies that the token sent by the user is valid
 passport.use(
@@ -16,7 +16,7 @@ passport.use(
       try {
         const { user_id } = token;
         const user = await User.findById(user_id);
-        if (!user) return done(null, false, 'User not found');
+        if (!user) return done(null, false, "User not found");
         //Pass the user details to the next middleware
         return done(null, user);
       } catch (error) {
@@ -27,21 +27,21 @@ passport.use(
 );
 
 passport.use(
-  'signUp',
+  "signUp",
   new localStrategy(
     {
-      usernameField: 'email',
-      passwordField: 'password',
+      usernameField: "email",
+      passwordField: "password",
       passReqToCallback: true,
     },
     async (req, email, password, done) => {
       try {
         const { name } = req.body;
 
-        let user = await User.findOne({ email });
+        let user = await User.findOne({ email: email.toLowerCase() });
 
         if (user)
-          return done(null, false, { message: 'Email is already taken' });
+          return done(null, false, { message: "Email is already taken" });
 
         user = await User.create({
           email,
@@ -60,18 +60,18 @@ passport.use(
 );
 
 passport.use(
-  'login',
+  "login",
   new localStrategy(
     {
-      usernameField: 'email',
-      passwordField: 'password',
+      usernameField: "email",
+      passwordField: "password",
     },
     async (email, password, done) => {
       try {
         const user = await User.findOne({ email });
         if (!user) {
           return done(null, false, {
-            message: 'Email or Password is incorrect',
+            message: "Email or Password is incorrect",
           });
         }
 
@@ -79,10 +79,10 @@ passport.use(
 
         if (!isPasswordMatch)
           return done(null, false, {
-            message: 'Email or password is incorrect',
+            message: "Email or password is incorrect",
           });
 
-        return done(null, user, { message: 'Logged in Successfully' });
+        return done(null, user, { message: "Logged in Successfully" });
       } catch (error) {
         return done(error);
       }

@@ -24,7 +24,7 @@ interface Props {
   title?: string;
 }
 
-export const Layout: React.FC<Props> = ({ children, title = 'Dress Shop' }) => {
+export const MainLayout: React.FC<Props> = ({ children, title = 'Dress Shop' }) => {
   useEffect(() => {
     if (!window.GA_INITIALIZED) {
       initGA();

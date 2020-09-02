@@ -1,22 +1,22 @@
-import { Request, Response } from 'express';
-import { Product } from '../models';
-import APIFeatures from '../lib/ApiFeatures';
+import { Request, Response } from "express";
+import { Product } from "../models";
+import APIFeatures from "../utils/ApiFeatures";
 
 export const index = async (req: Request, res: Response) => {
   try {
-    const features = new APIFeatures(Product.find(), req.query)
+    const features = new APIFeatures(Product.find(), Product, req.query)
       .filter()
       .sort()
       .limitFields()
       .paginate();
 
-    const total = await Product.find().countDocuments();
-
     const products = await features.query;
 
-    res.status(200).json({ data: { products, total } });
+    const total = await features.count().total;
+
+    res.status(200).json({ data: { total, count: products.length, products } });
   } catch (error) {
-    res.status(500).json({ message: 'Error in getting products' });
+    res.status(500).json({ message: "Error in getting products" });
   }
 };
 
@@ -25,7 +25,7 @@ export const show = async (req: Request, res: Response) => {
     const { id } = req.params;
     const product = await Product.findById(id);
 
-    if (!product) return res.status(404).json({ message: 'Product not found' });
+    if (!product) return res.status(404).json({ message: "Product not found" });
 
     // find related products based on product category
     const relatedProducts = await Product.find({
@@ -35,7 +35,7 @@ export const show = async (req: Request, res: Response) => {
 
     res.status(200).json({ data: { product, relatedProducts } });
   } catch (error) {
-    res.status(500).json({ message: 'Error in getting product' });
+    res.status(500).json({ message: "Error in getting product" });
   }
 };
 
@@ -52,7 +52,7 @@ export const store = async (req: Request, res: Response) => {
     });
     res.status(200).json({ data: { product } });
   } catch (error) {
-    res.status(500).json({ message: 'Error in creating product' });
+    res.status(500).json({ message: "Error in creating product" });
   }
 };
 
@@ -61,7 +61,7 @@ export const remove = async (req: Request, res: Response) => {
 
   let product = await Product.findOne({ _id: id });
 
-  if (!product) return res.status(404).json({ message: 'Product not found' });
+  if (!product) return res.status(404).json({ message: "Product not found" });
 
   product.remove();
 
@@ -74,7 +74,7 @@ export const update = async (req: Request, res: Response) => {
 
     let product = await Product.findOne({ _id: id });
 
-    if (!product) return res.status(404).json({ message: 'Product not found' });
+    if (!product) return res.status(404).json({ message: "Product not found" });
 
     product = await Product.findOneAndUpdate({ _id: product._id }, req.body, {
       new: true,
@@ -82,6 +82,6 @@ export const update = async (req: Request, res: Response) => {
 
     res.status(200).json({ data: { product } });
   } catch (error) {
-    res.status(500).json({ message: 'Error in creating product' });
+    res.status(500).json({ message: "Error in creating product" });
   }
 };

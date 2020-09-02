@@ -4,8 +4,8 @@ import Router from 'next/router';
 import { IoMdCart } from 'react-icons/io';
 import { useAuth, useCart } from 'store';
 import { capitalizeFirstLetter } from 'utils/helpers';
-import { Button } from '../Button';
-import { SearchBar } from '../SearchBar';
+import { Button } from 'components/shared/Button';
+import { SearchBar } from 'components/shared/SearchBar';
 
 export const DesktopMenu: React.FC = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);

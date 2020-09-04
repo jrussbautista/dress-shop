@@ -1,14 +1,10 @@
 import React from 'react';
-import { Cart } from 'types';
 import { CartItem } from './CartItem';
+import { useCart } from 'store';
 
-interface Props {
-  carts: Cart[];
-  removeCart(cartId: string, productId: string): void;
-  updateQty(cartId: string, qty: number): void;
-}
+export const CartList: React.FC = () => {
+  const { carts } = useCart();
 
-export const CartList: React.FC<Props> = ({ carts, removeCart, updateQty }) => {
   return (
     <div>
       <>
@@ -22,7 +18,7 @@ export const CartList: React.FC<Props> = ({ carts, removeCart, updateQty }) => {
           </div>
         </div>
         {carts.map((cart) => (
-          <CartItem cart={cart} key={cart._id} removeCart={removeCart} updateQty={updateQty} />
+          <CartItem cart={cart} key={cart._id} />
         ))}
       </>
       <style jsx>

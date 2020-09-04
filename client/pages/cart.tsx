@@ -1,37 +1,21 @@
-import React, { useState } from 'react';
-import { CartList, CartSubTotal } from 'components/domain/Cart';
+import React from 'react';
+import { CartList, CartSubTotal, CarSkeleton } from 'components/domain/Cart';
 import { useAuth, useCart } from 'store';
-import { GetServerSideProps } from 'next';
-import { CartService } from 'services';
-import { parseCookies } from 'nookies';
-import { Carts, Cart as CartType } from 'types';
 import { ErrorPage, Button, Meta, MobileBottomMenu } from 'components/shared';
 import calculateCartTotal from 'utils/calculateCartTotal';
 
-interface Props extends Carts {
-  error: string | null;
-}
-
-const Cart: React.FC<Props> = ({ carts, error }) => {
+const Cart: React.FC = () => {
   const { currentUser } = useAuth();
-  const { removeCart } = useCart();
+  const { carts, loading, error } = useCart();
 
-  const [myCarts, setMyCarts] = useState(carts);
-  const { cartTotal } = calculateCartTotal(myCarts);
+  const { cartTotal } = calculateCartTotal(carts);
 
-  const handleRemoveCart = (cartId: string, productId: string) => {
-    const filterCarts = myCarts.filter((cart) => cart._id !== cartId);
-    setMyCarts(filterCarts);
-    removeCart(productId);
-  };
-
-  const handleUpdateCartQty = async (cartId: string, quantity: number) => {
-    const newCarts = myCarts.map((cart) => (cart._id === cartId ? { ...cart, quantity } : cart));
-    setMyCarts(newCarts);
-  };
+  if (loading) {
+    return <CarSkeleton />;
+  }
 
   if (error) {
-    return <ErrorPage message="Error in getting carts. Please try again later." />;
+    return <ErrorPage message="Cannot fetch cart at this moment. Please try again" />;
   }
 
   return (
@@ -41,13 +25,9 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
         {currentUser ? (
           <div>
             <h1 className="page-title">Your Cart</h1>
-            {myCarts.length > 0 ? (
+            {carts.length > 0 ? (
               <>
-                <CartList
-                  carts={myCarts}
-                  removeCart={handleRemoveCart}
-                  updateQty={handleUpdateCartQty}
-                />
+                <CartList />
                 <CartSubTotal total={Number(cartTotal)} />
                 <div className="checkout-btn-wrapper">
                   <Button href="/checkout" title="Check Out" style={{ width: '15rem' }} />
@@ -63,7 +43,7 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
         ) : (
           <div className="msg-container">
             <h1 className="page-title"> Please login to see your cart </h1>
-            <Button href="/login" title="Log In" style={{ width: '15rem' }} />
+            <Button href="/auth?type=login" title="Log In" style={{ width: '15rem' }} />
           </div>
         )}
       </div>
@@ -103,38 +83,6 @@ const Cart: React.FC<Props> = ({ carts, error }) => {
       </style>
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { token } = parseCookies(context);
-
-  if (!token) {
-    return {
-      props: {
-        error: false,
-        carts: [],
-      },
-    };
-  }
-
-  let carts: CartType[] = [];
-  const error: null | string = null;
-
-  try {
-    const { carts: myCarts } = await CartService.fetchCarts(token);
-    carts = myCarts;
-  } catch (error) {
-    return {
-      props: {
-        error: 'Something went wrong',
-        carts: [],
-      },
-    };
-  }
-
-  return {
-    props: { carts, error },
-  };
 };
 
 export default Cart;

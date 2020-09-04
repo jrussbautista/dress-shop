@@ -46,7 +46,7 @@ export const ProductsSkeleton: React.FC<Props> = ({ number }) => {
             top: 0;
             left: 0;
             right: 0;
-            background-color: #eee;
+            background-color: var(--color-gray-light);
           }
 
           .info {
@@ -56,13 +56,13 @@ export const ProductsSkeleton: React.FC<Props> = ({ number }) => {
           .line {
             height: 2rem;
             width: 100%;
-            background-color: #eee;
+            background-color: var(--color-gray-light);
           }
 
           .half-line {
             height: 2rem;
             margin-top: 1rem;
-            background-color: #eee;
+            background-color: var(--color-gray-light);
             width: 50%;
           }
         `}

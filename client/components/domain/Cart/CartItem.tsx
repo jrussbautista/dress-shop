@@ -2,21 +2,17 @@ import React, { useState } from 'react';
 import { formatPrice } from 'utils/helpers';
 import Link from 'next/link';
 import { Cart } from 'types';
-import { useToast } from 'store';
+import { useToast, useCart } from 'store';
 import { InputQuantity } from 'components/shared';
 import { CartService } from 'services';
-import { parseCookies } from 'nookies';
 
 interface Props {
   cart: Cart;
-  removeCart(cartId: string, productId: string): void;
-  updateQty(cartId: string, qty: number): void;
 }
 
-export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
+export const CartItem: React.FC<Props> = ({ cart }) => {
+  const { removeCart, updateCartQty } = useCart();
   const { setToast } = useToast();
-
-  const { token } = parseCookies({});
 
   const [qty, setQty] = useState<string | number>(cart.quantity);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -25,8 +21,8 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
 
   const handleRemoveCart = async () => {
     try {
-      await CartService.removeCart(token, cart._id);
-      removeCart(cart._id, cart.product._id);
+      await CartService.removeCart(cart._id);
+      removeCart(cart._id);
     } catch (error) {
       setToast('error', error.message);
     }
@@ -35,8 +31,8 @@ export const CartItem: React.FC<Props> = ({ cart, removeCart, updateQty }) => {
   const updateQtyAsync = async (quantity: number) => {
     try {
       setIsUpdating(true);
-      await CartService.updateCart(token, cart._id, quantity);
-      updateQty(cart._id, quantity);
+      await CartService.updateCart(cart._id, quantity);
+      updateCartQty(cart._id, quantity);
       setQty(quantity);
     } catch (error) {
       setToast('error', error.message);

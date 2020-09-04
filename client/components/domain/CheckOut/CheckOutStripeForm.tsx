@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import Router from 'next/router';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import CardSection from './CheckOutStripeCard';
 import { CheckOutService } from 'services';
 import { useAuth, useToast, useCart } from 'store';
-import { parseCookies } from 'nookies';
 import { PageLoader, Alert, Button } from 'components/shared';
-import Router from 'next/router';
 import { StripeCardElement, StripeCardElementChangeEvent } from '@stripe/stripe-js';
 
 export const CheckoutStripeForm: React.FC = () => {
@@ -23,8 +22,8 @@ export const CheckoutStripeForm: React.FC = () => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    const { token } = parseCookies({});
-    CheckOutService.createPaymentIntent(token)
+
+    CheckOutService.createPaymentIntent()
       .then((data) => {
         setClientSecret(data.clientSecret);
       })

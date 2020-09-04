@@ -8,6 +8,7 @@ import {
 import { User } from '../../types';
 
 type State = {
+  isAuthenticated: boolean;
   currentUser: User | null;
   error: null | string;
 };
@@ -20,11 +21,11 @@ type Action = {
 export default (state: State, action: Action): State => {
   switch (action.type) {
     case LOGOUT_USER:
-      return { ...state, currentUser: null };
+      return { ...state, currentUser: null, isAuthenticated: false };
     case SET_CURRENT_USER:
-      return { ...state, currentUser: action.payload };
+      return { ...state, currentUser: action.payload, isAuthenticated: true };
     case SET_AUTH_ERROR:
-      return { ...state, error: action.payload };
+      return { ...state, error: action.payload, isAuthenticated: false };
     case UPDATE_USER:
       return { ...state, currentUser: action.payload };
     case CLEAR_AUTH_ERROR:

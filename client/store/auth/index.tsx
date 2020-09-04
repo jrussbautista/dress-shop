@@ -7,6 +7,7 @@ import { destroyCookie } from 'nookies';
 import reducer from './authReducer';
 
 interface InitialStateType {
+  isAuthenticated: boolean;
   currentUser: User | null;
   error: null | string;
   logout(): void;
@@ -15,6 +16,7 @@ interface InitialStateType {
 }
 
 const initialState = {
+  isAuthenticated: false,
   currentUser: null,
   error: null,
   logout: () => null,
@@ -32,6 +34,7 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
   const initialState = {
     currentUser,
     error: null,
+    isAuthenticated: currentUser ? true : false,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);

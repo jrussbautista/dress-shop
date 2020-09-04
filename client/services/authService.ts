@@ -86,12 +86,8 @@ const signUp = async ({
   }
 };
 
-export const changePassword = async (
-  token: string,
-  passwordFields: UserPasswordData
-): Promise<UserData> => {
+export const changePassword = async (passwordFields: UserPasswordData): Promise<UserData> => {
   try {
-    setAuthToken(token);
     const url = `/auth/change-password`;
     const { data } = await apiClient.patch(url, passwordFields);
     const userData: UserData = {
@@ -105,12 +101,10 @@ export const changePassword = async (
 };
 
 export const updateProfile = async (
-  token: string,
   userId: string,
   userFields: UserFields
 ): Promise<{ user: User }> => {
   try {
-    setAuthToken(token);
     const url = `/users/${userId}`;
     const { data } = await apiClient.patch(url, userFields, {
       params: { id: userId },

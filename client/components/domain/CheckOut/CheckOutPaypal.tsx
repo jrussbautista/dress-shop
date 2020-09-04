@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import Router from 'next/router';
 import { CheckOutService } from 'services';
-import { parseCookies } from 'nookies';
 import { useToast, useCart } from 'store';
 
 interface ErrorMsg {
@@ -14,7 +13,6 @@ interface PaypalData {
 
 export const CheckOutPaypal: React.FC = () => {
   const paypalButtonsRef = useRef<HTMLDivElement>(null);
-  const { token } = parseCookies({});
   const { setToast } = useToast();
   const { clearCart } = useCart();
 
@@ -23,7 +21,7 @@ export const CheckOutPaypal: React.FC = () => {
       window.paypal
         .Buttons({
           createOrder: function () {
-            return CheckOutService.createPaypalTransaction(token).then((data) => {
+            return CheckOutService.createPaypalTransaction().then((data) => {
               return data.orderID;
             });
           },
@@ -31,7 +29,7 @@ export const CheckOutPaypal: React.FC = () => {
             setToast('error', error.message);
           },
           onApprove: function (data: PaypalData) {
-            return CheckOutService.capturePaypalTransaction(token, data.orderID).then(() => {
+            return CheckOutService.capturePaypalTransaction(data.orderID).then(() => {
               setToast('success', 'Successfully transaction completed');
               clearCart();
               Router.push('/order');

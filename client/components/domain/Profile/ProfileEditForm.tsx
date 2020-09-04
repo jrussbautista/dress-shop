@@ -3,7 +3,6 @@ import { useAuth, useToast } from 'store';
 import { Button, PageLoader, Input } from 'components/shared';
 import { capitalizeFirstLetter } from 'utils/helpers';
 import { AuthService } from 'services';
-import { parseCookies } from 'nookies';
 import { MAX_FILE_SIZE } from 'utils/constants';
 
 interface InitialState {
@@ -38,8 +37,7 @@ export const ProfileEditForm: React.FC = () => {
 
     try {
       setUpdating(true);
-      const { token } = parseCookies({});
-      const { user } = await AuthService.updateProfile(token, currentUser?._id, userInfo);
+      const { user } = await AuthService.updateProfile(currentUser?._id, userInfo);
       updateUser(user);
       setToast('success', 'Successfully profile updated');
     } catch (error) {

@@ -4,11 +4,10 @@ import { ProductInfo, ProductRecommended } from 'components/domain/Product';
 import { PopUp, Meta, MobileBottomMenu, InputQuantity } from 'components/shared';
 import { usePopUp } from 'hooks';
 import { useAuth, useCart, useToast } from 'store';
-import { Product as ProductTypes, AddCart } from 'types';
+import { Product as ProductTypes, Cart } from 'types';
 import { GetServerSideProps } from 'next';
 import { ProductService } from 'services/productService';
 import { CartService } from 'services';
-import { parseCookies } from 'nookies';
 import { ErrorPage, Button } from 'components/shared';
 
 interface Props {
@@ -46,7 +45,6 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
     }
   };
 
-  //handle add to cart
   const handleAddToCart = async () => {
     try {
       if (!currentUser) {
@@ -54,12 +52,10 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
         Router.push(`/auth?type=login&ref=${product._id}`);
         return;
       }
-
-      const cartObj: AddCart = { quantity: Number(qty), product };
-      const { token } = parseCookies({});
+      const { cart } = await CartService.addCart(Number(qty), product._id);
+      const cartObj: Cart = { _id: cart._id, quantity: Number(qty), product };
       showToast();
       addCart(cartObj);
-      await CartService.addCart(token, Number(qty), product._id);
     } catch (error) {
       setToast('error', error.message);
     }

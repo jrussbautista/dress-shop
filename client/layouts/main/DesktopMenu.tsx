@@ -232,7 +232,7 @@ export const DesktopMenu: React.FC = () => {
         }
 
         .dropdown li:last-child {
-          border-top: 1px solid #eee;
+          border-top: 1px solid var(--color-gray-light);
         }
 
         @media only screen and (min-width: 1024px) {

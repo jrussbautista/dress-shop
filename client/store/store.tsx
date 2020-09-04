@@ -1,9 +1,9 @@
 import React from 'react';
-import { AuthProvider } from './auth/authContext';
-import { CartProvider } from './cart/cartContext';
-import { ModalProvider } from './modal/modalContext';
-import { ShopProvider } from './shop/shopContext';
-import { ToastProvider } from './toast/toastContext';
+import { AuthProvider } from './auth';
+import { CartProvider } from './cart';
+import { ModalProvider } from './modal';
+import { ShopProvider } from './shop';
+import { ToastProvider } from './toast';
 import { User } from '../types';
 
 type InitialStateProps = {

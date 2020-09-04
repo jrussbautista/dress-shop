@@ -54,7 +54,7 @@ export const HomeCategories: React.FC<Props> = ({ categories }) => {
           height: 100%;
           padding-top: 56.25%;
           background-size: cover;
-          border: 1px solid #eee;
+          border: 1px solid var(--color-gray-light);
         }
       `}</style>
     </div>

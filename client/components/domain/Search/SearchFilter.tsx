@@ -59,7 +59,7 @@ export const SearchFilter: React.FC<Props> = ({ handleChange, active }) => {
         }
 
         .select {
-          border: 1px solid #eee;
+          border: 1px solid var(--color-gray-light);
           background: #fff;
           position: relative;
           font-size: 1.8rem;

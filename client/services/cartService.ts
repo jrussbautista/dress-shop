@@ -1,15 +1,17 @@
 import { Cart } from 'types';
 import { catchError } from 'utils/catchError';
-import { setAuthToken } from 'utils/auth';
 import apiClient from 'api/apiClient';
 
 interface CartsData {
   carts: Cart[];
 }
 
-const fetchCarts = async (token: string): Promise<CartsData> => {
+interface AddCart {
+  cart: Cart;
+}
+
+const fetchCarts = async (): Promise<CartsData> => {
   try {
-    setAuthToken(token);
     const { data } = await apiClient.get(`/carts`);
     const cartsData: CartsData = {
       carts: data.data.carts,
@@ -20,30 +22,30 @@ const fetchCarts = async (token: string): Promise<CartsData> => {
   }
 };
 
-const addCart = async (token: string, quantity: number, productId: string): Promise<void> => {
+const addCart = async (quantity: number, productId: string): Promise<AddCart> => {
   try {
-    setAuthToken(token);
     const url = `/carts`;
-    const data = { quantity, productId };
-    return await apiClient.post(url, data);
+    const payload = { quantity, productId };
+    const { data } = await apiClient.post(url, payload);
+    return {
+      cart: data.data.cart,
+    };
   } catch (error) {
     throw new Error(catchError(error));
   }
 };
 
-const removeCart = async (token: string, cartId: string): Promise<void> => {
+const removeCart = async (cartId: string): Promise<void> => {
   try {
-    setAuthToken(token);
     const url = `/carts/${cartId}`;
-    return await apiClient.delete(url, { params: { token } });
+    return await apiClient.delete(url);
   } catch (error) {
     throw new Error(catchError(error));
   }
 };
 
-const updateCart = async (token: string, cartId: string, quantity: number): Promise<void> => {
+const updateCart = async (cartId: string, quantity: number): Promise<void> => {
   try {
-    setAuthToken(token);
     const url = `/carts/${cartId}`;
     return await apiClient.patch(url, { quantity });
   } catch (error) {

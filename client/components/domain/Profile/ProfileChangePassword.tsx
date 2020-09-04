@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button, PageLoader, Input } from 'components/shared';
 import { useToast } from 'store';
 import { AuthService } from 'services';
-import { parseCookies } from 'nookies';
 
 export const ProfileChangePassword: React.FC = () => {
   const { setToast } = useToast();
@@ -34,8 +33,7 @@ export const ProfileChangePassword: React.FC = () => {
   const handleChangePassword = async () => {
     try {
       setSubmitting(true);
-      const { token } = parseCookies({});
-      await AuthService.changePassword(token, password);
+      await AuthService.changePassword(password);
       setPassword(initialState);
       setToast('success', 'Successfully password changed');
     } catch (error) {

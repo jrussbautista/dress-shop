@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Meta, Button, PageLoader } from 'components/shared';
+import { Meta, Button, PageLoader, Input } from 'components/shared';
 import { useAuth, useToast } from 'store';
 import { AuthService } from 'services';
 
@@ -44,45 +44,40 @@ export const SignUpForm: React.FC = () => {
         {({ errors, touched, handleChange, handleSubmit, values }) => (
           <form onSubmit={handleSubmit} className="auth-form">
             <h1 className="page-heading"> Sign Up </h1>
-            <div className="group">
-              <input
-                className={`input ${errors.name && touched.name && 'input-error'}`}
-                type="text"
-                placeholder="Name"
-                autoComplete="true"
-                name="name"
-                value={values.name}
-                onChange={handleChange}
-              />
-              {errors.name && touched.name ? <div className="error">{errors.name}</div> : null}
-            </div>
-            <div className="group">
-              <input
-                className={`input ${errors.email && touched.email && 'input-error'}`}
-                type="email"
-                placeholder="Email"
-                autoComplete="true"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-              />
-              {errors.email && touched.email ? <div className="error">{errors.email}</div> : null}
-            </div>
-            <div className="group">
-              <input
-                className={`input ${errors.password && touched.password && 'input-error'}`}
-                type="password"
-                autoComplete="true"
-                placeholder="Password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-              />
-              {errors.password && touched.password ? (
-                <div className="error">{errors.password}</div>
-              ) : null}
-            </div>
-            <div className="group">
+            <Input
+              name="name"
+              id="name"
+              placeholder="Name"
+              value={values.name}
+              onChange={handleChange}
+              type="text"
+              error={Boolean(errors.name && touched.name)}
+            />
+            {errors.name && touched.name ? <div className="error">{errors.name}</div> : null}
+            <Input
+              name="email"
+              id="email"
+              placeholder="Email"
+              value={values.email}
+              onChange={handleChange}
+              type="email"
+              error={Boolean(errors.email && touched.email)}
+            />
+            {errors.email && touched.email ? <div className="error">{errors.email}</div> : null}
+            <Input
+              name="password"
+              id="password"
+              placeholder="Password"
+              value={values.password}
+              onChange={handleChange}
+              type="password"
+              error={Boolean(errors.password && touched.password)}
+            />
+            {errors.password && touched.password ? (
+              <div className="error">{errors.password}</div>
+            ) : null}
+
+            <div className="bottom">
               <Button
                 type="submit"
                 title="Sign Up"
@@ -116,42 +111,14 @@ export const SignUpForm: React.FC = () => {
             margin: 0 auto;
           }
 
-          .auth-form .input {
-            width: 100%;
-            height: 5rem;
-            font-size: 1.7rem;
-            border: 1px solid transparent;
-            border-bottom: 1px solid #666;
-          }
-
-          .auth-form .input:focus {
-            outline: none;
-          }
-
-          .group {
-            margin-top: 2.5rem;
-          }
-
-          .link {
+          .bottom {
             margin-top: 2rem;
-            color: var(--color-dark);
-            display: block;
-            font-size: 1.7rem;
-            text-align: center;
-          }
-
-          .link-text {
-            color: var(--color-primary);
           }
 
           .error {
             color: red;
             font-size: 1.6rem;
             padding: 0.2rem 0;
-          }
-
-          .auth-form .input-error {
-            border-bottom: 1px solid red;
           }
 
           @media only screen and (max-width: 600px) {

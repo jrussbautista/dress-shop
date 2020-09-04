@@ -6,8 +6,8 @@ const Sidebar = () => {
       <aside className="sidebar">
         <ul className="sidebar-list">
           <li> Dashboard</li>
-          <li>Users</li>
           <li>Products</li>
+          <li>Users</li>
         </ul>
       </aside>
       <style jsx>{`

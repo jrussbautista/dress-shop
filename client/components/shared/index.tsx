@@ -3,6 +3,7 @@ export * from './Button';
 export * from './ErrorPage';
 export * from './Icons';
 export * from './InputQuantity';
+export * from './Input';
 export * from './Meta';
 export * from './MobileBottomMenu';
 export * from './Modal';

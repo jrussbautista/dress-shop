@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth, useToast } from 'store';
-import { Button, PageLoader } from 'components/shared';
+import { Button, PageLoader, Input } from 'components/shared';
 import { capitalizeFirstLetter } from 'utils/helpers';
 import { AuthService } from 'services';
 import { parseCookies } from 'nookies';
@@ -79,9 +79,11 @@ export const ProfileEditForm: React.FC = () => {
     reader.readAsDataURL(file);
   };
 
+  const pageLoaderElement = updating && <PageLoader />;
+
   return (
     <div>
-      {updating && <PageLoader />}
+      {pageLoaderElement}
       <form onSubmit={handleSubmit} className="form">
         <div className="user-picture-container">
           <div className="user-avatar">
@@ -110,57 +112,30 @@ export const ProfileEditForm: React.FC = () => {
           </div>
         </div>
         <div className="user-details">
-          <div className="group">
-            <label htmlFor="name" className="label">
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={userInfo.name}
-              onChange={handleChange}
-              autoComplete="true"
-            />
-          </div>
-          <div className="group">
-            <label htmlFor="email" className="label">
-              Email
-            </label>
-            <input
-              type="text"
-              name="email"
-              value={userInfo.email}
-              onChange={handleChange}
-              autoComplete="true"
-            />
-          </div>
-          <div className="group bottom">
+          <Input
+            name="name"
+            onChange={handleChange}
+            id="name"
+            label="Name"
+            value={userInfo.name}
+            type="text"
+          />
+          <Input
+            name="email"
+            onChange={handleChange}
+            id="email"
+            label="Email"
+            value={userInfo.email}
+            type="email"
+          />
+          <div className="bottom">
             <Button type="submit" title="Save Profile" disabled={updating} />
           </div>
         </div>
       </form>
       <style jsx>{`
-        .group {
-          margin: 1rem 0;
-        }
-
         .bottom {
           margin-top: 3rem;
-        }
-
-        .label {
-          display: block;
-          margin-bottom: 0.5rem;
-          color: #9c99b6;
-          font-size: 1.7rem;
-        }
-
-        .group input {
-          border: 1px solid transparent;
-          border-bottom: 1px solid var(--color-dark);
-          width: 100%;
-          height: 5rem;
-          font-size: 1.7rem;
         }
 
         .user-picture-container {

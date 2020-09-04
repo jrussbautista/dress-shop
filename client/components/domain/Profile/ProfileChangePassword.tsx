@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, PageLoader } from 'components/shared';
+import { Button, PageLoader, Input } from 'components/shared';
 import { useToast } from 'store';
 import { AuthService } from 'services';
 import { parseCookies } from 'nookies';
@@ -56,43 +56,31 @@ export const ProfileChangePassword: React.FC = () => {
         <h2> Change Password </h2>
         <form onSubmit={handleSubmit} className="form">
           <div className="user-details">
-            <div className="group">
-              <label htmlFor="oldPassword" className="label">
-                Old Password
-              </label>
-              <input
-                type="password"
-                name="oldPassword"
-                value={password.oldPassword}
-                onChange={handleChange}
-                autoComplete="false"
-              />
-            </div>
-            <div className="group">
-              <label htmlFor="newPassword" className="label">
-                New Password
-              </label>
-              <input
-                type="password"
-                name="newPassword"
-                value={password.newPassword}
-                onChange={handleChange}
-                autoComplete="false"
-              />
-            </div>
-            <div className="group">
-              <label htmlFor="confirmNewPassword" className="label">
-                Confirm New Password
-              </label>
-              <input
-                type="password"
-                name="confirmNewPassword"
-                value={password.confirmNewPassword}
-                onChange={handleChange}
-                autoComplete="false"
-              />
-            </div>
-            <div className="group bottom">
+            <Input
+              name="oldPassword"
+              onChange={handleChange}
+              id="oldPassword"
+              label="Old Password"
+              value={password.oldPassword}
+              type="password"
+            />
+            <Input
+              name="newPassword"
+              onChange={handleChange}
+              id="newPassword"
+              label="New Password"
+              value={password.newPassword}
+              type="password"
+            />
+            <Input
+              name="confirmNewPassword"
+              onChange={handleChange}
+              id="confirmNewPassword"
+              label="Confirm New Password"
+              value={password.confirmNewPassword}
+              type="password"
+            />
+            <div className="bottom">
               <Button type="submit" title="Save Password" disabled={submitting} />
             </div>
           </div>
@@ -103,27 +91,8 @@ export const ProfileChangePassword: React.FC = () => {
           padding: 1rem 0;
         }
 
-        .group {
-          margin: 1rem 0;
-        }
-
         .bottom {
           margin-top: 3rem;
-        }
-
-        .label {
-          display: block;
-          margin-bottom: 0.5rem;
-          color: #9c99b6;
-          font-size: 1.7rem;
-        }
-
-        .group input {
-          border: 1px solid transparent;
-          border-bottom: 1px solid var(--color-dark);
-          width: 100%;
-          height: 5rem;
-          font-size: 1.7rem;
         }
       `}</style>
     </>

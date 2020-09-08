@@ -60,6 +60,8 @@ export const CartProvider: React.FC = ({ children }) => {
 
     if (isAuthenticated) {
       fetchCarts();
+    } else {
+      dispatch({ type: SET_ERROR, payload: { error: '' } });
     }
   }, [isAuthenticated]);
 

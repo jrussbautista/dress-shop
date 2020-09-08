@@ -33,7 +33,7 @@ export const checkProtectedRoutes = (ctx: NextPageContext): void => {
   if (!isProtectedRoutes) return;
 
   if (ctx.pathname === '/admin') {
-    redirectUser(ctx, '/admin/login');
+    redirectUser(ctx, '/adm');
     return;
   }
   redirectUser(ctx, '/auth?type=login');

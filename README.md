@@ -6,7 +6,7 @@
 
 ## Screenshots
 
-![Thumbnail](dress-thumbnail.png)
+![Thumbnail](dress-home-page.png)
 
 ## Stacks
 
@@ -19,22 +19,33 @@
 - Stripe and Paypal (for payment)
 - Vercel (for deployment)
 
-## Installation
+### Clone Repo
 
 ```
 git clone https://github.com/jrussumbrella/dress-shop-web.git
+```
+
+### Client Installation
+
+```
 cd dress-shop
 cd client
 npm install or yarn install
-cd server
-npm install or yarn install
+```
+
+## Server Installation
 
 ```
+cd server
+npm install or yarn install
+``
 
 ### This will run both client and server
 
 ```
+
 npm run dev
+
 ```
 
 ## Deploy using vercel
@@ -42,17 +53,25 @@ npm run dev
 ### Globally install vercel
 
 ```
- npm i -g vercel
+
+npm i -g vercel
+
 ```
 
 ### Client
 
 ```
+
 vercel --prod
+
 ```
 
 ## Server
 
 ```
+
 vercel --prod
+
+```
+
 ```

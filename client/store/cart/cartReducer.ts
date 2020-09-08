@@ -25,7 +25,13 @@ export default (state: State, action: Action): State => {
     case CLEAR_CART:
       return { ...state, carts: [], cartsNum: 0 };
     case SET_CARTS:
-      return { ...state, carts: action.payload, cartsNum: action.payload.length, loading: false };
+      return {
+        ...state,
+        carts: action.payload,
+        cartsNum: action.payload.length,
+        loading: false,
+        error: null,
+      };
     case ADD_CART: {
       // check if new added cart is exist on cart
       const isCartExist = state.carts.some((cart) => cart._id === action.payload.cart._id);
@@ -58,7 +64,7 @@ export default (state: State, action: Action): State => {
     }
 
     case SET_ERROR: {
-      return { ...state, error: action.payload.error };
+      return { ...state, error: action.payload.error, loading: false };
     }
 
     default:

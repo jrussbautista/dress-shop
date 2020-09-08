@@ -4,7 +4,6 @@ import { OrderList } from 'components/domain/Order';
 import { Meta, MobileBottomMenu, ErrorPage } from 'components/shared';
 import { Order as OrderType } from 'types';
 import { OrderService } from 'services/orderService';
-import { parseCookies } from 'nookies';
 
 type Orders = OrderType[];
 
@@ -40,22 +39,11 @@ const Order: React.FC<Props> = ({ orders, error }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { token } = parseCookies(context);
-
-  if (!token) {
-    return {
-      props: {
-        error: false,
-        carts: [],
-      },
-    };
-  }
-
+export const getServerSideProps: GetServerSideProps = async () => {
   let orders: Orders = [];
   const error: null | string = null;
   try {
-    const result = await OrderService.fetchOrders(token);
+    const result = await OrderService.fetchOrders();
     orders = result.orders;
   } catch (error) {
     return {

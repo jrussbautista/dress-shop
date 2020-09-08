@@ -53,8 +53,8 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
 
   const logout = (redirectUrl: string) => {
     destroyCookie({}, 'token');
-    Router.push(redirectUrl);
     dispatch({ type: LOGOUT_USER });
+    Router.push(redirectUrl);
   };
 
   const updateUser = (user: User) => {

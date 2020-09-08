@@ -12,7 +12,7 @@ const Schema = Yup.object().shape({
 });
 
 export const SignUpForm: React.FC = () => {
-  const { setCurrentUser } = useAuth();
+  const { login } = useAuth();
   const { setToast } = useToast();
 
   const [submitting, setSubmitting] = useState(false);

@@ -1,15 +1,13 @@
 import React from 'react';
-import { GetServerSideProps } from 'next';
-import { parseCookies } from 'nookies';
 import { Cart } from '../types';
 import { CheckOutList, CheckOutPaypal, CheckoutStripeForm } from 'components/domain/CheckOut';
-import { CartService } from 'services';
 import { formatPrice } from 'utils/helpers';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { STRIPE_CLIENT_KEY } from 'utils/constants';
 import calculateCartTotal from 'utils/calculateCartTotal';
 import { Meta, ErrorPage } from 'components/shared';
+import { useCart } from 'store';
 
 interface Props {
   carts: Cart[];
@@ -18,7 +16,8 @@ interface Props {
 
 const stripePromise = loadStripe(STRIPE_CLIENT_KEY);
 
-const Checkout: React.FC<Props> = ({ carts, error }) => {
+const Checkout: React.FC<Props> = () => {
+  const { carts, error } = useCart();
   const { cartTotal } = calculateCartTotal(carts);
 
   if (error) return <ErrorPage message={error} />;
@@ -127,37 +126,6 @@ const Checkout: React.FC<Props> = ({ carts, error }) => {
       `}</style>
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { token } = parseCookies(context);
-
-  if (!token) {
-    return {
-      props: {
-        error: false,
-        carts: [],
-      },
-    };
-  }
-
-  let carts: Cart[] = [];
-  const error: null | string = null;
-  try {
-    const result = await CartService.fetchCarts(token);
-    carts = result.carts;
-  } catch (error) {
-    return {
-      props: {
-        error: 'something went wrong',
-        carts: [],
-      },
-    };
-  }
-
-  return {
-    props: { carts, error },
-  };
 };
 
 export default Checkout;

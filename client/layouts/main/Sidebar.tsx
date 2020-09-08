@@ -16,7 +16,7 @@ export const Sidebar: React.FC<Props> = ({ isOpen, onClose }) => {
   };
 
   const handleLogOut = () => {
-    logout();
+    logout('/auth?type=login');
     onClose();
   };
 

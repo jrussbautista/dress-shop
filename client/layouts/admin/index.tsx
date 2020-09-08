@@ -7,6 +7,8 @@ import { useAuth } from 'store';
 export const AdminLayout: React.FC = ({ children }) => {
   const { currentUser } = useAuth();
 
+  console.log(currentUser);
+
   return (
     <>
       <Head>

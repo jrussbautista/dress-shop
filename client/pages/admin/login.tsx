@@ -47,7 +47,6 @@ export const AdminLogin: React.FC = () => {
           <form onSubmit={handleSubmit} className="auth-form">
             <h1 className="page-heading"> Admin Login </h1>
             <Input
-              label
               name="email"
               id="email"
               placeholder="Email"

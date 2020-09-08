@@ -2,8 +2,11 @@ import React from 'react';
 import Head from 'next/head';
 import Header from './Header';
 import Sidebar from './Sidebar';
+import { useAuth } from 'store';
 
 export const AdminLayout: React.FC = ({ children }) => {
+  const { currentUser } = useAuth();
+
   return (
     <>
       <Head>
@@ -13,19 +16,34 @@ export const AdminLayout: React.FC = ({ children }) => {
       <Header />
       <main>
         <div className="wrapper">
-          <Sidebar />
+          {currentUser && currentUser.role === 'admin' && (
+            <div className="sidebar">
+              <Sidebar />
+            </div>
+          )}
           <div className="main-content">{children}</div>
         </div>
       </main>
       <style jsx>{`
         .wrapper {
+          height: calc(100vh - 7rem);
           display: flex;
-          min-height: calc(100vh - 7rem);
+        }
+        .sidebar {
+          display: none;
+          height: 100%;
         }
 
         .main-content {
           flex: 1;
-          padding: 1rem;
+          padding: 2rem;
+          overflow-y: auto;
+        }
+
+        @media only screen and (min-width: 768px) {
+          .sidebar {
+            display: block;
+          }
         }
       `}</style>
     </>

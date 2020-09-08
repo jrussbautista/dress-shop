@@ -1,12 +1,12 @@
 import React from 'react';
 
 interface Props {
-  color: string;
+  color?: string;
   width: number;
   height: number;
 }
 
-export const Spinner: React.FC<Props> = ({ color, width }) => {
+export const Spinner: React.FC<Props> = ({ color = 'var(--color-primary)', width }) => {
   return (
     <>
       <div className="lds-ring">

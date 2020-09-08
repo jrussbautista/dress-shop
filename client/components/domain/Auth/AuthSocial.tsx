@@ -12,7 +12,7 @@ interface GoogleError {
 
 export const AuthSocial: React.FC = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const { setCurrentUser } = useAuth();
+  const { login } = useAuth();
   const { setToast } = useToast();
 
   const handleOnSuccess = async (response: any): Promise<void> => {
@@ -20,7 +20,7 @@ export const AuthSocial: React.FC = () => {
       setIsLoggingIn(true);
       const tokenId = response.tokenId;
       const { user, token } = await AuthService.verifyGoogleIdToken(tokenId);
-      setCurrentUser(user, token);
+      login(user, token);
     } catch (error) {
       setToast('error', error.message);
     } finally {

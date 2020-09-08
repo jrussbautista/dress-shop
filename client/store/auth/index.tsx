@@ -10,8 +10,8 @@ interface InitialStateType {
   isAuthenticated: boolean;
   currentUser: User | null;
   error: null | string;
-  logout(): void;
-  setCurrentUser(user: User, token: string): void;
+  logout(redirectUrl: string): void;
+  login(user: User, token: string, adminRedirect?: boolean): void;
   updateUser(user: User): void;
 }
 
@@ -20,7 +20,7 @@ const initialState = {
   currentUser: null,
   error: null,
   logout: () => null,
-  setCurrentUser: () => null,
+  login: () => null,
   updateUser: () => null,
 };
 
@@ -40,15 +40,20 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { ref } = useRouter().query;
 
-  const setCurrentUser = async (user: User, token: string) => {
+  const login = async (user: User, token: string, adminRedirect?: boolean) => {
     dispatch({ type: SET_CURRENT_USER, payload: user });
-    const url = ref ? `/product?id=${ref}` : '/profile';
+    let url = '';
+    if (adminRedirect) {
+      url = '/admin?selected_page=dashboard';
+    } else {
+      url = ref ? `/product?id=${ref}` : '/profile';
+    }
     autoLogin(token, url);
   };
 
-  const logout = () => {
+  const logout = (redirectUrl: string) => {
     destroyCookie({}, 'token');
-    Router.push('/auth?type=login');
+    Router.push(redirectUrl);
     dispatch({ type: LOGOUT_USER });
   };
 
@@ -57,7 +62,7 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ ...state, setCurrentUser, logout, updateUser }}>
+    <AuthContext.Provider value={{ ...state, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { User } from '../models';
-import { Cloudinary } from '../lib/cloudinary';
+import { Request, Response } from "express";
+import { User } from "../models";
+import { Cloudinary } from "../lib/cloudinary";
 
 export const update = async (req: Request, res: Response) => {
   try {
@@ -10,17 +10,20 @@ export const update = async (req: Request, res: Response) => {
     let user = await User.findById(id);
 
     if (!user)
-      return res.status(404).json({ error: { message: 'User not found' } });
+      return res.status(404).json({ error: { message: "User not found" } });
 
     if (user.id !== id) {
       return res
         .status(402)
-        .json({ error: { message: 'Ops user id mismatch' } });
+        .json({ error: { message: "Ops user id mismatch" } });
     }
 
     if (image) {
       // upload base64 image to cloudinary
-      const imageURL = await Cloudinary.upload(image);
+      const imageURL = await Cloudinary.upload(image, "avatar", {
+        height: 160,
+        width: 160,
+      });
       user = await User.findOneAndUpdate(
         { _id: id },
         { name, email, imageURL },
@@ -38,6 +41,6 @@ export const update = async (req: Request, res: Response) => {
   } catch (error) {
     res
       .status(500)
-      .json({ error: { message: 'Error in updating user details' } });
+      .json({ error: { message: "Error in updating user details" } });
   }
 };

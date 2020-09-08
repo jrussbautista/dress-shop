@@ -1,4 +1,4 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, Document } from "mongoose";
 
 export interface ProductDocument extends Document {
   name: string;
@@ -6,7 +6,6 @@ export interface ProductDocument extends Document {
   imageURL: string;
   category: string;
   description: string;
-  stocks: number;
 }
 
 const productSchema = new Schema(
@@ -16,7 +15,6 @@ const productSchema = new Schema(
     imageURL: String,
     category: String,
     description: String,
-    stocks: String,
   },
   {
     timestamps: true,
@@ -25,7 +23,7 @@ const productSchema = new Schema(
 
 productSchema.index(
   {
-    name: 'text',
+    name: "text",
   },
   {
     weights: {
@@ -34,4 +32,4 @@ productSchema.index(
   }
 );
 
-export const Product = model<ProductDocument>('Product', productSchema);
+export const Product = model<ProductDocument>("Product", productSchema);

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Product } from "../models";
 import APIFeatures from "../utils/ApiFeatures";
+import { Cloudinary } from "../lib/cloudinary";
 
 export const index = async (req: Request, res: Response) => {
   try {
@@ -41,17 +42,25 @@ export const show = async (req: Request, res: Response) => {
 
 export const store = async (req: Request, res: Response) => {
   try {
-    const { name, price, description, imageURL, category, stocks } = req.body;
+    const { name, price, description, image, category } = req.body;
+
+    // upload base64 image to cloudinary
+    const imageURL = await Cloudinary.upload(image, "products", {
+      height: 600,
+      width: 600,
+    });
+
     const product = await Product.create({
       name,
       price,
       description,
       imageURL,
       category,
-      stocks,
     });
+
     res.status(200).json({ data: { product } });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Error in creating product" });
   }
 };
@@ -65,7 +74,7 @@ export const remove = async (req: Request, res: Response) => {
 
   product.remove();
 
-  res.status(204);
+  res.status(204).json({ data: null });
 };
 
 export const update = async (req: Request, res: Response) => {

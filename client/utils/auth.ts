@@ -19,9 +19,9 @@ export const redirectUser = (ctx: NextPageContext, location: string): void => {
 };
 
 export const protectedRoutes = (pathname: string): boolean => {
-  const protectedRoutes = ['/profile', '/checkout', '/order'];
+  const routes = ['/profile', '/checkout', '/order', '/admin'];
 
-  if (protectedRoutes.includes(pathname)) {
+  if (routes.includes(pathname)) {
     return true;
   }
 
@@ -30,9 +30,13 @@ export const protectedRoutes = (pathname: string): boolean => {
 
 export const checkProtectedRoutes = (ctx: NextPageContext): void => {
   const isProtectedRoutes = protectedRoutes(ctx.pathname);
-  if (isProtectedRoutes) {
-    redirectUser(ctx, '/auth?type=login');
+  if (!isProtectedRoutes) return;
+
+  if (ctx.pathname === '/admin') {
+    redirectUser(ctx, '/admin/login');
+    return;
   }
+  redirectUser(ctx, '/auth?type=login');
 };
 
 export const setAuthToken = (token: string): void => {

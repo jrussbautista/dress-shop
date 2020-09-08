@@ -33,7 +33,7 @@ export const SignUpForm: React.FC = () => {
         onSubmit={(values) => {
           AuthService.signUp(values)
             .then(({ user, token }) => {
-              setCurrentUser(user, token);
+              login(user, token);
             })
             .catch((error) => {
               setToast('error', error.message);

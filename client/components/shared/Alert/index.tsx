@@ -14,7 +14,7 @@ export const Alert: React.FC<Props> = ({ type, message }) => {
       <style jsx>
         {`
           .alert {
-            padding: 1.2rem 1rem;
+            padding: 1.5rem 1rem;
             border-radius: 6px;
             font-size: 1.6rem;
           }

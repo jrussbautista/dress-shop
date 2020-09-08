@@ -27,6 +27,10 @@ export const DesktopMenu: React.FC = () => {
     setIsOpenDropdown(false);
   };
 
+  const onLogOut = () => {
+    logout('/auth?type=login');
+  };
+
   const handleSearchSubmit = (searchText: string) => {
     Router.push(`/search?keyword=${searchText}`);
   };
@@ -100,7 +104,7 @@ export const DesktopMenu: React.FC = () => {
                   <Button
                     type="button"
                     title="Log Out"
-                    onClick={logout}
+                    onClick={onLogOut}
                     style={{ width: '100%' }}
                   />
                 </div>
@@ -112,7 +116,7 @@ export const DesktopMenu: React.FC = () => {
             <Link href="/auth?type=register">
               <a>Sign Up</a>
             </Link>
-            <span style={{ fontWeight: 'normal', padding: '0 1rem' }}> | </span>
+            <span className="line"> | </span>
             <Link href="/auth?type=login">
               <a>Log In</a>
             </Link>
@@ -146,6 +150,10 @@ export const DesktopMenu: React.FC = () => {
 
         .header-right a:hover {
           color: var(--color-primary);
+        }
+
+        .line {
+          padding: 0 1rem;
         }
 
         .search-container {

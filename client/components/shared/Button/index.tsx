@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { Spinner } from 'components/shared';
 
 interface Props {
   onClick?(): void;
@@ -11,6 +12,7 @@ interface Props {
   disabled?: boolean;
   icon?: React.ReactElement;
   text?: boolean;
+  loading?: boolean;
 }
 
 export const Button: React.FC<Props> = ({
@@ -23,6 +25,7 @@ export const Button: React.FC<Props> = ({
   disabled,
   icon,
   text,
+  loading,
 }) => {
   return (
     <>
@@ -40,8 +43,14 @@ export const Button: React.FC<Props> = ({
           style={style}
           disabled={disabled}
         >
-          {icon && <span className="icon">{icon}</span>}
-          {title}
+          {loading ? (
+            <Spinner color="#fff" width={40} height={40} />
+          ) : (
+            <>
+              {icon && <span className="icon">{icon}</span>}
+              {title}
+            </>
+          )}
         </button>
       )}
       <style jsx>{`

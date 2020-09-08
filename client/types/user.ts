@@ -4,7 +4,7 @@ export type User = {
   name: string;
   imageURL: string;
   carts: string[];
-  role?: string;
+  role: 'user' | 'admin';
 };
 
 export type UserFields = {

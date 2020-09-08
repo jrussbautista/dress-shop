@@ -11,7 +11,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 export const LoginForm: React.FC = () => {
-  const { setCurrentUser } = useAuth();
+  const { login } = useAuth();
 
   const { setToast } = useToast();
 
@@ -32,7 +32,7 @@ export const LoginForm: React.FC = () => {
         onSubmit={({ email, password }) => {
           AuthService.login(email, password)
             .then(({ user, token }) => {
-              setCurrentUser(user, token);
+              login(user, token);
             })
             .catch((error) => {
               setToast('error', error.message);

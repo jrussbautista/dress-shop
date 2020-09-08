@@ -10,6 +10,7 @@ interface Props {
   onChange(e: React.ChangeEvent<HTMLInputElement>): void;
   placeholder?: string;
   autoComplete?: string | undefined;
+  required?: boolean;
 }
 
 export const Input: React.FC<Props> = ({
@@ -22,6 +23,7 @@ export const Input: React.FC<Props> = ({
   error,
   placeholder,
   autoComplete = 'false',
+  required,
 }) => {
   const inputClassName = error ? 'input error' : 'input';
 
@@ -42,6 +44,7 @@ export const Input: React.FC<Props> = ({
           value={value}
           placeholder={placeholder}
           autoComplete={autoComplete}
+          required={required}
         />
       </div>
       <style jsx>{`

@@ -24,11 +24,6 @@ const Sidebar: React.FC = () => {
               <a>Products</a>
             </Link>
           </li>
-          <li className={`${isActive('users') ? 'active' : ''}`}>
-            <Link href="/admin?selected_page=users">
-              <a>Users</a>
-            </Link>
-          </li>
         </ul>
       </aside>
       <style jsx>{`

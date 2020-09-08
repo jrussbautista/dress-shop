@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Dashboard, Products, Users } from 'components/domain/Admin';
+import { Dashboard, Products } from 'components/domain/Admin';
 import { useAuth } from 'store';
 import { Alert } from 'components/shared';
 
@@ -15,8 +15,6 @@ const Admin: React.FC = () => {
         return <Dashboard />;
       case 'products':
         return <Products />;
-      case 'users':
-        return <Users />;
       default:
         return null;
     }

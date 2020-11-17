@@ -1,5 +1,5 @@
 import { catchError } from 'utils/catchError';
-import apiClient from 'api/apiClient';
+import apiClient from 'utils/apiClient';
 
 interface IntentPayment {
   clientSecret: string;

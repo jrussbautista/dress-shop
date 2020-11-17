@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { LoginForm, SignUpForm, AuthSocial } from 'components/domain/Auth';
-import { AuthLink } from 'components/domain/Auth';
+import { LoginForm, SignUpForm, AuthSocial } from 'components/auth';
+import { AuthLink } from 'components/auth';
 import { MobileBottomMenu } from 'components/shared';
 
 const Auth: React.FC = () => {

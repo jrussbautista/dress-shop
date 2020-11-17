@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileEditForm, ProfileChangePassword } from 'components/domain/Profile';
+import { ProfileEditForm, ProfileChangePassword } from 'components/profile';
 import { MobileBottomMenu } from 'components/shared';
 
 const Profile: React.FC = () => {

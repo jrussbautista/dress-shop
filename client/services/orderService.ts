@@ -1,6 +1,6 @@
 import { Order } from 'types';
 import { catchError } from 'utils/catchError';
-import apiClient from 'api/apiClient';
+import apiClient from 'utils/apiClient';
 
 interface OrdersData {
   orders: Order[];

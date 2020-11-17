@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
-import { HomeBanner, HomeCategories, HomeProducts } from 'components/domain/Home';
-import { Spinner, Button } from 'components/shared';
+import React, { useState, useEffect } from 'react';
+import {
+  Spinner,
+  Button,
+  ProductsSkeleton,
+  ProductList,
+  Banners,
+  MobileBottomMenu,
+  Categories,
+} from 'components/shared';
 import { useShop } from 'store';
 import { GetServerSideProps } from 'next';
 import { BannerService, CategoryService } from 'services';
 import { Banner, Category } from 'types';
 import { useScrollRestoration } from 'hooks';
-import { MobileBottomMenu } from 'components/shared';
 
 interface Props {
   banners: Banner[];
@@ -15,7 +21,12 @@ interface Props {
 
 const Home: React.FC<Props> = ({ banners, categories }) => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const { isLoading, loadProducts, hasLoadMore } = useShop();
+  const { isLoading, loadProducts, hasLoadMore, products } = useShop();
+
+  useEffect(() => {
+    // load products if empty
+    products.length === 0 && loadProducts();
+  }, []);
 
   useScrollRestoration();
 
@@ -27,13 +38,12 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
 
   return (
     <>
-      <HomeBanner banners={banners} />
+      <Banners banners={banners} />
       <div className="container">
         <div className="heading">Shop Categories</div>
-        <HomeCategories categories={categories} />
+        <Categories categories={categories} />
         <div className="heading">Product Overview</div>
-
-        <HomeProducts />
+        {isLoading ? <ProductsSkeleton number={20} /> : <ProductList products={products} />}
 
         {isLoadingMore && (
           <div className="loading-wrapper">

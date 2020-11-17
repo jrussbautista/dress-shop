@@ -1,6 +1,6 @@
 import { Product } from 'types';
 import { catchError } from 'utils/catchError';
-import apiClient from 'api/apiClient';
+import apiClient from 'utils/apiClient';
 
 interface ProductsData {
   products: Product[];

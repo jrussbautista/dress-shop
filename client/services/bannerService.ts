@@ -1,4 +1,4 @@
-import apiClient from 'api/apiClient';
+import apiClient from 'utils/apiClient';
 import { Banner } from 'types';
 import { catchError } from 'utils/catchError';
 

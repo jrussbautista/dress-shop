@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Dashboard, Products } from 'components/domain/Admin';
+import { Dashboard, Products } from 'components/admin';
 import { useAuth } from 'store';
 import { Alert } from 'components/shared';
 

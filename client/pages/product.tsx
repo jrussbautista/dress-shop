@@ -1,6 +1,6 @@
 import Router from 'next/router';
 import React, { useState } from 'react';
-import { ProductInfo, ProductRecommended } from 'components/domain/Product';
+import { ProductInfo, ProductRecommended } from 'components/product';
 import { PopUp, Meta, MobileBottomMenu, InputQuantity } from 'components/shared';
 import { usePopUp } from 'hooks';
 import { useAuth, useCart, useToast } from 'store';

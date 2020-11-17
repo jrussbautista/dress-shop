@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { OrderList } from 'components/domain/Order';
+import { OrderList } from 'components/order';
 import { Meta, MobileBottomMenu, ErrorPage } from 'components/shared';
 import { Order as OrderType } from 'types';
 import { OrderService } from 'services/orderService';

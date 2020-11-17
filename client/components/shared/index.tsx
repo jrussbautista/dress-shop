@@ -1,5 +1,7 @@
 export * from './Alert';
 export * from './Button';
+export * from './Banners';
+export * from './Categories';
 export * from './ErrorPage';
 export * from './Icons';
 export * from './InputQuantity';

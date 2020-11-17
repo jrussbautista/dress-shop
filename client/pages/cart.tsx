@@ -1,5 +1,5 @@
 import React from 'react';
-import { CartList, CartSubTotal, CarSkeleton } from 'components/domain/Cart';
+import { CartList, CartSubTotal, CarSkeleton } from 'components/cart';
 import { useAuth, useCart } from 'store';
 import { ErrorPage, Button, Meta, MobileBottomMenu } from 'components/shared';
 import calculateCartTotal from 'utils/calculateCartTotal';

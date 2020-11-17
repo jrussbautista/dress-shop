@@ -6,7 +6,7 @@ interface Props {
   banners: Banner[];
 }
 
-export const HomeBanner: React.FC<Props> = ({ banners }) => {
+export const Banners: React.FC<Props> = ({ banners }) => {
   const settings = {
     dots: true,
     infinite: true,

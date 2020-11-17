@@ -6,7 +6,7 @@ interface Props {
   categories: Category[];
 }
 
-export const HomeCategories: React.FC<Props> = ({ categories }) => {
+export const Categories: React.FC<Props> = ({ categories }) => {
   return (
     <div>
       <div className="category-container">

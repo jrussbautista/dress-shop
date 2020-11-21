@@ -1,8 +1,16 @@
 import React from 'react';
-import { CartList, CartSubTotal, CarSkeleton } from 'components/cart';
-import { useAuth, useCart } from 'store';
-import { ErrorPage, Button, Meta, MobileBottomMenu } from 'components/shared';
+import { CartList, CartSubTotal, CartSkeleton } from 'components/cart';
+import { useAuth, useCart } from 'contexts';
+import {
+  ErrorMessage,
+  Button,
+  Meta,
+  MobileBottomMenu,
+  Heading,
+  Container,
+} from 'components/shared';
 import calculateCartTotal from 'utils/calculateCartTotal';
+import styles from 'styles/Cart.module.css';
 
 const Cart: React.FC = () => {
   const { currentUser } = useAuth();
@@ -11,76 +19,43 @@ const Cart: React.FC = () => {
   const { cartTotal } = calculateCartTotal(carts);
 
   if (loading) {
-    return <CarSkeleton />;
+    return <CartSkeleton />;
   }
 
   if (error) {
-    return <ErrorPage message="Cannot fetch cart at this moment. Please try again" />;
+    return <ErrorMessage message="Cannot fetch cart at this moment. Please try again" />;
   }
 
   return (
     <>
       <Meta title="Cart" />
-      <div className="container">
+      <Container>
         {currentUser ? (
-          <div>
-            <h1 className="page-title">Your Cart</h1>
+          <div className={styles.cartContainer}>
+            <Heading>Your Cart </Heading>
             {carts.length > 0 ? (
               <>
                 <CartList />
                 <CartSubTotal total={Number(cartTotal)} />
-                <div className="checkout-btn-wrapper">
-                  <Button href="/checkout" title="Check Out" style={{ width: '15rem' }} />
+                <div className={styles.checkoutBtnWrapper}>
+                  <Button href="/checkout" title="Check Out" />
                 </div>
               </>
             ) : (
-              <div className="msg-container">
-                <div className="msg"> Your cart is empty :( </div>
-                <Button href="/" title="Go Shop Now" style={{ width: '20rem' }} />
+              <div className={styles.msgContainer}>
+                <div className={styles.msg}> Your cart is empty :( </div>
+                <Button href="/" title="Go Shop Now" />
               </div>
             )}
           </div>
         ) : (
-          <div className="msg-container">
-            <h1 className="page-title"> Please login to see your cart </h1>
-            <Button href="/auth?type=login" title="Log In" style={{ width: '15rem' }} />
+          <div className={styles.msgContainer}>
+            <h1 className={styles.msg}> Please login to see your cart </h1>
+            <Button href="/auth?type=login" title="Log In" />
           </div>
         )}
-      </div>
+      </Container>
       <MobileBottomMenu />
-      <style jsx>
-        {`
-          .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-          }
-
-          .page-title {
-            font-size: 3rem;
-          }
-
-          .checkout-btn-wrapper {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-          }
-
-          .msg {
-            font-size: 2.2rem;
-            margin: 2rem 0;
-          }
-
-          .msg-container {
-            padding: 2rem 0;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-          }
-        `}
-      </style>
     </>
   );
 };

@@ -1,14 +1,23 @@
 import Router from 'next/router';
 import React, { useState } from 'react';
-import { ProductInfo, ProductRecommended } from 'components/product';
-import { PopUp, Meta, MobileBottomMenu, InputQuantity } from 'components/shared';
+import Image from 'next/image';
+import {
+  PopUp,
+  Meta,
+  MobileBottomMenu,
+  InputQuantity,
+  ProductList,
+  Container,
+  Heading,
+} from 'components/shared';
 import { usePopUp } from 'hooks';
-import { useAuth, useCart, useToast } from 'store';
+import { useAuth, useCart, useToast } from 'contexts';
 import { Product as ProductTypes, Cart } from 'types';
 import { GetServerSideProps } from 'next';
 import { ProductService } from 'services/productService';
 import { CartService } from 'services';
-import { ErrorPage, Button } from 'components/shared';
+import { ErrorMessage, Button } from 'components/shared';
+import styles from 'styles/Product.module.css';
 
 interface Props {
   product: ProductTypes;
@@ -68,23 +77,25 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
   };
 
   if (error) {
-    return <ErrorPage message={error} />;
+    return <ErrorMessage message={error} />;
   }
 
   return (
     <>
       <Meta title={product.name} />
-      <div className="container">
+      <Container>
         <PopUp isOpen={isOpen} message={`Successfully added to cart`} />
-        <div className="product-container">
-          <div className="main">
-            <div className="cover-img">
-              <img className="img" src={product.imageURL} alt={product.name} />
+        <div className={styles.productContainer}>
+          <div className={styles.main}>
+            <div className={styles.coverImg}>
+              <img className={styles.img} src={product.imageURL} alt={product.name} />
             </div>
           </div>
-          <div className="product-info">
-            <ProductInfo product={product} />
-            <div className="product-action">
+          <div className={styles.productInfo}>
+            <div className={styles.productName}>{product.name}</div>
+            <div className={styles.productPrice}>P{product.price}</div>
+            <div className={styles.productDesc}>{product.description}</div>
+            <div className={styles.productAction}>
               <InputQuantity
                 value={qty}
                 onButtonClick={handleButtonChangeQty}
@@ -96,68 +107,15 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
                 onClick={handleAddToCart}
                 variant="primary"
                 title="Add to Cart"
-                style={{ borderRadius: '50px', width: '20rem', marginLeft: 20 }}
+                className={styles.btnAddCart}
               />
             </div>
           </div>
         </div>
-        <ProductRecommended products={relatedProducts} />
-        <MobileBottomMenu />
-      </div>
-      <style jsx>{`
-        .container {
-          max-width: 120rem;
-          margin: 0 auto;
-        }
-
-        .product-container {
-          display: flex;
-          flex-wrap: wrap;
-          margin-bottom: 2rem;
-        }
-
-        .main,
-        .product-info {
-          flex-basis: 100%;
-        }
-
-        .product-info {
-          padding: 2rem;
-        }
-
-        .cover-img {
-          position: relative;
-          padding-bottom: 100%;
-        }
-
-        .img {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          object-fit: cover;
-        }
-
-        .product-action {
-          display: flex;
-          align-items: center;
-          margin: 1rem 0;
-        }
-
-        @media only screen and (min-width: 1024px) {
-          .main,
-          .product-info {
-            flex-basis: 50%;
-            margin-bottom: 2rem;
-            padding: 0 2rem;
-          }
-
-          .container {
-            margin: 3rem auto;
-          }
-        }
-      `}</style>
+        <Heading className={styles.heading}> Related Products </Heading>
+        <ProductList products={relatedProducts} />
+      </Container>
+      <MobileBottomMenu />
     </>
   );
 };

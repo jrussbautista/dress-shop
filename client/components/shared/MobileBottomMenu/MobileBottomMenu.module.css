@@ -1,0 +1,58 @@
+.bottomMenu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 9;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ccc;
+}
+
+.list {
+  flex: 1;
+}
+
+.active {
+  color: var(--color-primary);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: inherit;
+}
+
+.icon {
+  font-size: 2.5rem;
+  position: relative;
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.cartNum {
+  width: 2.5rem;
+  height: 2.5rem;
+  position: absolute;
+  top: -4px;
+  right: -2rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+@media only screen and (min-width: 1024px) {
+  .bottomMenu {
+    display: none;
+  }
+}

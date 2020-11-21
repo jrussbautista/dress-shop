@@ -1,0 +1,54 @@
+.bottom {
+  margin-top: 3rem;
+}
+
+.userPictureContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.userAvatar {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.userAvatar .image {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.userTextContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-dark);
+}
+
+.userText {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.uploadContainer {
+  position: relative;
+}
+
+.uploadContainer input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

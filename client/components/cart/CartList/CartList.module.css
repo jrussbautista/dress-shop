@@ -1,0 +1,23 @@
+.cartHeader {
+  display: none;
+  font-size: 2rem;
+  border-bottom: 1px solid #e8e8e1;
+  padding: 2rem 0;
+  margin-bottom: 3rem;
+}
+
+.cartHeaderProduct {
+  width: 32rem;
+  text-align: left;
+}
+
+.cartHeaderLbl {
+  flex: 1;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .cartHeader {
+    display: flex;
+  }
+}

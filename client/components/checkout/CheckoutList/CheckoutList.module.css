@@ -1,0 +1,34 @@
+.itemContainer {
+  padding: 1rem;
+}
+
+.main {
+  display: flex;
+  width: 250px;
+}
+
+.image {
+  width: 12rem;
+  height: 12rem;
+  object-fit: contain;
+}
+
+.info {
+  display: flex;
+}
+
+.price {
+  color: var(--color-red);
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.content {
+  flex: 1;
+}
+
+.orderTotal {
+  color: var(--color-red);
+  font-weight: 600;
+  font-size: 1.7rem;
+}

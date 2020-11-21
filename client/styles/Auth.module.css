@@ -1,0 +1,22 @@
+.authContainer {
+  width: 50rem;
+  margin: 0 auto;
+}
+
+.or {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.or .line {
+  flex: 1;
+  background: rgb(232, 233, 234);
+  color: rgb(134, 144, 153);
+  height: 1px;
+}
+
+.or .text {
+  padding: 0 1rem;
+}

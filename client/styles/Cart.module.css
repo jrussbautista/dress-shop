@@ -1,0 +1,23 @@
+.checkoutBtnWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.msg {
+  font-size: 2.2rem;
+  margin: 2rem 0;
+}
+
+.cartContainer {
+  padding: 2rem;
+}
+
+.msgContainer {
+  padding: 2rem 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

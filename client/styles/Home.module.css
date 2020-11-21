@@ -1,0 +1,28 @@
+.container {
+  padding: 2rem 0;
+}
+
+.loadMore {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 5rem 0;
+}
+
+.loadingWrapper {
+  width: 100%;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.reachedEnd {
+  text-align: center;
+  color: var(--color-primary);
+  padding: 2rem 0;
+  font-size: 1.5rem;
+}
+
+.loadMoreBtn {
+  width: 20rem;
+  border-radius: 50px;
+}

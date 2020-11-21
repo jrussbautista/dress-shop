@@ -2,17 +2,21 @@ import React, { useState, useEffect } from 'react';
 import {
   Spinner,
   Button,
-  ProductsSkeleton,
+  ProductListSkeleton,
   ProductList,
   Banners,
   MobileBottomMenu,
   Categories,
+  Heading,
+  Container,
 } from 'components/shared';
-import { useShop } from 'store';
+import { useShop } from 'contexts';
 import { GetServerSideProps } from 'next';
 import { BannerService, CategoryService } from 'services';
 import { Banner, Category } from 'types';
 import { useScrollRestoration } from 'hooks';
+import { colors } from 'utils/theme';
+import styles from 'styles/Home.module.css';
 
 interface Props {
   banners: Banner[];
@@ -36,87 +40,41 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
     setIsLoadingMore(false);
   };
 
+  const showLoadMore = () => {
+    return !isLoading && hasLoadMore && !isLoadingMore;
+  };
+
   return (
     <>
       <Banners banners={banners} />
-      <div className="container">
-        <div className="heading">Shop Categories</div>
+      <Container className={styles.container}>
+        <Heading>Shop Categories</Heading>
         <Categories categories={categories} />
-        <div className="heading">Product Overview</div>
-        {isLoading ? <ProductsSkeleton number={20} /> : <ProductList products={products} />}
-
+        <Heading>Product Overview</Heading>
+        {isLoading ? <ProductListSkeleton number={20} /> : <ProductList products={products} />}
         {isLoadingMore && (
-          <div className="loading-wrapper">
-            <Spinner color={'var(--color-primary)'} width={60} height={60} />
+          <div className={styles.loadingWrapper}>
+            <Spinner color={colors.primary} width={60} height={60} />
           </div>
         )}
 
-        {!isLoading && hasLoadMore && !isLoadingMore && (
-          <div className="load-more">
+        {showLoadMore() && (
+          <div className={styles.loadMore}>
             <Button
               title="Load More"
+              className={styles.loadMoreBtn}
               onClick={handleLoadMore}
               type="button"
               variant="outline"
-              style={{
-                borderRadius: '50px',
-                fontSize: '1.6rem',
-                width: '20rem',
-              }}
             />
           </div>
         )}
 
         {!hasLoadMore && (
-          <div className="reached-end">No more products. You have reached the end.</div>
+          <div className={styles.reachedEnd}>No more products. You have reached the end.</div>
         )}
-      </div>
+      </Container>
       <MobileBottomMenu />
-      <style jsx>
-        {`
-          .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-          }
-
-          .heading {
-            padding: 1.5rem;
-            font-weight: 700;
-            font-size: 3rem;
-            line-height: 1.1;
-            text-transform: uppercase;
-          }
-
-          .load-more {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin: 5rem 0;
-          }
-
-          .load-more .btn:focus {
-            outline: none;
-          }
-
-          .load-more .btn:hover {
-            background-color: var(--color-primary);
-            color: #fff;
-          }
-
-          .loading-wrapper {
-            width: 100%;
-            text-align: center;
-            padding: 2rem 0;
-          }
-
-          .reached-end {
-            text-align: center;
-            color: var(--color-primary);
-            padding: 2rem 0;
-            font-size: 1.5rem;
-          }
-        `}
-      </style>
     </>
   );
 };

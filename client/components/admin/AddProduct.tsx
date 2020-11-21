@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Input, Button } from 'components/shared';
-import { useToast, useModal } from 'store';
+import { useToast, useModal } from 'contexts';
 import { ProductService } from 'services';
 import { Product } from 'types';
 

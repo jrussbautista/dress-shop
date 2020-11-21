@@ -1,0 +1,35 @@
+.pagination {
+  display: flex;
+  padding: 2rem 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination li {
+  background-color: #fff;
+  margin-right: 1rem;
+  border-radius: var(--border-radius);
+}
+
+.pagination li button {
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.pagination .active {
+  background-color: var(--color-dark);
+}
+
+.pagination li a,
+.pagination li span,
+.pagination button {
+  color: var(--color-dark);
+  padding: 1rem 2rem;
+  display: block;
+  font-size: 1.8rem;
+}
+
+.pagination .active span {
+  color: #fff;
+}

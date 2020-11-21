@@ -1,0 +1,36 @@
+.searchBarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: sticky;
+  top: 8rem;
+  z-index: 9;
+  background-color: #fff;
+}
+
+.sortContainer {
+  margin: 0 0 2rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.message {
+  text-align: center;
+  margin: 20px 0;
+}
+
+@media only screen and (min-width: 1024px) {
+  .sortContainer {
+    justify-content: space-between;
+  }
+
+  .searchBarContainer {
+    display: none;
+  }
+}

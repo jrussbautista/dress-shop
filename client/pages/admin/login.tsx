@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Meta, Button, PageLoader, Input } from 'components/shared';
-import { useAuth, useToast } from 'store';
+import { useAuth, useToast } from 'contexts';
 import { AuthService } from 'services';
 
 const LoginSchema = Yup.object().shape({

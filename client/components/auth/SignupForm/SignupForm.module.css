@@ -1,0 +1,29 @@
+.pageHeading {
+  font-size: 3rem;
+  text-transform: uppercase;
+}
+
+.authForm {
+  padding: 2rem 0;
+  margin: 0 auto;
+}
+
+.bottom {
+  margin-top: 2rem;
+}
+
+.error {
+  color: red;
+  font-size: 1.6rem;
+  padding: 0.2rem 0;
+}
+
+.button {
+  width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .authForm {
+    width: 100%;
+  }
+}

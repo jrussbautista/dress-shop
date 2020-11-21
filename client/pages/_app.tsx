@@ -1,11 +1,11 @@
 import React from 'react';
 import App, { AppProps, AppContext } from 'next/app';
-import { StoreProvider } from 'store';
+import { StoreProvider } from 'contexts';
 import { parseCookies, destroyCookie } from 'nookies';
 import { checkProtectedRoutes } from 'utils/auth';
 import { AuthService } from 'services/authService';
-import { MainLayout } from 'layouts/main';
-import { AdminLayout } from 'layouts/admin';
+import { MainLayout } from 'components/layouts/main';
+import { AdminLayout } from 'components/layouts/admin';
 import { User } from 'types';
 import 'styles/global.css';
 

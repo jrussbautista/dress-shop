@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { OrderList } from 'components/order';
-import { Meta, MobileBottomMenu, ErrorPage } from 'components/shared';
+import { Meta, MobileBottomMenu, ErrorPage, Container, Heading } from 'components/shared';
 import { Order as OrderType } from 'types';
 import { OrderService } from 'services/orderService';
 
@@ -20,21 +20,11 @@ const Order: React.FC<Props> = ({ orders, error }) => {
   return (
     <>
       <Meta title="My Orders" />
-      <div className="container">
-        <h1 className="page-title">My Orders</h1>
+      <Container>
+        <Heading> My Orders </Heading>
         <OrderList orders={orders} />
-      </div>
+      </Container>
       <MobileBottomMenu />
-      <style jsx>{`
-        .container {
-          max-width: 1200px;
-          margin: 2rem auto;
-          padding: 0 2rem;
-        }
-        .page-title {
-          font-size: 3rem;
-        }
-      `}</style>
     </>
   );
 };

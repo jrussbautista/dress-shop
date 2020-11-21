@@ -4,7 +4,7 @@ import { ProductService } from 'services';
 import { ErrorPage, Pagination, Spinner, Button, Modal } from 'components/shared';
 import { FaTrash } from 'react-icons/fa';
 import { formatPrice } from 'utils/helpers';
-import { useModal, useToast } from 'store';
+import { useModal, useToast } from 'contexts';
 import AddProduct from './AddProduct';
 
 const LIMIT = 10;

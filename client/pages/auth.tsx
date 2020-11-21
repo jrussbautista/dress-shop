@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { LoginForm, SignUpForm, AuthSocial } from 'components/auth';
-import { AuthLink } from 'components/auth';
+import { LoginForm, SignUpForm, AuthSocial, AuthLink } from 'components/auth';
 import { MobileBottomMenu } from 'components/shared';
+import styles from 'styles/Auth.module.css';
 
 const Auth: React.FC = () => {
   const { query } = useRouter();
@@ -13,41 +13,17 @@ const Auth: React.FC = () => {
   return (
     <>
       <>
-        <div className="auth-container">
+        <div className={styles.authContainer}>
           {authElement}
           <AuthLink type={type} />
-          <div className="or">
-            <span className="line"></span>
-            <span className="text">or</span>
-            <span className="line"></span>
+          <div className={styles.or}>
+            <span className={styles.line}></span>
+            <span className={styles.text}>or</span>
+            <span className={styles.line}></span>
           </div>
           <AuthSocial />
         </div>
         <MobileBottomMenu />
-        <style jsx>{`
-          .auth-container {
-            width: 50rem;
-            margin: 0 auto;
-          }
-
-          .or {
-            margin: 1rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-
-          .or .line {
-            flex: 1;
-            background: rgb(232, 233, 234);
-            color: rgb(134, 144, 153);
-            height: 1px;
-          }
-
-          .or .text {
-            padding: 0 1rem;
-          }
-        `}</style>
       </>
     </>
   );

@@ -1,0 +1,29 @@
+.alert {
+  border-radius: 6px;
+  padding: 2rem 1.5rem;
+  font-size: 1.7rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+}
+
+.success {
+  background-color: var(--color-success);
+  color: #fff;
+}
+
+.error {
+  background-color: var(--color-danger);
+  color: var(--color-danger-light);
+}
+
+.close {
+  padding: 0 1rem;
+  cursor: pointer;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #fff;
+}

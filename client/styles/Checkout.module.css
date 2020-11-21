@@ -1,0 +1,64 @@
+.wrapper {
+  padding: 2rem;
+}
+
+.paymentTotal {
+  margin: 2rem 0;
+}
+
+.label {
+  font-size: 1.6rem;
+  padding: 0 6rem;
+}
+
+.item {
+  font-size: 1.6rem;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.total {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.withOr {
+  padding: 2rem 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.middle {
+  padding: 0 0.6rem;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-color: #ccc;
+}
+
+@media only screen and (min-width: 1024px) {
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    padding: 0;
+  }
+
+  .left {
+    width: 55%;
+    padding-left: 4rem;
+  }
+
+  .right {
+    flex: 1;
+  }
+}

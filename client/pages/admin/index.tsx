@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { Dashboard, Products } from 'components/admin';
-import { useAuth } from 'store';
+import { useAuth } from 'contexts';
 import { Alert } from 'components/shared';
 
 const Admin: React.FC = () => {

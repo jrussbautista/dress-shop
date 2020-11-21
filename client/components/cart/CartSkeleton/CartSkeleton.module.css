@@ -1,0 +1,57 @@
+.skeletonContainer {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.container {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.pageHeading {
+  background-color: var(--color-gray-light);
+  height: 4rem;
+  margin-bottom: 2rem;
+  width: 20rem;
+}
+
+.box {
+  width: 15rem;
+  height: 15rem;
+  background-color: var(--color-gray-light);
+  margin-right: 2rem;
+}
+
+.line {
+  background-color: var(--color-gray-light);
+  height: 3rem;
+  width: 20rem;
+  margin-right: 1rem;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.right .line {
+  margin-top: 2rem;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2rem;
+}
+@media only screen and (min-width: 768px) {
+  .right {
+    flex-direction: row;
+  }
+  .right .line {
+    width: 20rem;
+    flex: 1;
+  }
+}

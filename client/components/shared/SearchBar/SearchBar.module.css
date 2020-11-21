@@ -1,0 +1,25 @@
+.searchButton {
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.searchForm {
+  width: 30rem;
+  display: flex;
+  height: 5rem;
+  border-radius: 5rem;
+  padding: 0 1rem 0 2rem;
+  background-color: var(--color-gray-dark);
+}
+
+.searchInput {
+  border: 1px solid transparent;
+  width: 100%;
+  font-size: 1.5rem;
+  background-color: transparent;
+}
+
+.searchInput:focus {
+  outline: none;
+}

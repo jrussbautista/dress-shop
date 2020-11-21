@@ -1,13 +1,61 @@
 import Router, { useRouter } from 'next/router';
-import React from 'react';
-import { SearchFilter, SearchTabCategory, SearchProducts } from 'components/search';
-import { Meta, MobileBottomMenu, SearchBar } from 'components/shared';
+import React, { useEffect, useState } from 'react';
+import { Product } from 'types';
+import { SearchFilter, SearchCategory } from 'components/search';
+import {
+  Meta,
+  MobileBottomMenu,
+  SearchBar,
+  ProductsSkeleton,
+  ProductList,
+  Container,
+} from 'components/shared';
+import { ProductService } from 'services';
+import styles from 'styles/Search.module.css';
+
+interface IParams {
+  category?: string;
+  sort?: string;
+  keyword?: string;
+}
 
 const Search: React.FC = () => {
   const { query, pathname } = useRouter();
-  let { category, sort } = query;
-  category = (category as string) || '';
-  sort = (sort as string) || '';
+  const [products, setProducts] = useState<Product[]>([]);
+  const [error, setError] = useState<null | string>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const category = query.category as string;
+  const keyword = query.keyword as string;
+  const sort = query.sort as string;
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        setIsLoading(true);
+
+        let params: IParams = {};
+
+        if (category) {
+          params = { ...params, category };
+        }
+        if (sort) {
+          params = { ...params, sort };
+        }
+        if (keyword) {
+          params = { ...params, keyword };
+        }
+
+        const payload = { params };
+
+        const { products } = await ProductService.fetchProducts(payload);
+        setProducts(products);
+        setIsLoading(false);
+      } catch (error) {
+        setError('Error in fetching products. Please try again.');
+      }
+    };
+    getProducts();
+  }, [category, sort, keyword]);
 
   const handleTabChange = (selected: string) => {
     Router.push({ pathname, query: { ...query, category: selected } });
@@ -24,56 +72,29 @@ const Search: React.FC = () => {
   return (
     <>
       <Meta title="Search" />
-      <div className="container">
-        <div className="search-bar-container">
+      <Container>
+        <div className={styles.searchBarContainer}>
           <SearchBar onSubmit={handleSearchSubmit} style={{ width: '100%' }} isFocus />
         </div>
-        <div className="sort-container">
-          <SearchTabCategory active={category} onChangeTab={handleTabChange} />
+        <div className={styles.sortContainer}>
+          <SearchCategory active={category} onChangeTab={handleTabChange} />
           <SearchFilter handleChange={handleFilterChange} active={sort} />
         </div>
-
-        <SearchProducts />
+        {isLoading ? (
+          <ProductsSkeleton number={20} />
+        ) : (
+          <>
+            {products.length > 0 ? (
+              <ProductList products={products} />
+            ) : (
+              <div className={styles.message}>
+                No products found. Try searching for other keyword.
+              </div>
+            )}
+          </>
+        )}
         <MobileBottomMenu />
-      </div>
-      <style jsx>{`
-        .container {
-          max-width: 120rem;
-          margin: 0 auto;
-        }
-
-        .search-bar-container {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 2rem;
-          position: sticky;
-          top: 8rem;
-          z-index: 9;
-          background-color: #fff;
-        }
-
-        .sort-container {
-          margin: 0 0 2rem 0;
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: center;
-          background: rgba(0, 0, 0, 0.03);
-          padding: 1rem;
-          border-radius: 4px;
-        }
-
-        @media only screen and (min-width: 1024px) {
-          .sort-container {
-            justify-content: space-between;
-          }
-
-          .search-bar-container {
-            display: none;
-          }
-        }
-      `}</style>
+      </Container>
     </>
   );
 };

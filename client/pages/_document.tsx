@@ -14,9 +14,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta name="description" content="Dress Shop" />
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
           <link rel="stylesheet" href="/css/nprogress.css" />
           <link
             rel="stylesheet"

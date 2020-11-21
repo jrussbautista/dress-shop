@@ -1,0 +1,65 @@
+.container {
+  padding: 0 1.5rem;
+}
+
+.message {
+  padding: 1rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.filterContainer {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  font-size: 1.8rem;
+  padding-right: 1rem;
+}
+
+.select {
+  border: 1px solid var(--color-gray-light);
+  background: #fff;
+  position: relative;
+  font-size: 1.8rem;
+  padding: 1rem 1rem;
+  width: 21rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.selectItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid transparent;
+  width: 100%;
+  font-size: 1.6rem;
+  background-color: transparent;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  margin-top: 1rem;
+  left: 0;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 6px;
+  z-index: 1;
+  width: 20rem;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.dropdown .item {
+  font-size: 1.6rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.dropdown li:hover {
+  color: var(--color-primary);
+}

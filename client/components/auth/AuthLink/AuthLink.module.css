@@ -1,0 +1,10 @@
+.link {
+  margin-top: 2rem;
+  color: var(--color-dark);
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.linkText {
+  color: var(--color-primary);
+}

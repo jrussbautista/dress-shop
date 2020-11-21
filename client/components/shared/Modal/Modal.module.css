@@ -1,0 +1,43 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalBody {
+  min-width: 50%;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalTitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.close {
+  font-size: 1.5rem;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.modalContent {
+  font-size: 1.6rem;
+  padding: 1rem 0;
+}

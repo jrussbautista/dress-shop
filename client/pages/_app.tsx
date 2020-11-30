@@ -4,8 +4,8 @@ import { StoreProvider } from 'contexts';
 import { parseCookies, destroyCookie } from 'nookies';
 import { checkProtectedRoutes } from 'utils/auth';
 import { AuthService } from 'services/authService';
-import { MainLayout } from 'components/layouts/main';
-import { AdminLayout } from 'components/layouts/admin';
+import MainLayout from 'components/layouts/main-layout';
+import AdminLayout from 'components/layouts/admin-layout';
 import { User } from 'types';
 import 'styles/global.css';
 

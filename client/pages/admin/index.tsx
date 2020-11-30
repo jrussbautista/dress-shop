@@ -9,7 +9,7 @@ const Admin: React.FC = () => {
   const { query } = useRouter();
   const selectedPage = query.selected_page || 'dashboard';
 
-  const renderPage = () => {
+  const renderSection = () => {
     switch (selectedPage) {
       case 'dashboard':
         return <Dashboard />;
@@ -26,7 +26,7 @@ const Admin: React.FC = () => {
 
   return (
     <>
-      <div>{renderPage()}</div>
+      <div>{renderSection()}</div>
     </>
   );
 };

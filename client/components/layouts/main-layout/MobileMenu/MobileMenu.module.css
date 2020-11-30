@@ -1,0 +1,17 @@
+.headerItem {
+  display: flex;
+  align-items: center;
+}
+
+.menuButton {
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 2.5rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .headerMobile {
+    display: none;
+  }
+}

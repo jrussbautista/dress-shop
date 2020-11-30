@@ -1,0 +1,124 @@
+.header-item {
+  display: flex;
+  align-items: center;
+}
+
+.desktopMenu {
+  display: none;
+}
+
+.headerItem li {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  font-size: 1.7rem;
+  position: relative;
+}
+
+.headerItem span,
+.headerItem a {
+  display: flex;
+  align-items: center;
+  color: #3d3d3d;
+}
+
+.headerRight a:hover {
+  color: var(--color-primary);
+}
+
+.line {
+  padding: 0 1rem;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.cartNum {
+  width: 2.5rem;
+  height: 2.5rem;
+  position: absolute;
+  top: -1.3rem;
+  left: 3rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.user {
+  color: #fff;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.userTextContainer {
+  background-color: var(--color-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.user img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.iconContainer svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.dropdown {
+  width: 20rem;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 1rem;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.dropdown .item:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown .item:last-child {
+  padding: 0.8rem 0;
+}
+
+.dropdown .item a {
+  padding: 0.8rem 0;
+  width: 100%;
+}
+
+.dropdown li span {
+  font-size: 2rem;
+}
+
+.dropdown li:last-child {
+  border-top: 1px solid var(--color-gray-light);
+}
+
+@media only screen and (min-width: 1024px) {
+  .desktopMenu {
+    display: flex;
+  }
+}

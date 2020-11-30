@@ -1,0 +1,43 @@
+.loadingSpinner {
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  width: 20rem;
+  padding: 2rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  margin-right: 2rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.value {
+  font-size: 3rem;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.welcomeTitle {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.welcomeTitle span {
+  font-weight: 600;
+}
+
+.success {
+  background-color: var(--color-success);
+}
+
+.info {
+  background-color: var(--color-info);
+}

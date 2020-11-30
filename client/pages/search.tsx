@@ -6,9 +6,9 @@ import {
   Meta,
   MobileBottomMenu,
   SearchBar,
-  ProductsSkeleton,
   ProductList,
   Container,
+  ProductListSkeleton,
 } from 'components/shared';
 import { ProductService } from 'services';
 import styles from 'styles/Search.module.css';
@@ -81,7 +81,7 @@ const Search: React.FC = () => {
           <SearchFilter handleChange={handleFilterChange} active={sort} />
         </div>
         {isLoading ? (
-          <ProductsSkeleton number={20} />
+          <ProductListSkeleton number={20} />
         ) : (
           <>
             {products.length > 0 ? (

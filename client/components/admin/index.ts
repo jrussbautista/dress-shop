@@ -1,2 +1,2 @@
-export * from './Dashboard';
-export * from './Products';
+export { default as Dashboard } from './Dashboard';
+export { default as Products } from './Products';

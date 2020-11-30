@@ -1,0 +1,16 @@
+.sidebar {
+  background-color: #fff;
+  width: 20rem;
+  box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
+  height: 100%;
+}
+
+.sidebarList li {
+  display: block;
+  padding: 1.5rem;
+  font-size: 1.6rem;
+}
+
+.sidebar .active a {
+  color: var(--color-primary);
+}

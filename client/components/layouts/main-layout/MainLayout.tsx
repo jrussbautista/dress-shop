@@ -5,6 +5,7 @@ import NProgress from 'nprogress';
 import Header from './Header';
 import Router from 'next/router';
 import { initGA, logPageView } from 'utils/analytics';
+import styles from './MainLayout.module.css';
 
 NProgress.configure({ showSpinner: false });
 
@@ -24,7 +25,7 @@ interface Props {
   title?: string;
 }
 
-export const MainLayout: React.FC<Props> = ({ children, title = 'Dress Shop' }) => {
+const MainLayout: React.FC<Props> = ({ children, title = 'Dress Shop' }) => {
   useEffect(() => {
     if (!window.GA_INITIALIZED) {
       initGA();
@@ -40,12 +41,9 @@ export const MainLayout: React.FC<Props> = ({ children, title = 'Dress Shop' }) 
         <meta property="og:title" content={title} key="title" />
       </Head>
       <Header />
-      <main>{children}</main>
-      <style jsx>{`
-        main {
-          margin-bottom: 10rem;
-        }
-      `}</style>
+      <main className={styles.main}>{children}</main>
     </>
   );
 };
+
+export default MainLayout;

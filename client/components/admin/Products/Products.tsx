@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Product } from 'types';
 import { ProductService } from 'services';
-import { ErrorPage, Pagination, Spinner, Button, Modal } from 'components/shared';
+import { ErrorMessage, Pagination, Spinner, Button, Modal } from 'components/shared';
 import { FaTrash } from 'react-icons/fa';
 import { formatPrice } from 'utils/helpers';
 import { useModal, useToast } from 'contexts';
-import AddProduct from './AddProduct';
+import styles from './Products.module.css';
+import AddProduct from '../AddProduct';
 
 const LIMIT = 10;
 
-export const Products: React.FC = () => {
+const Products: React.FC = () => {
   const { setToast } = useToast();
   const { isOpen, openModal } = useModal();
 
@@ -66,7 +67,7 @@ export const Products: React.FC = () => {
   }
 
   if (error) {
-    return <ErrorPage message="Unable to get products right now please try again later." />;
+    return <ErrorMessage message="Unable to get products right now please try again later." />;
   }
 
   const addProductModalElement = isOpen ? (
@@ -78,15 +79,15 @@ export const Products: React.FC = () => {
   return (
     <div className="table-container">
       {addProductModalElement}
-      <div className="add-product-container">
+      <div className={styles.addProductContainer}>
         <Button title="Add Product" onClick={() => openModal()} />
       </div>
 
       {products.length === 0 ? (
-        <div className="msg"> No products created yet. </div>
+        <div className={styles.msg}> No products created yet. </div>
       ) : (
         <>
-          <table className="table">
+          <table className={styles.table}>
             <thead>
               <tr>
                 <th style={{ width: '30rem' }}> Product </th>
@@ -100,20 +101,20 @@ export const Products: React.FC = () => {
                 <tr key={product._id}>
                   <td>
                     <a href={`/product?id=${product._id}`} target="_blank" rel="noreferrer">
-                      <div className="product-info">
+                      <div className={styles.productInfo}>
                         <img src={product.imageURL} alt={product.name} />
-                        <div className="name"> {product.name} </div>
+                        <div className={styles.name}> {product.name} </div>
                       </div>
                     </a>
                   </td>
                   <td>
-                    <div className="price">{formatPrice(product.price)}</div>
+                    <div className={styles.price}>{formatPrice(product.price)}</div>
                   </td>
                   <td>
-                    <div className="desc">{product.description}</div>
+                    <div className={styles.desc}>{product.description}</div>
                   </td>
                   <td>
-                    <button className="btn-delete" onClick={() => deleteProduct(product._id)}>
+                    <button className={styles.btnDelete} onClick={() => deleteProduct(product._id)}>
                       <FaTrash size={16} />
                     </button>
                   </td>
@@ -124,73 +125,8 @@ export const Products: React.FC = () => {
           <Pagination limit={LIMIT} onChange={onChangePaginate} total={total} active={page} />
         </>
       )}
-
-      <style jsx>{`
-        .table-container {
-          padding: 2rem 0;
-        }
-
-        .add-product-container {
-          display: flex;
-          justify-content: flex-end;
-        }
-
-        .table {
-          width: 100%;
-        }
-
-        .table td {
-          border-bottom: 1px solid var(--color-dark);
-          padding: 1rem 0;
-          text-align: center;
-          font-size: 1.6rem;
-        }
-
-        .table th {
-          font-size: 2rem;
-          font-weight: 600;
-          border-bottom: 1px solid var(--color-dark);
-          padding: 1rem;
-        }
-
-        .product-info {
-          display: flex;
-        }
-
-        .product-info img {
-          width: 10rem;
-          height: 10rem;
-        }
-        .name {
-          font-size: 1.7rem;
-          padding: 0 1rem;
-        }
-
-        .desc {
-          width: 20rem;
-        }
-
-        .btn-delete {
-          padding: 1rem 1.5rem;
-          background-color: var(--color-primary);
-          color: #fff;
-          border: 1px solid transparent;
-          border-radius: 6px;
-          font-size: 1.6rem;
-          display: inline-flex;
-          align-items: center;
-          cursor: pointer;
-        }
-
-        .btn-delete .text {
-          margin-right: 0.5rem;
-        }
-
-        .price {
-          color: var(--color-primary);
-          font-weight: 600;
-        }
-      `}</style>
     </div>
   );
 };
+
+export default Products;

@@ -7,7 +7,7 @@ interface Props {
   name: string;
   id: string;
   value: string;
-  type: 'text' | 'password' | 'email';
+  type: 'text' | 'password' | 'email' | 'number';
   onChange(e: React.ChangeEvent<HTMLInputElement>): void;
   placeholder?: string;
   autoComplete?: string | undefined;

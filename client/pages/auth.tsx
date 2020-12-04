@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { LoginForm, SignUpForm, AuthSocial, AuthLink } from 'components/auth';
+import { Login, SignUp, AuthSocial, AuthLink } from 'components/auth';
 import { MobileBottomMenu } from 'components/shared';
 import styles from 'styles/Auth.module.css';
 
@@ -8,7 +8,7 @@ const Auth: React.FC = () => {
   const { query } = useRouter();
   const type = query.type as string;
 
-  const authElement = type === 'login' ? <LoginForm /> : <SignUpForm />;
+  const authElement = type === 'login' ? <Login /> : <SignUp />;
 
   return (
     <>

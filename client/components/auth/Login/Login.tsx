@@ -3,16 +3,16 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Meta, Button, PageLoader, Input } from 'components/shared';
 import { useAuth, useToast } from 'contexts';
-import styles from './SignupForm.module.css';
+import styles from './LoginForm.module.css';
 
-const Schema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
+const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Password is required').min(6),
   email: Yup.string().email('Invalid email').required('Email is required'),
 });
 
-const SignUpForm: React.FC = () => {
-  const { signUp } = useAuth();
+const Login: React.FC = () => {
+  const { login } = useAuth();
+
   const { setToast } = useToast();
 
   const [submitting, setSubmitting] = useState(false);
@@ -20,38 +20,29 @@ const SignUpForm: React.FC = () => {
   const initialValues = {
     email: '',
     password: '',
-    name: '',
   };
 
   return (
     <>
-      <Meta title="Sign Up" />
+      <Meta title="Log In" />
       {submitting && <PageLoader />}
       <Formik
         initialValues={initialValues}
-        validationSchema={Schema}
-        onSubmit={async (values) => {
+        validationSchema={LoginSchema}
+        onSubmit={async ({ email, password }) => {
           try {
-            await signUp(values);
+            setSubmitting(true);
+            await login(email, password);
             setSubmitting(false);
           } catch (error) {
             setToast('error', error.message);
+            setSubmitting(false);
           }
         }}
       >
         {({ errors, touched, handleChange, handleSubmit, values }) => (
           <form onSubmit={handleSubmit} className={styles.authForm}>
-            <h1 className={styles.pageHeading}> Sign Up </h1>
-            <Input
-              name="name"
-              id="name"
-              placeholder="Name"
-              value={values.name}
-              onChange={handleChange}
-              type="text"
-              error={Boolean(errors.name && touched.name)}
-            />
-            {errors.name && touched.name ? <div className={styles.error}>{errors.name}</div> : null}
+            <h1 className={styles.pageHeading}> Login </h1>
             <Input
               name="email"
               id="email"
@@ -80,8 +71,9 @@ const SignUpForm: React.FC = () => {
             <div className={styles.bottom}>
               <Button
                 type="submit"
-                title="Sign Up"
+                title="Log In"
                 disabled={submitting}
+                loading={submitting}
                 className={styles.button}
               />
             </div>
@@ -92,4 +84,4 @@ const SignUpForm: React.FC = () => {
   );
 };
 
-export default SignUpForm;
+export default Login;

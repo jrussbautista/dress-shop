@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Product } from 'types';
+import { Product, AddProduct as AddProductType } from 'types';
 import { ProductService } from 'services';
 import { ErrorMessage, Pagination, Spinner, Button, Modal } from 'components/shared';
 import { FaTrash } from 'react-icons/fa';
 import { formatPrice } from 'utils/helpers';
-import { useModal, useToast } from 'contexts';
+import { useToast } from 'contexts';
 import styles from './Products.module.css';
 import AddProduct from '../AddProduct';
 
@@ -12,13 +12,13 @@ const LIMIT = 10;
 
 const Products: React.FC = () => {
   const { setToast } = useToast();
-  const { isOpen, openModal } = useModal();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [total, setTotal] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -37,11 +37,28 @@ const Products: React.FC = () => {
     fetchProducts();
   }, [page]);
 
-  const addProduct = (product: Product) => {
-    setProducts([product, ...products]);
+  const onChangePaginate = (val: number) => {
+    setPage(val);
   };
 
-  const deleteProduct = async (id: string) => {
+  const closeAddProductModal = () => {
+    setIsOpenAddProductModal(false);
+  };
+
+  const openAddProductModal = () => {
+    setIsOpenAddProductModal(true);
+  };
+
+  const handleAddProduct = async (newProduct: AddProductType) => {
+    try {
+      const { product } = await ProductService.addProduct(newProduct);
+      setProducts([product, ...products]);
+    } catch (error) {
+      setToast('error', error.message);
+    }
+  };
+
+  const handleDeleteProduct = async (id: string) => {
     try {
       const isConfirm = window.confirm('Are you sure you want to delete this product?');
       if (!isConfirm) return;
@@ -54,35 +71,22 @@ const Products: React.FC = () => {
     }
   };
 
-  const onChangePaginate = (val: number) => {
-    setPage(val);
-  };
-
   if (loading) {
-    return (
-      <div style={{ textAlign: 'center' }}>
-        <Spinner width={60} height={60} />
-      </div>
-    );
+    return <Spinner size={60} />;
   }
 
   if (error) {
     return <ErrorMessage message="Unable to get products right now please try again later." />;
   }
 
-  const addProductModalElement = isOpen ? (
-    <Modal title="Add Product">
-      <AddProduct onAdd={addProduct} />
-    </Modal>
-  ) : null;
-
   return (
     <div className="table-container">
-      {addProductModalElement}
+      <Modal visible={isOpenAddProductModal} title="Add Product" onClose={closeAddProductModal}>
+        <AddProduct onSubmit={handleAddProduct} />
+      </Modal>
       <div className={styles.addProductContainer}>
-        <Button title="Add Product" onClick={() => openModal()} />
+        <Button title="Add Product" onClick={openAddProductModal} />
       </div>
-
       {products.length === 0 ? (
         <div className={styles.msg}> No products created yet. </div>
       ) : (
@@ -114,7 +118,10 @@ const Products: React.FC = () => {
                     <div className={styles.desc}>{product.description}</div>
                   </td>
                   <td>
-                    <button className={styles.btnDelete} onClick={() => deleteProduct(product._id)}>
+                    <button
+                      className={styles.btnDelete}
+                      onClick={() => handleDeleteProduct(product._id)}
+                    >
                       <FaTrash size={16} />
                     </button>
                   </td>

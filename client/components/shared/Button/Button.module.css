@@ -31,6 +31,7 @@
   color: #fff;
   border: 1px solid var(--color-primary);
 }
+
 .primary:hover {
   background-color: #fff;
   color: var(--color-primary);

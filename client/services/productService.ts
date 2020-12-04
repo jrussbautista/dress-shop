@@ -1,28 +1,6 @@
-import { Product } from 'types';
+import { ProductData, ProductsData, AddProduct, AddProductData } from 'types';
 import { catchError } from 'utils/catchError';
 import apiClient from 'utils/apiClient';
-
-interface ProductsData {
-  products: Product[];
-  total: number;
-}
-
-interface ProductData {
-  product: Product;
-  relatedProducts: Product[];
-}
-
-interface AddProduct {
-  name: string;
-  image: string;
-  price: number;
-  description: string;
-  category: string;
-}
-
-interface AddProductData {
-  product: Product;
-}
 
 type ProductPayload = { params: unknown };
 

@@ -1,0 +1,61 @@
+.previewImg {
+  width: 30rem;
+  height: 30rem;
+  object-fit: contain;
+  background-size: cover;
+}
+
+.form {
+  width: 100%;
+}
+
+.form input:focus {
+  outline: none;
+}
+
+.form select {
+  border: 1px solid var(--color-dark);
+  width: 100%;
+  height: 5rem;
+  font-size: 1.6rem;
+  background-color: #fff;
+  padding: 0 1rem;
+}
+
+.group {
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.imgUploadContainer {
+  position: relative;
+  width: 30rem;
+  height: 30rem;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  overflow: hidden;
+}
+
+.btnUploadContainer input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.btnUploadContainer {
+  position: relative;
+  width: 20rem;
+  height: 5rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+.btnSubmit {
+  width: 100%;
+}

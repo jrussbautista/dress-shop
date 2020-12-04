@@ -1,7 +1,6 @@
 import React from 'react';
 import { AuthProvider } from './auth';
 import { CartProvider } from './cart';
-import { ModalProvider } from './modal';
 import { ShopProvider } from './shop';
 import { ToastProvider } from './toast';
 import { User } from '../types';
@@ -33,8 +32,7 @@ export const StoreProvider: React.FC<InitialStateProps> = ({ children, currentUs
         <ToastProvider key="1" />,
         <AuthProvider currentUser={currentUser} key="2" />,
         <CartProvider key="3" />,
-        <ModalProvider key="4" />,
-        <ShopProvider key="5" />,
+        <ShopProvider key="4" />,
       ]}
     >
       {children}

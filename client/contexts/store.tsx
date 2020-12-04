@@ -30,11 +30,11 @@ export const StoreProvider: React.FC<InitialStateProps> = ({ children, currentUs
   return (
     <ProviderComposer
       contexts={[
-        <AuthProvider currentUser={currentUser} key="1" />,
-        <CartProvider key="2" />,
-        <ModalProvider key="3" />,
-        <ShopProvider key="4" />,
-        <ToastProvider key="5" />,
+        <ToastProvider key="1" />,
+        <AuthProvider currentUser={currentUser} key="2" />,
+        <CartProvider key="3" />,
+        <ModalProvider key="4" />,
+        <ShopProvider key="5" />,
       ]}
     >
       {children}

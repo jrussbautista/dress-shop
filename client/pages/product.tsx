@@ -1,6 +1,5 @@
 import Router from 'next/router';
 import React, { useState } from 'react';
-import Image from 'next/image';
 import {
   PopUp,
   Meta,
@@ -12,10 +11,9 @@ import {
 } from 'components/shared';
 import { usePopUp } from 'hooks';
 import { useAuth, useCart, useToast } from 'contexts';
-import { Product as ProductTypes, Cart } from 'types';
+import { Product as ProductTypes } from 'types';
 import { GetServerSideProps } from 'next';
 import { ProductService } from 'services/productService';
-import { CartService } from 'services';
 import { ErrorMessage, Button } from 'components/shared';
 import styles from 'styles/Product.module.css';
 
@@ -61,10 +59,8 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
         Router.push(`/auth?type=login&ref=${product._id}`);
         return;
       }
-      const { cart } = await CartService.addCart(Number(qty), product._id);
-      const cartObj: Cart = { _id: cart._id, quantity: Number(qty), product };
+      await addCart(product, Number(qty));
       showToast();
-      addCart(cartObj);
     } catch (error) {
       setToast('error', error.message);
     }

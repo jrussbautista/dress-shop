@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { OrderList } from 'components/order';
-import { Meta, MobileBottomMenu, ErrorPage, Container, Heading } from 'components/shared';
+import { Meta, MobileBottomMenu, ErrorMessage, Container, Heading } from 'components/shared';
 import { Order as OrderType } from 'types';
 import { OrderService } from 'services/orderService';
 
@@ -14,7 +14,7 @@ interface Props {
 
 const Order: React.FC<Props> = ({ orders, error }) => {
   if (error) {
-    return <ErrorPage message={error} />;
+    return <ErrorMessage message={error} />;
   }
 
   return (

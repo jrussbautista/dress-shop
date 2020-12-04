@@ -75,8 +75,8 @@ const DesktopMenu: React.FC = () => {
             {isOpenDropdown && (
               <div className={styles.dropdown}>
                 <div
-                  role="button"
-                  className="item"
+                  role="link"
+                  className={styles.item}
                   tabIndex={-1}
                   onClick={handleCloseDropDown}
                   onKeyDown={handleCloseDropDown}
@@ -88,7 +88,7 @@ const DesktopMenu: React.FC = () => {
                 <div
                   role="link"
                   tabIndex={-1}
-                  className="item"
+                  className={styles.item}
                   onClick={handleCloseDropDown}
                   onKeyDown={handleCloseDropDown}
                 >
@@ -99,7 +99,7 @@ const DesktopMenu: React.FC = () => {
                 <div
                   role="button"
                   tabIndex={-1}
-                  className="item"
+                  className={styles.item}
                   onClick={handleCloseDropDown}
                   onKeyDown={handleCloseDropDown}
                 >

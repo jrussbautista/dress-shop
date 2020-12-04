@@ -5,13 +5,21 @@ import { LOGOUT_USER, SET_CURRENT_USER, UPDATE_USER } from './authTypes';
 import { User } from 'types';
 import { destroyCookie } from 'nookies';
 import reducer from './authReducer';
+import { AuthService } from 'services';
+
+interface UserDetails {
+  email: string;
+  password: string;
+  name: string;
+}
 
 interface InitialStateType {
   isAuthenticated: boolean;
   currentUser: User | null;
   error: null | string;
   logout(redirectUrl: string): void;
-  login(user: User, token: string, adminRedirect?: boolean): void;
+  login(email: string, password: string, adminRedirect?: boolean): void;
+  signUp(userDetails: UserDetails): void;
   updateUser(user: User): void;
 }
 
@@ -21,6 +29,7 @@ const initialState = {
   error: null,
   logout: () => null,
   login: () => null,
+  signUp: () => null,
   updateUser: () => null,
 };
 
@@ -40,7 +49,8 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { ref } = useRouter().query;
 
-  const login = async (user: User, token: string, adminRedirect?: boolean) => {
+  const login = async (email: string, password: string, adminRedirect?: boolean): Promise<void> => {
+    const { user, token } = await AuthService.login(email, password);
     dispatch({ type: SET_CURRENT_USER, payload: user });
     let url = '';
     if (adminRedirect) {
@@ -48,6 +58,13 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
     } else {
       url = ref ? `/product?id=${ref}` : '/profile';
     }
+    autoLogin(token, url);
+  };
+
+  const signUp = async ({ email, password, name }: UserDetails) => {
+    const { user, token } = await AuthService.signUp({ email, password, name });
+    dispatch({ type: SET_CURRENT_USER, payload: user });
+    const url = '/profile';
     autoLogin(token, url);
   };
 
@@ -62,7 +79,7 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ ...state, login, logout, updateUser }}>
+    <AuthContext.Provider value={{ ...state, login, signUp, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

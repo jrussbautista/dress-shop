@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Cart } from 'types';
 import { useToast, useCart } from 'contexts';
 import { InputQuantity } from 'components/shared';
-import { CartService } from 'services';
 import styles from './CartItem.module.css';
 
 interface Props {
@@ -22,8 +21,7 @@ const CartItem: React.FC<Props> = ({ cart }) => {
 
   const handleRemoveCart = async () => {
     try {
-      await CartService.removeCart(cart._id);
-      removeCart(cart._id);
+      await removeCart(cart._id);
     } catch (error) {
       setToast('error', error.message);
     }
@@ -32,8 +30,7 @@ const CartItem: React.FC<Props> = ({ cart }) => {
   const updateQtyAsync = async (quantity: number) => {
     try {
       setIsUpdating(true);
-      await CartService.updateCart(cart._id, quantity);
-      updateCartQty(cart._id, quantity);
+      await updateCartQty(cart._id, quantity);
       setQty(quantity);
     } catch (error) {
       setToast('error', error.message);

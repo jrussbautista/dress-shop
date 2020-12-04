@@ -9,7 +9,7 @@ interface Props {
   href?: string;
   type?: 'button' | 'reset' | 'submit';
   title?: string;
-  variant?: 'primary' | 'outline' | 'light';
+  variant?: 'default' | 'primary' | 'outline' | 'light';
   style?: React.CSSProperties;
   disabled?: boolean;
   icon?: React.ReactElement;
@@ -24,13 +24,13 @@ const Button: React.FC<Props> = ({
   type = 'button',
   title,
   style,
-  variant,
+  variant = 'default',
   disabled,
   icon,
   loading,
   className,
 }) => {
-  const rootClassName = cName(styles.btn, styles[variant], className);
+  const rootClassName = cName(className, styles.btn, styles[variant]);
 
   return (
     <>
@@ -52,7 +52,7 @@ const Button: React.FC<Props> = ({
             <Spinner color="#fff" width={40} height={40} />
           ) : (
             <>
-              {icon && <span className="icon">{icon}</span>}
+              {icon && <span className={styles.icon}>{icon}</span>}
               {title}
             </>
           )}

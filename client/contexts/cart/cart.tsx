@@ -9,7 +9,7 @@ import {
   UPDATE_QUANTITY,
   SET_ERROR,
 } from './cartTypes';
-import { Cart } from 'types';
+import { Cart, Product } from 'types';
 import { CartService } from 'services';
 
 interface InitialStateType {
@@ -17,7 +17,7 @@ interface InitialStateType {
   error: null | string;
   carts: Cart[];
   cartsNum: number;
-  addCart: (cart: Cart) => void;
+  addCart: (product: Product, quantity: number) => void;
   removeCart: (id: string) => void;
   clearCart: () => void;
   updateCartQty: (id: string, quantity: number) => void;
@@ -48,16 +48,16 @@ export const CartProvider: React.FC = ({ children }) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    const fetchCarts = async () => {
-      try {
-        const { carts } = await CartService.fetchCarts();
-        dispatch({ type: SET_CARTS, payload: carts });
-      } catch (error) {
-        dispatch({ type: SET_ERROR, payload: { error: error.message } });
-      }
-    };
+  const fetchCarts = async () => {
+    try {
+      const { carts } = await CartService.fetchCarts();
+      dispatch({ type: SET_CARTS, payload: carts });
+    } catch (error) {
+      dispatch({ type: SET_ERROR, payload: { error: error.message } });
+    }
+  };
 
+  useEffect(() => {
     if (isAuthenticated) {
       fetchCarts();
     } else {
@@ -65,20 +65,24 @@ export const CartProvider: React.FC = ({ children }) => {
     }
   }, [isAuthenticated]);
 
-  const addCart = (cart: Cart) => {
-    dispatch({ type: ADD_CART, payload: { cart } });
+  const addCart = async (product: Product, quantity: number) => {
+    const { cart } = await CartService.addCart(quantity, product._id);
+    const cartItem: Cart = { _id: cart._id, quantity, product };
+    dispatch({ type: ADD_CART, payload: { cart: cartItem } });
   };
 
-  const removeCart = (id: string) => {
+  const removeCart = async (id: string) => {
+    await CartService.removeCart(id);
     dispatch({ type: REMOVE_CART, payload: { id } });
+  };
+
+  const updateCartQty = async (id: string, quantity: number) => {
+    await CartService.updateCart(id, quantity);
+    dispatch({ type: UPDATE_QUANTITY, payload: { id, quantity } });
   };
 
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
-  };
-
-  const updateCartQty = (id: string, quantity: number) => {
-    dispatch({ type: UPDATE_QUANTITY, payload: { id, quantity } });
   };
 
   return (

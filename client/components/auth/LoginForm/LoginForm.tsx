@@ -3,7 +3,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Meta, Button, PageLoader, Input } from 'components/shared';
 import { useAuth, useToast } from 'contexts';
-import { AuthService } from 'services';
 import styles from './LoginForm.module.css';
 
 const LoginSchema = Yup.object().shape({
@@ -30,15 +29,14 @@ const LoginForm: React.FC = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={LoginSchema}
-        onSubmit={({ email, password }) => {
-          AuthService.login(email, password)
-            .then(({ user, token }) => {
-              login(user, token);
-            })
-            .catch((error) => {
-              setToast('error', error.message);
-            })
-            .finally(() => setSubmitting(false));
+        onSubmit={async ({ email, password }) => {
+          try {
+            await login(email, password);
+          } catch (error) {
+            setToast('error', error.message);
+          } finally {
+            setSubmitting(false);
+          }
         }}
       >
         {({ errors, touched, handleChange, handleSubmit, values }) => (

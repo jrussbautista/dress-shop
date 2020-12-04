@@ -6,11 +6,18 @@
   padding: 0 2rem;
   font-size: 1.7rem;
   cursor: pointer;
-  background-color: var(--color-dark);
-  color: #fff;
   border-radius: var(--border-radius);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.default {
+  color: #fff;
   border: 1px solid var(--color-dark);
-  width: auto;
+  background-color: var(--color-dark);
 }
 
 .text {
@@ -18,10 +25,7 @@
   color: var(--color-primary);
   border: 1px solid transparent;
 }
-.btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+
 .primary {
   background-color: var(--color-primary);
   color: #fff;

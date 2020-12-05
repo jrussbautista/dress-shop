@@ -49,7 +49,7 @@ const Button: React.FC<Props> = ({
           disabled={disabled}
         >
           {loading ? (
-            <Spinner color="#fff" width={40} height={40} />
+            <Spinner color="#fff" size={30} />
           ) : (
             <>
               {icon && <span className={styles.icon}>{icon}</span>}

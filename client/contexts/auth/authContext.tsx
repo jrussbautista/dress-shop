@@ -19,6 +19,7 @@ interface InitialStateType {
   error: null | string;
   logout(redirectUrl: string): void;
   login(email: string, password: string, adminRedirect?: boolean): void;
+  loginWithGoogle(tokenId: string): void;
   signUp(userDetails: UserDetails): void;
   updateUser(user: User): void;
 }
@@ -30,6 +31,7 @@ const initialState = {
   logout: () => null,
   login: () => null,
   signUp: () => null,
+  loginWithGoogle: () => null,
   updateUser: () => null,
 };
 
@@ -49,8 +51,7 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { ref } = useRouter().query;
 
-  const login = async (email: string, password: string, adminRedirect?: boolean): Promise<void> => {
-    const { user, token } = await AuthService.login(email, password);
+  const loginSuccess = (user: User, token: string, adminRedirect = false) => {
     dispatch({ type: SET_CURRENT_USER, payload: user });
     let url = '';
     if (adminRedirect) {
@@ -61,11 +62,19 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
     autoLogin(token, url);
   };
 
+  const login = async (email: string, password: string, adminRedirect?: boolean): Promise<void> => {
+    const { user, token } = await AuthService.login(email, password);
+    loginSuccess(user, token, adminRedirect);
+  };
+
+  const loginWithGoogle = async (tokenId: string) => {
+    const { user, token } = await AuthService.verifyGoogleIdToken(tokenId);
+    loginSuccess(user, token);
+  };
+
   const signUp = async ({ email, password, name }: UserDetails) => {
     const { user, token } = await AuthService.signUp({ email, password, name });
-    dispatch({ type: SET_CURRENT_USER, payload: user });
-    const url = '/profile';
-    autoLogin(token, url);
+    loginSuccess(user, token);
   };
 
   const logout = (redirectUrl: string) => {
@@ -79,7 +88,7 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ ...state, login, signUp, logout, updateUser }}>
+    <AuthContext.Provider value={{ ...state, login, loginWithGoogle, signUp, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

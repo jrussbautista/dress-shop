@@ -3,7 +3,6 @@ import { Button, PageLoader } from 'components/shared';
 import { IconGoogle } from 'components/icons';
 import { GoogleLogin } from 'react-google-login';
 import { GOOGLE_CLIENT_ID } from 'utils/constants';
-import { AuthService } from 'services';
 import { useAuth, useToast } from 'contexts';
 
 interface GoogleError {
@@ -13,15 +12,14 @@ interface GoogleError {
 
 const AuthSocial: React.FC = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const { login } = useAuth();
+  const { loginWithGoogle } = useAuth();
   const { setToast } = useToast();
 
   const handleOnSuccess = async (response: any): Promise<void> => {
     try {
       setIsLoggingIn(true);
       const tokenId = response.tokenId;
-      const { user, token } = await AuthService.verifyGoogleIdToken(tokenId);
-      login(user, token);
+      await loginWithGoogle(tokenId);
     } catch (error) {
       setToast('error', error.message);
     } finally {

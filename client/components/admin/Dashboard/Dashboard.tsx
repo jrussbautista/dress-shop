@@ -31,7 +31,7 @@ const Dashboard: React.FC = () => {
   if (loading) {
     return (
       <div className={styles.loadingSpinner}>
-        <Spinner width={60} height={60} />
+        <Spinner size={30} />
       </div>
     );
   }

@@ -4,7 +4,7 @@ import Router from 'next/router';
 import { IoMdCart } from 'react-icons/io';
 import { useAuth, useCart } from 'contexts';
 import { capitalizeFirstLetter } from 'utils/helpers';
-import { Button, SearchBar } from 'components/shared';
+import { Button, SearchBar } from 'components/ui';
 import styles from './DesktopMenu.module.css';
 
 const DesktopMenu: React.FC = () => {

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { Toast } from 'components/shared';
+import { Toast } from 'components/ui';
 
 interface InitialState {
   isActive: boolean;
@@ -35,7 +35,12 @@ export const ToastProvider: React.FC = ({ children }) => {
 
   return (
     <ToastContext.Provider value={{ ...state, setToast, removeToast }}>
-      <Toast />
+      <Toast
+        type={state.type}
+        message={state.message}
+        closeToast={removeToast}
+        isActive={state.isActive}
+      />
       {children}
     </ToastContext.Provider>
   );

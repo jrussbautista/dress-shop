@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Product, AddProduct as AddProductType } from 'types';
 import { ProductService } from 'services';
-import { ErrorMessage, Pagination, Spinner, Button, Modal } from 'components/shared';
+import { ErrorMessage, Pagination, Spinner, Button, Modal } from 'components/ui';
 import { FaTrash } from 'react-icons/fa';
 import { formatPrice } from 'utils/helpers';
 import { useToast } from 'contexts';

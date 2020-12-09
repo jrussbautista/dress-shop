@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Spinner,
-  Button,
-  ProductListSkeleton,
-  ProductList,
-  Banners,
-  MobileBottomMenu,
-  Categories,
-  Heading,
-  Container,
-} from 'components/shared';
+import { Spinner, Button, Banners, Heading, Container } from 'components/ui';
+import { MobileBottomMenu } from 'components/core';
+import { ProductListSkeleton, ProductList } from 'components/product';
+import { Categories } from 'components/category';
 import { useShop } from 'contexts';
 import { GetServerSideProps } from 'next';
 import { BannerService, CategoryService } from 'services';
@@ -54,7 +47,7 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
         {isLoading ? <ProductListSkeleton number={20} /> : <ProductList products={products} />}
         {isLoadingMore && (
           <div className={styles.loadingWrapper}>
-            <Spinner color={colors.primary} width={60} height={60} />
+            <Spinner color={colors.primary} size={30} />
           </div>
         )}
 

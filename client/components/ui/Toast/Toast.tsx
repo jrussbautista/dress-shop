@@ -1,12 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { IoMdClose } from 'react-icons/io';
-import { useToast } from 'contexts';
 import styles from './Toast.module.css';
 
-const Toast: React.FC = () => {
-  const { type, message, isActive, removeToast } = useToast();
+interface Props {
+  type: string;
+  message: string;
+  isActive: boolean;
+  closeToast(): void;
+}
 
+const Toast: React.FC<Props> = ({ type, message, isActive, closeToast }) => {
   return (
     <>
       <motion.div
@@ -26,7 +30,7 @@ const Toast: React.FC = () => {
       >
         <div className={`${styles.alert} ${styles[type]}`} role={type}>
           <div>{message}</div>
-          <button className={styles.close} onClick={removeToast}>
+          <button className={styles.close} onClick={closeToast}>
             <IoMdClose />
           </button>
         </div>

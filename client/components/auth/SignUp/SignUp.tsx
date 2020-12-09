@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Meta, Button, PageLoader, Input } from 'components/shared';
+import { Button, PageLoader, Input } from 'components/ui';
+import { Meta } from 'components/core';
 import { useAuth, useToast } from 'contexts';
 import styles from './SignupForm.module.css';
 

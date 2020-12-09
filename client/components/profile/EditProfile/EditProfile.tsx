@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth, useToast } from 'contexts';
-import { Button, PageLoader, Input } from 'components/shared';
+import { Button, PageLoader, Input } from 'components/ui';
 import { capitalizeFirstLetter } from 'utils/helpers';
 import { AuthService } from 'services';
 import { MAX_FILE_SIZE } from 'utils/constants';

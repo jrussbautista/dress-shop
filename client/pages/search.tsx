@@ -2,14 +2,9 @@ import Router, { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Product } from 'types';
 import { SearchFilter, SearchCategory } from 'components/search';
-import {
-  Meta,
-  MobileBottomMenu,
-  SearchBar,
-  ProductList,
-  Container,
-  ProductListSkeleton,
-} from 'components/shared';
+import { SearchBar, Container } from 'components/ui';
+import { Meta, MobileBottomMenu } from 'components/core';
+import { ProductList, ProductListSkeleton } from 'components/product';
 import { ProductService } from 'services';
 import styles from 'styles/Search.module.css';
 

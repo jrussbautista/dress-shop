@@ -4,7 +4,7 @@ import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import CardSection from '../CheckoutStripeCard/CheckoutStripeCard';
 import { CheckOutService } from 'services';
 import { useAuth, useToast, useCart } from 'contexts';
-import { PageLoader, Alert, Button } from 'components/shared';
+import { PageLoader, Alert, Button } from 'components/ui';
 import { StripeCardElement, StripeCardElementChangeEvent } from '@stripe/stripe-js';
 import styles from './CheckoutStripeForm.module.css';
 

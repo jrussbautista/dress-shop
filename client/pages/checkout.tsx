@@ -6,7 +6,8 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { STRIPE_CLIENT_KEY } from 'utils/constants';
 import calculateCartTotal from 'utils/calculateCartTotal';
-import { Meta, ErrorMessage, Container } from 'components/shared';
+import { ErrorMessage, Container } from 'components/ui';
+import { Meta } from 'components/core';
 import { useCart } from 'contexts';
 import styles from 'styles/Checkout.module.css';
 

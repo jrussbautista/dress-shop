@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Meta, Button, PageLoader, Input } from 'components/shared';
+import { Meta, Button, PageLoader, Input } from 'components/ui';
 import { useAuth, useToast } from 'contexts';
-import { AuthService } from 'services';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Password is required').min(6),
@@ -29,18 +28,14 @@ export const AdminLogin: React.FC = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={LoginSchema}
-        onSubmit={({ email, password }) => {
-          AuthService.login(email, password)
-            .then(({ user, token }) => {
-              if (user.role !== 'admin') {
-                throw new Error('You are not authorize to access this page');
-              }
-              login(user, token, true);
-            })
-            .catch((error) => {
-              setToast('error', error.message);
-            })
-            .finally(() => setSubmitting(false));
+        onSubmit={async ({ email, password }) => {
+          try {
+            setSubmitting(true);
+            await login(email, password, true);
+          } catch (error) {
+            setToast('error', error.message);
+            setSubmitting(false);
+          }
         }}
       >
         {({ errors, touched, handleChange, handleSubmit, values }) => (

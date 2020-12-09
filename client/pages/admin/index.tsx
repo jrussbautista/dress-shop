@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { Dashboard, Products } from 'components/admin';
 import { useAuth } from 'contexts';
-import { Alert } from 'components/shared';
+import { Alert } from 'components/ui';
 
 const Admin: React.FC = () => {
   const { currentUser } = useAuth();

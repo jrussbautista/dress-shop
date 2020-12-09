@@ -1,14 +1,8 @@
 import React from 'react';
 import { CartList, CartSubTotal, CartSkeleton } from 'components/cart';
 import { useAuth, useCart } from 'contexts';
-import {
-  ErrorMessage,
-  Button,
-  Meta,
-  MobileBottomMenu,
-  Heading,
-  Container,
-} from 'components/shared';
+import { ErrorMessage, Button, Heading, Container } from 'components/ui';
+import { Meta, MobileBottomMenu } from 'components/core';
 import calculateCartTotal from 'utils/calculateCartTotal';
 import styles from 'styles/Cart.module.css';
 

@@ -1,20 +1,14 @@
 import Router from 'next/router';
 import React, { useState } from 'react';
-import {
-  PopUp,
-  Meta,
-  MobileBottomMenu,
-  InputQuantity,
-  ProductList,
-  Container,
-  Heading,
-} from 'components/shared';
+import { PopUp, Container, Heading } from 'components/ui';
+import { Meta, MobileBottomMenu } from 'components/core';
+import { ProductList, ProductInputQuantity } from 'components/product';
 import { usePopUp } from 'hooks';
 import { useAuth, useCart, useToast } from 'contexts';
 import { Product as ProductTypes } from 'types';
 import { GetServerSideProps } from 'next';
 import { ProductService } from 'services/productService';
-import { ErrorMessage, Button } from 'components/shared';
+import { ErrorMessage, Button } from 'components/ui';
 import styles from 'styles/Product.module.css';
 
 interface Props {
@@ -92,7 +86,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
             <div className={styles.productPrice}>P{product.price}</div>
             <div className={styles.productDesc}>{product.description}</div>
             <div className={styles.productAction}>
-              <InputQuantity
+              <ProductInputQuantity
                 value={qty}
                 onButtonClick={handleButtonChangeQty}
                 onChangeBlur={handleChangeBlur}

@@ -53,12 +53,19 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
 
   const loginSuccess = (user: User, token: string, adminRedirect = false) => {
     dispatch({ type: SET_CURRENT_USER, payload: user });
-    let url = '';
+
     if (adminRedirect) {
-      url = '/admin?selected_page=dashboard';
-    } else {
-      url = ref ? `/product?id=${ref}` : '/profile';
+      if (user.role !== 'admin') {
+        throw new Error('You are not authorize to access this page');
+      }
     }
+
+    const url = adminRedirect
+      ? '/admin?selected_page=dashboard'
+      : ref
+      ? `/product?id=${ref}`
+      : '/profile';
+
     autoLogin(token, url);
   };
 

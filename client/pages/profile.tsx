@@ -1,6 +1,7 @@
 import React from 'react';
 import { EditProfile, ChangePassword } from 'components/profile';
-import { MobileBottomMenu, Heading, Container } from 'components/shared';
+import { Heading, Container } from 'components/ui';
+import { MobileBottomMenu } from 'components/core';
 
 const Profile: React.FC = () => {
   return (

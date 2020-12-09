@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, PageLoader } from 'components/shared';
+import { Button, PageLoader } from 'components/ui';
 import { IconGoogle } from 'components/icons';
 import { GoogleLogin } from 'react-google-login';
 import { GOOGLE_CLIENT_ID } from 'utils/constants';

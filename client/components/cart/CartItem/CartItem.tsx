@@ -3,7 +3,7 @@ import { formatPrice } from 'utils/helpers';
 import Link from 'next/link';
 import { Cart } from 'types';
 import { useToast, useCart } from 'contexts';
-import { InputQuantity } from 'components/shared';
+import { ProductInputQuantity } from 'components/product';
 import styles from './CartItem.module.css';
 
 interface Props {
@@ -98,7 +98,7 @@ const CartItem: React.FC<Props> = ({ cart }) => {
           </div>
           <div className={`${styles.productQty} ${styles.productContent}`}>
             <div className="qty-container">
-              <InputQuantity
+              <ProductInputQuantity
                 isUpdating={isUpdating}
                 value={qty}
                 onButtonClick={handleBtnChangeQty}

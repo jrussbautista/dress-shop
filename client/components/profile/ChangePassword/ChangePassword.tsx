@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, PageLoader, Input } from 'components/shared';
+import { Button, PageLoader, Input } from 'components/ui';
 import { useToast } from 'contexts';
 import { AuthService } from 'services';
 import styles from './ChangePassword.module.css';

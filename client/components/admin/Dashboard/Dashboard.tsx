@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DashboardService } from 'services';
-import { Spinner, ErrorMessage } from 'components/shared';
+import { Spinner, ErrorMessage } from 'components/ui';
 import styles from './Dashboard.module.css';
 
 interface IDashboard {

@@ -1,5 +1,7 @@
 import { Schema, model, Document } from 'mongoose';
 
+const { String } = Schema.Types;
+
 export interface BannerDocument extends Document {
   name: String;
   imageURL: String;

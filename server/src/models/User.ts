@@ -1,6 +1,8 @@
-import { Schema, model, Document, Types } from "mongoose";
-import bcrypt from "bcryptjs";
-import { Role } from "../types";
+import { Schema, model, Document } from 'mongoose';
+import bcrypt from 'bcryptjs';
+import { Role } from '../types';
+
+const { String } = Schema.Types;
 
 export interface UserDocument extends Document {
   name: string;
@@ -8,7 +10,6 @@ export interface UserDocument extends Document {
   imageURL?: string;
   password?: string;
   role: Role;
-  carts: Types.ObjectId[];
   googleId?: string;
   matchesPassword: (password: string) => Promise<boolean>;
 }
@@ -21,12 +22,6 @@ const UserSchema = new Schema(
     password: String,
     role: String,
     googleId: String,
-    carts: [
-      {
-        type: "ObjectId",
-        ref: "Cart",
-      },
-    ],
   },
   {
     timestamps: true,
@@ -34,10 +29,12 @@ const UserSchema = new Schema(
 );
 
 // hash password
-UserSchema.pre<UserDocument>("save", async function () {
-  if (this.isModified("password")) {
-    const hash = await bcrypt.hashSync(String(this.password), 10);
-    this.password = hash;
+UserSchema.pre<UserDocument>('save', async function () {
+  if (this.isModified('password')) {
+    if (this.password) {
+      const hash = await bcrypt.hashSync(this.password.toString(), 10);
+      this.password = hash;
+    }
   }
 });
 
@@ -49,4 +46,4 @@ UserSchema.methods.matchesPassword = function (password: string) {
   return bcrypt.compareSync(password, this.password);
 };
 
-export const User = model<UserDocument>("User", UserSchema);
+export const User = model<UserDocument>('User', UserSchema);

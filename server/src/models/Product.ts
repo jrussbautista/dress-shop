@@ -1,4 +1,6 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document } from 'mongoose';
+
+const { String, Number } = Schema.Types;
 
 export interface ProductDocument extends Document {
   name: string;
@@ -23,7 +25,7 @@ const productSchema = new Schema(
 
 productSchema.index(
   {
-    name: "text",
+    name: 'text',
   },
   {
     weights: {
@@ -32,4 +34,4 @@ productSchema.index(
   }
 );
 
-export const Product = model<ProductDocument>("Product", productSchema);
+export const Product = model<ProductDocument>('Product', productSchema);

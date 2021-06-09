@@ -1,23 +1,35 @@
 import { Schema, model, Document, Types } from 'mongoose';
-import { Product } from '../types';
+
+const { ObjectId, Number } = Schema.Types;
+
+interface Items {
+  quantity: number;
+  product: Types.ObjectId;
+}
 
 export interface CartDocument extends Document {
   user: Types.ObjectId;
-  quantity: number;
-  product: Types.ObjectId;
+  items: Items[];
 }
 
 const CartSchema = new Schema(
   {
     user: {
-      type: 'ObjectId',
+      type: ObjectId,
       ref: 'User',
     },
-    product: {
-      type: 'ObjectId',
-      ref: 'Product',
-    },
-    quantity: Number,
+    items: [
+      {
+        quantity: {
+          type: Number,
+          default: 1,
+        },
+        product: {
+          type: ObjectId,
+          ref: 'Product',
+        },
+      },
+    ],
   },
   {
     timestamps: true,

@@ -1,30 +1,32 @@
 import { Schema, model, Document, Types } from 'mongoose';
 
-interface Product {
+const { ObjectId, Number } = Schema.Types;
+
+interface Item {
   quantity: number;
   product: Types.ObjectId;
 }
 
 export interface OrderDocument extends Document {
   user: Types.ObjectId;
-  products: Product[];
+  items: Item[];
   total: number;
 }
 
 const OrderSchema = new Schema(
   {
     user: {
-      type: 'ObjectId',
+      type: ObjectId,
       ref: 'User',
     },
-    products: [
+    items: [
       {
         quantity: {
           type: Number,
           default: 1,
         },
         product: {
-          type: Types.ObjectId,
+          type: ObjectId,
           ref: 'Product',
         },
       },

@@ -4,8 +4,7 @@ import { StoreProvider } from 'contexts';
 import { parseCookies, destroyCookie } from 'nookies';
 import { checkProtectedRoutes } from 'utils/auth';
 import { AuthService } from 'services/authService';
-import MainLayout from 'components/layouts/main-layout';
-import AdminLayout from 'components/layouts/admin-layout';
+import Layout from 'components/core/Layout';
 import { User } from 'types';
 import 'styles/global.css';
 
@@ -13,22 +12,12 @@ interface MyAppProps extends AppProps {
   currentUser: User | null;
 }
 
-const MyApp = ({ Component, pageProps, currentUser, router }: MyAppProps): JSX.Element => {
-  if (router.pathname.startsWith('/admin')) {
-    return (
-      <StoreProvider currentUser={currentUser}>
-        <AdminLayout>
-          <Component {...pageProps} />
-        </AdminLayout>
-      </StoreProvider>
-    );
-  }
-
+const MyApp = ({ Component, pageProps, currentUser }: MyAppProps): JSX.Element => {
   return (
     <StoreProvider currentUser={currentUser}>
-      <MainLayout>
+      <Layout>
         <Component {...pageProps} />
-      </MainLayout>
+      </Layout>
     </StoreProvider>
   );
 };

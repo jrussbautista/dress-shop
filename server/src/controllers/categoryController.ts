@@ -8,6 +8,6 @@ export const index = async (req: Request, res: Response) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: 'Error in getting products', success: false });
+      .json({ message: 'Error in getting categories', success: false });
   }
 };

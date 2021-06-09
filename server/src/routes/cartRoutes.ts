@@ -1,11 +1,14 @@
 import { Router } from 'express';
-import { index, store, remove } from '../controllers/cartController';
+import { index, store, remove, update } from '../controllers/cartController';
 import { protect } from '../middleware';
 
 const router = Router();
 
-router.route('/').get(protect, index).post(protect, store);
-
-router.route('/:id').delete(protect, remove);
+router
+  .route('/')
+  .get(protect, index)
+  .post(protect, store)
+  .delete(protect, remove)
+  .put(protect, update);
 
 export { router as cartRoutes };

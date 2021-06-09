@@ -2,19 +2,10 @@ import apiClient from 'utils/apiClient';
 import { Banner } from 'types';
 import { catchError } from 'utils/catchError';
 
-interface BannersData {
-  banners: Banner[];
-}
-
-const getBanners = async (): Promise<BannersData> => {
+const getBanners = async (): Promise<Banner[]> => {
   try {
     const { data } = await apiClient.get(`/banners`);
-
-    const bannersData: BannersData = {
-      banners: data.data.banners,
-    };
-
-    return bannersData;
+    return data.data;
   } catch (error) {
     throw new Error(catchError(error));
   }

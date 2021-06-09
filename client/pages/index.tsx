@@ -73,8 +73,8 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { banners } = await BannerService.getBanners();
-  const { categories } = await CategoryService.getCategories();
+  const banners = await BannerService.getBanners();
+  const categories = await CategoryService.getCategories();
 
   return {
     props: { banners, categories },

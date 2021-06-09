@@ -14,8 +14,8 @@ import WithAuth from 'components/core/WithAuth';
 const stripePromise = loadStripe(STRIPE_CLIENT_KEY);
 
 const Checkout: React.FC = () => {
-  const { carts, error } = useCart();
-  const { cartTotal } = calculateCartTotal(carts);
+  const { cartItems, error } = useCart();
+  const { cartTotal } = calculateCartTotal(cartItems);
 
   if (error) return <ErrorMessage message={error} />;
 
@@ -26,7 +26,7 @@ const Checkout: React.FC = () => {
         <div className={styles.wrapper}>
           <div className={styles.left}>
             <h2> Checkout Items </h2>
-            <CheckoutList items={carts} />
+            <CheckoutList items={cartItems} />
             <div className={styles.paymentTotal}>
               <div className={styles.paymentWrapper}>
                 <div className={styles.list}>

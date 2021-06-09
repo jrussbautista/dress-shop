@@ -1,10 +1,10 @@
 import React from 'react';
-import { Cart } from 'types';
+import { CartItem } from 'types';
 import { formatPrice } from 'utils/helpers';
 import styles from './CheckoutList.module.css';
 
 interface Props {
-  items: Cart[];
+  items: CartItem[];
 }
 
 const CheckoutList: React.FC<Props> = ({ items }) => {

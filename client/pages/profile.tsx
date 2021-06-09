@@ -2,6 +2,7 @@ import React from 'react';
 import { EditProfile, ChangePassword } from 'components/profile';
 import { Heading, Container } from 'components/ui';
 import { MobileBottomMenu } from 'components/core';
+import WithAuth from 'components/core/WithAuth';
 
 const Profile: React.FC = () => {
   return (
@@ -16,4 +17,4 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
+export default WithAuth(Profile);

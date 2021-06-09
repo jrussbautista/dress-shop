@@ -7,7 +7,6 @@ export { default as PageLoader } from './PageLoader/PageLoader';
 export { default as Pagination } from './Pagination';
 export { default as PopUp } from './PopUp';
 export { default as Spinner } from './Spinner/Spinner';
-export { default as SearchBar } from './SearchBar/SearchBar';
 export { default as Toast } from './Toast/Toast';
 export { default as Button } from './Button';
 export { default as Container } from './Container';

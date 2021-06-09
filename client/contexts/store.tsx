@@ -5,10 +5,6 @@ import { ShopProvider } from './shop';
 import { ToastProvider } from './toast';
 import { User } from '../types';
 
-type InitialStateProps = {
-  currentUser: User | null;
-};
-
 type ProviderProps = {
   contexts: any;
 };
@@ -25,12 +21,12 @@ const ProviderComposer: React.FC<ProviderProps> = ({ contexts, children }) =>
     children
   );
 
-export const StoreProvider: React.FC<InitialStateProps> = ({ children, currentUser }) => {
+export const StoreProvider: React.FC = ({ children }) => {
   return (
     <ProviderComposer
       contexts={[
         <ToastProvider key="1" />,
-        <AuthProvider currentUser={currentUser} key="2" />,
+        <AuthProvider key="2" />,
         <CartProvider key="3" />,
         <ShopProvider key="4" />,
       ]}

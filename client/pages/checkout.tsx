@@ -1,5 +1,4 @@
 import React from 'react';
-import { Cart } from '../types';
 import { CheckoutList, CheckoutPaypal, CheckoutStripeForm } from 'components/checkout';
 import { formatPrice } from 'utils/helpers';
 import { Elements } from '@stripe/react-stripe-js';
@@ -10,15 +9,11 @@ import { ErrorMessage, Container } from 'components/ui';
 import { Meta } from 'components/core';
 import { useCart } from 'contexts';
 import styles from 'styles/Checkout.module.css';
-
-interface Props {
-  carts: Cart[];
-  error: null | string;
-}
+import WithAuth from 'components/core/WithAuth';
 
 const stripePromise = loadStripe(STRIPE_CLIENT_KEY);
 
-const Checkout: React.FC<Props> = () => {
+const Checkout: React.FC = () => {
   const { carts, error } = useCart();
   const { cartTotal } = calculateCartTotal(carts);
 
@@ -62,4 +57,4 @@ const Checkout: React.FC<Props> = () => {
   );
 };
 
-export default Checkout;
+export default WithAuth(Checkout);

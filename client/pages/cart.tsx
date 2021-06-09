@@ -5,6 +5,7 @@ import { ErrorMessage, Button, Heading, Container } from 'components/ui';
 import { Meta, MobileBottomMenu } from 'components/core';
 import calculateCartTotal from 'utils/calculateCartTotal';
 import styles from 'styles/Cart.module.css';
+import WithAuth from 'components/core/WithAuth';
 
 const Cart: React.FC = () => {
   const { currentUser } = useAuth();
@@ -54,4 +55,4 @@ const Cart: React.FC = () => {
   );
 };
 
-export default Cart;
+export default WithAuth(Cart);

@@ -1,5 +1,5 @@
 import Router, { useRouter } from 'next/router';
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { autoLogin } from 'utils/auth';
 import { LOGOUT_USER, SET_CURRENT_USER, UPDATE_USER } from './authTypes';
 import { User } from 'types';
@@ -16,6 +16,7 @@ interface UserDetails {
 interface InitialStateType {
   isAuthenticated: boolean;
   currentUser: User | null;
+  loading: boolean;
   error: null | string;
   logout(redirectUrl: string): void;
   login(email: string, password: string, adminRedirect?: boolean): void;
@@ -28,28 +29,33 @@ const initialState = {
   isAuthenticated: false,
   currentUser: null,
   error: null,
+  loading: true,
+};
+
+const AuthContext = createContext<InitialStateType>({
+  ...initialState,
   logout: () => null,
   login: () => null,
   signUp: () => null,
   loginWithGoogle: () => null,
   updateUser: () => null,
-};
+});
 
-const AuthContext = createContext<InitialStateType>(initialState);
-
-type Props = {
-  currentUser: User | null;
-};
-
-export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
-  const initialState = {
-    currentUser,
-    error: null,
-    isAuthenticated: currentUser ? true : false,
-  };
-
+export const AuthProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { ref } = useRouter().query;
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      try {
+        const { user } = await AuthService.getMe();
+        dispatch({ type: SET_CURRENT_USER, payload: user });
+      } catch (error) {
+        dispatch({ type: LOGOUT_USER });
+      }
+    };
+    getCurrentUser();
+  }, []);
 
   const loginSuccess = (user: User, token: string, adminRedirect = false) => {
     dispatch({ type: SET_CURRENT_USER, payload: user });
@@ -60,11 +66,7 @@ export const AuthProvider: React.FC<Props> = ({ children, currentUser }) => {
       }
     }
 
-    const url = adminRedirect
-      ? '/admin?selected_page=dashboard'
-      : ref
-      ? `/product?id=${ref}`
-      : '/profile';
+    const url = ref ? `/product?id=${ref}` : '/profile';
 
     autoLogin(token, url);
   };

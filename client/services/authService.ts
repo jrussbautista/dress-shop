@@ -20,8 +20,7 @@ interface UserFields {
   image: string | ArrayBuffer | null;
 }
 
-const getMe = async (token: string): Promise<UserData> => {
-  setAuthToken(token);
+const getMe = async (): Promise<UserData> => {
   try {
     const { data } = await apiClient.get(`/auth/me`);
 

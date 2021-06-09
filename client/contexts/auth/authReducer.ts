@@ -11,6 +11,7 @@ type State = {
   isAuthenticated: boolean;
   currentUser: User | null;
   error: null | string;
+  loading: boolean;
 };
 
 type Action = {
@@ -23,7 +24,7 @@ export default (state: State, action: Action): State => {
     case LOGOUT_USER:
       return { ...state, currentUser: null, isAuthenticated: false };
     case SET_CURRENT_USER:
-      return { ...state, currentUser: action.payload, isAuthenticated: true };
+      return { ...state, currentUser: action.payload, isAuthenticated: true, loading: false };
     case SET_AUTH_ERROR:
       return { ...state, error: action.payload, isAuthenticated: false };
     case UPDATE_USER:

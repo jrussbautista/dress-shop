@@ -99,21 +99,14 @@ export const changePassword = async (passwordFields: UserPasswordData): Promise<
   }
 };
 
-export const updateProfile = async (
-  userId: string,
-  userFields: UserFields
-): Promise<{ user: User }> => {
+export const updateProfile = async (userId: string, userFields: UserFields): Promise<User> => {
   try {
     const url = `/users/${userId}`;
     const { data } = await apiClient.patch(url, userFields, {
       params: { id: userId },
     });
 
-    const userData: { user: User } = {
-      user: data.data.user,
-    };
-
-    return userData;
+    return data.data;
   } catch (error) {
     throw new Error(catchError(error));
   }

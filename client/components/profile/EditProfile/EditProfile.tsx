@@ -38,7 +38,7 @@ const EditProfile: React.FC = () => {
 
     try {
       setUpdating(true);
-      const { user } = await AuthService.updateProfile(currentUser?._id, userInfo);
+      const user = await AuthService.updateProfile(currentUser?._id, userInfo);
       updateUser(user);
       setToast('success', 'Successfully profile updated');
     } catch (error) {

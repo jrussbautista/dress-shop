@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
 import { formatPrice } from 'utils/helpers';
 import Link from 'next/link';
-import { Cart } from 'types';
+import { CartItem as CartItemType } from 'types';
 import { useToast, useCart } from 'contexts';
 import { ProductInputQuantity } from 'components/product';
 import styles from './CartItem.module.css';
 
 interface Props {
-  cart: Cart;
+  cartItem: CartItemType;
 }
 
-const CartItem: React.FC<Props> = ({ cart }) => {
-  const { removeCart, updateCartQty } = useCart();
+const CartItem: React.FC<Props> = ({ cartItem }) => {
+  const { removeCartItem, updateCartItemQty } = useCart();
   const { setToast } = useToast();
 
-  const [qty, setQty] = useState<string | number>(cart.quantity);
+  const [qty, setQty] = useState<string | number>(cartItem.quantity);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const total = formatPrice(parseFloat((cart.product.price * cart.quantity).toFixed(2)));
+  const total = formatPrice(parseFloat((cartItem.product.price * cartItem.quantity).toFixed(2)));
 
   const handleRemoveCart = async () => {
     try {
-      await removeCart(cart._id);
+      await removeCartItem(cartItem);
     } catch (error) {
       setToast('error', error.message);
     }
@@ -30,7 +30,7 @@ const CartItem: React.FC<Props> = ({ cart }) => {
   const updateQtyAsync = async (quantity: number) => {
     try {
       setIsUpdating(true);
-      await updateCartQty(cart._id, quantity);
+      await updateCartItemQty(cartItem, quantity);
       setQty(quantity);
     } catch (error) {
       setToast('error', error.message);
@@ -68,7 +68,7 @@ const CartItem: React.FC<Props> = ({ cart }) => {
 
   const handleChangeBlur = (val: string) => {
     if (!val) {
-      updateQtyAsync(cart.quantity);
+      updateQtyAsync(cartItem.quantity);
       return;
     }
 
@@ -79,25 +79,25 @@ const CartItem: React.FC<Props> = ({ cart }) => {
     <div className={styles.productList}>
       <div className={styles.product}>
         <div className={styles.productImg}>
-          <Link href={`/product?id=${cart.product._id}`}>
+          <Link href={`/product?id=${cartItem.product._id}`}>
             <a>
-              <img src={cart.product.imageURL} alt={cart.product.name} />
+              <img src={cartItem.product.imageURL} alt={cartItem.product.name} />
             </a>
           </Link>
         </div>
 
         <div className={styles.productInfo}>
           <div className={styles.productName}>
-            <Link href={`/product?id=${cart.product._id}`}>
-              <a>{cart.product.name}</a>
+            <Link href={`/product?id=${cartItem.product._id}`}>
+              <a>{cartItem.product.name}</a>
             </Link>
           </div>
 
           <div className={`${styles.productPrice} ${styles.productContent}`}>
-            {formatPrice(cart.product.price)}
+            {formatPrice(cartItem.product.price)}
           </div>
           <div className={`${styles.productQty} ${styles.productContent}`}>
-            <div className="qty-container">
+            <div className={styles.qtyContainer}>
               <ProductInputQuantity
                 isUpdating={isUpdating}
                 value={qty}

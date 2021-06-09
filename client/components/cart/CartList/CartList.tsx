@@ -4,7 +4,7 @@ import { useCart } from 'contexts';
 import styles from './CartList.module.css';
 
 const CartList: React.FC = () => {
-  const { carts } = useCart();
+  const { cartItems } = useCart();
 
   return (
     <div>
@@ -18,8 +18,8 @@ const CartList: React.FC = () => {
             Action
           </div>
         </div>
-        {carts.map((cart) => (
-          <CartItem cart={cart} key={cart._id} />
+        {cartItems.map((cartItem) => (
+          <CartItem cartItem={cartItem} key={cartItem._id} />
         ))}
       </>
     </div>

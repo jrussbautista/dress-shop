@@ -1,4 +1,4 @@
-import { Product } from 'types';
+import { Product, CartItem } from 'types';
 
 type Cart = {
   product: Product;
@@ -6,9 +6,12 @@ type Cart = {
 };
 
 export default function calculateCartTotal(
-  carts: Cart[]
+  cartItems: CartItem[]
 ): { cartTotal: number; stripeTotal: number } {
-  const total = carts.reduce((acc, el) => acc + el.product.price * el.quantity, 0);
+  const total = cartItems.reduce(
+    (prev, current) => prev + current.product.price * current.quantity,
+    0
+  );
   const cartTotal = parseFloat(total.toFixed(2));
   const stripeTotal = Number((total * 100).toFixed(2));
   return { cartTotal, stripeTotal };

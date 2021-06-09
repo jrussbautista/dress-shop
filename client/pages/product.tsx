@@ -19,7 +19,7 @@ interface Props {
 
 const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
   const [qty, setQty] = useState<string | number>(1);
-  const { addCart } = useCart();
+  const { addCartItem } = useCart();
   const { currentUser } = useAuth();
   const { isOpen, showToast } = usePopUp();
   const { setToast } = useToast();
@@ -53,7 +53,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
         Router.push(`/auth?type=login&ref=${product._id}`);
         return;
       }
-      await addCart(product, Number(qty));
+      await addCartItem(product, Number(qty));
       showToast();
     } catch (error) {
       setToast('error', error.message);

@@ -13,7 +13,7 @@ const DesktopMenu: React.FC = () => {
   const dropdownRef = useRef<HTMLLIElement>(null);
 
   const { currentUser, logout } = useAuth();
-  const { cartsNum } = useCart();
+  const { cartItems } = useCart();
 
   useEffect(() => {
     window.addEventListener('click', handleClickOutSide);
@@ -51,7 +51,9 @@ const DesktopMenu: React.FC = () => {
             <a>
               <IoMdCart size={30} />
               Cart
-              {currentUser && cartsNum > 0 && <div className={styles.cartNum}>{cartsNum}</div>}
+              {currentUser && cartItems.length > 0 && (
+                <div className={styles.cartNum}>{cartItems.length}</div>
+              )}
             </a>
           </Link>
         </li>

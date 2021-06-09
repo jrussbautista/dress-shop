@@ -8,7 +8,7 @@ import styles from './MobileBottomMenu.module.css';
 const MobileBottomMenu: React.FC = () => {
   const { pathname } = useRouter();
   const { currentUser } = useAuth();
-  const { cartsNum } = useCart();
+  const { cartItems } = useCart();
 
   return (
     <>
@@ -38,7 +38,7 @@ const MobileBottomMenu: React.FC = () => {
             <a className={styles.link}>
               <div className={styles.icon}>
                 <FiShoppingCart />
-                {cartsNum > 0 && <span className={styles.cartNum}>{cartsNum}</span>}
+                {cartItems.length > 0 && <span className={styles.cartNum}>{cartItems.length}</span>}
               </div>
               <span className={styles.title}> Cart </span>
             </a>

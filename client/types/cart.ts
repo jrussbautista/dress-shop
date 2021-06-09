@@ -1,16 +1,11 @@
-import { Product } from './product';
+import { Product } from './Product';
+
+export interface CartItem {
+  _id: string;
+  quantity: number;
+  product: Product;
+}
 
 export interface Cart {
-  _id: string;
-  product: Product;
-  quantity: number;
-}
-
-export interface AddCart {
-  product: Product;
-  quantity: number;
-}
-
-export interface Carts {
-  carts: Cart[];
+  items: CartItem[];
 }

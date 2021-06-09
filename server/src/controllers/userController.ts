@@ -9,8 +9,7 @@ export const update = async (req: Request, res: Response) => {
 
     let user = await User.findById(id);
 
-    if (!user)
-      return res.status(404).json({ error: { message: 'User not found' } });
+    if (!user) return res.status(404).json({ message: 'User not found' });
 
     if (user.id !== id) {
       return res.status(402).json({ message: 'Ops user id mismatch' });
@@ -35,7 +34,7 @@ export const update = async (req: Request, res: Response) => {
       );
     }
 
-    res.status(200).json({ data: { user } });
+    res.status(200).json({ data: user });
   } catch (error) {
     res.status(500).json({ message: 'Error in updating user details' });
   }

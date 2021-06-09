@@ -62,7 +62,7 @@ export const loginViaGoogle = async (req: Request, res: Response) => {
 
     sendResponseToken({ user, res, statusCode: 200 });
   } catch (error) {
-    res.status(500).json({ error: { message: 'Error in logging in' } });
+    res.status(500).json({ message: 'Error in logging in' });
   }
 };
 

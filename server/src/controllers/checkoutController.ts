@@ -5,14 +5,14 @@ import { createPaymentIntent as stripeCreatePaymentIntent } from '../lib/stripe'
 import { client } from '../lib/paypal';
 const paypal = require('@paypal/checkout-server-sdk');
 
-const getCarts = async (req: Request) => {
+const getCart = async (req: Request) => {
   const user = req.user as UserType;
-  return await Cart.find({ user: user._id }).populate('product');
+  return await Cart.findOne({ user: user._id }).populate('product');
 };
 
 const calculateCartTotal = async (req: Request): Promise<number> => {
-  const carts = await getCarts(req);
-  const total = carts.reduce(
+  const cart = await getCart(req);
+  const total = cart?.items.reduce(
     (acc: any, el: any) => acc + el.product.price * el.quantity,
     0
   );

@@ -15,7 +15,7 @@ const WithAuth = (Component: React.ComponentType): React.FC => () => {
 
   useEffect(() => {
     if (!loading && !isAuthenticated) {
-      router.push('/login');
+      router.push('/auth');
     }
   }, [loading]);
 

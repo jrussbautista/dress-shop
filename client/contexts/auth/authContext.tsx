@@ -1,6 +1,6 @@
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { autoLogin } from 'utils/auth';
+import { autoLogin, autoLogout } from 'utils/auth';
 import { LOGOUT_USER, SET_CURRENT_USER, UPDATE_USER } from './authTypes';
 import { User } from 'types';
 import { destroyCookie } from 'nookies';
@@ -83,7 +83,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const logout = (redirectUrl: string) => {
     destroyCookie({}, 'token');
     dispatch({ type: LOGOUT_USER });
-    Router.push(redirectUrl);
+    autoLogout(redirectUrl);
   };
 
   const updateUser = (user: User) => {

@@ -1,6 +1,5 @@
 import { User } from 'types';
 import { catchError } from 'utils/catchError';
-import { setAuthToken } from 'utils/auth';
 import apiClient from 'utils/apiClient';
 
 interface UserData {

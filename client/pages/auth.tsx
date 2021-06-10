@@ -8,7 +8,7 @@ const Auth: React.FC = () => {
   const { query } = useRouter();
   const type = query.type as string;
 
-  const authElement = type === 'login' ? <Login /> : <SignUp />;
+  const authElement = type === 'register' ? <SignUp /> : <Login />;
 
   return (
     <>

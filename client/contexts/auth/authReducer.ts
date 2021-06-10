@@ -22,7 +22,7 @@ type Action = {
 export default (state: State, action: Action): State => {
   switch (action.type) {
     case LOGOUT_USER:
-      return { ...state, currentUser: null, isAuthenticated: false };
+      return { ...state, currentUser: null, isAuthenticated: false, loading: false };
     case SET_CURRENT_USER:
       return { ...state, currentUser: action.payload, isAuthenticated: true, loading: false };
     case SET_AUTH_ERROR:

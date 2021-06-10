@@ -1,5 +1,5 @@
 export * from './Banner';
-export * from './user';
+export * from './User';
 export * from './Product';
 export * from './Category';
 export * from './Cart';

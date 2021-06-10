@@ -23,7 +23,7 @@ const SearchFilter: React.FC<Props> = ({ handleChange, active }) => {
 
   return (
     <div className={styles.filterContainer}>
-      <span className="label"> Sort by </span>
+      <span className={styles.label}> Sort by </span>
       <div className={styles.select}>
         <button
           className={styles.selectItem}

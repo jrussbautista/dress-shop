@@ -3,14 +3,14 @@
   z-index: 99;
   top: 0;
   left: 0;
-  background-color: #fff;
+  background-color: var(--background);
   box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.06);
 }
 
 .siteTitle {
   font-size: 3rem;
   font-weight: 600;
-  color: #3d3d3d;
+  color: var(--color-text-primary);
 }
 
 .headerWrapper {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { AppProps } from 'next/app';
 import { StoreProvider } from 'contexts';
+import { ThemeProvider } from 'next-themes';
+
 import Layout from 'components/core/Layout';
 import { User } from 'types';
 import 'styles/global.css';
@@ -12,9 +14,11 @@ interface MyAppProps extends AppProps {
 const MyApp = ({ Component, pageProps }: MyAppProps): JSX.Element => {
   return (
     <StoreProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     </StoreProvider>
   );
 };

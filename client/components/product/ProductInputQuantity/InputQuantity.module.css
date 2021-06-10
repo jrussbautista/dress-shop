@@ -1,6 +1,6 @@
 .qtyContainer {
   display: flex;
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--background);
   height: 4rem;
 }
 
@@ -8,11 +8,11 @@
   width: 6rem;
   text-align: center;
   font-size: 1.6rem;
-  border-left: 1px solid #e6e6e6;
-  border-right: 1px solid #e6e6e6;
+  border-left: 1px solid var(--background);
+  border-right: 1px solid var(--background);
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  background-color: #f7f7f7;
+  background-color: var(--background);
 }
 
 .qtyInput:disabled {
@@ -20,10 +20,11 @@
 }
 
 .qtyBtn {
-  background-color: #fff;
+  background-color: var(--background-light);
   border: 1px solid transparent;
   width: 4rem;
   font-size: 1.6rem;
+  cursor: pointer;
 }
 
 .qtyBtn:disabled {

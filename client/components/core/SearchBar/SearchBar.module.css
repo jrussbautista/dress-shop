@@ -10,7 +10,7 @@
   height: 5rem;
   border-radius: 5rem;
   padding: 0 1rem 0 2rem;
-  background-color: var(--color-gray-dark);
+  background-color: var(--background-light);
 }
 
 .searchInput {

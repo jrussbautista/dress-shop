@@ -26,7 +26,7 @@ const Input: React.FC<Props> = ({
   autoComplete = 'false',
   required,
 }) => {
-  const inputClassName = styles.error ? `${styles.input} ${styles.error}` : styles.input;
+  const inputClassName = error ? `${styles.input} ${styles.error}` : styles.input;
 
   return (
     <>

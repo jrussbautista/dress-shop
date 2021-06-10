@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 import { IoMdCart } from 'react-icons/io';
+import { FiSun, FiMoon } from 'react-icons/fi';
 import { useAuth, useCart } from 'contexts';
 import { capitalizeFirstLetter } from 'utils/helpers';
 import { Button } from 'components/ui';
 import { SearchBar } from 'components/core';
 import styles from './DesktopMenu.module.css';
+import { useTheme } from 'next-themes';
 
 const DesktopMenu: React.FC = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -14,6 +16,7 @@ const DesktopMenu: React.FC = () => {
 
   const { currentUser, logout } = useAuth();
   const { cartItems } = useCart();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     window.addEventListener('click', handleClickOutSide);
@@ -38,6 +41,11 @@ const DesktopMenu: React.FC = () => {
 
   const handleCloseDropDown = () => {
     setIsOpenDropdown(!isOpenDropdown);
+  };
+
+  const handleToggleTheme = () => {
+    const selectedTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(selectedTheme);
   };
 
   return (
@@ -99,13 +107,21 @@ const DesktopMenu: React.FC = () => {
                     <a>My Orders</a>
                   </Link>
                 </div>
+
                 <div
+                  className={styles.item}
                   role="button"
                   tabIndex={-1}
-                  className={styles.item}
-                  onClick={handleCloseDropDown}
-                  onKeyDown={handleCloseDropDown}
+                  onClick={handleToggleTheme}
+                  onKeyPress={handleToggleTheme}
                 >
+                  <div className={styles.selectThemeContainer}>
+                    <span>Theme</span>
+                    <span>{theme === 'light' ? <FiSun /> : <FiMoon />}</span>
+                  </div>
+                </div>
+
+                <div className={styles.item}>
                   <Button
                     type="button"
                     title="Log Out"

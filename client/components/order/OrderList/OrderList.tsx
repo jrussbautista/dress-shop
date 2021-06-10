@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { formatDate, formatPrice } from 'utils/helpers';
+import { formatDate } from 'utils/helpers';
+import formatPrice from 'utils/formatPrice';
 import { Order } from 'types';
 import styles from './OrderList.module.css';
 

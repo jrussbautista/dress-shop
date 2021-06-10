@@ -19,7 +19,7 @@
 .headerItem a {
   display: flex;
   align-items: center;
-  color: #3d3d3d;
+  color: var(--color-text-primary);
 }
 
 .headerRight a:hover {
@@ -65,7 +65,8 @@
 }
 
 .userTextContainer {
-  background-color: var(--color-dark);
+  background-color: var(--foreground);
+  color: var(--background);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,21 +92,20 @@
   top: 100%;
   right: 0;
   margin-top: 1rem;
-  background-color: #fff;
+  background-color: var(--background-light);
   border-radius: 6px;
-  padding: 1rem;
 }
 
 .dropdown .item:not(:last-child) {
   border-bottom: 1px solid #ccc;
 }
 
-.dropdown .item:last-child {
-  padding: 0.8rem 0;
+.dropdown .item {
+  padding: 1rem;
 }
 
 .dropdown .item a {
-  padding: 0.8rem 0;
+  display: block;
   width: 100%;
 }
 
@@ -115,6 +115,11 @@
 
 .dropdown li:last-child {
   border-top: 1px solid var(--color-gray-light);
+}
+
+.selectThemeContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media only screen and (min-width: 1024px) {

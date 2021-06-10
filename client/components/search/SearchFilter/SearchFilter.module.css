@@ -20,7 +20,7 @@
 
 .select {
   border: 1px solid var(--color-gray-light);
-  background: #fff;
+  background: var(--background-light);
   position: relative;
   font-size: 1.8rem;
   padding: 1rem 1rem;
@@ -36,7 +36,7 @@
   border: 1px solid transparent;
   width: 100%;
   font-size: 1.6rem;
-  background-color: transparent;
+  background: var(--background-light);
 }
 
 .dropdown {
@@ -44,7 +44,7 @@
   top: 100%;
   margin-top: 1rem;
   left: 0;
-  background-color: #fff;
+  background: var(--background-light);
   padding: 1rem;
   border-radius: 6px;
   z-index: 1;
@@ -56,7 +56,7 @@
   font-size: 1.6rem;
   padding: 0.5rem 1rem;
   width: 100%;
-  background-color: transparent;
+  background: var(--background-light);
   border: 1px solid transparent;
 }
 

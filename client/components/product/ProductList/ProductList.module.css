@@ -16,7 +16,7 @@
 
 .productName {
   font-size: 1.7rem;
-  color: var(--color-dark);
+  color: var(--color-text-primary);
 }
 
 .productPrice {

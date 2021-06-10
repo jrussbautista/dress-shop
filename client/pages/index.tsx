@@ -21,8 +21,9 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
   const { isLoading, loadProducts, hasLoadMore, products } = useShop();
 
   useEffect(() => {
-    // load products if empty
-    products.length === 0 && loadProducts();
+    if (isLoading) {
+      loadProducts();
+    }
   }, []);
 
   useScrollRestoration();

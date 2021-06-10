@@ -44,7 +44,7 @@ const MobileBottomMenu: React.FC = () => {
             </a>
           </Link>
         </div>
-        <div className={`list ${pathname === '/profile' ? 'active' : ''}`}>
+        <div className={`${styles.list} ${pathname === '/profile' ? 'active' : ''}`}>
           <Link href={`${currentUser ? '/profile' : '/auth?type=login'}`}>
             <a className={styles.link}>
               <div className={styles.icon}>

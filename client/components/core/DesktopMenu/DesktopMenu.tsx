@@ -95,8 +95,8 @@ const DesktopMenu: React.FC = () => {
                   onClick={handleCloseDropDown}
                   onKeyDown={handleCloseDropDown}
                 >
-                  <Link href="/order">
-                    <a>My orders</a>
+                  <Link href="/orders">
+                    <a>My Orders</a>
                   </Link>
                 </div>
                 <div

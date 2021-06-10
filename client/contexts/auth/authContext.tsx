@@ -57,23 +57,17 @@ export const AuthProvider: React.FC = ({ children }) => {
     getCurrentUser();
   }, []);
 
-  const loginSuccess = (user: User, token: string, adminRedirect = false) => {
+  const loginSuccess = (user: User, token: string) => {
     dispatch({ type: SET_CURRENT_USER, payload: user });
-
-    if (adminRedirect) {
-      if (user.role !== 'admin') {
-        throw new Error('You are not authorize to access this page');
-      }
-    }
 
     const url = ref ? `/product?id=${ref}` : '/profile';
 
     autoLogin(token, url);
   };
 
-  const login = async (email: string, password: string, adminRedirect?: boolean): Promise<void> => {
+  const login = async (email: string, password: string): Promise<void> => {
     const { user, token } = await AuthService.login(email, password);
-    loginSuccess(user, token, adminRedirect);
+    loginSuccess(user, token);
   };
 
   const loginWithGoogle = async (tokenId: string) => {

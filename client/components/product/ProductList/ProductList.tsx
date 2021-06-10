@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Products } from 'types';
 import Image from 'next/image';
 import styles from './ProductList.module.css';
+import formatPrice from 'utils/formatPrice';
 
 interface Props {
   products: Products;
@@ -25,7 +26,7 @@ const ProductList: React.FC<Props> = ({ products }) => {
                 </div>
                 <div className={styles.productInfo}>
                   <div className={styles.productName}>{product.name}</div>
-                  <div className={styles.productPrice}>P{product.price}</div>
+                  <div className={styles.productPrice}>{formatPrice(product.price)}</div>
                 </div>
               </div>
             </a>

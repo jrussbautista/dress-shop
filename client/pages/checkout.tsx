@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckoutList, CheckoutPaypal, CheckoutStripeForm } from 'components/checkout';
-import { formatPrice } from 'utils/helpers';
+import formatPrice from 'utils/formatPrice';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { STRIPE_CLIENT_KEY } from 'utils/constants';

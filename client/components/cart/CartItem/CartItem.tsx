@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { formatPrice } from 'utils/helpers';
+import formatPrice from 'utils/formatPrice';
 import Link from 'next/link';
 import { CartItem as CartItemType } from 'types';
 import { useToast, useCart } from 'contexts';

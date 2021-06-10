@@ -10,6 +10,7 @@ import { GetServerSideProps } from 'next';
 import { ProductService } from 'services/productService';
 import { ErrorMessage, Button } from 'components/ui';
 import styles from 'styles/Product.module.css';
+import formatPrice from 'utils/formatPrice';
 
 interface Props {
   product: ProductTypes;
@@ -83,7 +84,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
           </div>
           <div className={styles.productInfo}>
             <div className={styles.productName}>{product.name}</div>
-            <div className={styles.productPrice}>P{product.price}</div>
+            <div className={styles.productPrice}>{formatPrice(product.price)}</div>
             <div className={styles.productDesc}>{product.description}</div>
             <div className={styles.productAction}>
               <ProductInputQuantity

@@ -79,7 +79,7 @@ const CartItem: React.FC<Props> = ({ cartItem }) => {
     <div className={styles.productList}>
       <div className={styles.product}>
         <div className={styles.productImg}>
-          <Link href={`/product?id=${cartItem.product._id}`}>
+          <Link href={`/products/${cartItem.product._id}`}>
             <a>
               <img src={cartItem.product.imageURL} alt={cartItem.product.name} />
             </a>
@@ -88,7 +88,7 @@ const CartItem: React.FC<Props> = ({ cartItem }) => {
 
         <div className={styles.productInfo}>
           <div className={styles.productName}>
-            <Link href={`/product?id=${cartItem.product._id}`}>
+            <Link href={`/products/${cartItem.product._id}`}>
               <a>{cartItem.product.name}</a>
             </Link>
           </div>

@@ -13,6 +13,7 @@ import {
   orderRoutes,
   userRoutes,
   dashboardRoutes,
+  wishlistRoutes,
 } from './routes';
 import { PORT } from './config';
 import passport from 'passport';
@@ -35,6 +36,7 @@ const start = async () => {
   app.use('/api/auth', authRoutes);
   app.use('/api/banners', bannerRoutes);
   app.use('/api/categories', categoryRoutes);
+  app.use('/api/wishlist', wishlistRoutes);
   app.use('/api/cart', cartRoutes);
   app.use('/api/checkout', checkOutRoutes);
   app.use('/api/orders', orderRoutes);

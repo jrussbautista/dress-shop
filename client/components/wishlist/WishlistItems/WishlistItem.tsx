@@ -18,7 +18,9 @@ const WishlistItem: React.FC<Props> = ({ wishlistItem }) => {
 
   const [removing, setRemoving] = useState(false);
 
-  const handleRemove = async () => {
+  const handleRemove = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
     try {
       setRemoving(true);
       await removeWishlistItem(wishlistItem.product._id);

@@ -25,5 +25,5 @@ export const autoLogin = (token: string, location: string): void => {
 export const autoLogout = (redirectUrl: string): void => {
   destroyCookie({}, 'token');
   deleteAuthToken();
-  Router.push(redirectUrl);
+  window.location.href = redirectUrl;
 };

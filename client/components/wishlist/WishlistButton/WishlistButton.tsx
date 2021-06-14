@@ -1,4 +1,5 @@
-import { useWishlist, useToast } from 'contexts';
+import { useWishlist, useToast, useAuth } from 'contexts';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { colors } from 'utils/theme';
@@ -9,6 +10,8 @@ interface Props {
 }
 
 const WishlistButton: React.FC<Props> = ({ productId }) => {
+  const router = useRouter();
+  const { isAuthenticated } = useAuth();
   const { wishlistItems, addWishlistItem, removeWishlistItem } = useWishlist();
 
   const { setToast } = useToast();
@@ -21,6 +24,11 @@ const WishlistButton: React.FC<Props> = ({ productId }) => {
     e.preventDefault();
 
     try {
+      if (!isAuthenticated) {
+        setToast('error', 'Please, login first.');
+        return router.push('/auth');
+      }
+
       if (isProductInWishlist) {
         await removeWishlistItem(productId);
       } else {

@@ -37,3 +37,26 @@ export const store = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error in adding wishlist' });
   }
 };
+
+export const destroy = async (req: Request, res: Response) => {
+  try {
+    const user = req.user as UserTypes;
+    const { productId } = req.body;
+    let wishlist = await Wishlist.findOne({
+      user: user._id,
+      product: productId,
+    });
+
+    if (!wishlist) {
+      return res
+        .status(409)
+        .json({ message: 'Product is not in your  wishlist' });
+    }
+
+    await wishlist.remove();
+
+    res.status(200).json({ data: null });
+  } catch (error) {
+    res.status(500).json({ message: 'Error in adding wishlist' });
+  }
+};

@@ -7,7 +7,7 @@ const paypal = require('@paypal/checkout-server-sdk');
 
 const getCart = async (req: Request) => {
   const user = req.user as UserType;
-  return await Cart.findOne({ user: user._id }).populate('product');
+  return await Cart.findOne({ user: user._id }).populate('items.product');
 };
 
 const calculateCartTotal = async (req: Request): Promise<number> => {
@@ -34,6 +34,7 @@ export const createPaymentIntent = async (req: Request, res: Response) => {
   try {
     // calculate stripe amount
     const cartTotal = await calculateCartTotal(req);
+    console.log(cartTotal);
     const stripeAmount = cartTotal * 100;
     const clientSecret = await stripeCreatePaymentIntent(stripeAmount);
 

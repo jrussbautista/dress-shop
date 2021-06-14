@@ -17,7 +17,7 @@ const WishlistButton: React.FC<Props> = ({ productId }) => {
     (wishlistItem) => wishlistItem.product._id === productId
   );
 
-  const handleWishlistChange = async (e) => {
+  const handleWishlistChange = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {

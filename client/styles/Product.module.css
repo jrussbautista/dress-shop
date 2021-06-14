@@ -55,7 +55,7 @@
 .btnAddCart {
   border-radius: 50px;
   width: 20rem;
-  margin-left: 20px;
+  margin: 0 20px 0 40px;
 }
 
 .heading {

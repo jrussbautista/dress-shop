@@ -109,6 +109,18 @@ const DesktopMenu: React.FC = () => {
                 </div>
 
                 <div
+                  role="link"
+                  tabIndex={-1}
+                  className={styles.item}
+                  onClick={handleCloseDropDown}
+                  onKeyDown={handleCloseDropDown}
+                >
+                  <Link href="/wishlist">
+                    <a>My Wishlist</a>
+                  </Link>
+                </div>
+
+                <div
                   className={styles.item}
                   role="button"
                   tabIndex={-1}

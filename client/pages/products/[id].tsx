@@ -11,6 +11,7 @@ import { ProductService } from 'services/productService';
 import { ErrorMessage, Button } from 'components/ui';
 import styles from 'styles/Product.module.css';
 import formatPrice from 'utils/formatPrice';
+import WishlistButton from 'components/wishlist/WishlistButton';
 
 interface Props {
   product: ProductTypes;
@@ -100,6 +101,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
                 title="Add to Cart"
                 className={styles.btnAddCart}
               />
+              <WishlistButton productId={product._id} />
             </div>
           </div>
         </div>

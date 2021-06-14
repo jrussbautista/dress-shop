@@ -3,7 +3,7 @@ import { AuthProvider } from './auth';
 import { CartProvider } from './cart';
 import { ShopProvider } from './shop';
 import { ToastProvider } from './toast';
-import { User } from '../types';
+import { WishlistProvider } from './wishlist';
 
 type ProviderProps = {
   contexts: any;
@@ -29,6 +29,7 @@ export const StoreProvider: React.FC = ({ children }) => {
         <AuthProvider key="2" />,
         <CartProvider key="3" />,
         <ShopProvider key="4" />,
+        <WishlistProvider key="5" />,
       ]}
     >
       {children}

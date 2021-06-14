@@ -1,28 +1,8 @@
-.productImgWrapper img {
-  object-fit: cover;
-  background-color: #dddddd;
-}
-
 .productGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1.5rem;
   margin: 2rem 0;
-}
-
-.productInfo {
-  padding: 1rem;
-}
-
-.productName {
-  font-size: 1.7rem;
-  color: var(--color-text-primary);
-}
-
-.productPrice {
-  color: var(--color-primary);
-  font-size: 1.8rem;
-  font-weight: 600;
 }
 
 @media only screen and (min-width: 768px) {

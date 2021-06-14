@@ -18,9 +18,7 @@ const WishlistItem: React.FC<Props> = ({ wishlistItem }) => {
 
   const [removing, setRemoving] = useState(false);
 
-  const handleRemove = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
+  const handleRemove = async () => {
     try {
       setRemoving(true);
       await removeWishlistItem(wishlistItem.product._id);
@@ -35,24 +33,30 @@ const WishlistItem: React.FC<Props> = ({ wishlistItem }) => {
   };
 
   return (
-    <Link href={`/products/${wishlistItem.product._id}`}>
-      <a className={classNames(styles.wishlistItemContainer, removing ? styles.removing : '')}>
-        <div className={styles.mediaContainer}>
-          <img
-            className={styles.mediaImage}
-            src={wishlistItem.product.imageURL}
-            alt={wishlistItem.product.name}
-          />
-        </div>
-        <div className={styles.infoContainer}>
-          <p className={styles.name}>{wishlistItem.product.name}</p>
-          <p className={styles.price}>{formatPrice(wishlistItem.product.price)}</p>
-          <div className={styles.buttonsContainer}>
-            <Button title="Remove" onClick={handleRemove} />
+    <div className={classNames(styles.wishlistItemContainer, removing ? styles.removing : '')}>
+      <Link href={`/products/${wishlistItem.product._id}`}>
+        <a>
+          <div className={styles.mediaContainer}>
+            <img
+              className={styles.mediaImage}
+              src={wishlistItem.product.imageURL}
+              alt={wishlistItem.product.name}
+            />
           </div>
+        </a>
+      </Link>
+      <div className={styles.infoContainer}>
+        <Link href={`/products/${wishlistItem.product._id}`}>
+          <a>
+            <p className={styles.name}>{wishlistItem.product.name}</p>
+          </a>
+        </Link>
+        <p className={styles.price}>{formatPrice(wishlistItem.product.price)}</p>
+        <div className={styles.buttonsContainer}>
+          <Button title="Remove" onClick={handleRemove} />
         </div>
-      </a>
-    </Link>
+      </div>
+    </div>
   );
 };
 

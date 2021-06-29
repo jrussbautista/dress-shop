@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Spinner, Button, Banners, Heading, Container } from 'components/ui';
+import { Spinner, Button, Heading, Container } from 'components/ui';
 import { MobileBottomMenu } from 'components/core';
 import { ProductListSkeleton, ProductList } from 'components/product';
-import { Categories } from 'components/category';
+import { BannersSection, CategoriesSection } from 'components/home';
 import { useShop } from 'contexts';
-import { GetServerSideProps } from 'next';
-import { BannerService, CategoryService } from 'services';
 import { Banner, Category } from 'types';
 import { useScrollRestoration } from 'hooks';
 import { colors } from 'utils/theme';
@@ -16,7 +14,7 @@ interface Props {
   categories: Category[];
 }
 
-const Home: React.FC<Props> = ({ banners, categories }) => {
+const Home: React.FC<Props> = () => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const { isLoading, loadProducts, hasLoadMore, products } = useShop();
 
@@ -40,10 +38,9 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
 
   return (
     <>
-      <Banners banners={banners} />
+      <BannersSection />
       <Container className={styles.container}>
-        <Heading>Shop Categories</Heading>
-        <Categories categories={categories} />
+        <CategoriesSection />
         <Heading>Product Overview</Heading>
         {isLoading ? <ProductListSkeleton number={20} /> : <ProductList products={products} />}
         {isLoadingMore && (
@@ -71,15 +68,6 @@ const Home: React.FC<Props> = ({ banners, categories }) => {
       <MobileBottomMenu />
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const banners = await BannerService.getBanners();
-  const categories = await CategoryService.getCategories();
-
-  return {
-    props: { banners, categories },
-  };
 };
 
 export default Home;

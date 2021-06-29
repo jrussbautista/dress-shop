@@ -15,6 +15,7 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="stylesheet" href="/css/nprogress.css" />
+          <link rel="shortcut icon" href="/logo.png" />
           <link
             rel="stylesheet"
             type="text/css"

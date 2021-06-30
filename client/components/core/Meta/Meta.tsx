@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Meta: React.FC<Props> = ({
-  title,
+  title = 'Buy best and quality products',
   description = 'Dress Shop | Buy best and quality products',
   image = 'https://dress-shop.vercel.app/featured.png',
 }) => {

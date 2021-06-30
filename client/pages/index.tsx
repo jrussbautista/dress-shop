@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Spinner, Button, Heading, Container } from 'components/ui';
-import { MobileBottomMenu } from 'components/core';
+import { Meta, MobileBottomMenu } from 'components/core';
 import { ProductListSkeleton, ProductList } from 'components/product';
 import { BannersSection, CategoriesSection } from 'components/home';
 import { useShop } from 'contexts';
@@ -38,6 +38,7 @@ const Home: React.FC<Props> = () => {
 
   return (
     <>
+      <Meta />
       <BannersSection />
       <Container className={styles.container}>
         <CategoriesSection />

@@ -74,7 +74,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
 
   return (
     <>
-      <Meta title={product.name} />
+      <Meta title={product.name} description={product.description} image={product.imageURL} />
       <Container>
         <PopUp isOpen={isOpen} message={`Successfully added to cart`} />
         <div className={styles.productContainer}>

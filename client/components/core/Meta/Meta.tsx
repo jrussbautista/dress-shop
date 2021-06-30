@@ -21,11 +21,11 @@ const Meta: React.FC<Props> = ({
 
       <meta name="twitter:card" content={description} />
       <meta name="twitter:site" content="@projecthub" />
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:title" content={siteTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
 
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={siteTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
     </Head>

@@ -34,6 +34,16 @@
   margin: 1rem 0;
 }
 
+.productTopContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wishlistButtonContainer {
+  padding-left: 10px;
+}
+
 .productName {
   font-size: 3rem;
   font-weight: 600;
@@ -55,7 +65,7 @@
 .btnAddCart {
   border-radius: 50px;
   width: 20rem;
-  margin: 0 20px 0 40px;
+  margin-left: 10px;
 }
 
 .heading {
@@ -76,5 +86,9 @@
 
   .heading {
     padding: 0;
+  }
+
+  .btnAddCart {
+    margin: 0 20px 0 40px;
   }
 }

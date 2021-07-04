@@ -84,7 +84,12 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
             </div>
           </div>
           <div className={styles.productInfo}>
-            <div className={styles.productName}>{product.name}</div>
+            <div className={styles.productTopContainer}>
+              <div className={styles.productName}>{product.name}</div>
+              <div className={styles.wishlistButtonContainer}>
+                <WishlistButton productId={product._id} />
+              </div>
+            </div>
             <div className={styles.productPrice}>{formatPrice(product.price)}</div>
             <div className={styles.productDesc}>{product.description}</div>
             <div className={styles.productAction}>
@@ -101,7 +106,6 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
                 title="Add to Cart"
                 className={styles.btnAddCart}
               />
-              <WishlistButton productId={product._id} />
             </div>
           </div>
         </div>

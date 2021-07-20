@@ -1,4 +1,4 @@
-import { LOAD_PRODUCTS } from './shopTypes';
+import { LOAD_PRODUCTS } from './shop-types';
 import { Product } from 'types';
 
 type State = {
@@ -13,7 +13,7 @@ type Action = {
   payload?: any;
 };
 
-export default (state: State, action: Action): State => {
+const shopReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case LOAD_PRODUCTS: {
       const products = action.payload.products;
@@ -33,3 +33,5 @@ export default (state: State, action: Action): State => {
       return state;
   }
 };
+
+export default shopReducer;

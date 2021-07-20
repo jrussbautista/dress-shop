@@ -4,7 +4,7 @@ import {
   SET_AUTH_ERROR,
   CLEAR_AUTH_ERROR,
   UPDATE_USER,
-} from './authTypes';
+} from './auth-types';
 import { User } from '../../types';
 
 type State = {
@@ -19,7 +19,7 @@ type Action = {
   payload?: any;
 };
 
-export default (state: State, action: Action): State => {
+const authReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case LOGOUT_USER:
       return { ...state, currentUser: null, isAuthenticated: false, loading: false };
@@ -35,3 +35,5 @@ export default (state: State, action: Action): State => {
       return state;
   }
 };
+
+export default authReducer;

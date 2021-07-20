@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { useAuth } from '../auth';
-import reducer from './cartReducer';
+import reducer from './cart-reducer';
 import {
   ADD_CART,
   CLEAR_CART,
@@ -8,7 +8,7 @@ import {
   SET_CARTS,
   UPDATE_QUANTITY,
   SET_ERROR,
-} from './cartTypes';
+} from './cart-types';
 import { CartItem, Product } from 'types';
 import { CartService } from 'services';
 

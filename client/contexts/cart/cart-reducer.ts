@@ -1,4 +1,8 @@
-import { removeCartItemToCart, addCartItemToCart, updateCartItemQuantityToCart } from './cartUtils';
+import {
+  removeCartItemToCart,
+  addCartItemToCart,
+  updateCartItemQuantityToCart,
+} from './cart-utils';
 import {
   ADD_CART,
   REMOVE_CART,
@@ -6,7 +10,7 @@ import {
   CLEAR_CART,
   UPDATE_QUANTITY,
   SET_ERROR,
-} from './cartTypes';
+} from './cart-types';
 import { CartItem } from 'types';
 
 type State = {
@@ -20,7 +24,7 @@ type Action = {
   payload?: any;
 };
 
-export default (state: State, action: Action): State => {
+const cartReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case CLEAR_CART:
       return { ...state, cartItems: [] };
@@ -60,3 +64,5 @@ export default (state: State, action: Action): State => {
       return state;
   }
 };
+
+export default cartReducer;

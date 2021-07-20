@@ -1,1 +1,1 @@
-export * from './shopContext';
+export * from './ShopContext';

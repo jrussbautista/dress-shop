@@ -1,1 +1,1 @@
-export * from './wishlistContext';
+export * from './WishlistContext';

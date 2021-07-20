@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { autoLogin, autoLogout } from 'utils/auth';
-import { LOGOUT_USER, SET_CURRENT_USER, UPDATE_USER } from './authTypes';
+import { LOGOUT_USER, SET_CURRENT_USER, UPDATE_USER } from './auth-types';
 import { User } from 'types';
 import { destroyCookie } from 'nookies';
-import reducer from './authReducer';
+import reducer from './auth-reducer';
 import { AuthService } from 'services';
 
 interface UserDetails {

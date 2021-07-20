@@ -1,4 +1,4 @@
-import { WishlistItem } from './../../types/Wishlist';
+import { WishlistItem } from '../../types/Wishlist';
 
 export const addWishlistItem = (
   wishlistItems: WishlistItem[],

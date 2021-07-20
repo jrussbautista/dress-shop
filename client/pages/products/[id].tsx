@@ -7,7 +7,7 @@ import { usePopUp } from 'hooks';
 import { useAuth, useCart, useToast } from 'contexts';
 import { Product as ProductTypes } from 'types';
 import { GetServerSideProps } from 'next';
-import { ProductService } from 'services/productService';
+import { ProductService } from 'services/ProductService';
 import { ErrorMessage, Button } from 'components/ui';
 import styles from 'styles/Product.module.css';
 import formatPrice from 'utils/formatPrice';

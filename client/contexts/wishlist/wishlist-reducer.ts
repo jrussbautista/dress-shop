@@ -1,6 +1,6 @@
-import { addWishlistItem, removeWishlistItem } from './wishlistUtils';
-import { SET_WISHLIST_ITEMS, ADD_WISHLIST_ITEM, REMOVE_WISHLIST_ITEM } from './wishlistTypes';
-import { WishlistItem } from './../../types/Wishlist';
+import { addWishlistItem, removeWishlistItem } from './wishlist-utils';
+import { SET_WISHLIST_ITEMS, ADD_WISHLIST_ITEM, REMOVE_WISHLIST_ITEM } from './wishlist-types';
+import { WishlistItem } from '../../types/Wishlist';
 
 type State = {
   wishlistItems: WishlistItem[];
@@ -13,7 +13,7 @@ type Action = {
   payload?: any;
 };
 
-export default (state: State, action: Action): State => {
+const wishlistReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case SET_WISHLIST_ITEMS:
       return {
@@ -36,3 +36,5 @@ export default (state: State, action: Action): State => {
       return state;
   }
 };
+
+export default wishlistReducer;

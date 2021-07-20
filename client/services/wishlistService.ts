@@ -1,4 +1,4 @@
-import { WishlistItem } from './../types/Wishlist';
+import { WishlistItem } from '../types/Wishlist';
 import apiClient from 'utils/apiClient';
 import { catchError } from 'utils/catchError';
 

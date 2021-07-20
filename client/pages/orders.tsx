@@ -3,7 +3,7 @@ import { OrderList } from 'components/order';
 import { ErrorMessage, Container, Heading } from 'components/ui';
 import { Meta, MobileBottomMenu } from 'components/core';
 import { Order as OrderType } from 'types';
-import { OrderService } from 'services/orderService';
+import { OrderService } from 'services/OrderService';
 import WithAuth from 'components/core/WithAuth';
 
 const Orders: React.FC = () => {

@@ -1,4 +1,4 @@
-import { ProductData, ProductsData, AddProduct, AddProductData } from 'types';
+import { ProductData, ProductsData } from 'types';
 import { catchError } from 'utils/catchError';
 import apiClient from 'utils/apiClient';
 
@@ -34,30 +34,7 @@ export const fetchProduct = async (id: string): Promise<ProductData> => {
   }
 };
 
-export const addProduct = async (product: AddProduct): Promise<AddProductData> => {
-  try {
-    const url = '/products';
-    const { data } = await apiClient.post(url, product);
-    return {
-      product: data.data.product,
-    };
-  } catch (error) {
-    throw new Error(catchError(error));
-  }
-};
-
-export const deleteProduct = async (id: string): Promise<void> => {
-  const url = `/products/${id}`;
-  try {
-    return await apiClient.delete(url);
-  } catch (error) {
-    throw new Error(catchError(error));
-  }
-};
-
 export const ProductService = {
   fetchProducts,
   fetchProduct,
-  addProduct,
-  deleteProduct,
 };

@@ -33,11 +33,36 @@ cd client
 npm install or yarn install
 ```
 
+#### Add .env.local file to root client directory
+
+```
+NEXT_PUBLIC_PAYPAL_CLIENT_ID=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KY=
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=
+```
+
 ## Server Installation
 
 ```
 cd server
 npm install or yarn install
+```
+
+#### Add .env file to root server directory
+
+```
+DATABASE_URI=
+JWT_SECRET=
+STRIPE_SECRET_API_KEY=
+GOOGLE_WEB_CLIENT_ID=
+GOOGLE_ANDROID_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+CLIENT_PUBLIC_URL=
+CLOUDINARY_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+PAYPAL_CLIENT_ID=
+PAYPAL_CLIENT_SECRET=
 ```
 
 ### This will run both client and server

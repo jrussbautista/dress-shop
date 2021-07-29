@@ -1,2 +1,2 @@
-export * from './use-scroll-restoration';
-export * from './use-popup';
+export * from './useScrollRestoration';
+export * from './usePopup';

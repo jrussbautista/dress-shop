@@ -1,14 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import Router from 'next/router';
-import { IoMdCart } from 'react-icons/io';
+import React, { useEffect, useRef, useState } from 'react';
 import { FiSun, FiMoon } from 'react-icons/fi';
+import { IoMdCart } from 'react-icons/io';
+
+import { SearchBar } from '@/components/core';
+import { Button } from '@/components/ui';
 import { useAuth, useCart } from '@/contexts';
 import { capitalizeFirstLetter } from '@/utils/helpers';
-import { Button } from '@/components/ui';
-import { SearchBar } from '@/components/core';
+
 import styles from './DesktopMenu.module.css';
-import { useTheme } from 'next-themes';
 
 const DesktopMenu: React.FC = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);

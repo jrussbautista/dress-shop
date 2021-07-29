@@ -1,5 +1,5 @@
-import apiClient from '@/utils/apiClient';
 import { Banner } from '@/types';
+import apiClient from '@/utils/apiClient';
 import { catchError } from '@/utils/catchError';
 
 const getBanners = async (): Promise<Banner[]> => {

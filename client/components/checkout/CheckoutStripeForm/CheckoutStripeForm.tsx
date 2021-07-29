@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import Router from 'next/router';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-import CardSection from '../CheckoutStripeCard/CheckoutStripeCard';
-import { CheckOutService } from 'services';
-import { useAuth, useToast, useCart } from 'contexts';
-import { PageLoader, Alert, Button } from 'components/ui';
 import { StripeCardElement, StripeCardElementChangeEvent } from '@stripe/stripe-js';
+import Router from 'next/router';
+import React, { useEffect, useState } from 'react';
+
+import { PageLoader, Alert, Button } from 'components/ui';
+import { useAuth, useToast, useCart } from 'contexts';
+import { CheckOutService } from 'services';
+
+import CardSection from '../CheckoutStripeCard/CheckoutStripeCard';
+
 import styles from './CheckoutStripeForm.module.css';
 
 const CheckoutStripeForm: React.FC = () => {

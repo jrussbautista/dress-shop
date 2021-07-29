@@ -1,6 +1,7 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import React from 'react';
 import { IoMdClose } from 'react-icons/io';
+
 import styles from './Toast.module.css';
 
 interface Props {

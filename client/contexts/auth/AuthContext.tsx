@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { autoLogin, autoLogout } from '@/utils/auth';
-import { LOGOUT_USER, SET_CURRENT_USER, UPDATE_USER } from './auth-types';
-import { User } from 'types';
 import { destroyCookie } from 'nookies';
-import reducer from './auth-reducer';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
+
 import { AuthService } from '@/services';
+import { autoLogin, autoLogout } from '@/utils/auth';
+import { User } from 'types';
+
+import reducer from './auth-reducer';
+import { LOGOUT_USER, SET_CURRENT_USER, UPDATE_USER } from './auth-types';
 
 interface UserDetails {
   email: string;

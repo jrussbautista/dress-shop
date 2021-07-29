@@ -1,8 +1,10 @@
-import { useWishlist, useToast, useAuth } from '@/contexts';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+
+import { useWishlist, useToast, useAuth } from '@/contexts';
 import { colors } from '@/utils/theme';
+
 import styles from './WishlistButton.module.css';
 
 interface Props {

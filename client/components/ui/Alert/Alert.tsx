@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './Alert.module.css';
 
 interface Props {

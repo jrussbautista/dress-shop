@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MdExpandMore } from 'react-icons/md';
+
 import styles from './SearchFilter.module.css';
 
 interface Props {

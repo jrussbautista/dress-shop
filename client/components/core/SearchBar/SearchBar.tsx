@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { IoIosSearch } from 'react-icons/io';
+
 import styles from './SearchBar.module.css';
 
 interface Props {
@@ -16,7 +17,7 @@ const SearchBar: React.FC<Props> = ({ onSubmit, style, isFocus }) => {
     if (isFocus) {
       if (searchRef.current) searchRef.current.focus();
     }
-  }, []);
+  }, [isFocus]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,6 +1,8 @@
 import React from 'react';
 import Slider from 'react-slick';
+
 import { Banner } from '@/types';
+
 import styles from './Banners.module.css';
 
 interface Props {

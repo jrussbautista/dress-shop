@@ -1,5 +1,6 @@
-import { LOAD_PRODUCTS } from './shop-types';
 import { Product } from 'types';
+
+import { LOAD_PRODUCTS } from './shop-types';
 
 type State = {
   products: Product[];

@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import { useEffect } from 'react';
 
 interface IShouldRestore {
@@ -6,7 +7,6 @@ interface IShouldRestore {
 }
 
 const cachedScrollPositions: any = [];
-import Router from 'next/router';
 
 export const useScrollRestoration = (): void => {
   useEffect(() => {

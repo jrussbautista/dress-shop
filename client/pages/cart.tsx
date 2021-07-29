@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { CartList, CartSubTotal, CartSkeleton } from '@/components/cart';
-import { useCart } from '@/contexts';
-import { ErrorMessage, Button, Heading, Container } from '@/components/ui';
 import { Meta, MobileBottomMenu } from '@/components/core';
-import calculateCartTotal from '@/utils/calculateCartTotal';
-import styles from '@/styles/Cart.module.css';
 import WithAuth from '@/components/core/WithAuth';
+import { ErrorMessage, Button, Heading, Container } from '@/components/ui';
+import { useCart } from '@/contexts';
+import styles from '@/styles/Cart.module.css';
+import calculateCartTotal from '@/utils/calculateCartTotal';
 
 const Cart: React.FC = () => {
   const { cartItems, loading, error } = useCart();

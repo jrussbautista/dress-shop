@@ -1,15 +1,16 @@
-import React from 'react';
-import { CheckoutList, CheckoutPaypal, CheckoutStripeForm } from '@/components/checkout';
-import formatPrice from '@/utils/formatPrice';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { STRIPE_CLIENT_KEY } from '@/utils/constants';
-import calculateCartTotal from '@/utils/calculateCartTotal';
-import { ErrorMessage, Container } from '@/components/ui';
+import React from 'react';
+
+import { CheckoutList, CheckoutPaypal, CheckoutStripeForm } from '@/components/checkout';
 import { Meta } from '@/components/core';
+import WithAuth from '@/components/core/WithAuth';
+import { ErrorMessage, Container } from '@/components/ui';
 import { useCart } from '@/contexts';
 import styles from '@/styles/Checkout.module.css';
-import WithAuth from '@/components/core/WithAuth';
+import calculateCartTotal from '@/utils/calculateCartTotal';
+import { STRIPE_CLIENT_KEY } from '@/utils/constants';
+import formatPrice from '@/utils/formatPrice';
 
 const stripePromise = loadStripe(STRIPE_CLIENT_KEY);
 

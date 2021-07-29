@@ -1,3 +1,5 @@
+import { User } from '../../types';
+
 import {
   LOGOUT_USER,
   SET_CURRENT_USER,
@@ -5,7 +7,6 @@ import {
   CLEAR_AUTH_ERROR,
   UPDATE_USER,
 } from './auth-types';
-import { User } from '../../types';
 
 type State = {
   isAuthenticated: boolean;

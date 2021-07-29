@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiMinus, FiPlus } from 'react-icons/fi';
+
 import styles from './InputQuantity.module.css';
 
 interface Props {

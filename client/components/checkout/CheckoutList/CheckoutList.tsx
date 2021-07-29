@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { CartItem } from '@/types';
 import formatPrice from '@/utils/formatPrice';
+
 import styles from './CheckoutList.module.css';
 
 interface Props {

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { FaCheck } from 'react-icons/fa';
+
 import styles from './PopUp.module.css';
 
 interface Props {

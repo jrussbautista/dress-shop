@@ -1,5 +1,6 @@
-import React from 'react';
 import { useRouter } from 'next/router';
+import React from 'react';
+
 import { Login, SignUp, AuthSocial, AuthLink } from '@/components/auth';
 import { MobileBottomMenu } from '@/components/core';
 import styles from '@/styles/Auth.module.css';

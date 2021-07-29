@@ -1,44 +1,69 @@
-// eslint-disable-next-line no-undef
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: { jsx: true },
+  env: {
+    node: true,
+    es6: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:jsx-a11y/recommended',
-    // Prettier plugin and recommended rules
-    'prettier/@typescript-eslint',
-    'plugin:prettier/recommended',
+  parserOptions: { ecmaVersion: 8, sourceType: 'module' },
+  ignorePatterns: ['node_modules/*'],
+  extends: ['eslint:recommended'],
+  overrides: [
+    {
+      files: ['**/*.ts', '**/*.tsx'],
+      parser: '@typescript-eslint/parser',
+      settings: {
+        react: { version: 'detect' },
+        'import/resolver': {
+          typescript: {},
+        },
+      },
+      env: {
+        browser: true,
+        node: true,
+        es6: true,
+      },
+      extends: [
+        'eslint:recommended',
+        'plugin:import/errors',
+        'plugin:import/warnings',
+        'plugin:import/typescript',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:jsx-a11y/recommended',
+        'plugin:prettier/recommended',
+      ],
+      rules: {
+        'linebreak-style': ['error', 'unix'],
+        'react/prop-types': 'off',
+
+        'import/order': [
+          'error',
+          {
+            groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object'],
+            'newlines-between': 'always',
+            alphabetize: { order: 'asc', caseInsensitive: true },
+          },
+        ],
+        'import/default': 'off',
+        'import/no-named-as-default-member': 'off',
+        'import/no-named-as-default': 'off',
+
+        'react/react-in-jsx-scope': 'off',
+
+        'jsx-a11y/anchor-is-valid': 'off',
+
+        '@typescript-eslint/no-unused-vars': ['error'],
+
+        '@typescript-eslint/explicit-function-return-type': ['off'],
+        '@typescript-eslint/explicit-module-boundary-types': ['off'],
+        '@typescript-eslint/no-empty-function': ['off'],
+        '@typescript-eslint/no-explicit-any': ['off'],
+
+        'react/displayName': ['off'],
+
+        'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+      },
+    },
   ],
-  rules: {
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
-    'react/react-in-jsx-scope': 0,
-    'react/display-name': 0,
-    'react/prop-types': 0,
-    '@typescript-eslint/explicit-function-return-type': 0,
-    '@typescript-eslint/explicit-member-accessibility': 0,
-    '@typescript-eslint/indent': 0,
-    '@typescript-eslint/member-delimiter-style': 0,
-    '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/no-var-requires': 0,
-    '@typescript-eslint/no-use-before-define': 0,
-    'jsx-a11y/anchor-is-valid': 0,
-    '@typescript-eslint/no-unused-vars': [
-      2,
-      {
-        argsIgnorePattern: '^_',
-      },
-    ],
-    'no-console': [
-      2,
-      {
-        allow: ['warn', 'error'],
-      },
-    ],
-  },
 };

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { useAuth, useToast } from '@/contexts';
+
 import { Button, PageLoader, Input } from '@/components/ui';
-import { capitalizeFirstLetter } from '@/utils/helpers';
+import { useAuth, useToast } from '@/contexts';
 import { AuthService } from '@/services';
 import { MAX_FILE_SIZE } from '@/utils/constants';
+import { capitalizeFirstLetter } from '@/utils/helpers';
+
 import styles from './EditProfile.module.css';
 
 interface InitialState {

@@ -1,6 +1,6 @@
 import { User } from '@/types';
-import { catchError } from '@/utils/catchError';
 import apiClient from '@/utils/apiClient';
+import { catchError } from '@/utils/catchError';
 
 interface UserData {
   user: User;

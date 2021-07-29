@@ -1,5 +1,6 @@
 import Router from 'next/router';
 import { setCookie, destroyCookie } from 'nookies';
+
 import apiClient from './apiClient';
 
 export const setAuthToken = (token: string): void => {

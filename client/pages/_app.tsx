@@ -1,11 +1,11 @@
-import React from 'react';
-import { AppProps } from 'next/app';
-import { StoreProvider } from '@/contexts';
 import { ThemeProvider } from 'next-themes';
+import { AppProps } from 'next/app';
+import React from 'react';
 
-import Layout from 'components/core/Layout';
-import { User } from 'types';
-import 'styles/global.css';
+import Layout from '@/components/core/Layout';
+import { StoreProvider } from '@/contexts';
+import { User } from '@/types';
+import '@/styles/global.css';
 
 interface MyAppProps extends AppProps {
   currentUser: User | null;

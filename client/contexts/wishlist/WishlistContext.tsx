@@ -1,7 +1,9 @@
-import { useAuth } from 'contexts/auth';
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
+
 import { WishlistService } from '@/services/WishlistService';
 import { WishlistItem } from '@/types/Wishlist';
+import { useAuth } from 'contexts/auth';
+
 import reducer from './wishlist-reducer';
 import { ADD_WISHLIST_ITEM, REMOVE_WISHLIST_ITEM, SET_WISHLIST_ITEMS } from './wishlist-types';
 

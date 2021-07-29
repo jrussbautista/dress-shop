@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Button, PageLoader } from 'components/ui';
-import { IconGoogle } from '@/components/icons';
 import { GoogleLogin } from 'react-google-login';
-import { GOOGLE_CLIENT_ID } from '@/utils/constants';
+
+import { IconGoogle } from '@/components/icons';
 import { useAuth, useToast } from '@/contexts';
+import { GOOGLE_CLIENT_ID } from '@/utils/constants';
+import { Button, PageLoader } from 'components/ui';
 
 interface GoogleError {
   error: string;

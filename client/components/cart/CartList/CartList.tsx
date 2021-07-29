@@ -1,6 +1,9 @@
 import React from 'react';
-import CartItem from '../CartItem';
+
 import { useCart } from '@/contexts';
+
+import CartItem from '../CartItem';
+
 import styles from './CartList.module.css';
 
 const CartList: React.FC = () => {

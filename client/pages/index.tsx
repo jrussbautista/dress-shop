@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Spinner, Button, Heading, Container } from '@/components/ui';
+
 import { Meta, MobileBottomMenu } from '@/components/core';
-import { ProductListSkeleton, ProductList } from '@/components/product';
 import { BannersSection, CategoriesSection } from '@/components/home';
+import { ProductListSkeleton, ProductList } from '@/components/product';
+import { Spinner, Button, Heading, Container } from '@/components/ui';
 import { useShop } from '@/contexts';
-import { Banner, Category } from '@/types';
 import { useScrollRestoration } from '@/hooks';
-import { colors } from '@/utils/theme';
 import styles from '@/styles/Home.module.css';
+import { Banner, Category } from '@/types';
+import { colors } from '@/utils/theme';
 
 interface Props {
   banners: Banner[];
@@ -22,7 +23,7 @@ const Home: React.FC<Props> = () => {
     if (isLoading) {
       loadProducts();
     }
-  }, []);
+  }, [isLoading, loadProducts]);
 
   useScrollRestoration();
 

@@ -1,7 +1,9 @@
 import React from 'react';
-import WishlistItem from './WishlistItem';
-import { useWishlist } from '@/contexts';
+
 import { Button, Spinner } from '@/components/ui';
+import { useWishlist } from '@/contexts';
+
+import WishlistItem from './WishlistItem';
 import styles from './WishlistItems.module.css';
 
 const WishlistItems: React.FC = () => {

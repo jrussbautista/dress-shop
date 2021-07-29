@@ -1,6 +1,7 @@
-import { addWishlistItem, removeWishlistItem } from './wishlist-utils';
-import { SET_WISHLIST_ITEMS, ADD_WISHLIST_ITEM, REMOVE_WISHLIST_ITEM } from './wishlist-types';
 import { WishlistItem } from '../../types/Wishlist';
+
+import { SET_WISHLIST_ITEMS, ADD_WISHLIST_ITEM, REMOVE_WISHLIST_ITEM } from './wishlist-types';
+import { addWishlistItem, removeWishlistItem } from './wishlist-utils';
 
 type State = {
   wishlistItems: WishlistItem[];

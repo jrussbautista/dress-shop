@@ -1,7 +1,9 @@
-import React, { useRef, useEffect } from 'react';
 import Router from 'next/router';
+import React, { useRef, useEffect } from 'react';
+
 import { CheckOutService } from '@/services';
 import { useToast, useCart } from 'contexts';
+
 import styles from './CheckoutPaypal.module.css';
 
 interface ErrorMsg {
@@ -42,6 +44,7 @@ const CheckoutPaypal: React.FC = () => {
         })
         .render(paypalButtonsRef.current);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

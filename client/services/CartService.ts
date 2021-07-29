@@ -1,6 +1,6 @@
 import { Cart, CartItem } from '@/types';
-import { catchError } from '@/utils/catchError';
 import apiClient from '@/utils/apiClient';
+import { catchError } from '@/utils/catchError';
 
 const getCart = async (): Promise<Cart> => {
   try {

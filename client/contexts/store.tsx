@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { AuthProvider } from './auth';
 import { CartProvider } from './cart';
 import { ShopProvider } from './shop';

@@ -1,13 +1,13 @@
 import Router, { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { Product } from '@/types';
-import { SearchFilter, SearchCategory } from '@/components/search';
-import { Container } from '@/components/ui';
-import { SearchBar } from '@/components/core';
-import { Meta, MobileBottomMenu } from '@/components/core';
+
+import { SearchBar, Meta, MobileBottomMenu } from '@/components/core';
 import { ProductList, ProductListSkeleton } from '@/components/product';
+import { SearchFilter, SearchCategory } from '@/components/search';
+import { Container, ErrorMessage } from '@/components/ui';
 import { ProductService } from '@/services';
 import styles from '@/styles/Search.module.css';
+import { Product } from '@/types';
 
 interface IParams {
   category?: string;
@@ -76,6 +76,9 @@ const Search: React.FC = () => {
           <SearchCategory active={category} onChangeTab={handleTabChange} />
           <SearchFilter handleChange={handleFilterChange} active={sort} />
         </div>
+
+        {error && <ErrorMessage message="Cannot search product at this moment. Please try again" />}
+
         {isLoading ? (
           <ProductListSkeleton number={20} />
         ) : (

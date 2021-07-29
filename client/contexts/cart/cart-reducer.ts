@@ -1,8 +1,5 @@
-import {
-  removeCartItemToCart,
-  addCartItemToCart,
-  updateCartItemQuantityToCart,
-} from './cart-utils';
+import { CartItem } from 'types';
+
 import {
   ADD_CART,
   REMOVE_CART,
@@ -11,7 +8,11 @@ import {
   UPDATE_QUANTITY,
   SET_ERROR,
 } from './cart-types';
-import { CartItem } from 'types';
+import {
+  removeCartItemToCart,
+  addCartItemToCart,
+  updateCartItemQuantityToCart,
+} from './cart-utils';
 
 type State = {
   cartItems: CartItem[];

@@ -1,10 +1,11 @@
-import React from 'react';
-import { useEffect } from 'react';
 import Head from 'next/head';
-import NProgress from 'nprogress';
-import Header from '@/components/core/Header';
 import Router from 'next/router';
+import NProgress from 'nprogress';
+import { useEffect } from 'react';
+
+import Header from '@/components/core/Header';
 import { initGA, logPageView } from '@/utils/analytics';
+
 import styles from './Layout.module.css';
 
 NProgress.configure({ showSpinner: false });

@@ -1,7 +1,9 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
+
 import DesktopMenu from '../DesktopMenu';
 import MobileMenu from '../MobileMenu';
+
 import styles from './Header.module.css';
 
 const Header: React.FC = () => {

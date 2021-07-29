@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { IoMdClose } from 'react-icons/io';
+
 import styles from './Modal.module.css';
 
 interface Props {

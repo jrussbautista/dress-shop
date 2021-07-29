@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
 import { Formik } from 'formik';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
-import { Button, PageLoader, Input } from '@/components/ui';
+
 import { Meta } from '@/components/core';
+import { Button, PageLoader, Input } from '@/components/ui';
 import { useAuth, useToast } from '@/contexts';
+
 import styles from './Signup.module.css';
 
 const Schema = Yup.object().shape({

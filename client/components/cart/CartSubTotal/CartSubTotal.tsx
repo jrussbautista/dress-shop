@@ -1,5 +1,7 @@
 import React from 'react';
+
 import formatPrice from '@/utils/formatPrice';
+
 import styles from './CartSubTotal.module.css';
 
 interface Props {

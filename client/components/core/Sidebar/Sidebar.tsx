@@ -1,7 +1,9 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
+
 import { Button } from '@/components/ui';
 import { useAuth } from '@/contexts';
+
 import styles from './Sidebar.module.css';
 
 interface Props {

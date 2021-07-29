@@ -5,9 +5,10 @@ type Cart = {
   quantity: number;
 };
 
-export default function calculateCartTotal(
-  cartItems: CartItem[]
-): { cartTotal: number; stripeTotal: number } {
+export default function calculateCartTotal(cartItems: CartItem[]): {
+  cartTotal: number;
+  stripeTotal: number;
+} {
   const total = cartItems.reduce(
     (prev, current) => prev + current.product.price * current.quantity,
     0

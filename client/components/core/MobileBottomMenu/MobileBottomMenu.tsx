@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { FiHome, FiSearch, FiShoppingCart, FiUser } from 'react-icons/fi';
 import Link from 'next/link';
-import { useAuth, useCart } from 'contexts';
+import { useAuth, useCart } from '@/contexts';
 import styles from './MobileBottomMenu.module.css';
 
 const MobileBottomMenu: React.FC = () => {

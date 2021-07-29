@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppProps } from 'next/app';
-import { StoreProvider } from 'contexts';
+import { StoreProvider } from '@/contexts';
 import { ThemeProvider } from 'next-themes';
 
 import Layout from 'components/core/Layout';

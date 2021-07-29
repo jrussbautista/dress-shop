@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Banners from 'components/ui/Banners';
-import { BannerService } from 'services';
-import { Banner } from 'types';
+import Banners from '@/components/ui/Banners';
+import { BannerService } from '@/services';
+import { Banner } from '@/types';
 import styles from './BannerSection.module.css';
 
 const BannerSkeleton = () => {

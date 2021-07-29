@@ -1,7 +1,7 @@
 import React from 'react';
-import Alert from '../Alert';
-import Button from '../Button';
-import Container from '../Container';
+import Alert from '@/components/ui/Alert';
+import Button from '@/components/ui/Button';
+import Container from '@/components/ui/Container';
 
 interface Props {
   message: string;

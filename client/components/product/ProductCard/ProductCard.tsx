@@ -1,6 +1,6 @@
 import React from 'react';
-import { Product } from 'types';
-import formatPrice from 'utils/formatPrice';
+import { Product } from '@/types';
+import formatPrice from '@/utils/formatPrice';
 import { WishlistButton } from 'components/wishlist';
 import Image from 'next/image';
 import styles from './ProductCard.module.css';

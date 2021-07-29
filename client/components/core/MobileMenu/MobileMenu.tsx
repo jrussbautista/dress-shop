@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
-import Sidebar from '../Sidebar';
+import Sidebar from '@/components/core/Sidebar';
 import styles from './MobileMenu.module.css';
 
 const MobileMenu: React.FC = () => {

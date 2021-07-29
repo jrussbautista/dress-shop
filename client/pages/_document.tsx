@@ -1,6 +1,6 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
-import { PAYPAL_CLIENT_ID } from 'utils/constants';
+import { PAYPAL_CLIENT_ID } from '@/utils/constants';
 
 class MyDocument extends Document {
   /* eslint-disable @typescript-eslint/explicit-module-boundary-types */

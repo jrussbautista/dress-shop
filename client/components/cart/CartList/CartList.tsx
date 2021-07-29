@@ -1,6 +1,6 @@
 import React from 'react';
 import CartItem from '../CartItem';
-import { useCart } from 'contexts';
+import { useCart } from '@/contexts';
 import styles from './CartList.module.css';
 
 const CartList: React.FC = () => {

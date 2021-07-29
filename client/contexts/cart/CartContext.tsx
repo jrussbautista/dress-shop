@@ -9,8 +9,8 @@ import {
   UPDATE_QUANTITY,
   SET_ERROR,
 } from './cart-types';
-import { CartItem, Product } from 'types';
-import { CartService } from 'services';
+import { CartItem, Product } from '@/types';
+import { CartService } from '@/services';
 
 interface InitialStateType {
   loading: boolean;

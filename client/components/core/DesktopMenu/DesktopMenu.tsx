@@ -3,10 +3,10 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { IoMdCart } from 'react-icons/io';
 import { FiSun, FiMoon } from 'react-icons/fi';
-import { useAuth, useCart } from 'contexts';
-import { capitalizeFirstLetter } from 'utils/helpers';
-import { Button } from 'components/ui';
-import { SearchBar } from 'components/core';
+import { useAuth, useCart } from '@/contexts';
+import { capitalizeFirstLetter } from '@/utils/helpers';
+import { Button } from '@/components/ui';
+import { SearchBar } from '@/components/core';
 import styles from './DesktopMenu.module.css';
 import { useTheme } from 'next-themes';
 

@@ -1,7 +1,7 @@
-import WithAuth from 'components/core/WithAuth';
+import WithAuth from '@/components/core/WithAuth';
 import React from 'react';
-import { WishlistItems } from 'components/wishlist';
-import { Container } from 'components/ui';
+import { WishlistItems } from '@/components/wishlist';
+import { Container } from '@/components/ui';
 
 const Wishlist = () => {
   return (

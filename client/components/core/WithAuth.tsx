@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAuth } from 'contexts';
 import { useRouter } from 'next/router';
-import { Spinner } from 'components/ui';
+import { Spinner } from '@/components/ui';
 
 const styles = {
   container: {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Categories } from 'components/category';
-import { Heading } from 'components/ui';
-import { CategoryService } from 'services';
+import { Categories } from '@/components/category';
+import { Heading } from '@/components/ui';
+import { CategoryService } from '@/services';
 import { Category } from 'types';
-import CategoriesSkeleton from 'components/category/CategoriesSkeleton';
+import CategoriesSkeleton from '@/components/category/CategoriesSkeleton';
 
 const CategoriesSection: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);

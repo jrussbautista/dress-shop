@@ -1,6 +1,6 @@
-import { Category } from 'types';
-import { catchError } from 'utils/catchError';
-import apiClient from 'utils/apiClient';
+import { Category } from '@/types';
+import { catchError } from '@/utils/catchError';
+import apiClient from '@/utils/apiClient';
 
 const getCategories = async (): Promise<Category[]> => {
   try {

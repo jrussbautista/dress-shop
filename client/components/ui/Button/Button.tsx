@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import cName from 'classnames';
-import { Spinner } from 'components/ui';
+import { Spinner } from '@/components/ui';
 import styles from './Button.module.css';
 
 interface Props {

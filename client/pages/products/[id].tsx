@@ -1,17 +1,17 @@
 import Router from 'next/router';
 import React, { useState } from 'react';
-import { PopUp, Container, Heading } from 'components/ui';
-import { Meta, MobileBottomMenu } from 'components/core';
-import { ProductList, ProductInputQuantity } from 'components/product';
-import { usePopUp } from 'hooks';
-import { useAuth, useCart, useToast } from 'contexts';
-import { Product as ProductTypes } from 'types';
+import { PopUp, Container, Heading } from '@/components/ui';
+import { Meta, MobileBottomMenu } from '@/components/core';
+import { ProductList, ProductInputQuantity } from '@/components/product';
+import { usePopUp } from '@/hooks';
+import { useAuth, useCart, useToast } from '@/contexts';
+import { Product as ProductTypes } from '@/types';
 import { GetServerSideProps } from 'next';
-import { ProductService } from 'services/ProductService';
-import { ErrorMessage, Button } from 'components/ui';
-import styles from 'styles/Product.module.css';
-import formatPrice from 'utils/formatPrice';
-import WishlistButton from 'components/wishlist/WishlistButton';
+import { ProductService } from '@/services/ProductService';
+import { ErrorMessage, Button } from '@/components/ui';
+import styles from '@/styles/Product.module.css';
+import formatPrice from '@/utils/formatPrice';
+import WishlistButton from '@/components/wishlist/WishlistButton';
 
 interface Props {
   product: ProductTypes;

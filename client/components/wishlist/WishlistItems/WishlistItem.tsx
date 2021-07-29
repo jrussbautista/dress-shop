@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { WishlistItem as WishlistItemType } from 'types/Wishlist';
-import formatPrice from 'utils/formatPrice';
-import { Button } from 'components/ui';
+import { WishlistItem as WishlistItemType } from '@/types/Wishlist';
+import formatPrice from '@/utils/formatPrice';
+import { Button } from '@/components/ui';
 import styles from './WishlistItem.module.css';
-import { useWishlist, useToast } from 'contexts';
+import { useWishlist, useToast } from '@/contexts';
 import classNames from 'classnames';
 
 interface Props {

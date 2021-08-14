@@ -11,7 +11,7 @@
     "prepare": "cd .. && husky install client/.husky",
     "format": "npm run prettier -- --write",
     "check-types": "tsc --project tsconfig.json --pretty --noEmit",
-    "validate": "npm-run-all --parallel check-types"
+    "validate": "npm-run-all --parallel check-types && lint-staged"
   },
   "lint-staged": {
     "*.+(ts|tsx)": [

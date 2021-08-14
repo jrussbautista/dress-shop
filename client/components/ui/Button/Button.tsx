@@ -2,9 +2,9 @@ import cName from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 
-import { Spinner } from '@/components/ui';
-
 import styles from './Button.module.css';
+
+import { Spinner } from '@/components/ui';
 
 interface Props {
   onClick?(): void;

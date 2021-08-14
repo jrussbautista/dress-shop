@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { useCart } from '@/contexts';
-
 import CartItem from '../CartItem';
 
 import styles from './CartList.module.css';
+
+import { useCart } from '@/contexts';
 
 const CartList: React.FC = () => {
   const { cartItems } = useCart();

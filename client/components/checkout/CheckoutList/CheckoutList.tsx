@@ -1,9 +1,9 @@
 import React from 'react';
 
+import styles from './CheckoutList.module.css';
+
 import { CartItem } from '@/types';
 import formatPrice from '@/utils/formatPrice';
-
-import styles from './CheckoutList.module.css';
 
 interface Props {
   items: CartItem[];

@@ -5,12 +5,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import { IoMdCart } from 'react-icons/io';
 
+import styles from './DesktopMenu.module.css';
+
 import { SearchBar } from '@/components/core';
 import { Button } from '@/components/ui';
 import { useAuth, useCart } from '@/contexts';
 import { capitalizeFirstLetter } from '@/utils/helpers';
-
-import styles from './DesktopMenu.module.css';
 
 const DesktopMenu: React.FC = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);

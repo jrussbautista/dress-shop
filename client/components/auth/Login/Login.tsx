@@ -2,11 +2,12 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
-import { Meta } from '@/components/core';
-import { Button, PageLoader, Input } from '@/components/ui';
 import { useAuth, useToast } from 'contexts';
 
 import styles from './Login.module.css';
+
+import { Meta } from '@/components/core';
+import { Button, PageLoader, Input } from '@/components/ui';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Password is required').min(6),

@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
 
+import styles from './Sidebar.module.css';
+
 import { Button } from '@/components/ui';
 import { useAuth } from '@/contexts';
-
-import styles from './Sidebar.module.css';
 
 interface Props {
   isOpen: boolean;

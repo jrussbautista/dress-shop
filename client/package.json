@@ -9,13 +9,14 @@
     "lint": "eslint ./ --ext .ts,.tsx",
     "lint:fix": "eslint --fix --ext .js,.ts,.tsx ./ --ignore-path .gitignore",
     "prepare": "cd .. && husky install client/.husky",
+    "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\"",
     "format": "npm run prettier -- --write",
     "check-types": "tsc --project tsconfig.json --pretty --noEmit",
     "validate": "npm-run-all --parallel check-types && lint-staged"
   },
   "lint-staged": {
     "*.+(ts|tsx)": [
-      "npm run lint"
+      "npm run lint:fix"
     ]
   },
   "dependencies": {

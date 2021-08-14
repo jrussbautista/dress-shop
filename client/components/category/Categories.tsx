@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { Category } from '@/types';
-
 import styles from './Categories.module.css';
+
+import { Category } from '@/types';
 
 interface Props {
   categories: Category[];

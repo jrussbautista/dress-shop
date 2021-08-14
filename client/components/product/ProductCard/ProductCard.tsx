@@ -2,11 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import { Product } from '@/types';
-import formatPrice from '@/utils/formatPrice';
 import { WishlistButton } from 'components/wishlist';
 
 import styles from './ProductCard.module.css';
+
+import { Product } from '@/types';
+import formatPrice from '@/utils/formatPrice';
 
 interface Props {
   product: Product;

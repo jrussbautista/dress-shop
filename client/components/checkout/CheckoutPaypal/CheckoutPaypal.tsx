@@ -1,10 +1,11 @@
 import Router from 'next/router';
 import React, { useRef, useEffect } from 'react';
 
-import { CheckOutService } from '@/services';
 import { useToast, useCart } from 'contexts';
 
 import styles from './CheckoutPaypal.module.css';
+
+import { CheckOutService } from '@/services';
 
 interface ErrorMsg {
   message: string;

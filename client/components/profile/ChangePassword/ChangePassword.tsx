@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
+import styles from './ChangePassword.module.css';
+
 import { Button, PageLoader, Input } from '@/components/ui';
 import { useToast } from '@/contexts';
 import { AuthService } from '@/services';
-
-import styles from './ChangePassword.module.css';
 
 const ChangePassword: React.FC = () => {
   const { setToast } = useToast();

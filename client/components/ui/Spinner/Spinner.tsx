@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { colors } from '@/utils/theme';
-
 import styles from './Spinner.module.css';
+
+import { colors } from '@/utils/theme';
 
 interface Props {
   color?: string;

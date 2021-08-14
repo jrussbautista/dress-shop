@@ -1,8 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
-import { CartService } from '@/services';
-import { CartItem, Product } from '@/types';
-
 import { useAuth } from '../auth';
 
 import reducer from './cart-reducer';
@@ -14,6 +11,9 @@ import {
   UPDATE_QUANTITY,
   SET_ERROR,
 } from './cart-types';
+
+import { CartService } from '@/services';
+import { CartItem, Product } from '@/types';
 
 interface InitialStateType {
   loading: boolean;

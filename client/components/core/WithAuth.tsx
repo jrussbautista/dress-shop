@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import { Spinner } from '@/components/ui';
 import { useAuth } from 'contexts';
+
+import { Spinner } from '@/components/ui';
 
 const styles = {
   container: {

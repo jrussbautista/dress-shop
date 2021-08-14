@@ -2,11 +2,11 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
+import styles from './Signup.module.css';
+
 import { Meta } from '@/components/core';
 import { Button, PageLoader, Input } from '@/components/ui';
 import { useAuth, useToast } from '@/contexts';
-
-import styles from './Signup.module.css';
 
 const Schema = Yup.object().shape({
   name: Yup.string().required('Name is required'),

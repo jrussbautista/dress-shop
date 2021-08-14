@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 
-import Sidebar from '@/components/core/Sidebar';
-
 import styles from './MobileMenu.module.css';
+
+import Sidebar from '@/components/core/Sidebar';
 
 const MobileMenu: React.FC = () => {
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);

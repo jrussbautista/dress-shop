@@ -2,12 +2,12 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
+import styles from './WishlistItem.module.css';
+
 import { Button } from '@/components/ui';
 import { useWishlist, useToast } from '@/contexts';
 import { WishlistItem as WishlistItemType } from '@/types/Wishlist';
 import formatPrice from '@/utils/formatPrice';
-
-import styles from './WishlistItem.module.css';
 
 interface Props {
   wishlistItem: WishlistItemType;

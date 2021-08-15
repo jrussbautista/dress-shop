@@ -1,6 +1,6 @@
 module.exports = {
   roots: ['<rootDir>'],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
   moduleNameMapper: {
     '\\.(scss|sass|css)$': 'identity-obj-proxy',

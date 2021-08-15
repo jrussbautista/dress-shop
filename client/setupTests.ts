@@ -6,6 +6,8 @@ beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
 afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
 
+// necessary for next/image
+
 process.env = {
   ...process.env,
   __NEXT_IMAGE_OPTS: {
@@ -15,7 +17,7 @@ process.env = {
     path: '/_next/image',
     loader: 'default',
   },
-};
+} as any;
 
 window.matchMedia =
   window.matchMedia ||

@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-import { CartItem as CartItemType } from 'types';
-
-import styles from './CartItem.module.css';
-
 import { ProductInputQuantity } from '@/components/product';
 import { useToast, useCart } from '@/contexts';
 import formatPrice from '@/utils/formatPrice';
+import { CartItem as CartItemType } from 'types';
+
+import styles from './CartItem.module.css';
 
 interface Props {
   cartItem: CartItemType;

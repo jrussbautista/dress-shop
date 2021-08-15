@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 
-import styles from './OrderList.module.css';
-
 import { Order } from '@/types';
 import formatPrice from '@/utils/formatPrice';
 import { formatDate } from '@/utils/helpers';
+
+import styles from './OrderList.module.css';
 
 interface Props {
   orders: Order[];

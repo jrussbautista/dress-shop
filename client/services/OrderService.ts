@@ -1,6 +1,6 @@
+import apiClient from '@/utils/apiClient';
+import { catchError } from '@/utils/catchError';
 import { Order } from 'types';
-import apiClient from 'utils/apiClient';
-import { catchError } from 'utils/catchError';
 
 const getOrders = async (): Promise<Order[]> => {
   try {

@@ -1,9 +1,9 @@
 import React from 'react';
 import Slider from 'react-slick';
 
-import styles from './Banners.module.css';
-
 import { Banner } from '@/types';
+
+import styles from './Banners.module.css';
 
 interface Props {
   banners: Banner[];
@@ -12,7 +12,7 @@ interface Props {
 const Banners: React.FC<Props> = ({ banners }) => {
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -25,11 +25,8 @@ const Banners: React.FC<Props> = ({ banners }) => {
     <>
       <Slider {...settings}>
         {banners.map((banner) => (
-          <div className={styles.banner} key={banner._id}>
-            <div
-              className={styles.img}
-              style={{ backgroundImage: `url(${banner.imageURL})` }}
-            ></div>
+          <div className={styles.banner} key={banner._id} role="banner">
+            <img src={banner.imageURL} className={styles.img} alt={banner.name} />
           </div>
         ))}
       </Slider>

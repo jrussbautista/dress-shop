@@ -1,6 +1,6 @@
+import apiClient from '@/utils/apiClient';
+import { catchError } from '@/utils/catchError';
 import { ProductData, ProductsData } from 'types';
-import apiClient from 'utils/apiClient';
-import { catchError } from 'utils/catchError';
 
 type ProductPayload = { params: unknown };
 

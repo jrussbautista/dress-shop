@@ -3,10 +3,10 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 import { useEffect } from 'react';
 
-import styles from './Layout.module.css';
-
 import Header from '@/components/core/Header';
 import { initGA, logPageView } from '@/utils/analytics';
+
+import styles from './Layout.module.css';
 
 NProgress.configure({ showSpinner: false });
 

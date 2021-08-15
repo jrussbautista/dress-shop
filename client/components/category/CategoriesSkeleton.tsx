@@ -5,7 +5,7 @@ import styles from './CategoriesSkeleton.module.css';
 const CategoriesSkeleton: React.FC = () => {
   return (
     <div>
-      <div className={styles.categoryContainer}>
+      <div className={styles.categoryContainer} aria-label="Categories loading">
         {[1, 2].map((category) => (
           <div className={styles.list} key={category}>
             <div className={styles.categoryImg} />

@@ -10,13 +10,11 @@ interface Props {
 
 const ProductList: React.FC<Props> = ({ products }) => {
   return (
-    <>
-      <div className={styles.productGrid}>
-        {products.map((product) => (
-          <ProductCard product={product} key={product._id} />
-        ))}
-      </div>
-    </>
+    <div className={styles.productGrid} aria-label="Product list">
+      {products.map((product) => (
+        <ProductCard product={product} key={product._id} />
+      ))}
+    </div>
   );
 };
 

@@ -9,7 +9,7 @@ interface Props {
 const ProductListSkeleton: React.FC<Props> = ({ number }) => {
   return (
     <>
-      <div className={styles.grid}>
+      <div className={styles.grid} aria-label="Product list skeleton">
         {[...Array(number)].map((_, i) => (
           <div key={i} className={styles.gridItem}>
             <div className={styles.gridBoxWrapper}>

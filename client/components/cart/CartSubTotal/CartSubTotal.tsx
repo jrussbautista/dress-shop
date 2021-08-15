@@ -1,8 +1,8 @@
 import React from 'react';
 
-import styles from './CartSubTotal.module.css';
-
 import formatPrice from '@/utils/formatPrice';
+
+import styles from './CartSubTotal.module.css';
 
 interface Props {
   total: number;

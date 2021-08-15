@@ -1,12 +1,11 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 
-import { useAuth } from 'contexts/auth';
+import { useAuth } from '@/contexts/auth';
+import { WishlistService } from '@/services/WishlistService';
+import { WishlistItem } from '@/types/Wishlist';
 
 import reducer from './wishlist-reducer';
 import { ADD_WISHLIST_ITEM, REMOVE_WISHLIST_ITEM, SET_WISHLIST_ITEMS } from './wishlist-types';
-
-import { WishlistService } from '@/services/WishlistService';
-import { WishlistItem } from '@/types/Wishlist';
 
 interface InitialState {
   wishlistItems: WishlistItem[];

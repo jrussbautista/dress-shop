@@ -1,8 +1,8 @@
 import React from 'react';
 
-import styles from './PageLoader.module.css';
-
 import { Spinner } from '@/components/ui';
+
+import styles from './PageLoader.module.css';
 
 const PageLoader: React.FC = () => {
   return (

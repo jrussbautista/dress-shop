@@ -25,9 +25,10 @@
       "@/styles/*": ["styles/*"],
       "@/types": ["types"],
       "@/types/*": ["types/*"],
-      "@/utils/*": ["utils/*"]
+      "@/utils/*": ["utils/*"],
+      "@/test/*": ["test/*"]
     }
   },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "exclude": ["node_modules", "node_modules/msw/lib/types/context/set.d.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.config.js"]
 }

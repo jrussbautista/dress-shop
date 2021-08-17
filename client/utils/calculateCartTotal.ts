@@ -1,9 +1,4 @@
-import { Product, CartItem } from 'types';
-
-type Cart = {
-  product: Product;
-  quantity: number;
-};
+import { CartItem } from 'types';
 
 export default function calculateCartTotal(cartItems: CartItem[]): {
   cartTotal: number;

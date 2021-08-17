@@ -1,6 +1,6 @@
 import * as faker from 'faker';
 
-import { Product, Banner, Category, User } from '@/types';
+import { Product, Banner, Category, User, CartItem } from '@/types';
 
 type Overrides = Record<string, any>;
 
@@ -41,6 +41,18 @@ export const categoryGenerator = (overrides?: Overrides): Category => {
     _id: faker.datatype.uuid(),
     imageURL: faker.image.imageUrl(),
     name: faker.commerce.productName(),
+    ...overrides,
+  };
+};
+
+export const cartItemGenerator = (
+  overrides?: Overrides,
+  productOverrides?: Overrides
+): CartItem => {
+  return {
+    _id: faker.datatype.uuid(),
+    product: productGenerator(productOverrides),
+    quantity: faker.datatype.number(99),
     ...overrides,
   };
 };

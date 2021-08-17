@@ -26,9 +26,6 @@ const Sidebar: React.FC<Props> = ({ isOpen, onClose }) => {
   return (
     <>
       <div className={`${styles.sidebar} ${isOpen ? styles.isOpen : ''}`}>
-        <div className={styles.title}>
-          <span> Dress </span>
-        </div>
         <div
           className={styles.list}
           role="link"
@@ -84,7 +81,7 @@ const Sidebar: React.FC<Props> = ({ isOpen, onClose }) => {
           tabIndex={-1}
           onClick={onClose}
           onKeyDown={onClose}
-        ></div>
+        />
       )}
     </>
   );

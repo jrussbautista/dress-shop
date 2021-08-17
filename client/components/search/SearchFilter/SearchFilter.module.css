@@ -47,7 +47,7 @@
   background: var(--background-light);
   padding: 1rem;
   border-radius: 6px;
-  z-index: 1;
+  z-index: 22;
   width: 20rem;
   border: 1px solid rgba(0, 0, 0, 0.09);
 }

@@ -65,7 +65,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     dispatch({ type: SET_CURRENT_USER, payload: user });
 
-    const url = ref ? `/product?id=${ref}` : '/profile';
+    const url = ref ? `/products/${ref}` : '/profile';
 
     autoLogin(token, url);
   };

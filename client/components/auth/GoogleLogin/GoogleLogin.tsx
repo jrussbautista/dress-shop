@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin as GoogleLoginLib } from 'react-google-login';
 
 import { IconGoogle } from '@/components/icons';
 import { Button, PageLoader } from '@/components/ui';
@@ -11,7 +11,7 @@ interface GoogleError {
   details: string;
 }
 
-const AuthSocial: React.FC = () => {
+const GoogleLogin: React.FC = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const { loginWithGoogle } = useAuth();
   const { setToast } = useToast();
@@ -37,7 +37,7 @@ const AuthSocial: React.FC = () => {
     <>
       {isLoggingIn && <PageLoader />}
       <div className="container">
-        <GoogleLogin
+        <GoogleLoginLib
           clientId={GOOGLE_CLIENT_ID}
           buttonText="Login"
           onSuccess={handleOnSuccess}
@@ -60,4 +60,4 @@ const AuthSocial: React.FC = () => {
   );
 };
 
-export default AuthSocial;
+export default GoogleLogin;

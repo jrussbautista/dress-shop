@@ -1,8 +1,19 @@
 import * as faker from 'faker';
 
-import { Product, Banner, Category } from '@/types';
+import { Product, Banner, Category, User } from '@/types';
 
 type Overrides = Record<string, any>;
+
+export const userGenerator = (overrides?: Overrides): User => {
+  return {
+    _id: faker.datatype.uuid(),
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    imageURL: faker.image.imageUrl(),
+    role: 'user',
+    ...overrides,
+  };
+};
 
 export const productGenerator = (overrides?: Overrides): Product => {
   return {

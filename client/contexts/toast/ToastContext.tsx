@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 
 import { Toast } from '@/components/ui';
 
-interface InitialState {
+interface Context {
   isActive: boolean;
   type: string;
   message: string;
@@ -10,17 +10,18 @@ interface InitialState {
   removeToast(): void;
 }
 
-const initialState = {
-  isActive: false,
-  type: '',
-  message: '',
-  setToast: () => null,
-  removeToast: () => null,
-};
-
-export const ToastContext = createContext<InitialState>(initialState);
+export const ToastContext = createContext<Context | undefined>(undefined);
+ToastContext.displayName = 'ToastContext';
 
 export const ToastProvider: React.FC = ({ children }) => {
+  const initialState = {
+    isActive: false,
+    type: '',
+    message: '',
+    setToast: () => null,
+    removeToast: () => null,
+  };
+
   const [state, setState] = useState(initialState);
 
   const removeToast = () => {
@@ -47,4 +48,10 @@ export const ToastProvider: React.FC = ({ children }) => {
   );
 };
 
-export const useToast = (): InitialState => useContext(ToastContext);
+export const useToast = () => {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error('useToast must be used within ToastProvider');
+  }
+  return context;
+};

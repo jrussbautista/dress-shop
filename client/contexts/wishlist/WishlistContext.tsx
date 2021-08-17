@@ -7,7 +7,7 @@ import { WishlistItem } from '@/types/Wishlist';
 import reducer from './wishlist-reducer';
 import { ADD_WISHLIST_ITEM, REMOVE_WISHLIST_ITEM, SET_WISHLIST_ITEMS } from './wishlist-types';
 
-interface InitialState {
+interface Context {
   wishlistItems: WishlistItem[];
   loading: boolean;
   error: null | string;
@@ -15,19 +15,16 @@ interface InitialState {
   removeWishlistItem: (productId: string) => void;
 }
 
-const initialState = {
-  wishlistItems: [],
-  loading: true,
-  error: null,
-};
-
-const WishlistContext = createContext<InitialState>({
-  ...initialState,
-  addWishlistItem: () => null,
-  removeWishlistItem: () => null,
-});
+const WishlistContext = createContext<Context | undefined>(undefined);
+WishlistContext.displayName = 'WishlistContext';
 
 export const WishlistProvider: React.FC = ({ children }) => {
+  const initialState = {
+    wishlistItems: [],
+    loading: true,
+    error: null,
+  };
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const { isAuthenticated } = useAuth();
@@ -64,4 +61,10 @@ export const WishlistProvider: React.FC = ({ children }) => {
   );
 };
 
-export const useWishlist = () => useContext(WishlistContext);
+export const useWishlist = () => {
+  const context = useContext(WishlistContext);
+  if (!context) {
+    throw new Error('useWishlist must be used within WishlistProvider');
+  }
+  return context;
+};

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Categories } from '@/components/category';
-import CategoriesSkeleton from '@/components/category/CategoriesSkeleton';
+import { Categories, CategoriesSkeleton } from '@/components/category';
 import { Heading } from '@/components/ui';
 import { CategoryService } from '@/services';
 import { Category } from 'types';

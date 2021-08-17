@@ -8,7 +8,7 @@ import { useCart } from '@/contexts';
 import styles from '@/styles/Cart.module.css';
 import calculateCartTotal from '@/utils/calculateCartTotal';
 
-const Cart: React.FC = () => {
+const Cart = () => {
   const { cartItems, loading, error } = useCart();
 
   const { cartTotal } = calculateCartTotal(cartItems);

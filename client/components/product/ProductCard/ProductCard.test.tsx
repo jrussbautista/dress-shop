@@ -1,6 +1,5 @@
-import { render, screen } from '@testing-library/react';
-
 import { productGenerator } from '@/test/data-generators';
+import { render, screen } from '@/test/test-utils';
 import formatPrice from '@/utils/formatPrice';
 
 import ProductCard from './ProductCard';

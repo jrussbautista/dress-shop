@@ -1,13 +1,13 @@
 import React, { createContext, useReducer, useContext } from 'react';
 
 import { ProductService } from '@/services/ProductService';
+import { Product } from '@/types';
 import { PAGE_LIMIT } from '@/utils/constants';
-import { Product } from 'types';
 
 import reducer from './shop-reducer';
 import { LOAD_PRODUCTS } from './shop-types';
 
-interface InitialStateType {
+interface Context {
   products: Product[];
   isLoading: boolean;
   hasLoadMore: boolean;
@@ -15,17 +15,17 @@ interface InitialStateType {
   loadProducts(): void;
 }
 
-const initialState = {
-  products: [],
-  isLoading: true,
-  hasLoadMore: true,
-  currentPage: 1,
-  loadProducts: () => null,
-};
-
-const ShopContext = createContext<InitialStateType>(initialState);
+const ShopContext = createContext<Context | undefined>(undefined);
+ShopContext.displayName = 'ShopContext';
 
 export const ShopProvider: React.FC = ({ children }) => {
+  const initialState = {
+    products: [],
+    isLoading: true,
+    hasLoadMore: true,
+    currentPage: 1,
+  };
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
   async function loadProducts() {
@@ -39,4 +39,10 @@ export const ShopProvider: React.FC = ({ children }) => {
   return <ShopContext.Provider value={{ ...state, loadProducts }}>{children}</ShopContext.Provider>;
 };
 
-export const useShop = (): InitialStateType => useContext(ShopContext);
+export const useShop = () => {
+  const context = useContext(ShopContext);
+  if (!context) {
+    throw new Error('useShop must be used within a ShopProvider');
+  }
+  return context;
+};

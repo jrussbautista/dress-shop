@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 import { Meta } from '@/components/core';
 import { Button, PageLoader, Input } from '@/components/ui';
-import { useAuth, useToast } from 'contexts';
+import { useAuth, useToast } from '@/contexts';
 
 import styles from './Login.module.css';
 

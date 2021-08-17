@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './AuthLink.module.css';
 
 interface Props {
-  type: string;
+  type: 'login' | 'register';
 }
 
 const AuthLink: React.FC<Props> = ({ type }) => {

@@ -3,7 +3,6 @@ export type User = {
   email?: string;
   name: string;
   imageURL: string;
-  carts: string[];
   role: 'user' | 'admin';
 };
 

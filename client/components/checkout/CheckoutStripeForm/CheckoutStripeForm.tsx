@@ -3,9 +3,9 @@ import { StripeCardElement, StripeCardElementChangeEvent } from '@stripe/stripe-
 import Router from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-import { PageLoader, Alert, Button } from 'components/ui';
-import { useAuth, useToast, useCart } from 'contexts';
-import { CheckOutService } from 'services';
+import { PageLoader, Alert, Button } from '@/components/ui';
+import { useAuth, useToast, useCart } from '@/contexts';
+import { CheckOutService } from '@/services';
 
 import CardSection from '../CheckoutStripeCard/CheckoutStripeCard';
 

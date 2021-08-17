@@ -1,9 +1,8 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
+import { useAuth } from '@/contexts';
 import { CartService } from '@/services';
 import { CartItem, Product } from '@/types';
-
-import { useAuth } from '../auth';
 
 import reducer from './cart-reducer';
 import {
@@ -15,7 +14,7 @@ import {
   SET_ERROR,
 } from './cart-types';
 
-interface InitialStateType {
+interface Context {
   loading: boolean;
   error: null | string;
   cartItems: CartItem[];
@@ -25,19 +24,8 @@ interface InitialStateType {
   updateCartItemQty: (cartItem: CartItem, newQuantity: number) => void;
 }
 
-const initialState = {
-  loading: true,
-  error: null,
-  cartItems: [],
-};
-
-const CartContext = createContext<InitialStateType>({
-  ...initialState,
-  addCartItem: () => null,
-  removeCartItem: () => null,
-  clearCart: () => null,
-  updateCartItemQty: () => null,
-});
+const CartContext = createContext<Context | undefined>(undefined);
+CartContext.displayName = 'CartContext';
 
 export const CartProvider: React.FC = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -94,4 +82,10 @@ export const CartProvider: React.FC = ({ children }) => {
   );
 };
 
-export const useCart = (): InitialStateType => useContext(CartContext);
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
+};

@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { destroyCookie } from 'nookies';
+import { destroyCookie, parseCookies } from 'nookies';
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 import { AuthService } from '@/services';
+import { User } from '@/types';
 import { autoLogin, autoLogout } from '@/utils/auth';
-import { User } from 'types';
 
 import reducer from './auth-reducer';
 import { LOGOUT_USER, SET_CURRENT_USER, UPDATE_USER } from './auth-types';
@@ -15,51 +15,54 @@ interface UserDetails {
   name: string;
 }
 
-interface InitialStateType {
+interface Context {
   isAuthenticated: boolean;
   currentUser: User | null;
   loading: boolean;
   error: null | string;
   logout(redirectUrl: string): void;
-  login(email: string, password: string, adminRedirect?: boolean): void;
+  login(email: string, password: string): void;
   loginWithGoogle(tokenId: string): void;
   signUp(userDetails: UserDetails): void;
   updateUser(user: User): void;
 }
 
-const initialState = {
-  isAuthenticated: false,
-  currentUser: null,
-  error: null,
-  loading: true,
-};
-
-const AuthContext = createContext<InitialStateType>({
-  ...initialState,
-  logout: () => null,
-  login: () => null,
-  signUp: () => null,
-  loginWithGoogle: () => null,
-  updateUser: () => null,
-});
+const AuthContext = createContext<Context | undefined>(undefined);
+AuthContext.displayName = 'AuthContext';
 
 export const AuthProvider: React.FC = ({ children }) => {
+  const initialState = {
+    isAuthenticated: false,
+    currentUser: null,
+    error: null,
+    loading: true,
+  };
+
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { ref } = useRouter().query;
+
+  const { query } = useRouter();
 
   useEffect(() => {
-    const getCurrentUser = async () => {
+    const loadCurrentUser = async () => {
       try {
+        const { token } = parseCookies({});
+        if (!token) {
+          return;
+        }
+
         const { user } = await AuthService.getMe();
         dispatch({ type: SET_CURRENT_USER, payload: user });
       } catch (error) {
         dispatch({ type: LOGOUT_USER });
       }
     };
-    getCurrentUser();
+
+    loadCurrentUser();
   }, []);
 
   const loginSuccess = (user: User, token: string) => {
+    const { ref } = query;
+
     dispatch({ type: SET_CURRENT_USER, payload: user });
 
     const url = ref ? `/product?id=${ref}` : '/profile';
@@ -99,4 +102,10 @@ export const AuthProvider: React.FC = ({ children }) => {
   );
 };
 
-export const useAuth = (): InitialStateType => useContext(AuthContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be within AuthProvider');
+  }
+  return context;
+};

@@ -1,8 +1,8 @@
 import Router from 'next/router';
 import React, { useRef, useEffect } from 'react';
 
+import { useToast, useCart } from '@/contexts';
 import { CheckOutService } from '@/services';
-import { useToast, useCart } from 'contexts';
 
 import styles from './CheckoutPaypal.module.css';
 

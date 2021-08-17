@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next';
+import { GetStaticPropsContext } from 'next';
 import Router from 'next/router';
 import React, { useState } from 'react';
 
@@ -117,13 +117,14 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.query.id as string;
+export async function getStaticProps({ params }: GetStaticPropsContext<{ id: string }>) {
+  const id = params?.id as string;
 
   try {
-    const { product, relatedProducts } = await ProductService.fetchProduct(id);
+    const { product, relatedProducts } = await ProductService.getProduct(id);
     return {
       props: { product, relatedProducts },
+      revalidate: 200,
     };
   } catch (error) {
     return {
@@ -134,6 +135,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-};
+}
+
+export async function getStaticPaths() {
+  const { products } = await ProductService.getProducts();
+
+  const paths = products.map((product) => ({
+    params: { id: product._id },
+  }));
+
+  return { paths, fallback: 'blocking' };
+}
 
 export default Product;

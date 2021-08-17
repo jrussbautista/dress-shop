@@ -5,14 +5,16 @@ import { Product } from '@/types';
 import { PAGE_LIMIT } from '@/utils/constants';
 
 import reducer from './shop-reducer';
-import { LOAD_PRODUCTS } from './shop-types';
+import { LOAD_PRODUCTS, LOAD_MORE_PRODUCTS, SET_INITIAL_PRODUCTS } from './shop-types';
 
 interface Context {
   products: Product[];
   isLoading: boolean;
   hasLoadMore: boolean;
   currentPage: number;
-  loadProducts(): void;
+  loadProducts(): Promise<void>;
+  loadMoreProducts(): Promise<void>;
+  setInitialProducts(products: Product[]): void;
 }
 
 const ShopContext = createContext<Context | undefined>(undefined);
@@ -23,20 +25,36 @@ export const ShopProvider: React.FC = ({ children }) => {
     products: [],
     isLoading: true,
     hasLoadMore: true,
-    currentPage: 1,
+    currentPage: 2,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  async function loadProducts() {
+  const loadProducts = async () => {
     const payload = {
       params: { page: state.currentPage, limit: PAGE_LIMIT },
     };
-    const data = await ProductService.fetchProducts(payload);
+    const data = await ProductService.getProducts(payload);
     dispatch({ type: LOAD_PRODUCTS, payload: data });
-  }
+  };
 
-  return <ShopContext.Provider value={{ ...state, loadProducts }}>{children}</ShopContext.Provider>;
+  const loadMoreProducts = async () => {
+    const payload = {
+      params: { page: state.currentPage, limit: PAGE_LIMIT },
+    };
+    const data = await ProductService.getProducts(payload);
+    dispatch({ type: LOAD_MORE_PRODUCTS, payload: data });
+  };
+
+  const setInitialProducts = (products: Product[]) => {
+    dispatch({ type: SET_INITIAL_PRODUCTS, payload: products });
+  };
+
+  return (
+    <ShopContext.Provider value={{ ...state, loadProducts, loadMoreProducts, setInitialProducts }}>
+      {children}
+    </ShopContext.Provider>
+  );
 };
 
 export const useShop = () => {

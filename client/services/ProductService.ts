@@ -4,7 +4,7 @@ import { ProductData, ProductsData } from 'types';
 
 type ProductPayload = { params: unknown };
 
-const fetchProducts = async (payload?: ProductPayload): Promise<ProductsData> => {
+const getProducts = async (payload?: ProductPayload): Promise<ProductsData> => {
   try {
     const url = `/products`;
     const { data } = await apiClient.get(url, payload);
@@ -19,7 +19,7 @@ const fetchProducts = async (payload?: ProductPayload): Promise<ProductsData> =>
   }
 };
 
-export const fetchProduct = async (id: string): Promise<ProductData> => {
+export const getProduct = async (id: string): Promise<ProductData> => {
   try {
     const url = `/products/${id}`;
     const { data } = await apiClient.get(url);
@@ -35,6 +35,6 @@ export const fetchProduct = async (id: string): Promise<ProductData> => {
 };
 
 export const ProductService = {
-  fetchProducts,
-  fetchProduct,
+  getProducts,
+  getProduct,
 };

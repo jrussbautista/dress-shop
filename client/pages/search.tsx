@@ -43,7 +43,7 @@ const Search: React.FC = () => {
 
         const payload = { params };
 
-        const { products } = await ProductService.fetchProducts(payload);
+        const { products } = await ProductService.getProducts(payload);
         setProducts(products);
         setIsLoading(false);
       } catch (error) {

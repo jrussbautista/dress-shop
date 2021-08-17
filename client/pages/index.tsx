@@ -1,18 +1,26 @@
-import { Meta, MobileBottomMenu } from '@/components/core';
-import { BannersSection, CategoriesSection, ProductOverviewSection } from '@/components/home';
-import { Container } from '@/components/ui';
-import { useScrollRestoration } from '@/hooks';
+import { InferGetStaticPropsType } from 'next';
 
-const Home = () => {
+import { Categories } from '@/components/category';
+import { Meta, MobileBottomMenu } from '@/components/core';
+import { ProductOverviewSection } from '@/components/home';
+import { Banners, Container } from '@/components/ui';
+import { useScrollRestoration } from '@/hooks';
+import { BannerService, CategoryService, ProductService } from '@/services';
+
+const Home = ({
+  banners,
+  categories,
+  products,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   useScrollRestoration();
 
   return (
     <>
       <Meta />
-      <BannersSection />
+      <Banners banners={banners} />
       <Container>
-        <CategoriesSection />
-        <ProductOverviewSection />
+        <Categories categories={categories} />
+        <ProductOverviewSection initialProducts={products} />
       </Container>
       <MobileBottomMenu />
     </>
@@ -20,3 +28,20 @@ const Home = () => {
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  const PAGE = 1;
+  const LIMIT = 12;
+  const banners = await BannerService.getBanners();
+  const categories = await CategoryService.getCategories();
+  const { products } = await ProductService.getProducts({ params: { page: PAGE, limit: LIMIT } });
+
+  return {
+    props: {
+      banners,
+      categories,
+      products,
+    },
+    revalidate: 60,
+  };
+}

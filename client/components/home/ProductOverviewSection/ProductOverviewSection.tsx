@@ -1,36 +1,43 @@
 import React, { useState, useEffect } from 'react';
 
-import { ProductListSkeleton, ProductList } from '@/components/product';
+import { ProductList } from '@/components/product';
 import { Spinner, Button, Heading } from '@/components/ui';
 import { useShop } from '@/contexts';
+import { Product } from '@/types';
 import { colors } from '@/utils/theme';
 
 import styles from './ProductOverviewSection.module.css';
 
-const ProductOverview = () => {
+interface Props {
+  initialProducts: Product[];
+}
+
+const ProductOverview = ({ initialProducts }: Props) => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const { isLoading, loadProducts, hasLoadMore, products } = useShop();
+  const { loadMoreProducts, hasLoadMore, products, setInitialProducts } = useShop();
 
   useEffect(() => {
-    if (isLoading) {
-      loadProducts();
+    if (products.length === 0) {
+      setInitialProducts(initialProducts);
     }
-  }, [isLoading, loadProducts]);
+  }, [initialProducts, products.length, setInitialProducts]);
 
   const handleLoadMore = async () => {
     setIsLoadingMore(true);
-    await loadProducts();
+    await loadMoreProducts();
     setIsLoadingMore(false);
   };
 
   const showLoadMore = () => {
-    return !isLoading && hasLoadMore && !isLoadingMore;
+    return hasLoadMore && !isLoadingMore;
   };
 
   return (
     <div className={styles.container}>
       <Heading>Product Overview</Heading>
-      {isLoading ? <ProductListSkeleton number={20} /> : <ProductList products={products} />}
+
+      <ProductList products={products} />
+
       {isLoadingMore && (
         <div className={styles.loadingWrapper}>
           <Spinner color={colors.primary} size={30} />

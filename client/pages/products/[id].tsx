@@ -109,7 +109,7 @@ const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
             </div>
           </div>
         </div>
-        <Heading className={styles.heading}> Related Products </Heading>
+        <Heading> Related Products </Heading>
         <ProductList products={relatedProducts} />
       </Container>
       <MobileBottomMenu />

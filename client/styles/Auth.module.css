@@ -1,6 +1,5 @@
 .authContainer {
-  width: 50rem;
-  margin: 0 auto;
+  margin: 0 1.5rem;
 }
 
 .or {
@@ -19,4 +18,11 @@
 
 .or .text {
   padding: 0 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .authContainer {
+    width: 50rem;
+    margin: 0 auto;
+  }
 }

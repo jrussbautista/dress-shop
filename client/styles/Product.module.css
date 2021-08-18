@@ -68,10 +68,6 @@
   margin-left: 10px;
 }
 
-.heading {
-  padding: 0 2rem;
-}
-
 @media only screen and (min-width: 1024px) {
   .main,
   .productInfo {

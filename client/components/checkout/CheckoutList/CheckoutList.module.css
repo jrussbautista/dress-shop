@@ -8,9 +8,15 @@
 }
 
 .image {
-  width: 12rem;
-  height: 12rem;
-  object-fit: contain;
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.productName {
+  margin: 0;
+  width: 100px;
 }
 
 .info {
@@ -25,6 +31,7 @@
 
 .content {
   flex: 1;
+  padding: 0 0.5rem;
 }
 
 .orderTotal {

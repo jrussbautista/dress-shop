@@ -44,12 +44,12 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const loadCurrentUser = async () => {
-      try {
-        const { token } = parseCookies({});
-        if (!token) {
-          return;
-        }
+      const { token } = parseCookies({});
+      if (!token) {
+        return dispatch({ type: LOGOUT_USER });
+      }
 
+      try {
         const { user } = await AuthService.getMe();
         dispatch({ type: SET_CURRENT_USER, payload: user });
       } catch (error) {

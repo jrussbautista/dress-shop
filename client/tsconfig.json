@@ -29,6 +29,6 @@
       "@/test/*": ["test/*"]
     }
   },
-  "exclude": ["node_modules", "setupTests.ts"],
+  "exclude": ["node_modules", "jest.setuo.ts"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.config.js"]
 }

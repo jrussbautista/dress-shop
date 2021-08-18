@@ -2,9 +2,9 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 import { ProductInputQuantity } from '@/components/product';
-import { useToast, useCart } from '@/contexts';
+import { useCart, useToast } from '@/contexts';
+import { CartItem as CartItemType } from '@/types';
 import formatPrice from '@/utils/formatPrice';
-import { CartItem as CartItemType } from 'types';
 
 import styles from './CartItem.module.css';
 
@@ -109,7 +109,9 @@ const CartItem: React.FC<Props> = ({ cartItem }) => {
               />
             </div>
           </div>
-          <div className={`${styles.total} ${styles.productContent}`}>{total}</div>
+          <p aria-label="cart-total" className={`${styles.total} ${styles.productContent}`}>
+            {total}
+          </p>
           <div className={styles.productAction}>
             <button className={styles.btnCartAction} onClick={handleRemoveCart}>
               Delete

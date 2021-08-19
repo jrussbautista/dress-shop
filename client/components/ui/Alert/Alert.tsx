@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './Alert.module.css';
 
 interface Props {
-  type: string;
+  type: 'error' | 'success';
   message: string | null;
 }
 

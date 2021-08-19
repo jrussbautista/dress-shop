@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
@@ -21,6 +21,9 @@ const LoginSchema = Yup.object().shape({
 
 const LoginForm = () => {
   const [submitting, setSubmitting] = useState(false);
+  const { query } = useRouter();
+
+  const ref = query.ref as string;
 
   const { login } = useAuth();
   const { setToast } = useToast();
@@ -29,8 +32,12 @@ const LoginForm = () => {
     try {
       setSubmitting(true);
       await login(email, password);
-      Router.push('/profile');
       setSubmitting(false);
+      if (ref) {
+        Router.push(`/products/${ref}`);
+      } else {
+        Router.push('/profile');
+      }
     } catch (error) {
       setToast('error', error.message);
       setSubmitting(false);

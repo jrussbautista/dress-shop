@@ -26,4 +26,15 @@ export const authHandlers = [
       })
     );
   }),
+  rest.post(`${API_URL}/auth/signup`, (_, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        data: {
+          token: 'test_token',
+          user: userGenerator(),
+        },
+      })
+    );
+  }),
 ];

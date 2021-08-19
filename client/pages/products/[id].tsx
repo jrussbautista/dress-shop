@@ -52,8 +52,7 @@ const Product = ({ product, relatedProducts, error }: Props) => {
     try {
       if (!currentUser) {
         setToast('error', 'Please log in first');
-        Router.push(`/auth?type=login&ref=${product._id}`);
-        return;
+        return Router.push(`/login?ref=${product._id}`);
       }
       await addCartItem(product, Number(qty));
       showToast();

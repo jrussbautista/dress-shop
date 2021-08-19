@@ -13,9 +13,9 @@ const SignUp = () => {
         <Heading>Sign Up</Heading>
         <SignUpForm />
         <div className={styles.link}>
-          Don{`'`}t have an account?
-          <Link href="/auth?type=register">
-            <a className={`${styles.link} ${styles.linkText}`}> Create an account.</a>
+          Already have an account?
+          <Link href="/login">
+            <a className={`${styles.link} ${styles.linkText}`}> Log in your account.</a>
           </Link>
           <div className={styles.or}>
             <div className={styles.line} />

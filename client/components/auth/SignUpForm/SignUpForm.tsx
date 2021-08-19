@@ -38,8 +38,8 @@ const SignUp = () => {
           try {
             setSubmitting(true);
             await signUp(values);
-            Router.push('/profile');
             setSubmitting(false);
+            Router.push('/profile');
           } catch (error) {
             setToast('error', error.message);
             setSubmitting(false);
@@ -48,7 +48,6 @@ const SignUp = () => {
       >
         {({ errors, touched, handleChange, handleSubmit, values }) => (
           <form onSubmit={handleSubmit} className={styles.authForm}>
-            <h1 className={styles.pageHeading}> Sign Up </h1>
             <Input
               name="name"
               id="name"
@@ -89,6 +88,7 @@ const SignUp = () => {
                 type="submit"
                 title="Sign Up"
                 disabled={submitting}
+                loading={submitting}
                 className={styles.button}
               />
             </div>

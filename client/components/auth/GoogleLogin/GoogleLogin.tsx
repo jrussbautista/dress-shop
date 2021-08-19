@@ -1,4 +1,4 @@
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { GoogleLogin as GoogleLoginLib } from 'react-google-login';
 
@@ -16,13 +16,20 @@ const GoogleLogin = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const { loginWithGoogle } = useAuth();
   const { setToast } = useToast();
+  const { query } = useRouter();
+  const ref = query.ref as string;
 
   const handleOnSuccess = async (response: any): Promise<void> => {
     try {
       setIsLoggingIn(true);
       const tokenId = response.tokenId;
       await loginWithGoogle(tokenId);
-      Router.push('/profile');
+      setIsLoggingIn(false);
+      if (ref) {
+        Router.push(`/products/${ref}`);
+      } else {
+        Router.push('/profile');
+      }
     } catch (error) {
       setToast('error', error.message);
     } finally {

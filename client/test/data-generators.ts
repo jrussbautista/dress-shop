@@ -1,21 +1,20 @@
 import * as faker from 'faker';
 
-import { Product, Banner, Category, User, CartItem } from '@/types';
-
 type Overrides = Record<string, any>;
 
-export const userGenerator = (overrides?: Overrides): User => {
+export const userGenerator = (overrides?: Overrides) => {
   return {
     _id: faker.datatype.uuid(),
     name: faker.name.findName(),
     email: faker.internet.email(),
     imageURL: faker.image.imageUrl(),
+    password: faker.internet.password(),
     role: 'user',
     ...overrides,
   };
 };
 
-export const productGenerator = (overrides?: Overrides): Product => {
+export const productGenerator = (overrides?: Overrides) => {
   return {
     _id: faker.datatype.uuid(),
     name: faker.commerce.productName(),
@@ -27,7 +26,7 @@ export const productGenerator = (overrides?: Overrides): Product => {
   };
 };
 
-export const bannerGenerator = (overrides?: Overrides): Banner => {
+export const bannerGenerator = (overrides?: Overrides) => {
   return {
     _id: faker.datatype.uuid(),
     imageURL: faker.image.imageUrl(),
@@ -36,7 +35,7 @@ export const bannerGenerator = (overrides?: Overrides): Banner => {
   };
 };
 
-export const categoryGenerator = (overrides?: Overrides): Category => {
+export const categoryGenerator = (overrides?: Overrides) => {
   return {
     _id: faker.datatype.uuid(),
     imageURL: faker.image.imageUrl(),
@@ -45,10 +44,7 @@ export const categoryGenerator = (overrides?: Overrides): Category => {
   };
 };
 
-export const cartItemGenerator = (
-  overrides?: Overrides,
-  productOverrides?: Overrides
-): CartItem => {
+export const cartItemGenerator = (overrides?: Overrides, productOverrides?: Overrides) => {
   return {
     _id: faker.datatype.uuid(),
     product: productGenerator(productOverrides),

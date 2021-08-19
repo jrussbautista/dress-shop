@@ -1,0 +1,56 @@
+import Router from 'next/router';
+import React from 'react';
+
+import { AuthProvider } from '@/contexts/auth';
+import { ToastProvider } from '@/contexts/toast';
+import { userGenerator } from '@/test/data-generators';
+import { fireEvent, rtlRender, screen, userEvent, waitFor } from '@/test/test-utils';
+
+import SignUpForm from './SignUpForm';
+
+const Wrapper: React.FC = ({ children }) => {
+  return (
+    <AuthProvider>
+      <ToastProvider>{children}</ToastProvider>
+    </AuthProvider>
+  );
+};
+
+const render = (ui: React.ReactElement) => {
+  return rtlRender(ui, { wrapper: Wrapper });
+};
+
+test('successfully register user and navigated to profile page', async () => {
+  render(<SignUpForm />);
+  const fields = userGenerator();
+
+  const nameInput = screen.getByPlaceholderText(/name/i);
+  const emailInput = screen.getByPlaceholderText(/email/i);
+  const passwordInput = screen.getByPlaceholderText(/password/i);
+
+  userEvent.type(nameInput, fields.name);
+  userEvent.type(emailInput, fields.email);
+  userEvent.type(passwordInput, fields.password);
+
+  const submitButton = screen.getByRole('button', { name: /sign up/i });
+
+  fireEvent.click(submitButton);
+
+  await waitFor(() => expect(submitButton).toBeDisabled());
+
+  await waitFor(() => expect(submitButton).toBeEnabled());
+
+  expect(Router.push).toBeCalledWith('/profile');
+});
+
+test('display input fields error when input fields is empty on form submit', async () => {
+  render(<SignUpForm />);
+
+  const submitButton = screen.getByRole('button', { name: /sign up/i });
+
+  userEvent.click(submitButton);
+
+  await waitFor(() => expect(screen.getByText('Email is required')).toBeInTheDocument());
+
+  expect(screen.getByText('Password is required')).toBeInTheDocument();
+});

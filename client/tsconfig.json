@@ -29,6 +29,6 @@
       "@/test/*": ["test/*"]
     }
   },
-  "exclude": ["node_modules", "jest.setuo.ts"],
+  "exclude": ["node_modules", "jest.setup.ts", "./cypress"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.config.js"]
 }

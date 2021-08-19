@@ -13,7 +13,10 @@
     "format": "npm run prettier -- --write",
     "check-types": "tsc --project tsconfig.json --pretty --noEmit",
     "test": "jest --watch",
-    "validate": "npm-run-all --parallel check-types && lint-staged"
+    "validate": "npm-run-all --parallel check-types && lint-staged",
+    "cypres:install": "cypress install",
+    "cypress:run": "cypress run",
+    "cypress:open": "cypress open"
   },
   "lint-staged": {
     "*.+(ts|tsx)": [
@@ -44,6 +47,7 @@
     "yup": "^0.28.0"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^8.0.0",
     "@testing-library/dom": "^8.1.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
@@ -60,9 +64,11 @@
     "@typescript-eslint/parser": "^3.10.1",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^27.0.6",
+    "cypress": "^8.3.0",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-cypress": "^2.11.3",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jest-dom": "^3.9.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",

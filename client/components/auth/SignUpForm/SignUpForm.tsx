@@ -49,6 +49,7 @@ const SignUp = () => {
         {({ errors, touched, handleChange, handleSubmit, values }) => (
           <form onSubmit={handleSubmit} className={styles.authForm}>
             <Input
+              aria-label="Name"
               name="name"
               id="name"
               placeholder="Name"
@@ -59,6 +60,7 @@ const SignUp = () => {
             />
             {errors.name && touched.name ? <div className={styles.error}>{errors.name}</div> : null}
             <Input
+              aria-label="Email"
               name="email"
               id="email"
               placeholder="Email"
@@ -71,6 +73,7 @@ const SignUp = () => {
               <div className={styles.error}>{errors.email}</div>
             ) : null}
             <Input
+              aria-label="Password"
               name="password"
               id="password"
               placeholder="Password"

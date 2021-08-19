@@ -58,6 +58,7 @@ const LoginForm = () => {
               onChange={handleChange}
               type="email"
               error={Boolean(errors.email && touched.email)}
+              aria-label="Email"
             />
             {errors.email && touched.email ? (
               <div className={styles.error}>{errors.email}</div>
@@ -70,6 +71,7 @@ const LoginForm = () => {
               onChange={handleChange}
               type="password"
               error={Boolean(errors.password && touched.password)}
+              aria-label="Password"
             />
             {errors.password && touched.password ? (
               <div className={styles.error}>{errors.password}</div>

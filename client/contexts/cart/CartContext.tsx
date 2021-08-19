@@ -41,7 +41,7 @@ export const CartProvider: React.FC = ({ children }) => {
   const loadCartItems = async () => {
     try {
       const results = await CartService.getCart();
-      dispatch({ type: SET_CARTS, payload: results.items });
+      dispatch({ type: SET_CARTS, payload: results ? results.items : [] });
     } catch (error) {
       dispatch({ type: SET_ERROR, payload: { error: error.message } });
     }

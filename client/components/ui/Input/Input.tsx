@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Input.module.css';
 
-interface Props {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: boolean;
   name: string;
@@ -26,6 +26,7 @@ const Input = ({
   placeholder,
   autoComplete = 'false',
   required,
+  ...rest
 }: Props) => {
   const inputClassName = error ? `${styles.input} ${styles.error}` : styles.input;
 
@@ -47,6 +48,7 @@ const Input = ({
           placeholder={placeholder}
           autoComplete={autoComplete}
           required={required}
+          {...rest}
         />
       </div>
     </>

@@ -31,7 +31,7 @@ const SearchBar = ({ onSubmit, style, isFocus }: Props) => {
 
   return (
     <>
-      <form className={styles.searchForm} onSubmit={handleSubmit} style={style}>
+      <form className={styles.searchForm} onSubmit={handleSubmit} style={style} role="search">
         <input
           ref={searchRef}
           type="text"
@@ -39,6 +39,7 @@ const SearchBar = ({ onSubmit, style, isFocus }: Props) => {
           placeholder="Search Product..."
           onChange={handleChange}
           value={searchText}
+          aria-label="Search Product"
         />
         <button className={styles.searchButton} type="submit">
           <IoIosSearch size={30} />

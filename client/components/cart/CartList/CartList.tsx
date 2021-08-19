@@ -1,14 +1,16 @@
 import React from 'react';
 
-import { useCart } from '@/contexts';
+import { CartItem as CartItemType } from '@/types';
 
 import CartItem from '../CartItem';
 
 import styles from './CartList.module.css';
 
-const CartList = () => {
-  const { cartItems } = useCart();
+interface Props {
+  cartItems: CartItemType[];
+}
 
+const CartList = ({ cartItems }: Props) => {
   return (
     <div>
       <>

@@ -78,7 +78,7 @@ const CartItem = ({ cartItem }: Props) => {
   };
 
   return (
-    <div className={styles.productList}>
+    <div className={styles.productList} role="listitem">
       <div className={styles.product}>
         <div className={styles.productImg}>
           <Link href={`/products/${cartItem.product._id}`}>

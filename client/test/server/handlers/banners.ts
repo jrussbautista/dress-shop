@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import { fakeBanners } from '@/test/fake-data';
+import { bannerGenerator } from '@/test/data-generators';
 import { API_URL } from '@/utils/constants';
 
 export const bannersHandlers = [
@@ -8,7 +8,7 @@ export const bannersHandlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        data: fakeBanners,
+        data: [bannerGenerator(), bannerGenerator()],
       })
     );
   }),

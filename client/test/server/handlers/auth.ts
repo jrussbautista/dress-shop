@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import { fakeUser } from '@/test/fake-data';
+import { userGenerator } from '@/test/data-generators';
 import { API_URL } from '@/utils/constants';
 
 export const authHandlers = [
@@ -10,7 +10,7 @@ export const authHandlers = [
       ctx.json({
         data: {
           token: 'test_token',
-          user: fakeUser,
+          user: userGenerator(),
         },
       })
     );
@@ -21,7 +21,7 @@ export const authHandlers = [
       ctx.json({
         data: {
           token: 'test_token',
-          user: fakeUser,
+          user: userGenerator(),
         },
       })
     );

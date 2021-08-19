@@ -27,15 +27,18 @@ const Cart = () => {
       <Container>
         <div className={styles.cartContainer}>
           <Heading>Your Cart </Heading>
-          {cartItems.length > 0 ? (
+
+          {cartItems.length > 0 && (
             <>
-              <CartList />
+              <CartList cartItems={cartItems} />
               <CartSubTotal total={Number(cartTotal)} />
               <div className={styles.checkoutBtnWrapper}>
                 <Button href="/checkout" title="Check Out" />
               </div>
             </>
-          ) : (
+          )}
+
+          {cartItems.length === 0 && (
             <div className={styles.msgContainer}>
               <div className={styles.msg}> Your cart is empty :( </div>
               <Button href="/" title="Go Shop Now" />

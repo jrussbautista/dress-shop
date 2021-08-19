@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import { fakeCategories } from '@/test/fake-data';
+import { categoryGenerator } from '@/test/data-generators';
 import { API_URL } from '@/utils/constants';
 
 export const categoriesHandlers = [
@@ -8,7 +8,7 @@ export const categoriesHandlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        data: fakeCategories,
+        data: [categoryGenerator(), categoryGenerator()],
       })
     );
   }),

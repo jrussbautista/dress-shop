@@ -12,7 +12,8 @@
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\"",
     "format": "npm run prettier -- --write",
     "check-types": "tsc --project tsconfig.json --pretty --noEmit",
-    "test": "jest --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "validate": "npm-run-all --parallel check-types && lint-staged",
     "cypres:install": "cypress install",
     "cypress:run": "cypress run",
@@ -20,7 +21,8 @@
   },
   "lint-staged": {
     "*.+(ts|tsx)": [
-      "npm run lint:fix"
+      "npm run lint:fix",
+      "npm run test"
     ]
   },
   "dependencies": {

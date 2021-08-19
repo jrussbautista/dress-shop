@@ -7,11 +7,11 @@ interface Props {
   image?: string;
 }
 
-const Meta: React.FC<Props> = ({
+const Meta = ({
   title = 'Buy best and quality products',
   description = 'Dress Shop | Buy best and quality products',
   image = 'https://dress-shop.vercel.app/featured.png',
-}) => {
+}: Props) => {
   const siteTitle = `Dress Shop | ${title}`;
 
   return (

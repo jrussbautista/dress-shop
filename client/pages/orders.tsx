@@ -7,7 +7,7 @@ import { ErrorMessage, Container, Heading } from '@/components/ui';
 import { OrderService } from '@/services/OrderService';
 import { Order as OrderType } from '@/types';
 
-const Orders: React.FC = () => {
+const Orders = () => {
   const [orders, setOrders] = useState<OrderType[]>([]);
   const [ordersStatus, setOrdersStatus] = useState('idle');
   const [error, setError] = useState('');

@@ -9,7 +9,7 @@ interface Props {
   categories: Category[];
 }
 
-const Categories: React.FC<Props> = ({ categories }) => {
+const Categories = ({ categories }: Props) => {
   return (
     <ul className={styles.categoryContainer}>
       {categories.map((category) => (

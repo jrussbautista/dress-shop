@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import React, { useState } from 'react';
 import { GoogleLogin as GoogleLoginLib } from 'react-google-login';
 
@@ -11,7 +12,7 @@ interface GoogleError {
   details: string;
 }
 
-const GoogleLogin: React.FC = () => {
+const GoogleLogin = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const { loginWithGoogle } = useAuth();
   const { setToast } = useToast();
@@ -21,6 +22,7 @@ const GoogleLogin: React.FC = () => {
       setIsLoggingIn(true);
       const tokenId = response.tokenId;
       await loginWithGoogle(tokenId);
+      Router.push('/profile');
     } catch (error) {
       setToast('error', error.message);
     } finally {

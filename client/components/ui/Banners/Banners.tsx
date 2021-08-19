@@ -9,7 +9,7 @@ interface Props {
   banners: Banner[];
 }
 
-const Banners: React.FC<Props> = ({ banners }) => {
+const Banners = ({ banners }: Props) => {
   const settings = {
     dots: true,
     infinite: false,

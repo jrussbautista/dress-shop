@@ -14,7 +14,7 @@ import formatPrice from '@/utils/formatPrice';
 
 const stripePromise = loadStripe(STRIPE_CLIENT_KEY);
 
-const Checkout: React.FC = () => {
+const Checkout = () => {
   const { cartItems, error } = useCart();
   const { cartTotal } = calculateCartTotal(cartItems);
 

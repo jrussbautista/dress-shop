@@ -7,12 +7,12 @@ interface Props {
   message: string | null;
 }
 
-const Alert: React.FC<Props> = ({ type, message }) => {
+const Alert = ({ type, message }: Props) => {
   const alertStyles = `${styles.alert} ${styles.alert[type]}`;
 
   return (
     <>
-      <div className={alertStyles} role={type}>
+      <div className={alertStyles} role="alert">
         {message}
       </div>
     </>

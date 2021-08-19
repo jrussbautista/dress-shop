@@ -5,7 +5,7 @@ import Sidebar from '@/components/core/Sidebar';
 
 import styles from './MobileMenu.module.css';
 
-const MobileMenu: React.FC = () => {
+const MobileMenu = () => {
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
 
   return (

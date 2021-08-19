@@ -8,7 +8,7 @@ interface Props {
   total: number;
 }
 
-const CartSubTotal: React.FC<Props> = ({ total }) => {
+const CartSubTotal = ({ total }: Props) => {
   return (
     <div className={styles.subtotal}>
       <div className={styles.label}> Sub Total </div>

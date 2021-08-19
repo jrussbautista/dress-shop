@@ -27,3 +27,9 @@
   display: flex;
   justify-content: flex-end;
 }
+
+@media only screen and (min-width: 1024px) {
+  .headerWrapper {
+    padding: 0;
+  }
+}

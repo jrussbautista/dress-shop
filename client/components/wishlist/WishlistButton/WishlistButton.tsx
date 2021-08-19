@@ -11,7 +11,7 @@ interface Props {
   productId: string;
 }
 
-const WishlistButton: React.FC<Props> = ({ productId }) => {
+const WishlistButton = ({ productId }: Props) => {
   const router = useRouter();
   const { isAuthenticated } = useAuth();
   const { wishlistItems, addWishlistItem, removeWishlistItem } = useWishlist();
@@ -28,7 +28,7 @@ const WishlistButton: React.FC<Props> = ({ productId }) => {
     try {
       if (!isAuthenticated) {
         setToast('error', 'Please, login first.');
-        return router.push('/auth');
+        return router.push('/login');
       }
 
       if (isProductInWishlist) {

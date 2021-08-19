@@ -6,3 +6,7 @@ export function useRouter() {
     asPath: '',
   };
 }
+
+export default {
+  push: jest.fn(),
+};

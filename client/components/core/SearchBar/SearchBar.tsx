@@ -9,7 +9,7 @@ interface Props {
   isFocus?: boolean;
 }
 
-const SearchBar: React.FC<Props> = ({ onSubmit, style, isFocus }) => {
+const SearchBar = ({ onSubmit, style, isFocus }: Props) => {
   const [searchText, setSearchText] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
 

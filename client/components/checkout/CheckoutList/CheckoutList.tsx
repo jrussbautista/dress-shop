@@ -10,7 +10,7 @@ interface Props {
   items: CartItem[];
 }
 
-const CheckoutList: React.FC<Props> = ({ items }) => {
+const CheckoutList = ({ items }: Props) => {
   return (
     <>
       <div>

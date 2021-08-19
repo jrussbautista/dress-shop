@@ -4,7 +4,7 @@ import { Spinner } from '@/components/ui';
 
 import styles from './PageLoader.module.css';
 
-const PageLoader: React.FC = () => {
+const PageLoader = () => {
   return (
     <>
       <div className={styles.pageLoader}>

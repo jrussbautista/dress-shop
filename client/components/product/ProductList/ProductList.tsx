@@ -8,7 +8,7 @@ interface Props {
   products: Products;
 }
 
-const ProductList: React.FC<Props> = ({ products }) => {
+const ProductList = ({ products }: Props) => {
   return (
     <div className={styles.productGrid} aria-label="Product list">
       {products.map((product) => (

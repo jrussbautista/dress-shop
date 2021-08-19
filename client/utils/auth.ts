@@ -1,9 +1,8 @@
-import Router from 'next/router';
 import { setCookie, destroyCookie } from 'nookies';
 
 import apiClient from './apiClient';
 
-export const setAuthToken = (token: string): void => {
+export const setAuthToken = (token: string) => {
   apiClient.defaults.headers.common['Authorization'] = '';
   delete apiClient.defaults.headers.common['Authorization'];
 
@@ -12,19 +11,17 @@ export const setAuthToken = (token: string): void => {
   }
 };
 
-export const deleteAuthToken = (): void => {
+export const deleteAuthToken = () => {
   apiClient.defaults.headers.common['Authorization'] = '';
   delete apiClient.defaults.headers.common['Authorization'];
 };
 
-export const autoLogin = (token: string, location: string): void => {
+export const autoLogin = (token: string) => {
   setCookie({}, 'token', token, {});
   setAuthToken(token);
-  Router.push(location);
 };
 
-export const autoLogout = (redirectUrl: string): void => {
+export const autoLogout = () => {
   destroyCookie({}, 'token');
   deleteAuthToken();
-  window.location.href = redirectUrl;
 };

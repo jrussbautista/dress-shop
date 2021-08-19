@@ -8,7 +8,7 @@ interface Props {
   active: string;
 }
 
-const SearchFilter: React.FC<Props> = ({ handleChange, active }) => {
+const SearchFilter = ({ handleChange, active }: Props) => {
   const [selected, setSelected] = useState(!active ? null : getActive(active));
   const [openDropdown, setOpenDropdown] = useState(false);
 

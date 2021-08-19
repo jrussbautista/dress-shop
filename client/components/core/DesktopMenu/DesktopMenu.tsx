@@ -12,7 +12,7 @@ import { capitalizeFirstLetter } from '@/utils/helpers';
 
 import styles from './DesktopMenu.module.css';
 
-const DesktopMenu: React.FC = () => {
+const DesktopMenu = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
 
@@ -34,7 +34,8 @@ const DesktopMenu: React.FC = () => {
   };
 
   const onLogOut = () => {
-    logout('/auth?type=login');
+    logout();
+    window.location.href = '/login';
   };
 
   const handleSearchSubmit = (searchText: string) => {
@@ -148,11 +149,11 @@ const DesktopMenu: React.FC = () => {
           </li>
         ) : (
           <li ref={dropdownRef}>
-            <Link href="/auth?type=register">
+            <Link href="/signup">
               <a>Sign Up</a>
             </Link>
             <span className={styles.line}> | </span>
-            <Link href="/auth?type=login">
+            <Link href="/login">
               <a>Log In</a>
             </Link>
           </li>

@@ -18,10 +18,10 @@ interface Context {
   loading: boolean;
   error: null | string;
   cartItems: CartItem[];
-  addCartItem: (product: Product, quantity: number) => void;
-  removeCartItem: (cartItemToRemove: CartItem) => void;
+  addCartItem: (product: Product, quantity: number) => Promise<void>;
+  removeCartItem: (cartItemToRemove: CartItem) => Promise<void>;
   clearCart: () => void;
-  updateCartItemQty: (cartItem: CartItem, newQuantity: number) => void;
+  updateCartItemQty: (cartItem: CartItem, newQuantity: number) => Promise<void>;
 }
 
 const CartContext = createContext<Context | undefined>(undefined);
@@ -38,7 +38,7 @@ export const CartProvider: React.FC = ({ children }) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const fetchCarts = async () => {
+  const loadCartItems = async () => {
     try {
       const results = await CartService.getCart();
       dispatch({ type: SET_CARTS, payload: results.items });
@@ -49,7 +49,7 @@ export const CartProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetchCarts();
+      loadCartItems();
     }
   }, [isAuthenticated]);
 

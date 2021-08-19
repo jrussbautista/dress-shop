@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { destroyCookie, parseCookies } from 'nookies';
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
@@ -20,10 +19,10 @@ interface Context {
   currentUser: User | null;
   loading: boolean;
   error: null | string;
-  logout(redirectUrl: string): void;
-  login(email: string, password: string): void;
-  loginWithGoogle(tokenId: string): void;
-  signUp(userDetails: UserDetails): void;
+  logout(): void;
+  login(email: string, password: string): Promise<void>;
+  loginWithGoogle(tokenId: string): Promise<void>;
+  signUp(userDetails: UserDetails): Promise<void>;
   updateUser(user: User): void;
 }
 
@@ -39,8 +38,6 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const { query } = useRouter();
 
   useEffect(() => {
     const loadCurrentUser = async () => {
@@ -61,13 +58,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const loginSuccess = (user: User, token: string) => {
-    const { ref } = query;
-
     dispatch({ type: SET_CURRENT_USER, payload: user });
-
-    const url = ref ? `/products/${ref}` : '/profile';
-
-    autoLogin(token, url);
+    autoLogin(token);
   };
 
   const login = async (email: string, password: string): Promise<void> => {
@@ -85,10 +77,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     loginSuccess(user, token);
   };
 
-  const logout = (redirectUrl: string) => {
+  const logout = () => {
     destroyCookie({}, 'token');
     dispatch({ type: LOGOUT_USER });
-    autoLogout(redirectUrl);
+    autoLogout();
   };
 
   const updateUser = (user: User) => {

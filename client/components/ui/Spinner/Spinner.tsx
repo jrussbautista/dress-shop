@@ -9,16 +9,14 @@ interface Props {
   size: number;
 }
 
-const Spinner: React.FC<Props> = ({ color = colors.primary, size = 30 }) => {
+const Spinner = ({ color = colors.primary, size = 30 }: Props) => {
   const sizeStyle = `${size}px`;
 
   return (
-    <>
-      <div
-        className={styles.loader}
-        style={{ width: sizeStyle, height: sizeStyle, borderLeftColor: color }}
-      />
-    </>
+    <div
+      className={styles.loader}
+      style={{ width: sizeStyle, height: sizeStyle, borderLeftColor: color }}
+    />
   );
 };
 

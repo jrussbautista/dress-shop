@@ -12,7 +12,7 @@ interface Props {
   cartItem: CartItemType;
 }
 
-const CartItem: React.FC<Props> = ({ cartItem }) => {
+const CartItem = ({ cartItem }: Props) => {
   const { removeCartItem, updateCartItemQty } = useCart();
   const { setToast } = useToast();
 

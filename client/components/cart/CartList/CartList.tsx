@@ -6,7 +6,7 @@ import CartItem from '../CartItem';
 
 import styles from './CartList.module.css';
 
-const CartList: React.FC = () => {
+const CartList = () => {
   const { cartItems } = useCart();
 
   return (

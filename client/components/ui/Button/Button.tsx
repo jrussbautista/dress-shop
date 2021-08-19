@@ -20,7 +20,7 @@ interface Props {
   className?: string;
 }
 
-const Button: React.FC<Props> = ({
+const Button = ({
   onClick,
   href,
   type = 'button',
@@ -31,7 +31,7 @@ const Button: React.FC<Props> = ({
   icon,
   loading,
   className,
-}) => {
+}: Props) => {
   const rootClassName = cName(className, styles.btn, styles[variant]);
 
   return (

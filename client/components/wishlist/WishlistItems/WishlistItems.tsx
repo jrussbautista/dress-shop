@@ -6,7 +6,7 @@ import { useWishlist } from '@/contexts';
 import WishlistItem from './WishlistItem';
 import styles from './WishlistItems.module.css';
 
-const WishlistItems: React.FC = () => {
+const WishlistItems = () => {
   const { wishlistItems, loading } = useWishlist();
 
   if (loading) {

@@ -15,7 +15,7 @@ interface IParams {
   keyword?: string;
 }
 
-const Search: React.FC = () => {
+const Search = () => {
   const { query, pathname } = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<null | string>(null);

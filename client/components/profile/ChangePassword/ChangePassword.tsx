@@ -6,7 +6,7 @@ import { AuthService } from '@/services';
 
 import styles from './ChangePassword.module.css';
 
-const ChangePassword: React.FC = () => {
+const ChangePassword = () => {
   const { setToast } = useToast();
 
   const initialState = {

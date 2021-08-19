@@ -8,7 +8,7 @@ interface Props {
   message: string;
 }
 
-const ErrorPage: React.FC<Props> = ({ message }) => {
+const ErrorPage = ({ message }: Props) => {
   const handleRefresh = () => {
     window.location.reload();
   };

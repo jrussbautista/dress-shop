@@ -11,7 +11,7 @@ interface Props {
   closeToast(): void;
 }
 
-const Toast: React.FC<Props> = ({ type, message, isActive, closeToast }) => {
+const Toast = ({ type, message, isActive, closeToast }: Props) => {
   return (
     <>
       <motion.div

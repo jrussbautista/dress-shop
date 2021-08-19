@@ -1,6 +1,6 @@
 import styles from './CartSkeleton.module.css';
 
-const CartSkeleton: React.FC = () => {
+const CartSkeleton = () => {
   return (
     <>
       <div className={styles.skeletonContainer}>

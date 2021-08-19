@@ -20,9 +20,20 @@
   padding: 0 1rem;
 }
 
+.link {
+  margin-top: 2rem;
+  color: var(--color-text-primary);
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.linkText {
+  color: var(--color-primary);
+}
+
 @media only screen and (min-width: 768px) {
   .authContainer {
-    width: 50rem;
-    margin: 0 auto;
+    width: 60rem;
+    margin: 5rem auto;
   }
 }

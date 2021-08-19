@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 
-import { useAuth } from '@/contexts/auth';
+import { useAuth } from '@/contexts';
 import { WishlistService } from '@/services/WishlistService';
 import { WishlistItem } from '@/types/Wishlist';
 
@@ -11,8 +11,8 @@ interface Context {
   wishlistItems: WishlistItem[];
   loading: boolean;
   error: null | string;
-  addWishlistItem: (productId: string) => void;
-  removeWishlistItem: (productId: string) => void;
+  addWishlistItem: (productId: string) => Promise<void>;
+  removeWishlistItem: (productId: string) => Promise<void>;
 }
 
 const WishlistContext = createContext<Context | undefined>(undefined);
@@ -29,7 +29,7 @@ export const WishlistProvider: React.FC = ({ children }) => {
 
   const { isAuthenticated } = useAuth();
 
-  const fetchWishlist = async () => {
+  const loadWishlistItems = async () => {
     try {
       const results = await WishlistService.getWishlist();
       dispatch({ type: SET_WISHLIST_ITEMS, payload: results });
@@ -40,7 +40,7 @@ export const WishlistProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetchWishlist();
+      loadWishlistItems();
     }
   }, [isAuthenticated]);
 

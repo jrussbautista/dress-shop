@@ -7,7 +7,7 @@ import { useAuth, useCart } from '@/contexts';
 
 import styles from './MobileBottomMenu.module.css';
 
-const MobileBottomMenu: React.FC = () => {
+const MobileBottomMenu = () => {
   const { pathname } = useRouter();
   const { currentUser } = useAuth();
   const { cartItems } = useCart();
@@ -47,7 +47,7 @@ const MobileBottomMenu: React.FC = () => {
           </Link>
         </div>
         <div className={`${styles.list} ${pathname === '/profile' ? 'active' : ''}`}>
-          <Link href={`${currentUser ? '/profile' : '/auth?type=login'}`}>
+          <Link href={`${currentUser ? '/profile' : '/login'}`}>
             <a className={styles.link}>
               <div className={styles.icon}>
                 <FiUser />

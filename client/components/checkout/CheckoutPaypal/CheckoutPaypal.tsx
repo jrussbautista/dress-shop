@@ -14,7 +14,7 @@ interface PaypalData {
   orderID: string;
 }
 
-const CheckoutPaypal: React.FC = () => {
+const CheckoutPaypal = () => {
   const paypalButtonsRef = useRef<HTMLDivElement>(null);
   const { setToast } = useToast();
   const { clearCart } = useCart();

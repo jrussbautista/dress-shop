@@ -14,7 +14,7 @@ interface InitialState {
   image: string | ArrayBuffer | null;
 }
 
-const EditProfile: React.FC = () => {
+const EditProfile = () => {
   const { currentUser, updateUser } = useAuth();
   const { setToast } = useToast();
 

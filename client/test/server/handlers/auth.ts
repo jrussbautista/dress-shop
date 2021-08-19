@@ -9,7 +9,18 @@ export const authHandlers = [
       ctx.status(200),
       ctx.json({
         data: {
-          token: '',
+          token: 'test_token',
+          user: fakeUser,
+        },
+      })
+    );
+  }),
+  rest.post(`${API_URL}/auth/login`, (_, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        data: {
+          token: 'test_token',
           user: fakeUser,
         },
       })

@@ -17,7 +17,7 @@ const WithAuth = (Component: React.ComponentType) => {
 
     useEffect(() => {
       if (!loading && !isAuthenticated) {
-        router.push('/auth');
+        router.push('/login');
       }
     }, [isAuthenticated, loading, router]);
 

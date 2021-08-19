@@ -6,7 +6,7 @@ interface Props {
   number: number;
 }
 
-const ProductListSkeleton: React.FC<Props> = ({ number }) => {
+const ProductListSkeleton = ({ number }: Props) => {
   return (
     <>
       <div className={styles.grid} aria-label="Product list skeleton">

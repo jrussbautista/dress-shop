@@ -11,13 +11,13 @@ interface Props {
   isUpdating?: boolean;
 }
 
-const InputQuantity: React.FC<Props> = ({
+const InputQuantity = ({
   value,
   onChangeInput,
   onButtonClick,
   onChangeBlur,
   isUpdating,
-}) => {
+}: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     onChangeInput(value);

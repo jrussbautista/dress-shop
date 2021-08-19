@@ -12,7 +12,7 @@ interface Props {
   product: Product;
 }
 
-const ProductCard: React.FC<Props> = ({ product }) => {
+const ProductCard = ({ product }: Props) => {
   return (
     <Link href={`/products/${product._id}`}>
       <a>

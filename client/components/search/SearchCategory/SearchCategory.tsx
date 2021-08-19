@@ -7,7 +7,7 @@ interface Props {
   onChangeTab(active: string): void;
 }
 
-const SearchCategory: React.FC<Props> = ({ active, onChangeTab }) => {
+const SearchCategory = ({ active, onChangeTab }: Props) => {
   return (
     <>
       <div className={styles.tab}>

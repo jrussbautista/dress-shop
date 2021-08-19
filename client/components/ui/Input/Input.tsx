@@ -15,7 +15,7 @@ interface Props {
   required?: boolean;
 }
 
-const Input: React.FC<Props> = ({
+const Input = ({
   label,
   name,
   id,
@@ -26,7 +26,7 @@ const Input: React.FC<Props> = ({
   placeholder,
   autoComplete = 'false',
   required,
-}) => {
+}: Props) => {
   const inputClassName = error ? `${styles.input} ${styles.error}` : styles.input;
 
   return (

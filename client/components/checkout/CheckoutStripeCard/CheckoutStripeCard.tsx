@@ -26,7 +26,7 @@ interface Props {
   onChange(event: StripeCardElementChangeEvent): Promise<void>;
 }
 
-const CardSection: React.FC<Props> = ({ onChange }) => {
+const CardSection = ({ onChange }: Props) => {
   return (
     <>
       <div>

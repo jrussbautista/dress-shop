@@ -1,62 +1,48 @@
 import { Formik } from 'formik';
+import Router from 'next/router';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
-import { Meta } from '@/components/core';
-import { Button, PageLoader, Input } from '@/components/ui';
+import { Button, Input, PageLoader } from '@/components/ui';
 import { useAuth, useToast } from '@/contexts';
+import { LoginFields } from '@/types';
 
-import styles from './Signup.module.css';
+import styles from './LoginForm.module.css';
 
-const Schema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
+const initialValues = {
+  email: '',
+  password: '',
+};
+
+const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Password is required').min(6),
   email: Yup.string().email('Invalid email').required('Email is required'),
 });
 
-const SignUp: React.FC = () => {
-  const { signUp } = useAuth();
-  const { setToast } = useToast();
-
+const LoginForm = () => {
   const [submitting, setSubmitting] = useState(false);
 
-  const initialValues = {
-    email: '',
-    password: '',
-    name: '',
+  const { login } = useAuth();
+  const { setToast } = useToast();
+
+  const handleSubmit = async ({ email, password }: LoginFields) => {
+    try {
+      setSubmitting(true);
+      await login(email, password);
+      Router.push('/profile');
+      setSubmitting(false);
+    } catch (error) {
+      setToast('error', error.message);
+      setSubmitting(false);
+    }
   };
 
   return (
     <>
-      <Meta title="Sign Up" />
       {submitting && <PageLoader />}
-      <Formik
-        initialValues={initialValues}
-        validationSchema={Schema}
-        onSubmit={async (values) => {
-          try {
-            setSubmitting(true);
-            await signUp(values);
-            setSubmitting(false);
-          } catch (error) {
-            setToast('error', error.message);
-            setSubmitting(false);
-          }
-        }}
-      >
+      <Formik initialValues={initialValues} validationSchema={LoginSchema} onSubmit={handleSubmit}>
         {({ errors, touched, handleChange, handleSubmit, values }) => (
           <form onSubmit={handleSubmit} className={styles.authForm}>
-            <h1 className={styles.pageHeading}> Sign Up </h1>
-            <Input
-              name="name"
-              id="name"
-              placeholder="Name"
-              value={values.name}
-              onChange={handleChange}
-              type="text"
-              error={Boolean(errors.name && touched.name)}
-            />
-            {errors.name && touched.name ? <div className={styles.error}>{errors.name}</div> : null}
             <Input
               name="email"
               id="email"
@@ -85,8 +71,9 @@ const SignUp: React.FC = () => {
             <div className={styles.bottom}>
               <Button
                 type="submit"
-                title="Sign Up"
+                title="Log In"
                 disabled={submitting}
+                loading={submitting}
                 className={styles.button}
               />
             </div>
@@ -97,4 +84,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default LoginForm;

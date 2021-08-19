@@ -9,7 +9,7 @@ interface Props {
   isOpen: boolean;
 }
 
-const PopUp: React.FC<Props> = ({ message, isOpen }) =>
+const PopUp = ({ message, isOpen }: Props) =>
   isOpen
     ? ReactDOM.createPortal(
         <div className={styles.popupContainer}>

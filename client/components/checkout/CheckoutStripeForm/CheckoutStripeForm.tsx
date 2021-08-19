@@ -11,7 +11,7 @@ import CardSection from '../CheckoutStripeCard/CheckoutStripeCard';
 
 import styles from './CheckoutStripeForm.module.css';
 
-const CheckoutStripeForm: React.FC = () => {
+const CheckoutStripeForm = () => {
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState<null | string>(null);
   const [processing, setProcessing] = useState(false);

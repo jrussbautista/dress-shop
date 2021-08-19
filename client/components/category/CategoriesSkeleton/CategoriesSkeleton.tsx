@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './CategoriesSkeleton.module.css';
 
-const CategoriesSkeleton: React.FC = () => {
+const CategoriesSkeleton = () => {
   return (
     <div>
       <div className={styles.categoryContainer} aria-label="Categories loading">

@@ -11,7 +11,7 @@ interface Props {
   orders: Order[];
 }
 
-const OrderList: React.FC<Props> = ({ orders }) => {
+const OrderList = ({ orders }: Props) => {
   return (
     <div>
       {orders.length > 0 ? (

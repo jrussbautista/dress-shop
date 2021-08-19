@@ -19,7 +19,7 @@ interface Props {
   error?: string;
 }
 
-const Product: React.FC<Props> = ({ product, relatedProducts, error }) => {
+const Product = ({ product, relatedProducts, error }: Props) => {
   const [qty, setQty] = useState<string | number>(1);
   const { addCartItem } = useCart();
   const { currentUser } = useAuth();

@@ -5,16 +5,14 @@ import WithAuth from '@/components/core/WithAuth';
 import { EditProfile, ChangePassword } from '@/components/profile';
 import { Heading, Container } from '@/components/ui';
 
-const Profile: React.FC = () => {
+const Profile = () => {
   return (
-    <>
-      <Container>
-        <Heading> My Profile </Heading>
-        <EditProfile />
-        <ChangePassword />
-        <MobileBottomMenu />
-      </Container>
-    </>
+    <Container>
+      <Heading> My Profile </Heading>
+      <EditProfile />
+      <ChangePassword />
+      <MobileBottomMenu />
+    </Container>
   );
 };
 

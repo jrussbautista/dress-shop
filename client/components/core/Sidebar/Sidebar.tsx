@@ -11,7 +11,7 @@ interface Props {
   onClose(): void;
 }
 
-const Sidebar: React.FC<Props> = ({ isOpen, onClose }) => {
+const Sidebar = ({ isOpen, onClose }: Props) => {
   const { logout, currentUser } = useAuth();
 
   const handleClose = () => {
@@ -19,7 +19,7 @@ const Sidebar: React.FC<Props> = ({ isOpen, onClose }) => {
   };
 
   const handleLogOut = () => {
-    logout('/auth?type=login');
+    logout();
     onClose();
   };
 

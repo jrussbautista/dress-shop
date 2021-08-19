@@ -9,7 +9,7 @@ interface Props {
   onChange(val: number): void;
 }
 
-const Pagination: React.FC<Props> = ({ total, limit, active, onChange }) => {
+const Pagination = ({ total, limit, active, onChange }: Props) => {
   let pageNumbers: number[] = [];
 
   for (let i = 1; i <= Math.ceil(total / limit); i++) {

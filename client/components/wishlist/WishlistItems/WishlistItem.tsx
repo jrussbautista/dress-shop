@@ -13,7 +13,7 @@ interface Props {
   wishlistItem: WishlistItemType;
 }
 
-const WishlistItem: React.FC<Props> = ({ wishlistItem }) => {
+const WishlistItem = ({ wishlistItem }: Props) => {
   const { removeWishlistItem } = useWishlist();
 
   const { setToast } = useToast();

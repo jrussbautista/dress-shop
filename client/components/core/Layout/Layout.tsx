@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import Header from '@/components/core/Header';
 import { initGA, logPageView } from '@/utils/analytics';
 
+import Footer from '../Footer';
+
 import styles from './Layout.module.css';
 
 NProgress.configure({ showSpinner: false });
@@ -43,6 +45,7 @@ const Layout: React.FC<Props> = ({ children, title = 'Dress Shop' }) => {
       </Head>
       <Header />
       <main className={styles.main}>{children}</main>
+      <Footer />
     </>
   );
 };

@@ -3,14 +3,16 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FiHome, FiSearch, FiShoppingCart, FiUser } from 'react-icons/fi';
 
-import { useAuth, useCart } from '@/contexts';
+import useCart from '@/hooks/cart/use-cart';
+import useUser from '@/hooks/user/use-user';
 
 import styles from './MobileBottomMenu.module.css';
 
 const MobileBottomMenu = () => {
   const { pathname } = useRouter();
-  const { currentUser } = useAuth();
-  const { cartItems } = useCart();
+  const { data: currentUser } = useUser();
+
+  const { data } = useCart();
 
   return (
     <>
@@ -40,7 +42,9 @@ const MobileBottomMenu = () => {
             <a className={styles.link}>
               <div className={styles.icon}>
                 <FiShoppingCart />
-                {cartItems.length > 0 && <span className={styles.cartNum}>{cartItems.length}</span>}
+                {data && data.items.length > 0 && (
+                  <span className={styles.cartNum}>{data.items.length}</span>
+                )}
               </div>
               <span className={styles.title}> Cart </span>
             </a>

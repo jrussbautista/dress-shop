@@ -24,6 +24,11 @@ Router.events.on('routeChangeError', () => {
   NProgress.done();
 });
 
+declare const window: Window &
+  typeof globalThis & {
+    GA_INITIALIZED: any;
+  };
+
 interface Props {
   title?: string;
 }

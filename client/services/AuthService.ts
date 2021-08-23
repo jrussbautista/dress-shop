@@ -101,9 +101,7 @@ export const changePassword = async (passwordFields: UserPasswordData): Promise<
 export const updateProfile = async (userId: string, userFields: UserFields): Promise<User> => {
   try {
     const url = `/users/${userId}`;
-    const { data } = await apiClient.patch(url, userFields, {
-      params: { id: userId },
-    });
+    const { data } = await apiClient.patch(url, userFields);
 
     return data.data;
   } catch (error) {

@@ -1,19 +1,12 @@
+import { ProductData, Product } from '@/types';
 import apiClient from '@/utils/apiClient';
 import { catchError } from '@/utils/catchError';
-import { ProductData, ProductsData } from 'types';
 
-type ProductPayload = { params: unknown };
-
-const getProducts = async (payload?: ProductPayload): Promise<ProductsData> => {
+const getProducts = async (fields: Record<string, any> = {}): Promise<Product[]> => {
   try {
     const url = `/products`;
-    const { data } = await apiClient.get(url, payload);
-
-    const productsData: ProductsData = {
-      products: data.data.products,
-      total: data.data.total,
-    };
-    return productsData;
+    const { data } = await apiClient.get(url, { params: fields });
+    return data.data.products;
   } catch (error) {
     throw new Error(catchError(error));
   }

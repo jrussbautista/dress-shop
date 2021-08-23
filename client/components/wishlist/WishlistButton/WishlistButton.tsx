@@ -2,7 +2,11 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
-import { useWishlist, useToast, useAuth } from '@/contexts';
+import { useToast } from '@/contexts';
+import useUser from '@/hooks/user/use-user';
+import useAddItem from '@/hooks/wishlist/use-add-item';
+import useRemoveItem from '@/hooks/wishlist/use-remove-item';
+import useWishlist from '@/hooks/wishlist/use-wishlist';
 import { colors } from '@/utils/theme';
 
 import styles from './WishlistButton.module.css';
@@ -13,28 +17,29 @@ interface Props {
 
 const WishlistButton = ({ productId }: Props) => {
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
-  const { wishlistItems, addWishlistItem, removeWishlistItem } = useWishlist();
+  const { data: currentUser } = useUser();
+
+  const { data } = useWishlist();
+  const { addToWishlist } = useAddItem();
+  const { removeToWishlist } = useRemoveItem();
 
   const { setToast } = useToast();
 
-  const isProductInWishlist = wishlistItems.some(
-    (wishlistItem) => wishlistItem.product._id === productId
-  );
+  const isProductInWishlist = data?.some((wishlistItem) => wishlistItem.product._id === productId);
 
   const handleWishlistChange = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {
-      if (!isAuthenticated) {
+      if (!currentUser) {
         setToast('error', 'Please, login first.');
         return router.push('/login');
       }
 
       if (isProductInWishlist) {
-        await removeWishlistItem(productId);
+        await removeToWishlist(productId);
       } else {
-        await addWishlistItem(productId);
+        await addToWishlist(productId);
       }
     } catch (error) {
       setToast(

@@ -4,7 +4,8 @@ import Router from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import { PageLoader, Alert, Button } from '@/components/ui';
-import { useAuth, useToast, useCart } from '@/contexts';
+import { useToast } from '@/contexts';
+import useUser from '@/hooks/user/use-user';
 import { CheckOutService } from '@/services';
 
 import CardSection from '../CheckoutStripeCard/CheckoutStripeCard';
@@ -18,8 +19,7 @@ const CheckoutStripeForm = () => {
   const [disabled, setDisabled] = useState(true);
   const [clientSecret, setClientSecret] = useState('');
 
-  const { clearCart } = useCart();
-  const { currentUser } = useAuth();
+  const { data: currentUser } = useUser();
   const { setToast } = useToast();
   const stripe = useStripe();
   const elements = useElements();
@@ -67,7 +67,6 @@ const CheckoutStripeForm = () => {
     } else {
       // The payment has been processed!
       if (result.paymentIntent?.status === 'succeeded') {
-        clearCart();
         setToast('success', 'Order Success. Thank you for your order');
         setError(null);
         setSucceeded(true);

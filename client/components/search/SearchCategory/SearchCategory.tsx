@@ -12,14 +12,14 @@ const SearchCategory = ({ active, onChangeTab }: Props) => {
     <>
       <div className={styles.tab}>
         <button
-          type={styles.button}
+          type="button"
           className={`${styles.list} ${active === 'men' ? styles.active : ''}`}
           onClick={() => onChangeTab('men')}
         >
           Men
         </button>
         <button
-          type={styles.button}
+          type="button"
           className={`${styles.list} ${active === 'women' ? styles.active : ''}`}
           onClick={() => onChangeTab('women')}
         >

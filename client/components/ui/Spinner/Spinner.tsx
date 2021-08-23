@@ -6,7 +6,7 @@ import styles from './Spinner.module.css';
 
 interface Props {
   color?: string;
-  size: number;
+  size?: number;
 }
 
 const Spinner = ({ color = colors.primary, size = 30 }: Props) => {

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { ProductList } from '@/components/product';
 import { Spinner, Button, Heading } from '@/components/ui';
-import { useShop } from '@/contexts';
+import useProducts from '@/hooks/products/use-products';
 import { Product } from '@/types';
 import { colors } from '@/utils/theme';
 
@@ -13,24 +13,9 @@ interface Props {
 }
 
 const ProductOverview = ({ initialProducts }: Props) => {
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const { loadMoreProducts, hasLoadMore, products, setInitialProducts } = useShop();
+  const { products, loadMore, isLoadingMore, isReachingEnd } = useProducts(initialProducts);
 
-  useEffect(() => {
-    if (products.length === 0) {
-      setInitialProducts(initialProducts);
-    }
-  }, [initialProducts, products.length, setInitialProducts]);
-
-  const handleLoadMore = async () => {
-    setIsLoadingMore(true);
-    await loadMoreProducts();
-    setIsLoadingMore(false);
-  };
-
-  const showLoadMore = () => {
-    return hasLoadMore && !isLoadingMore;
-  };
+  const showLoadMore = !isLoadingMore && !isReachingEnd;
 
   return (
     <div className={styles.container}>
@@ -44,19 +29,19 @@ const ProductOverview = ({ initialProducts }: Props) => {
         </div>
       )}
 
-      {showLoadMore() && (
+      {showLoadMore && (
         <div className={styles.loadMore}>
           <Button
             title="Load More"
             className={styles.loadMoreBtn}
-            onClick={handleLoadMore}
+            onClick={() => loadMore()}
             type="button"
             variant="outline"
           />
         </div>
       )}
 
-      {!hasLoadMore && (
+      {isReachingEnd && (
         <div className={styles.reachedEnd}>No more products. You have reached the end.</div>
       )}
     </div>

@@ -7,7 +7,9 @@ import { IoMdCart } from 'react-icons/io';
 
 import { SearchBar } from '@/components/core';
 import { Button } from '@/components/ui';
-import { useAuth, useCart } from '@/contexts';
+import useLogout from '@/hooks/auth/use-logout';
+import useCart from '@/hooks/cart/use-cart';
+import useUser from '@/hooks/user/use-user';
 import { capitalizeFirstLetter } from '@/utils/helpers';
 
 import styles from './DesktopMenu.module.css';
@@ -16,8 +18,10 @@ const DesktopMenu = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
 
-  const { currentUser, logout } = useAuth();
-  const { cartItems } = useCart();
+  const { data: currentUser } = useUser();
+  const logout = useLogout();
+
+  const { data } = useCart();
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -33,7 +37,7 @@ const DesktopMenu = () => {
     setIsOpenDropdown(false);
   };
 
-  const onLogOut = () => {
+  const handleLogOut = () => {
     logout();
     window.location.href = '/login';
   };
@@ -62,8 +66,8 @@ const DesktopMenu = () => {
             <a>
               <IoMdCart size={30} />
               Cart
-              {currentUser && cartItems.length > 0 && (
-                <div className={styles.cartNum}>{cartItems.length}</div>
+              {currentUser && data && data.items.length > 0 && (
+                <div className={styles.cartNum}>{data.items.length}</div>
               )}
             </a>
           </Link>
@@ -140,7 +144,7 @@ const DesktopMenu = () => {
                   <Button
                     type="button"
                     title="Log Out"
-                    onClick={onLogOut}
+                    onClick={handleLogOut}
                     style={{ width: '100%' }}
                   />
                 </div>

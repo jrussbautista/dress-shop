@@ -1,22 +1,22 @@
 import React from 'react';
 
 import { Button, Spinner } from '@/components/ui';
-import { useWishlist } from '@/contexts';
+import useWishlist from '@/hooks/wishlist/use-wishlist';
 
 import WishlistItem from './WishlistItem';
 import styles from './WishlistItems.module.css';
 
 const WishlistItems = () => {
-  const { wishlistItems, loading } = useWishlist();
+  const { data, isLoading } = useWishlist();
 
-  if (loading) {
+  if (isLoading) {
     return <Spinner size={40} />;
   }
 
   return (
     <>
-      {wishlistItems.length > 0 ? (
-        wishlistItems.map((wishlistItem) => (
+      {data && data.length > 0 ? (
+        data.map((wishlistItem) => (
           <WishlistItem wishlistItem={wishlistItem} key={wishlistItem._id} />
         ))
       ) : (

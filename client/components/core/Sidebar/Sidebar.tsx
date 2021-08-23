@@ -2,7 +2,8 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Button } from '@/components/ui';
-import { useAuth } from '@/contexts';
+import useLogout from '@/hooks/auth/use-logout';
+import useUser from '@/hooks/user/use-user';
 
 import styles from './Sidebar.module.css';
 
@@ -12,7 +13,8 @@ interface Props {
 }
 
 const Sidebar = ({ isOpen, onClose }: Props) => {
-  const { logout, currentUser } = useAuth();
+  const { data: currentUser } = useUser();
+  const logout = useLogout();
 
   const handleClose = () => {
     onClose();
@@ -20,7 +22,7 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
 
   const handleLogOut = () => {
     logout();
-    onClose();
+    window.location.href = '/login';
   };
 
   return (
@@ -63,14 +65,41 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
           </Link>
         </div>
         {currentUser && (
-          <div className={styles.list}>
-            <Button
-              type="button"
-              onClick={handleLogOut}
-              title="Log Out"
-              style={{ width: '100%' }}
-            />
-          </div>
+          <>
+            <div className={styles.title}>
+              <span> Account </span>
+            </div>
+            <div
+              className={styles.list}
+              role="link"
+              tabIndex={-1}
+              onClick={handleClose}
+              onKeyDown={handleClose}
+            >
+              <Link href="/orders">
+                <a className={styles.link}>My Orders</a>
+              </Link>
+            </div>
+            <div
+              className={styles.list}
+              role="link"
+              tabIndex={-1}
+              onClick={handleClose}
+              onKeyDown={handleClose}
+            >
+              <Link href="/wishlist">
+                <a className={styles.link}>My Wishlist</a>
+              </Link>
+            </div>
+            <div className={styles.list}>
+              <Button
+                type="button"
+                onClick={handleLogOut}
+                title="Log Out"
+                style={{ width: '100%' }}
+              />
+            </div>
+          </>
         )}
       </div>
 

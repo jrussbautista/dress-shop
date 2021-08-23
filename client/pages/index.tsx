@@ -35,7 +35,7 @@ export async function getStaticProps() {
   const LIMIT = 12;
   const banners = await BannerService.getBanners();
   const categories = await CategoryService.getCategories();
-  const { products } = await ProductService.getProducts({ params: { page: PAGE, limit: LIMIT } });
+  const products = await ProductService.getProducts({ page: PAGE, limit: LIMIT });
 
   return {
     props: {

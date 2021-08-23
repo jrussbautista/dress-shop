@@ -1,16 +1,13 @@
 import React from 'react';
 
-import { CartItem as CartItemType } from '@/types';
+import useCart from '@/hooks/cart/use-cart';
 
 import CartItem from '../CartItem';
 
 import styles from './CartList.module.css';
 
-interface Props {
-  cartItems: CartItemType[];
-}
-
-const CartList = ({ cartItems }: Props) => {
+const CartList = () => {
+  const { data } = useCart();
   return (
     <div>
       <>
@@ -23,9 +20,14 @@ const CartList = ({ cartItems }: Props) => {
             Action
           </div>
         </div>
-        {cartItems.map((cartItem) => (
-          <CartItem cartItem={cartItem} key={cartItem._id} />
-        ))}
+
+        {data?.items && (
+          <div role="listbox">
+            {data?.items.map((cartItem) => (
+              <CartItem cartItem={cartItem} key={cartItem._id} />
+            ))}
+          </div>
+        )}
       </>
     </div>
   );

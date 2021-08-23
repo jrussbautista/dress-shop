@@ -4,7 +4,8 @@ import { GoogleLogin as GoogleLoginLib } from 'react-google-login';
 
 import { IconGoogle } from '@/components/icons';
 import { Button, PageLoader } from '@/components/ui';
-import { useAuth, useToast } from '@/contexts';
+import { useToast } from '@/contexts';
+import useGoogleLogin from '@/hooks/auth/use-google-login';
 import { GOOGLE_CLIENT_ID } from '@/utils/constants';
 
 interface GoogleError {
@@ -14,7 +15,7 @@ interface GoogleError {
 
 const GoogleLogin = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const { loginWithGoogle } = useAuth();
+  const googleLogin = useGoogleLogin();
   const { setToast } = useToast();
   const { query } = useRouter();
   const ref = query.ref as string;
@@ -23,7 +24,7 @@ const GoogleLogin = () => {
     try {
       setIsLoggingIn(true);
       const tokenId = response.tokenId;
-      await loginWithGoogle(tokenId);
+      await googleLogin(tokenId);
       setIsLoggingIn(false);
       if (ref) {
         Router.push(`/products/${ref}`);

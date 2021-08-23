@@ -2,7 +2,9 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 import { ProductInputQuantity } from '@/components/product';
-import { useCart, useToast } from '@/contexts';
+import { useToast } from '@/contexts';
+import useRemoveItem from '@/hooks/cart/use-remove-item';
+import useUpdateItem from '@/hooks/cart/use-update-item';
 import { CartItem as CartItemType } from '@/types';
 import formatPrice from '@/utils/formatPrice';
 
@@ -13,7 +15,8 @@ interface Props {
 }
 
 const CartItem = ({ cartItem }: Props) => {
-  const { removeCartItem, updateCartItemQty } = useCart();
+  const { removeFromCart } = useRemoveItem();
+  const { updateFromCart } = useUpdateItem();
   const { setToast } = useToast();
 
   const [qty, setQty] = useState<string | number>(cartItem.quantity);
@@ -23,7 +26,7 @@ const CartItem = ({ cartItem }: Props) => {
 
   const handleRemoveCart = async () => {
     try {
-      await removeCartItem(cartItem);
+      await removeFromCart(cartItem.product._id);
     } catch (error) {
       setToast('error', error.message);
     }
@@ -32,7 +35,7 @@ const CartItem = ({ cartItem }: Props) => {
   const updateQtyAsync = async (quantity: number) => {
     try {
       setIsUpdating(true);
-      await updateCartItemQty(cartItem, quantity);
+      await updateFromCart(cartItem.product._id, quantity);
       setQty(quantity);
     } catch (error) {
       setToast('error', error.message);

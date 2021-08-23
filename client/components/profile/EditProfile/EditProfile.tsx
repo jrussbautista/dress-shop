@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
 import { Button, PageLoader, Input } from '@/components/ui';
-import { useAuth, useToast } from '@/contexts';
-import { AuthService } from '@/services';
+import { useToast } from '@/contexts';
+import useUpdateUser from '@/hooks/user/use-update-user';
+import useUser from '@/hooks/user/use-user';
 import { MAX_FILE_SIZE } from '@/utils/constants';
 import { capitalizeFirstLetter } from '@/utils/helpers';
 
@@ -15,7 +16,9 @@ interface InitialState {
 }
 
 const EditProfile = () => {
-  const { currentUser, updateUser } = useAuth();
+  const { data: currentUser } = useUser();
+  const updateUser = useUpdateUser();
+
   const { setToast } = useToast();
 
   const initialState: InitialState = {
@@ -40,8 +43,7 @@ const EditProfile = () => {
 
     try {
       setUpdating(true);
-      const user = await AuthService.updateProfile(currentUser?._id, userInfo);
-      updateUser(user);
+      await updateUser(currentUser?._id, userInfo);
       setToast('success', 'Successfully profile updated');
     } catch (error) {
       setToast('error', error.message);

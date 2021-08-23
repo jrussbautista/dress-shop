@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import { Button, Input, PageLoader } from '@/components/ui';
-import { useAuth, useToast } from '@/contexts';
+import { useToast } from '@/contexts';
+import useLogin from '@/hooks/auth/use-login';
 import { LoginFields } from '@/types';
 
 import styles from './LoginForm.module.css';
@@ -22,10 +23,10 @@ const LoginSchema = Yup.object().shape({
 const LoginForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const { query } = useRouter();
+  const login = useLogin();
 
   const ref = query.ref as string;
 
-  const { login } = useAuth();
   const { setToast } = useToast();
 
   const handleSubmit = async ({ email, password }: LoginFields) => {

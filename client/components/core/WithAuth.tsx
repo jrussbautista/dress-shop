@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { Spinner } from '@/components/ui';
-import { useAuth } from '@/contexts';
+import useUser from '@/hooks/user/use-user';
 
 const styles = {
   container: {
@@ -12,16 +12,16 @@ const styles = {
 
 const WithAuth = (Component: React.ComponentType) => {
   const MyComponent = () => {
-    const { loading, isAuthenticated } = useAuth();
+    const { data: currentUser, isLoading } = useUser();
     const router = useRouter();
 
     useEffect(() => {
-      if (!loading && !isAuthenticated) {
+      if (!isLoading && !currentUser) {
         router.push('/login');
       }
-    }, [isAuthenticated, loading, router]);
+    }, [currentUser, isLoading, router]);
 
-    if (isAuthenticated) {
+    if (currentUser) {
       return <Component />;
     }
 

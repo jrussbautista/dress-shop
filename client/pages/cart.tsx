@@ -4,16 +4,17 @@ import { CartList, CartSubTotal, CartSkeleton } from '@/components/cart';
 import { Meta, MobileBottomMenu } from '@/components/core';
 import WithAuth from '@/components/core/WithAuth';
 import { ErrorMessage, Button, Heading, Container } from '@/components/ui';
-import { useCart } from '@/contexts';
+import useCart from '@/hooks/cart/use-cart';
 import styles from '@/styles/Cart.module.css';
 import calculateCartTotal from '@/utils/calculateCartTotal';
 
 const Cart = () => {
-  const { cartItems, loading, error } = useCart();
+  const { data, isLoading, error } = useCart();
 
+  const cartItems = data ? data.items : [];
   const { cartTotal } = calculateCartTotal(cartItems);
 
-  if (loading) {
+  if (isLoading) {
     return <CartSkeleton />;
   }
 
@@ -30,7 +31,7 @@ const Cart = () => {
 
           {cartItems.length > 0 && (
             <>
-              <CartList cartItems={cartItems} />
+              <CartList />
               <CartSubTotal total={Number(cartTotal)} />
               <div className={styles.checkoutBtnWrapper}>
                 <Button href="/checkout" title="Check Out" />

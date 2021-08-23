@@ -1,24 +1,10 @@
 import Router from 'next/router';
 import React from 'react';
 
-import { AuthProvider } from '@/contexts/auth';
-import { ToastProvider } from '@/contexts/toast';
 import { userGenerator } from '@/test/data-generators';
-import { rtlRender, screen, userEvent, waitFor } from '@/test/test-utils';
+import { render, screen, userEvent, waitFor } from '@/test/test-utils';
 
 import LoginForm from './LoginForm';
-
-const Wrapper: React.FC = ({ children }) => {
-  return (
-    <AuthProvider>
-      <ToastProvider>{children}</ToastProvider>
-    </AuthProvider>
-  );
-};
-
-const render = (ui: React.ReactElement) => {
-  return rtlRender(ui, { wrapper: Wrapper });
-};
 
 test('successfully login user and navigated to profile page', async () => {
   render(<LoginForm />);

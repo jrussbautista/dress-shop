@@ -1,3 +1,4 @@
+import cName from 'classnames';
 import React from 'react';
 
 import styles from './Alert.module.css';
@@ -8,11 +9,11 @@ interface Props {
 }
 
 const Alert = ({ type, message }: Props) => {
-  const alertStyles = `${styles.alert} ${styles.alert[type]}`;
+  const rootClassName = cName(styles.alert, styles[type]);
 
   return (
     <>
-      <div className={alertStyles} role="alert">
+      <div className={rootClassName} role="alert">
         {message}
       </div>
     </>

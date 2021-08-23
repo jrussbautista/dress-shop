@@ -1,17 +1,26 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { Order } from '@/types';
+import { Spinner, ErrorMessage } from '@/components/ui';
+import useOrders from '@/hooks/orders/use-orders';
 import formatPrice from '@/utils/formatPrice';
 import { formatDate } from '@/utils/helpers';
 
 import styles from './OrderList.module.css';
 
-interface Props {
-  orders: Order[];
-}
+const OrderList = () => {
+  const { data, isLoading, error } = useOrders();
 
-const OrderList = ({ orders }: Props) => {
+  if (error) {
+    return <ErrorMessage message={error} />;
+  }
+
+  const orders = data || [];
+
+  if (isLoading) {
+    return <Spinner size={40} />;
+  }
+
   return (
     <div>
       {orders.length > 0 ? (

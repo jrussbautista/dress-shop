@@ -6,8 +6,10 @@ import { Meta, MobileBottomMenu } from '@/components/core';
 import { ProductList, ProductInputQuantity } from '@/components/product';
 import { PopUp, Container, Heading, ErrorMessage, Button } from '@/components/ui';
 import WishlistButton from '@/components/wishlist/WishlistButton';
-import { useAuth, useCart, useToast } from '@/contexts';
+import { useToast } from '@/contexts';
 import { usePopUp } from '@/hooks';
+import useAddItem from '@/hooks/cart/use-add-item';
+import useUser from '@/hooks/user/use-user';
 import { ProductService } from '@/services/ProductService';
 import styles from '@/styles/Product.module.css';
 import { Product as ProductTypes } from '@/types';
@@ -21,8 +23,8 @@ interface Props {
 
 const Product = ({ product, relatedProducts, error }: Props) => {
   const [qty, setQty] = useState<string | number>(1);
-  const { addCartItem } = useCart();
-  const { currentUser } = useAuth();
+  const { addToCart } = useAddItem();
+  const { data: currentUser } = useUser();
   const { isOpen, showToast } = usePopUp();
   const { setToast } = useToast();
 
@@ -35,7 +37,6 @@ const Product = ({ product, relatedProducts, error }: Props) => {
     setQty(value);
   };
 
-  // handle change quantity
   const handleButtonChangeQty = (action: string) => {
     if (action === 'add') {
       if (qty >= 10) {
@@ -54,7 +55,7 @@ const Product = ({ product, relatedProducts, error }: Props) => {
         setToast('error', 'Please log in first');
         return Router.push(`/login?ref=${product._id}`);
       }
-      await addCartItem(product, Number(qty));
+      await addToCart(product._id, Number(qty));
       showToast();
     } catch (error) {
       setToast('error', error.message);
@@ -137,7 +138,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext<{ id: str
 }
 
 export async function getStaticPaths() {
-  const { products } = await ProductService.getProducts();
+  const products = await ProductService.getProducts();
 
   const paths = products.map((product) => ({
     params: { id: product._id },

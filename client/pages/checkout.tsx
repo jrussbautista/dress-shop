@@ -6,7 +6,7 @@ import { CheckoutList, CheckoutPaypal, CheckoutStripeForm } from '@/components/c
 import { Meta } from '@/components/core';
 import WithAuth from '@/components/core/WithAuth';
 import { ErrorMessage, Container } from '@/components/ui';
-import { useCart } from '@/contexts';
+import useCart from '@/hooks/cart/use-cart';
 import styles from '@/styles/Checkout.module.css';
 import calculateCartTotal from '@/utils/calculateCartTotal';
 import { STRIPE_CLIENT_KEY } from '@/utils/constants';
@@ -15,7 +15,9 @@ import formatPrice from '@/utils/formatPrice';
 const stripePromise = loadStripe(STRIPE_CLIENT_KEY);
 
 const Checkout = () => {
-  const { cartItems, error } = useCart();
+  const { data, error } = useCart();
+  const cartItems = data ? data.items : [];
+
   const { cartTotal } = calculateCartTotal(cartItems);
 
   if (error) return <ErrorMessage message={error} />;

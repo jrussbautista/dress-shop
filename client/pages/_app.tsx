@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app';
 import React from 'react';
+import { SWRConfig } from 'swr';
 
 import Layout from '@/components/core/Layout';
 import { AppProviders } from '@/contexts';
@@ -12,11 +13,13 @@ interface MyAppProps extends AppProps {
 
 const MyApp = ({ Component, pageProps }: MyAppProps): JSX.Element => {
   return (
-    <AppProviders>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </AppProviders>
+    <SWRConfig value={{ revalidateOnFocus: false }}>
+      <AppProviders>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AppProviders>
+    </SWRConfig>
   );
 };
 

@@ -3,7 +3,8 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 import { Button } from '@/components/ui';
-import { useWishlist, useToast } from '@/contexts';
+import { useToast } from '@/contexts';
+import useRemoveItem from '@/hooks/wishlist/use-remove-item';
 import { WishlistItem as WishlistItemType } from '@/types/Wishlist';
 import formatPrice from '@/utils/formatPrice';
 
@@ -14,8 +15,7 @@ interface Props {
 }
 
 const WishlistItem = ({ wishlistItem }: Props) => {
-  const { removeWishlistItem } = useWishlist();
-
+  const { removeToWishlist } = useRemoveItem();
   const { setToast } = useToast();
 
   const [removing, setRemoving] = useState(false);
@@ -23,7 +23,7 @@ const WishlistItem = ({ wishlistItem }: Props) => {
   const handleRemove = async () => {
     try {
       setRemoving(true);
-      await removeWishlistItem(wishlistItem.product._id);
+      await removeToWishlist(wishlistItem.product._id);
       setToast('success', "You've successfully removed wishlist item.");
     } catch (error) {
       setToast(

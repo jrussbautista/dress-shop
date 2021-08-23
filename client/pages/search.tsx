@@ -1,57 +1,22 @@
 import Router, { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { SearchBar, Meta, MobileBottomMenu } from '@/components/core';
 import { ProductList, ProductListSkeleton } from '@/components/product';
 import { SearchFilter, SearchCategory } from '@/components/search';
 import { Container, ErrorMessage } from '@/components/ui';
-import { ProductService } from '@/services';
+import useSearch from '@/hooks/search/use-search';
 import styles from '@/styles/Search.module.css';
-import { Product } from '@/types';
-
-interface IParams {
-  category?: string;
-  sort?: string;
-  keyword?: string;
-}
 
 const Search = () => {
   const { query, pathname } = useRouter();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [error, setError] = useState<null | string>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const category = query.category as string;
   const keyword = query.keyword as string;
   const sort = query.sort as string;
 
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        setIsLoading(true);
+  const { data, error, isLoading } = useSearch({ category, keyword, sort });
 
-        let params: IParams = {};
-
-        if (category) {
-          params = { ...params, category };
-        }
-        if (sort) {
-          params = { ...params, sort };
-        }
-        if (keyword) {
-          params = { ...params, keyword };
-        }
-
-        const payload = { params };
-
-        const { products } = await ProductService.getProducts(payload);
-        setProducts(products);
-        setIsLoading(false);
-      } catch (error) {
-        setError('Error in fetching products. Please try again.');
-      }
-    };
-    getProducts();
-  }, [category, sort, keyword]);
+  const products = data || [];
 
   const handleTabChange = (selected: string) => {
     Router.push({ pathname, query: { ...query, category: selected } });
@@ -86,9 +51,7 @@ const Search = () => {
             {products.length > 0 ? (
               <ProductList products={products} />
             ) : (
-              <div className={styles.message}>
-                No products found. Try searching for other keyword.
-              </div>
+              <div className={styles.message}>No products found.</div>
             )}
           </>
         )}

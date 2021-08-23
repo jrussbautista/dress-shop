@@ -11,3 +11,9 @@ export type UserFields = {
   password: string;
   email: string;
 };
+
+export interface UpdateUserFields {
+  image: string | ArrayBuffer | null;
+  name: string;
+  email: string;
+}

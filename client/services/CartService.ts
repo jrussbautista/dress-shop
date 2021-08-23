@@ -11,7 +11,7 @@ const getCart = async (): Promise<Cart> => {
   }
 };
 
-const addCartItem = async (quantity: number, productId: string): Promise<CartItem> => {
+const addCartItem = async (productId: string, quantity: number): Promise<CartItem> => {
   try {
     const url = `/cart`;
     const payload = { quantity, productId };

@@ -5,7 +5,8 @@ import * as Yup from 'yup';
 
 import { Meta } from '@/components/core';
 import { Button, PageLoader, Input } from '@/components/ui';
-import { useAuth, useToast } from '@/contexts';
+import { useToast } from '@/contexts';
+import useSignup from '@/hooks/auth/use-signup';
 
 import styles from './Signup.module.css';
 
@@ -16,8 +17,8 @@ const Schema = Yup.object().shape({
 });
 
 const SignUp = () => {
-  const { signUp } = useAuth();
   const { setToast } = useToast();
+  const signup = useSignup();
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -37,7 +38,7 @@ const SignUp = () => {
         onSubmit={async (values) => {
           try {
             setSubmitting(true);
-            await signUp(values);
+            await signup(values);
             setSubmitting(false);
             Router.push('/profile');
           } catch (error) {

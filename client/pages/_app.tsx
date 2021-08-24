@@ -5,6 +5,7 @@ import Layout from '@/components/core/Layout';
 import { AppProviders } from '@/contexts';
 import { User } from '@/types';
 import '@/styles/global.css';
+import '@/styles/nprogress.css';
 
 interface MyAppProps extends AppProps {
   currentUser: User | null;

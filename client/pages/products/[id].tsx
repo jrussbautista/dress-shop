@@ -1,4 +1,5 @@
 import { GetStaticPropsContext } from 'next';
+import Image from 'next/image';
 import Router from 'next/router';
 import React, { useState } from 'react';
 
@@ -80,7 +81,12 @@ const Product = ({ product, relatedProducts, error }: Props) => {
         <div className={styles.productContainer}>
           <div className={styles.main}>
             <div className={styles.coverImg}>
-              <img className={styles.img} src={product.imageURL} alt={product.name} />
+              <Image
+                className={styles.img}
+                layout="fill"
+                src={product.imageURL}
+                alt={product.name}
+              />
             </div>
           </div>
           <div className={styles.productInfo}>

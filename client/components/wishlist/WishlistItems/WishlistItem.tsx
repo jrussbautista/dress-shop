@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
@@ -39,7 +40,9 @@ const WishlistItem = ({ wishlistItem }: Props) => {
       <Link href={`/products/${wishlistItem.product._id}`}>
         <a>
           <div className={styles.mediaContainer}>
-            <img
+            <Image
+              width={150}
+              height={150}
               className={styles.mediaImage}
               src={wishlistItem.product.imageURL}
               alt={wishlistItem.product.name}

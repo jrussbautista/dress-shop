@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import Slider from 'react-slick';
 
@@ -26,7 +27,7 @@ const Banners = ({ banners }: Props) => {
       <Slider {...settings}>
         {banners.map((banner) => (
           <div className={styles.banner} key={banner._id} role="banner">
-            <img src={banner.imageURL} className={styles.img} alt={banner.name} />
+            <Image layout="fill" src={banner.imageURL} className={styles.img} alt={banner.name} />
           </div>
         ))}
       </Slider>

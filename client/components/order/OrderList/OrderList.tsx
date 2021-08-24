@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -40,13 +41,12 @@ const OrderList = () => {
                           <div className={styles.productWrapper}>
                             <Link href={`/product?id=${product.product._id}`}>
                               <a>
-                                <div className={styles.imageWrapper}>
-                                  <img
-                                    src={product.product.imageURL}
-                                    alt={product.product.name}
-                                    className={styles.productImage}
-                                  />
-                                </div>
+                                <Image
+                                  src={product.product.imageURL}
+                                  alt={product.product.name}
+                                  width={150}
+                                  height={150}
+                                />
                               </a>
                             </Link>
 

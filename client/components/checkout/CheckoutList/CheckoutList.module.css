@@ -7,6 +7,10 @@
   width: 250px;
 }
 
+.right {
+  margin-left: 15px;
+}
+
 .image {
   width: 10rem;
   height: 10rem;

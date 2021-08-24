@@ -1,5 +1,6 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import Script from 'next/script';
 import React from 'react';
 
 import { CheckoutList, CheckoutPaypal, CheckoutStripeForm } from '@/components/checkout';
@@ -9,7 +10,7 @@ import { ErrorMessage, Container } from '@/components/ui';
 import useCart from '@/hooks/cart/use-cart';
 import styles from '@/styles/Checkout.module.css';
 import calculateCartTotal from '@/utils/calculateCartTotal';
-import { STRIPE_CLIENT_KEY } from '@/utils/constants';
+import { STRIPE_CLIENT_KEY, PAYPAL_CLIENT_ID } from '@/utils/constants';
 import formatPrice from '@/utils/formatPrice';
 
 const stripePromise = loadStripe(STRIPE_CLIENT_KEY);
@@ -25,6 +26,9 @@ const Checkout = () => {
   return (
     <>
       <Meta title="Check Out" />
+      <Script
+        src={`https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=PHP`}
+      ></Script>
       <Container>
         <div className={styles.wrapper}>
           <div className={styles.left}>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -16,8 +17,13 @@ const Categories = ({ categories }: Props) => {
         <li className={styles.list} key={category._id}>
           <Link href={`/search?category=${category.name.toLowerCase()}`}>
             <a>
-              <img className={styles.categoryImg} alt={category.name} src={category.imageURL}></img>
-              <div className={styles.name}>{category.name}</div>
+              <Image
+                className={styles.categoryImg}
+                alt={category.name}
+                src={category.imageURL}
+                layout="fill"
+              />
+              <p className={styles.name}>{category.name}</p>
             </a>
           </Link>
         </li>

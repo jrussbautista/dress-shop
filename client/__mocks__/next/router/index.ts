@@ -7,6 +7,10 @@ export function useRouter() {
   };
 }
 
-export default {
-  push: jest.fn(),
+const router = () => {
+  return {
+    push: jest.fn(),
+  };
 };
+
+export default router;

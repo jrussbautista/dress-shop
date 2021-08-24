@@ -42,17 +42,6 @@
   margin-top: 2rem;
 }
 
-.productImage {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.imageWrapper {
-  width: 15rem;
-  height: 15rem;
-}
-
 .totalText {
   font-size: 2rem;
   padding-right: 1rem;

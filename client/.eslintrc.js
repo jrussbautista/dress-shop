@@ -1,12 +1,5 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true,
-    es6: true,
-  },
-  parserOptions: { ecmaVersion: 8, sourceType: 'module' },
-  ignorePatterns: ['node_modules/*'],
-  extends: ['eslint:recommended'],
+  extends: ['eslint:recommended', 'next'],
   overrides: [
     {
       files: ['**/*.ts', '**/*.tsx'],
@@ -24,6 +17,7 @@ module.exports = {
       },
       extends: [
         'eslint:recommended',
+        'plugin:@next/next/recommended',
         'plugin:import/errors',
         'plugin:import/warnings',
         'plugin:import/typescript',

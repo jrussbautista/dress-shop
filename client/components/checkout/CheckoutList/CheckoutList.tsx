@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -19,15 +20,17 @@ const CheckoutList = ({ items }: Props) => {
             <div className={styles.main}>
               <Link href={`/products/${item.product._id}`}>
                 <a>
-                  <img
+                  <Image
                     className={styles.image}
                     src={item.product.imageURL}
                     alt={item.product.name}
+                    width={120}
+                    height={120}
                   />
                 </a>
               </Link>
 
-              <div>
+              <div className={styles.right}>
                 <Link href={`/products/${item.product._id}`}>
                   <a>
                     <p className={styles.productName}>{item.product.name}</p>

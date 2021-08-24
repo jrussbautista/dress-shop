@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
@@ -86,7 +87,12 @@ const CartItem = ({ cartItem }: Props) => {
         <div className={styles.productImg}>
           <Link href={`/products/${cartItem.product._id}`}>
             <a>
-              <img src={cartItem.product.imageURL} alt={cartItem.product.name} />
+              <Image
+                src={cartItem.product.imageURL}
+                alt={cartItem.product.name}
+                width={150}
+                height={150}
+              />
             </a>
           </Link>
         </div>

@@ -1,4 +1,5 @@
 import { useTheme } from 'next-themes';
+import Image from 'next/image';
 import Link from 'next/link';
 import Router from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
@@ -82,7 +83,7 @@ const DesktopMenu = () => {
               onKeyDown={handleCloseDropDown}
             >
               {currentUser.imageURL ? (
-                <img src={currentUser.imageURL} alt={currentUser.name} />
+                <Image width={40} height={40} src={currentUser.imageURL} alt={currentUser.name} />
               ) : (
                 <div className={styles.userTextContainer}>
                   {capitalizeFirstLetter(currentUser.name)}

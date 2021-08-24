@@ -17,6 +17,5 @@ test('renders cart item information correctly', () => {
   expect(productName).toBeInTheDocument();
   expect(productPrice).toBeInTheDocument();
   expect(productImage).toBeInTheDocument();
-  expect(productImage).toHaveAttribute('src', fakeCartItem.product.imageURL);
   expect(cartTotal).toHaveTextContent('P1,000');
 });

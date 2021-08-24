@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import { cartItemGenerator } from '@/test/data-generators';
+import { fakeCartItems } from '@/test/fake-data';
 import { API_URL } from '@/utils/constants';
 
 export const cartHandlers = [
@@ -8,7 +8,9 @@ export const cartHandlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        data: [cartItemGenerator(), cartItemGenerator(), cartItemGenerator()],
+        data: {
+          items: fakeCartItems,
+        },
       })
     );
   }),

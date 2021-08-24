@@ -1,10 +1,14 @@
+import { cache } from 'swr';
 import '@testing-library/jest-dom/extend-expect';
 
-import { server } from '@/test/server';
+import { server } from './test/server';
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
 afterAll(() => server.close());
-afterEach(() => server.resetHandlers());
+afterEach(() => {
+  server.resetHandlers();
+  cache.clear();
+});
 
 // necessary for next/image
 

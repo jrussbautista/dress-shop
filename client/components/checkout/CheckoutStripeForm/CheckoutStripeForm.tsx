@@ -70,7 +70,7 @@ const CheckoutStripeForm = () => {
         setToast('success', 'Order Success. Thank you for your order');
         setError(null);
         setSucceeded(true);
-        Router.push('/order');
+        Router.push('/orders');
       }
     }
   };

@@ -16,6 +16,20 @@
   text-align: center;
 }
 
+.msgContainer {
+  padding: 2rem 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.msg {
+  font-size: 2.2rem;
+  margin: 2rem 0;
+}
+
 @media only screen and (min-width: 1024px) {
   .cartHeader {
     display: flex;

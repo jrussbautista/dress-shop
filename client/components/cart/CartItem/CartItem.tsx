@@ -98,7 +98,10 @@ const CartItem = ({ cartItem }: Props) => {
             </Link>
           </div>
 
-          <div className={`${styles.productPrice} ${styles.productContent}`}>
+          <div
+            className={`${styles.productPrice} ${styles.productContent}`}
+            aria-label="Product price"
+          >
             {formatPrice(cartItem.product.price)}
           </div>
           <div className={`${styles.productQty} ${styles.productContent}`}>
@@ -112,7 +115,10 @@ const CartItem = ({ cartItem }: Props) => {
               />
             </div>
           </div>
-          <p aria-label="cart-total" className={`${styles.total} ${styles.productContent}`}>
+          <p
+            aria-label="Product price total"
+            className={`${styles.total} ${styles.productContent}`}
+          >
             {total}
           </p>
           <div className={styles.productAction}>

@@ -15,7 +15,7 @@ const WishlistItems = () => {
 
   return (
     <>
-      {data && data.length > 0 ? (
+      {data && data.length ? (
         data.map((wishlistItem) => (
           <WishlistItem wishlistItem={wishlistItem} key={wishlistItem._id} />
         ))

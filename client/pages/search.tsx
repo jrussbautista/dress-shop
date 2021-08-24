@@ -30,31 +30,47 @@ const Search = () => {
     Router.push(`/search?keyword=${searchText}`);
   };
 
+  if (isLoading) {
+    return (
+      <>
+        <Meta title="Search" />
+        <Container>
+          <ProductListSkeleton number={12} />
+        </Container>
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <Meta title="Search" />
+        <Container>
+          <ErrorMessage message="Cannot search product at this moment. Please try again" />
+        </Container>
+      </>
+    );
+  }
+
   return (
     <>
       <Meta title="Search" />
       <Container>
-        <div className={styles.searchBarContainer}>
-          <SearchBar onSubmit={handleSearchSubmit} style={{ width: '100%' }} isFocus />
-        </div>
-        <div className={styles.sortContainer}>
-          <SearchCategory active={category} onChangeTab={handleTabChange} />
-          <SearchFilter handleChange={handleFilterChange} active={sort} />
-        </div>
-
-        {error && <ErrorMessage message="Cannot search product at this moment. Please try again" />}
-
-        {isLoading ? (
-          <ProductListSkeleton number={20} />
-        ) : (
+        {products.length ? (
           <>
-            {products.length > 0 ? (
-              <ProductList products={products} />
-            ) : (
-              <div className={styles.message}>No products found.</div>
-            )}
+            <div className={styles.searchBarContainer}>
+              <SearchBar onSubmit={handleSearchSubmit} style={{ width: '100%' }} isFocus />
+            </div>
+            <div className={styles.sortContainer}>
+              <SearchCategory active={category} onChangeTab={handleTabChange} />
+              <SearchFilter handleChange={handleFilterChange} active={sort} />
+            </div>
+            <ProductList products={products} />
           </>
+        ) : (
+          <div className={styles.message}>No products found.</div>
         )}
+
         <MobileBottomMenu />
       </Container>
     </>

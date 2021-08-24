@@ -131,7 +131,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext<{ id: str
       props: {
         product: null,
         relatedProducts: [],
-        error: 'Error in getting product',
+        error: 'Unexpected error occured. Please try again later.',
       },
     };
   }

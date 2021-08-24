@@ -12,7 +12,7 @@ test('renders cart item information correctly', () => {
   const productName = screen.getByText(fakeCartItem.product.name);
   const productPrice = screen.getByText(formatPrice(fakeCartItem.product.price));
   const productImage = screen.getByAltText(fakeCartItem.product.name);
-  const cartTotal = screen.getByLabelText('cart-total');
+  const cartTotal = screen.getByLabelText('Product price total');
 
   expect(productName).toBeInTheDocument();
   expect(productPrice).toBeInTheDocument();

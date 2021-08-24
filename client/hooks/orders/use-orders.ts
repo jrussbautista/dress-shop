@@ -5,7 +5,7 @@ import { OrderService } from '@/services/OrderService';
 
 const useOrders = () => {
   const { data: user } = useUser();
-  const value = user ? 'api/orders' : null;
+  const value = user ? '/api/orders' : null;
 
   const { data, error } = useSWR(value, OrderService.getOrders);
 

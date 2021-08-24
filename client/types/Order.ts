@@ -1,6 +1,6 @@
 import { Product } from './Product';
 
-interface OrderProduct {
+interface Item {
   quantity: number;
   product: Product;
 }
@@ -8,6 +8,6 @@ interface OrderProduct {
 export type Order = {
   _id: string;
   total: number;
-  products: OrderProduct[];
+  items: Item[];
   createdAt: Date;
 };

@@ -35,6 +35,13 @@ const Search = () => {
       <>
         <Meta title="Search" />
         <Container>
+          <div className={styles.searchBarContainer}>
+            <SearchBar onSubmit={handleSearchSubmit} style={{ width: '100%' }} isFocus />
+          </div>
+          <div className={styles.sortContainer}>
+            <SearchCategory active={category} onChangeTab={handleTabChange} />
+            <SearchFilter handleChange={handleFilterChange} active={sort} />
+          </div>
           <ProductListSkeleton number={12} />
         </Container>
       </>
@@ -70,7 +77,6 @@ const Search = () => {
         ) : (
           <div className={styles.message}>No products found.</div>
         )}
-
         <MobileBottomMenu />
       </Container>
     </>

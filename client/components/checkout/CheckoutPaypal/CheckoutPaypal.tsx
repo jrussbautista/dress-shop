@@ -1,8 +1,10 @@
 import Router from 'next/router';
-import React, { useRef, useEffect } from 'react';
+import Script from 'next/script';
+import React, { useRef, useEffect, useState } from 'react';
 
 import { useToast } from '@/contexts';
 import { CheckOutService } from '@/services';
+import { PAYPAL_CLIENT_ID } from '@/utils/constants';
 
 import styles from './CheckoutPaypal.module.css';
 
@@ -20,6 +22,8 @@ interface PaypalData {
 }
 
 const CheckoutPaypal = () => {
+  const [sdkReady, setSdkReady] = useState(false);
+
   const paypalButtonsRef = useRef<HTMLDivElement>(null);
   const { setToast } = useToast();
 
@@ -48,10 +52,18 @@ const CheckoutPaypal = () => {
         .render(paypalButtonsRef.current);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sdkReady]);
+
+  const handleLoad = () => {
+    setSdkReady(true);
+  };
 
   return (
     <>
+      <Script
+        src={`https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=PHP`}
+        onLoad={handleLoad}
+      ></Script>
       <div className={styles.paypal} ref={paypalButtonsRef} />
     </>
   );

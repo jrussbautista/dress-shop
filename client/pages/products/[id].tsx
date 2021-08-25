@@ -24,7 +24,7 @@ interface Props {
 
 const Product = ({ product, relatedProducts, error }: Props) => {
   const [qty, setQty] = useState<string | number>(1);
-  const { addToCart } = useAddItem();
+  const { addToCart, addingToCart } = useAddItem();
   const { data: currentUser } = useUser();
   const { isOpen, showToast } = usePopUp();
   const { setToast } = useToast();
@@ -111,6 +111,8 @@ const Product = ({ product, relatedProducts, error }: Props) => {
                 variant="primary"
                 title="Add to Cart"
                 className={styles.btnAddCart}
+                disabled={addingToCart}
+                loading={addingToCart}
               />
             </div>
           </div>

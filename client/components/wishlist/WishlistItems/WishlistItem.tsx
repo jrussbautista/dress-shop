@@ -58,7 +58,7 @@ const WishlistItem = ({ wishlistItem }: Props) => {
         </Link>
         <p className={styles.price}>{formatPrice(wishlistItem.product.price)}</p>
         <div className={styles.buttonsContainer}>
-          <Button title="Remove" onClick={handleRemove} />
+          <Button title="Remove" onClick={handleRemove} disabled={removing} loading={removing} />
         </div>
       </div>
     </div>

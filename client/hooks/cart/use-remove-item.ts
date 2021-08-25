@@ -24,6 +24,7 @@ const useRemoveItem = () => {
       try {
         await CartService.removeCartItem(productId);
         mutate('/api/cart');
+        setStatus({ removingFromCart: false, error: null });
       } catch (error) {
         setStatus({ removingFromCart: false, error: error.message });
       }

@@ -24,6 +24,7 @@ const useAddOrder = () => {
       try {
         await CheckOutService.stripeCharge(paymentMethodId);
         mutate('/api/orders');
+        setStatus({ addingOrder: false, error: null });
       } catch (error) {
         setStatus({ addingOrder: false, error: error.message });
       }

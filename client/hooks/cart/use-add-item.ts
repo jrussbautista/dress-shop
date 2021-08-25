@@ -24,6 +24,7 @@ const useAddItem = () => {
       try {
         await CartService.addCartItem(productId, quantity);
         mutate('/api/cart');
+        setStatus({ addingToCart: false, error: null });
       } catch (error) {
         setStatus({ addingToCart: false, error: error.message });
       }

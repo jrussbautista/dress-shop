@@ -24,6 +24,7 @@ const useRemoveItem = () => {
       try {
         await WishlistService.removeWishlistItem(productId);
         mutate('/api/wishlist');
+        setStatus({ removingToWishlist: false, error: null });
       } catch (error) {
         setStatus({ removingToWishlist: false, error: error.message });
       }

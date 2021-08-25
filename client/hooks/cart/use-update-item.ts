@@ -24,6 +24,7 @@ const useUpdateItem = () => {
       try {
         await CartService.updateQuantityCarItem(productId, quantity);
         mutate('/api/cart');
+        setStatus({ updatingToCart: false, error: null });
       } catch (error) {
         setStatus({ updatingToCart: false, error: error.message });
       }

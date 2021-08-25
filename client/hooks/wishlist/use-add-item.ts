@@ -24,6 +24,7 @@ const useAddItem = () => {
       try {
         await WishlistService.addWishlistItem(productId);
         mutate('/api/wishlist');
+        setStatus({ addingToWishlist: false, error: null });
       } catch (error) {
         setStatus({ addingToWishlist: false, error: error.message });
       }

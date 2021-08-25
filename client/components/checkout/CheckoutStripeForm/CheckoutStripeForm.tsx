@@ -1,12 +1,12 @@
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-import { StripeCardElement, StripeCardElementChangeEvent } from '@stripe/stripe-js';
+import { StripeCardElementChangeEvent } from '@stripe/stripe-js';
 import Router from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { PageLoader, Alert, Button } from '@/components/ui';
 import { useToast } from '@/contexts';
+import useAddOrder from '@/hooks/orders/use-add-order';
 import useUser from '@/hooks/user/use-user';
-import { CheckOutService } from '@/services';
 
 import CardSection from '../CheckoutStripeCard/CheckoutStripeCard';
 
@@ -17,24 +17,12 @@ const CheckoutStripeForm = () => {
   const [error, setError] = useState<null | string>(null);
   const [processing, setProcessing] = useState(false);
   const [disabled, setDisabled] = useState(true);
-  const [clientSecret, setClientSecret] = useState('');
 
   const { data: currentUser } = useUser();
+  const { addOrder } = useAddOrder();
   const { setToast } = useToast();
   const stripe = useStripe();
   const elements = useElements();
-
-  useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-
-    CheckOutService.createPaymentIntent()
-      .then((data) => {
-        setClientSecret(data.clientSecret);
-      })
-      .catch(() => {
-        setError('Error in creating payment intent');
-      });
-  }, []);
 
   const handleChange = async (event: StripeCardElementChangeEvent) => {
     setDisabled(event.empty);
@@ -50,28 +38,34 @@ const CheckoutStripeForm = () => {
       return;
     }
 
-    const result = await stripe.confirmCardPayment(clientSecret, {
-      receipt_email: currentUser?.email,
-      payment_method: {
-        card: elements.getElement(CardElement) as StripeCardElement,
-        billing_details: {
-          name: currentUser?.name,
-          email: currentUser?.email,
-        },
+    const cardElement = elements.getElement(CardElement);
+
+    if (!cardElement) return;
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: cardElement,
+      billing_details: {
+        name: currentUser?.name,
+        email: currentUser?.email,
       },
     });
 
-    if (result.error?.message) {
-      setToast('error', result.error.message);
+    if (error) {
+      setToast('error', error.message as string);
       setProcessing(false);
-    } else {
-      // The payment has been processed!
-      if (result.paymentIntent?.status === 'succeeded') {
-        setToast('success', 'Order Success. Thank you for your order');
-        setError(null);
-        setSucceeded(true);
-        Router.push('/orders');
-      }
+      return;
+    }
+
+    try {
+      await addOrder(paymentMethod?.id as string);
+      setSucceeded(true);
+      setProcessing(false);
+      setError(null);
+      Router.push('/orders');
+    } catch (error) {
+      setToast('error', error.message);
+      setProcessing(false);
     }
   };
 

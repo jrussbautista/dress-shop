@@ -1,7 +1,13 @@
-import { Product } from './product';
+import { User } from './User';
+import { Product } from './Product';
+
+interface CartItem {
+  quantity: number;
+  product: Product;
+}
 
 export type Cart = {
   _id: string;
-  product: Product;
-  quantity: number;
+  items: CartItem[];
+  user: string;
 };

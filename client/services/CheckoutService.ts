@@ -1,22 +1,15 @@
 import apiClient from '@/utils/apiClient';
 import { catchError } from '@/utils/catchError';
 
-interface IntentPayment {
-  clientSecret: string;
-}
-
 interface PaypalTransaction {
   orderID: string;
 }
 
-const createPaymentIntent = async (): Promise<IntentPayment> => {
+export const stripeCharge = async (paymentMethodId: string) => {
   try {
-    const url = `/checkout/stripe/create-payment-intent`;
-    const { data } = await apiClient.post(url);
-    const intentPaymentData: IntentPayment = {
-      clientSecret: data.data.clientSecret,
-    };
-    return intentPaymentData;
+    const url = `/checkout/create-stripe-charge`;
+    const { data } = await apiClient.post(url, { paymentMethodId });
+    return data.data;
   } catch (error) {
     throw new Error(catchError(error));
   }
@@ -47,7 +40,7 @@ export const capturePaypalTransaction = async (orderID: string): Promise<void> =
 };
 
 export const CheckOutService = {
-  createPaymentIntent,
   createPaypalTransaction,
   capturePaypalTransaction,
+  stripeCharge,
 };

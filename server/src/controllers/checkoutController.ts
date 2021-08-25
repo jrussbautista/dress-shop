@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Cart, User, Order } from '../models';
 import { User as UserType } from '../types';
-import { createPaymentIntent as stripeCreatePaymentIntent } from '../lib/stripe';
+import { createPaymentIntent } from '../lib/stripe';
 import { client } from '../lib/paypal';
 const paypal = require('@paypal/checkout-server-sdk');
 
@@ -10,7 +10,7 @@ const getCart = async (req: Request) => {
   return await Cart.findOne({ user: user._id }).populate('items.product');
 };
 
-const calculateCartTotal = async (req: Request): Promise<number> => {
+const calculateCartTotal = async (req: Request) => {
   const cart = await getCart(req);
   const total = cart?.items.reduce(
     (acc: any, el: any) => acc + el.product.price * el.quantity,
@@ -19,56 +19,40 @@ const calculateCartTotal = async (req: Request): Promise<number> => {
   return total;
 };
 
-const createOrder = async (userId: string, amount: number) => {
+const createOrder = async (
+  userId: string,
+  amount: number,
+  paymentMethod: string
+) => {
   const cart = await Cart.findOne({ user: userId });
 
   if (!cart) return;
 
-  await Order.create({ user: userId, total: amount, items: cart.items });
+  const order = await Order.create({
+    user: userId,
+    total: amount,
+    items: cart.items,
+    paymentMethod,
+  });
 
   await Cart.findOneAndUpdate({ _id: cart._id }, { $set: { items: [] } });
+
+  return order;
 };
 
-// send client secret to client
-export const createPaymentIntent = async (req: Request, res: Response) => {
+export const createStripeCharge = async (req: Request, res: Response) => {
+  const user = req.user as UserType;
+  const { paymentMethodId } = req.body;
   try {
-    // calculate stripe amount
-    const cartTotal = await calculateCartTotal(req);
-    console.log(cartTotal);
-    const stripeAmount = cartTotal * 100;
-    const clientSecret = await stripeCreatePaymentIntent(stripeAmount);
-
-    res.status(200).json({
-      data: {
-        clientSecret,
-      },
-    });
+    const totalAmount = await calculateCartTotal(req);
+    await createPaymentIntent(totalAmount, paymentMethodId);
+    const order = await createOrder(user._id, totalAmount, 'stripe');
+    res.status(200).json({ data: order });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res
+      .status(500)
+      .send({ message: 'Unexpected error occured. Please try again later.' });
   }
-};
-
-// trigger webhook for stripe payment
-export const triggerWebhook = async (req: Request, res: Response) => {
-  const event = req.body;
-  // Handle the event
-  switch (event.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
-
-      const user = await User.findOne({ email: paymentIntent.receipt_email });
-      const amount = paymentIntent.amount / 100;
-
-      await createOrder(user?._id, amount);
-      console.log('PaymentIntent was successful!');
-      break;
-    default:
-      // Unexpected event type
-      return res.status(400).end();
-  }
-
-  // Return a 200 response to acknowledge receipt of the event
-  res.json({ received: true });
 };
 
 export const createPaypalTransaction = async (req: Request, res: Response) => {
@@ -91,7 +75,9 @@ export const createPaypalTransaction = async (req: Request, res: Response) => {
   try {
     order = await client().execute(request);
   } catch (err) {
-    return res.send(500);
+    return res
+      .status(500)
+      .send({ message: 'Unexpected error occured. Please try again later.' });
   }
 
   res.status(200).json({
@@ -114,7 +100,7 @@ export const capturePaypalTransaction = async (req: Request, res: Response) => {
     const amount =
       capture.result.purchase_units[0].payments.captures[0].amount.value;
 
-    await createOrder(user._id, amount);
+    await createOrder(user._id, amount, 'paypal');
   } catch (err) {
     return res.send(500);
   }

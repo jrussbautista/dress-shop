@@ -11,6 +11,8 @@ export interface OrderDocument extends Document {
   user: Types.ObjectId;
   items: Item[];
   total: number;
+  isPaid?: boolean;
+  paymentMethod: string;
 }
 
 const OrderSchema = new Schema(
@@ -32,6 +34,10 @@ const OrderSchema = new Schema(
       },
     ],
     total: Number,
+    paymentMethod: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

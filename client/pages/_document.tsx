@@ -2,7 +2,6 @@ import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/do
 import React from 'react';
 
 class MyDocument extends Document {
-  /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
 

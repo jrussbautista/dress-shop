@@ -33,6 +33,7 @@ export default Home;
 export async function getStaticProps() {
   const PAGE = 1;
   const LIMIT = 12;
+
   const banners = await BannerService.getBanners();
   const categories = await CategoryService.getCategories();
   const products = await ProductService.getProducts({ page: PAGE, limit: LIMIT });

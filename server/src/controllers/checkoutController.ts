@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Cart, User, Order } from '../models';
+import { Cart, Order } from '../models';
 import { User as UserType } from '../types';
 import { createPaymentIntent } from '../lib/stripe';
 import { client } from '../lib/paypal';

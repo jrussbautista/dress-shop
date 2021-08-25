@@ -130,7 +130,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext<{ id: str
     const { product, relatedProducts } = await ProductService.getProduct(id);
     return {
       props: { product, relatedProducts },
-      revalidate: 200,
+      revalidate: 100,
     };
   } catch (error) {
     return {

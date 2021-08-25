@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ./ --ext .ts,.tsx",
+    "lint": "next lint",
     "lint:fix": "eslint --fix --ext .js,.ts,.tsx ./ --ignore-path .gitignore",
     "prepare": "cd .. && husky install client/.husky",
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\"",

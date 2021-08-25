@@ -17,12 +17,9 @@ const Categories = ({ categories }: Props) => {
         <li className={styles.list} key={category._id}>
           <Link href={`/search?category=${category.name.toLowerCase()}`}>
             <a>
-              <Image
-                className={styles.categoryImg}
-                alt={category.name}
-                src={category.imageURL}
-                layout="fill"
-              />
+              <div className={styles.categoryImgWrapper}>
+                <Image alt={category.name} src={category.imageURL} layout="fill" />
+              </div>
               <p className={styles.name}>{category.name}</p>
             </a>
           </Link>

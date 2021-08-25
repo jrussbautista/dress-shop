@@ -8,21 +8,21 @@ describe('smoke', () => {
 
     // signup
     cy.findByRole('link', { name: /sign up/i }).click();
+    cy.wait(3000);
 
     cy.findByRole('textbox', {
       name: /name/i,
     }).type(user.name);
-
     cy.findByRole('textbox', {
       name: /email/i,
     }).type(user.email);
-
     cy.findByLabelText(/password/i).type(user.password);
 
     cy.findByRole('button', { name: /sign up/i }).click();
 
-    cy.url().should('include', '/profile');
+    cy.wait(3000);
 
+    cy.url().should('include', '/profile');
     cy.findByRole('textbox', {
       name: /name/i,
     }).should('have.value', user.name);
@@ -35,9 +35,12 @@ describe('smoke', () => {
     cy.findByRole('textbox', {
       name: /email/i,
     }).type(user.email);
-
     cy.findByLabelText(/password/i).type(user.password);
+
     cy.findByRole('button', { name: /log in/i }).click();
+
+    cy.wait(3000);
+
     cy.url().should('include', '/profile');
 
     // search and view product
@@ -49,7 +52,7 @@ describe('smoke', () => {
       name: /search product/i,
     }).type('brown jacket{enter}');
 
-    cy.wait(3000);
+    cy.wait(5000);
 
     cy.findByText(/brown jacket/i).click();
 
@@ -61,15 +64,35 @@ describe('smoke', () => {
 
     cy.findByRole('link', { name: /cart/i }).click();
 
+    cy.wait(3000);
+
     cy.findByRole('main').within(() => {
       cy.findAllByRole('listitem').should('have.length', 1);
-      cy.findAllByRole('listitem')
-        .first()
-        .within(() => {
-          cy.findByRole('button', { name: /delete/i }).click();
-        });
-      cy.findAllByRole('listitem').should('have.length', 0);
-      cy.findByText('Your cart is empty :(').should('exist');
+    });
+
+    // checkout
+    cy.findByRole('button', { name: /check out/i }).click();
+    cy.url().should('include', '/checkout');
+
+    cy.wait(3000);
+
+    cy.getStripeElement('cardNumber').type('4242424242424242');
+
+    cy.getStripeElement('cardExpiry').type('1122');
+
+    cy.getStripeElement('cardCvc').type('123');
+
+    cy.getStripeElement('postalCode').type('12345');
+
+    cy.findByRole('button', { name: 'Confirm Order' }).click();
+
+    cy.wait(12000);
+
+    // view orders
+    cy.url().should('include', '/orders');
+
+    cy.findByRole('main').within(() => {
+      cy.findAllByRole('listitem').should('have.length', 1);
     });
   });
 });

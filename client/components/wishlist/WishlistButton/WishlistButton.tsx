@@ -20,8 +20,8 @@ const WishlistButton = ({ productId }: Props) => {
   const { data: currentUser } = useUser();
 
   const { data } = useWishlist();
-  const { addToWishlist } = useAddItem();
-  const { removeToWishlist } = useRemoveItem();
+  const { addToWishlist, addingToWishlist } = useAddItem();
+  const { removeToWishlist, removingToWishlist } = useRemoveItem();
 
   const { setToast } = useToast();
 
@@ -50,7 +50,12 @@ const WishlistButton = ({ productId }: Props) => {
   };
 
   return (
-    <button type="button" className={styles.button} onClick={handleWishlistChange}>
+    <button
+      type="button"
+      className={styles.button}
+      onClick={handleWishlistChange}
+      disabled={addingToWishlist || removingToWishlist}
+    >
       {isProductInWishlist ? (
         <AiFillHeart size={30} color={colors.red} />
       ) : (

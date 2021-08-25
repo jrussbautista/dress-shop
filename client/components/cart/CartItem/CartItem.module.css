@@ -71,6 +71,10 @@
   margin-bottom: 1rem;
 }
 
+.updating {
+  opacity: 0.5;
+}
+
 @media only screen and (min-width: 1024px) {
   .productInfo {
     display: flex;

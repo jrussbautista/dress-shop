@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -82,7 +83,10 @@ const CartItem = ({ cartItem }: Props) => {
   };
 
   return (
-    <div className={styles.productList} role="listitem">
+    <div
+      className={classNames(styles.productList, isUpdating ? styles.updating : '')}
+      role="listitem"
+    >
       <div className={styles.product}>
         <div className={styles.productImg}>
           <Link href={`/products/${cartItem.product._id}`}>

@@ -8,7 +8,7 @@ const PAGE_SIZE = 12;
 const useProducts = (initialData: Product[]) => {
   const { data, error, size, setSize, isValidating } = useSWRInfinite(
     (index) => `/api/products?page=${index + 1}`,
-    (url) => {
+    (url: string) => {
       const currentPage = url.split('page=')[1];
       return ProductService.getProducts({ page: currentPage, limit: PAGE_SIZE });
     },

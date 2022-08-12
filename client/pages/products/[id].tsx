@@ -14,6 +14,7 @@ import useUser from '@/hooks/user/use-user';
 import { ProductService } from '@/services/ProductService';
 import styles from '@/styles/Product.module.css';
 import { Product as ProductTypes } from '@/types';
+import { CACHE_REVALIDATION } from '@/utils/constants';
 import formatPrice from '@/utils/formatPrice';
 
 interface Props {
@@ -132,7 +133,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext<{ id: str
     const { product, relatedProducts } = await ProductService.getProduct(id);
     return {
       props: { product, relatedProducts },
-      revalidate: 100,
+      revalidate: CACHE_REVALIDATION,
     };
   } catch (error) {
     return {
@@ -146,13 +147,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext<{ id: str
 }
 
 export async function getStaticPaths() {
-  const products = await ProductService.getProducts();
-
-  const paths = products.map((product) => ({
-    params: { id: product._id },
-  }));
-
-  return { paths, fallback: 'blocking' };
+  return { paths: [], fallback: 'blocking' };
 }
 
 export default Product;

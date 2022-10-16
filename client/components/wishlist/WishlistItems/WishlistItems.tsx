@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button, Spinner } from '@/components/ui';
-import useWishlist from '@/hooks/wishlist/use-wishlist';
+import useWishlist from '@/hooks/wishlist/useWishlist';
 
 import WishlistItem from './WishlistItem';
 import styles from './WishlistItems.module.css';

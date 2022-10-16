@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
-import { ProductService } from '@/services';
+import ProductService from '@/services/ProductService';
 
 interface Params {
   category?: string;

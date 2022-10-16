@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Spinner, ErrorMessage } from '@/components/ui';
-import useOrders from '@/hooks/orders/use-orders';
+import useOrders from '@/hooks/orders/useOrders';
 import formatPrice from '@/utils/formatPrice';
 import { formatDate } from '@/utils/helpers';
 

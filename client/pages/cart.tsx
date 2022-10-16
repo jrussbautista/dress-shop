@@ -4,7 +4,7 @@ import { CartList, CartSubTotal } from '@/components/cart';
 import { Meta, MobileBottomMenu } from '@/components/core';
 import WithAuth from '@/components/core/WithAuth';
 import { Button, Heading, Container } from '@/components/ui';
-import useCart from '@/hooks/cart/use-cart';
+import useCart from '@/hooks/cart/useCart';
 import styles from '@/styles/Cart.module.css';
 import calculateCartTotal from '@/utils/calculateCartTotal';
 

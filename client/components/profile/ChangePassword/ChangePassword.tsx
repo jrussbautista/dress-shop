@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Button, PageLoader, Input } from '@/components/ui';
 import { useToast } from '@/contexts';
-import { AuthService } from '@/services';
+import AuthService from '@/services/AuthService';
 
 import styles from './ChangePassword.module.css';
 

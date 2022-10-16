@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { mutate } from 'swr';
 
-import { AuthService } from '@/services';
+import AuthService from '@/services/AuthService';
 import { UpdateUserFields } from '@/types';
 
 const useUpdateUser = () => {

@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 import { Button, Input, PageLoader } from '@/components/ui';
 import { useToast } from '@/contexts';
-import useLogin from '@/hooks/auth/use-login';
+import { useLogin } from '@/hooks/useAuth';
 import { LoginFields } from '@/types';
 
 import styles from './LoginForm.module.css';

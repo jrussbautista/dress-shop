@@ -1,5 +1,5 @@
+import apiClient from '@/lib/apiClient';
 import { Cart, CartItem } from '@/types';
-import apiClient from '@/utils/apiClient';
 import { catchError } from '@/utils/catchError';
 
 const getCart = async (): Promise<Cart> => {
@@ -38,9 +38,11 @@ const updateQuantityCarItem = async (productId: string, quantity: number): Promi
   }
 };
 
-export const CartService = {
+const CartService = {
   getCart,
   addCartItem,
   removeCartItem,
   updateQuantityCarItem,
 };
+
+export default CartService;

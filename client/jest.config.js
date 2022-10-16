@@ -12,6 +12,7 @@ module.exports = {
     '^@/utils(.*)$': '<rootDir>/utils/$1',
     '^@/types(.*)$': '<rootDir>/types/$1',
     '^@/hooks(.*)$': '<rootDir>/hooks/$1',
+    '^@/lib(.*)$': '<rootDir>/lib/$1',
     '^@/styles(.*)$': '<rootDir>/styles/$1',
     '^@/test(.*)$': '<rootDir>/test/$1',
   },

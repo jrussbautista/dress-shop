@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { mutate } from 'swr';
 
-import { CheckOutService } from '@/services';
+import CheckOutService from '@/services/CheckoutService';
 
 interface InitialState {
   addingOrder: boolean;

@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from 'react';
 
 import { PAYPAL_CLIENT_ID } from '@/constants';
 import { useToast } from '@/contexts';
-import { CheckOutService } from '@/services';
+import CheckOutService from '@/services/CheckoutService';
 
 import styles from './CheckoutPaypal.module.css';
 

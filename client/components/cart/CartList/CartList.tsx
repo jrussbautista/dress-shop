@@ -2,7 +2,7 @@ import React from 'react';
 
 import { CartSkeleton } from '@/components/cart';
 import { ErrorMessage, Button } from '@/components/ui';
-import useCart from '@/hooks/cart/use-cart';
+import useCart from '@/hooks/cart/useCart';
 
 import CartItem from '../CartItem';
 

@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,57 +16,23 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/contexts/*": [
-        "contexts/*"
-      ],
-      "@/contexts": [
-        "contexts"
-      ],
-      "@/constants": [
-        "constants"
-      ],
-      "@/hooks": [
-        "hooks"
-      ],
-      "@/hooks/*": [
-        "hooks/*"
-      ],
-      "@/services": [
-        "services"
-      ],
-      "@/services/*": [
-        "services/*"
-      ],
-      "@/styles/*": [
-        "styles/*"
-      ],
-      "@/types": [
-        "types"
-      ],
-      "@/types/*": [
-        "types/*"
-      ],
-      "@/utils/*": [
-        "utils/*"
-      ],
-      "@/test/*": [
-        "test/*"
-      ]
+      "@/components/*": ["components/*"],
+      "@/contexts/*": ["contexts/*"],
+      "@/contexts": ["contexts"],
+      "@/constants": ["constants"],
+      "@/hooks": ["hooks"],
+      "@/hooks/*": ["hooks/*"],
+      "@/lib/*": ["lib/*"],
+      "@/services": ["services"],
+      "@/services/*": ["services/*"],
+      "@/styles/*": ["styles/*"],
+      "@/types": ["types"],
+      "@/types/*": ["types/*"],
+      "@/utils/*": ["utils/*"],
+      "@/test/*": ["test/*"]
     },
     "incremental": true
   },
-  "exclude": [
-    "node_modules",
-    "jest.setup.ts",
-    "./cypress"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "jest.config.js"
-  ]
+  "exclude": ["node_modules", "jest.setup.ts", "./cypress"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.config.js"]
 }

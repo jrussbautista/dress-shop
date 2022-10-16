@@ -2,8 +2,8 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Button } from '@/components/ui';
-import useLogout from '@/hooks/auth/use-logout';
-import useUser from '@/hooks/user/use-user';
+import { useLogout } from '@/hooks/useAuth';
+import useUser from '@/hooks/user/useUser';
 
 import styles from './Sidebar.module.css';
 

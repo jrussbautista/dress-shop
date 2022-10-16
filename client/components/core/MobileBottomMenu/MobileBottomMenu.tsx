@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FiHome, FiSearch, FiShoppingCart, FiUser } from 'react-icons/fi';
 
-import useCart from '@/hooks/cart/use-cart';
-import useUser from '@/hooks/user/use-user';
+import useCart from '@/hooks/cart/useCart';
+import useUser from '@/hooks/user/useUser';
 
 import styles from './MobileBottomMenu.module.css';
 

@@ -1,5 +1,5 @@
+import apiClient from '@/lib/apiClient';
 import { Category } from '@/types';
-import apiClient from '@/utils/apiClient';
 import { catchError } from '@/utils/catchError';
 
 const getCategories = async (): Promise<Category[]> => {
@@ -12,6 +12,8 @@ const getCategories = async (): Promise<Category[]> => {
   }
 };
 
-export const CategoryService = {
+const CategoryService = {
   getCategories,
 };
+
+export default CategoryService;

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import { Button } from '@/components/ui';
 import { useToast } from '@/contexts';
-import useRemoveItem from '@/hooks/wishlist/use-remove-item';
+import useRemoveItem from '@/hooks/wishlist/useRemoveItem';
 import { WishlistItem as WishlistItemType } from '@/types/Wishlist';
 import formatPrice from '@/utils/formatPrice';
 

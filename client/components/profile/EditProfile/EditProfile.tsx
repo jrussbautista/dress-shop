@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import { Button, PageLoader, Input } from '@/components/ui';
+import { MAX_FILE_SIZE } from '@/constants';
 import { useToast } from '@/contexts';
 import useUpdateUser from '@/hooks/user/use-update-user';
 import useUser from '@/hooks/user/use-user';
-import { MAX_FILE_SIZE } from '@/utils/constants';
 import { capitalizeFirstLetter } from '@/utils/helpers';
 
 import styles from './EditProfile.module.css';

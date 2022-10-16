@@ -6,37 +6,38 @@ import { fireEvent, render, screen, userEvent, waitFor } from '@/test/test-utils
 
 import SignUpForm from './SignUpForm';
 
-test('successfully register user and navigated to profile page', async () => {
-  render(<SignUpForm />);
-  const fields = userGenerator();
+jest.mock('next/router', () => ({
+  push: jest.fn(),
+}));
 
-  const nameInput = screen.getByPlaceholderText(/name/i);
-  const emailInput = screen.getByPlaceholderText(/email/i);
-  const passwordInput = screen.getByPlaceholderText(/password/i);
+describe('<SignupForm />', () => {
+  test('successfully register user and navigated to profile page', async () => {
+    render(<SignUpForm />);
+    const fields = userGenerator();
 
-  userEvent.type(nameInput, fields.name);
-  userEvent.type(emailInput, fields.email);
-  userEvent.type(passwordInput, fields.password);
+    const nameInput = screen.getByPlaceholderText(/name/i);
+    const emailInput = screen.getByPlaceholderText(/email/i);
+    const passwordInput = screen.getByPlaceholderText(/password/i);
 
-  const submitButton = screen.getByRole('button', { name: /sign up/i });
+    userEvent.type(nameInput, fields.name);
+    userEvent.type(emailInput, fields.email);
+    userEvent.type(passwordInput, fields.password);
 
-  fireEvent.click(submitButton);
+    const submitButton = screen.getByRole('button', { name: /sign up/i });
+    fireEvent.click(submitButton);
 
-  await waitFor(() => expect(submitButton).toBeDisabled());
+    await waitFor(() => expect(submitButton).toBeDisabled());
+    await waitFor(() => expect(submitButton).toBeEnabled());
+    expect(Router.push).toHaveBeenCalledWith('/profile');
+  });
 
-  await waitFor(() => expect(submitButton).toBeEnabled());
+  test('display input fields error when input fields is empty on form submit', async () => {
+    render(<SignUpForm />);
+    const submitButton = screen.getByRole('button', { name: /sign up/i });
 
-  expect(Router.push).toBeCalledWith('/profile');
-});
+    userEvent.click(submitButton);
 
-test('display input fields error when input fields is empty on form submit', async () => {
-  render(<SignUpForm />);
-
-  const submitButton = screen.getByRole('button', { name: /sign up/i });
-
-  userEvent.click(submitButton);
-
-  await waitFor(() => expect(screen.getByText('Email is required')).toBeInTheDocument());
-
-  expect(screen.getByText('Password is required')).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText('Email is required')).toBeInTheDocument());
+    expect(screen.getByText('Password is required')).toBeInTheDocument();
+  });
 });

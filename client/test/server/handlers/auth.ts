@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
+import { API_URL } from '@/constants';
 import { userGenerator } from '@/test/data-generators';
-import { API_URL } from '@/utils/constants';
 
 export const authHandlers = [
   rest.get(`${API_URL}/auth/me`, (_, res, ctx) => {

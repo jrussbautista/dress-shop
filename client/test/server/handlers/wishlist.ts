@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import { API_URL } from '@/utils/constants';
+import { API_URL } from '@/constants';
 
 export const wishlistHandlers = [
   rest.get(`${API_URL}/wishlist`, (_, res, ctx) => {

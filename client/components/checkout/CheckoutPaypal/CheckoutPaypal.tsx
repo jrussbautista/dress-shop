@@ -2,9 +2,9 @@ import Router from 'next/router';
 import Script from 'next/script';
 import React, { useRef, useEffect, useState } from 'react';
 
+import { PAYPAL_CLIENT_ID } from '@/constants';
 import { useToast } from '@/contexts';
 import { CheckOutService } from '@/services';
-import { PAYPAL_CLIENT_ID } from '@/utils/constants';
 
 import styles from './CheckoutPaypal.module.css';
 

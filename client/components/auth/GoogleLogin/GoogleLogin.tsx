@@ -4,9 +4,9 @@ import { GoogleLogin as GoogleLoginLib } from 'react-google-login';
 
 import { IconGoogle } from '@/components/icons';
 import { Button, PageLoader } from '@/components/ui';
+import { GOOGLE_CLIENT_ID } from '@/constants';
 import { useToast } from '@/contexts';
 import useGoogleLogin from '@/hooks/auth/use-google-login';
-import { GOOGLE_CLIENT_ID } from '@/utils/constants';
 
 interface GoogleError {
   error: string;

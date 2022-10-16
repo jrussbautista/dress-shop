@@ -6,6 +6,15 @@ import { render, screen, userEvent, waitFor } from '@/test/test-utils';
 
 import LoginForm from './LoginForm';
 
+jest.mock('next/router', () => ({
+  push: jest.fn(),
+  useRouter() {
+    return {
+      query: '',
+    };
+  },
+}));
+
 test('successfully login user and navigated to profile page', async () => {
   render(<LoginForm />);
   const fields = userGenerator();

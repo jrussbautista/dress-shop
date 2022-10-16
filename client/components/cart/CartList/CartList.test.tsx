@@ -1,10 +1,10 @@
 import { rest } from 'msw';
 import { setCookie, destroyCookie } from 'nookies';
 
+import { API_URL } from '@/constants';
 import { fakeCartItems } from '@/test/fake-data';
 import { server } from '@/test/server';
 import { render, screen, waitForElementToBeRemoved, within } from '@/test/test-utils';
-import { API_URL } from '@/utils/constants';
 import formatPrice from '@/utils/formatPrice';
 
 import CartList from './CartList';
@@ -32,7 +32,7 @@ test('successfully fetched cart items and renders correctly', async () => {
     const result = fakeCartItems[index];
 
     expect(utils.getByAltText(result.product.name)).toBeInTheDocument();
-    expect(utils.getByAltText(result.product.name)).toHaveAttribute('src', result.product.imageURL);
+    expect(utils.getByAltText(result.product.name)).toHaveAttribute('src');
     expect(utils.getByText(result.product.name)).toBeInTheDocument();
     expect(utils.getByText(result.product.name)).toHaveAttribute(
       'href',

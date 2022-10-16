@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
+import { API_URL } from '@/constants';
 import { categoryGenerator } from '@/test/data-generators';
-import { API_URL } from '@/utils/constants';
 
 export const categoriesHandlers = [
   rest.get(`${API_URL}/categories`, (_, res, ctx) => {

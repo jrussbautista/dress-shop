@@ -7,6 +7,7 @@ import { Meta, MobileBottomMenu } from '@/components/core';
 import { ProductList, ProductInputQuantity } from '@/components/product';
 import { PopUp, Container, Heading, ErrorMessage, Button } from '@/components/ui';
 import WishlistButton from '@/components/wishlist/WishlistButton';
+import { CACHE_REVALIDATION } from '@/constants';
 import { useToast } from '@/contexts';
 import { usePopUp } from '@/hooks';
 import useAddItem from '@/hooks/cart/use-add-item';
@@ -14,7 +15,6 @@ import useUser from '@/hooks/user/use-user';
 import { ProductService } from '@/services/ProductService';
 import styles from '@/styles/Product.module.css';
 import { Product as ProductTypes } from '@/types';
-import { CACHE_REVALIDATION } from '@/utils/constants';
 import formatPrice from '@/utils/formatPrice';
 
 interface Props {

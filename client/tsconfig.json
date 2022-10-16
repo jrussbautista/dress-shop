@@ -19,6 +19,7 @@
       "@/components/*": ["components/*"],
       "@/contexts/*": ["contexts/*"],
       "@/contexts": ["contexts"],
+      "@/constants": ["constants"],
       "@/hooks": ["hooks"],
       "@/hooks/*": ["hooks/*"],
       "@/services": ["services"],

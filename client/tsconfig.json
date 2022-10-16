@@ -22,6 +22,7 @@
       "@/constants": ["constants"],
       "@/hooks": ["hooks"],
       "@/hooks/*": ["hooks/*"],
+      "@/lib/*": ["lib/*"],
       "@/services": ["services"],
       "@/services/*": ["services/*"],
       "@/styles/*": ["styles/*"],
@@ -29,7 +30,8 @@
       "@/types/*": ["types/*"],
       "@/utils/*": ["utils/*"],
       "@/test/*": ["test/*"]
-    }
+    },
+    "incremental": true
   },
   "exclude": ["node_modules", "jest.setup.ts", "./cypress"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.config.js"]

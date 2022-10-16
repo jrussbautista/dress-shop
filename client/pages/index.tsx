@@ -5,7 +5,9 @@ import { Meta, MobileBottomMenu } from '@/components/core';
 import { ProductOverviewSection } from '@/components/home';
 import { Banners, Container, Heading } from '@/components/ui';
 import { useScrollRestoration } from '@/hooks';
-import { BannerService, CategoryService, ProductService } from '@/services';
+import BannerService from '@/services/BannerService';
+import CategoryService from '@/services/CategoryService';
+import ProductService from '@/services/ProductService';
 
 const Home = ({
   banners,

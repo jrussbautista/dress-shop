@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { mutate } from 'swr';
 
-import { CartService } from '@/services';
+import CartService from '@/services/CartService';
 
 interface InitialState {
   addingToCart: boolean;

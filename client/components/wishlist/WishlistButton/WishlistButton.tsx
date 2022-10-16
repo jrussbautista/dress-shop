@@ -3,10 +3,10 @@ import React from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 import { useToast } from '@/contexts';
-import useUser from '@/hooks/user/use-user';
-import useAddItem from '@/hooks/wishlist/use-add-item';
-import useRemoveItem from '@/hooks/wishlist/use-remove-item';
-import useWishlist from '@/hooks/wishlist/use-wishlist';
+import useUser from '@/hooks/user/useUser';
+import useAddItem from '@/hooks/wishlist/useAddItem';
+import useRemoveItem from '@/hooks/wishlist/useRemoveItem';
+import useWishlist from '@/hooks/wishlist/useWishlist';
 import { colors } from '@/utils/theme';
 
 import styles from './WishlistButton.module.css';

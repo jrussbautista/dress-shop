@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 
-import useUser from '@/hooks/user/use-user';
-import { CartService } from '@/services';
+import useUser from '@/hooks/user/useUser';
+import CartService from '@/services/CartService';
 
 const useCart = () => {
   const { data: user } = useUser();

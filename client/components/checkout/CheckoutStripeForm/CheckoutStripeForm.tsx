@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 
 import { PageLoader, Alert, Button } from '@/components/ui';
 import { useToast } from '@/contexts';
-import useAddOrder from '@/hooks/orders/use-add-order';
-import useUser from '@/hooks/user/use-user';
+import useAddOrder from '@/hooks/orders/useAddOrder';
+import useUser from '@/hooks/user/useUser';
 
 import CardSection from '../CheckoutStripeCard/CheckoutStripeCard';
 

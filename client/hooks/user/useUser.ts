@@ -1,7 +1,7 @@
 import { parseCookies } from 'nookies';
 import useSWR from 'swr';
 
-import { AuthService } from '@/services';
+import AuthService from '@/services/AuthService';
 
 const useUser = () => {
   const { token } = parseCookies({});

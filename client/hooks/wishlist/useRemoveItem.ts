@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { mutate } from 'swr';
 
-import { WishlistService } from '@/services';
+import WishlistService from '@/services/WishlistService';
 
 interface InitialState {
   removingToWishlist: boolean;

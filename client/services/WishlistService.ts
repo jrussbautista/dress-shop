@@ -1,5 +1,5 @@
+import apiClient from '@/lib/apiClient';
 import { WishlistItem } from '@/types/Wishlist';
-import apiClient from '@/utils/apiClient';
 import { catchError } from '@/utils/catchError';
 
 const getWishlist = async (): Promise<WishlistItem[]> => {
@@ -28,8 +28,10 @@ const removeWishlistItem = async (productId: string): Promise<void> => {
   }
 };
 
-export const WishlistService = {
+const WishlistService = {
   addWishlistItem,
   getWishlist,
   removeWishlistItem,
 };
+
+export default WishlistService;

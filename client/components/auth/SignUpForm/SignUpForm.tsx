@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { Meta } from '@/components/core';
 import { Button, PageLoader, Input } from '@/components/ui';
 import { useToast } from '@/contexts';
-import useSignup from '@/hooks/auth/use-signup';
+import { useSignup } from '@/hooks/useAuth';
 
 import styles from './Signup.module.css';
 

@@ -5,7 +5,7 @@ import { SearchBar, Meta, MobileBottomMenu } from '@/components/core';
 import { ProductList, ProductListSkeleton } from '@/components/product';
 import { SearchFilter, SearchCategory } from '@/components/search';
 import { Container, ErrorMessage } from '@/components/ui';
-import useSearch from '@/hooks/search/use-search';
+import useSearch from '@/hooks/useSearch';
 import styles from '@/styles/Search.module.css';
 
 const Search = () => {

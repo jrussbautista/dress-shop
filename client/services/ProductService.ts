@@ -1,5 +1,5 @@
+import apiClient from '@/lib/apiClient';
 import { ProductData, Product } from '@/types';
-import apiClient from '@/utils/apiClient';
 import { catchError } from '@/utils/catchError';
 
 const getProducts = async (fields: Record<string, any> = {}): Promise<Product[]> => {
@@ -27,7 +27,9 @@ export const getProduct = async (id: string): Promise<ProductData> => {
   }
 };
 
-export const ProductService = {
+const ProductService = {
   getProducts,
   getProduct,
 };
+
+export default ProductService;

@@ -1,4 +1,4 @@
-import apiClient from '@/utils/apiClient';
+import apiClient from '@/lib/apiClient';
 import { catchError } from '@/utils/catchError';
 
 interface PaypalTransaction {
@@ -39,8 +39,10 @@ export const capturePaypalTransaction = async (orderID: string): Promise<void> =
   }
 };
 
-export const CheckOutService = {
+const CheckOutService = {
   createPaypalTransaction,
   capturePaypalTransaction,
   stripeCharge,
 };
+
+export default CheckOutService;

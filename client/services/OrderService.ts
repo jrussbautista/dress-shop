@@ -1,4 +1,4 @@
-import apiClient from '@/utils/apiClient';
+import apiClient from '@/lib/apiClient';
 import { catchError } from '@/utils/catchError';
 import { Order } from 'types';
 
@@ -11,6 +11,8 @@ const getOrders = async (): Promise<Order[]> => {
   }
 };
 
-export const OrderService = {
+const OrderService = {
   getOrders,
 };
+
+export default OrderService;

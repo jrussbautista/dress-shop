@@ -8,9 +8,9 @@ import { IoMdCart } from 'react-icons/io';
 
 import { SearchBar } from '@/components/core';
 import { Button } from '@/components/ui';
-import useLogout from '@/hooks/auth/use-logout';
-import useCart from '@/hooks/cart/use-cart';
-import useUser from '@/hooks/user/use-user';
+import useCart from '@/hooks/cart/useCart';
+import { useLogout } from '@/hooks/useAuth';
+import useUser from '@/hooks/user/useUser';
 import { capitalizeFirstLetter } from '@/utils/helpers';
 
 import styles from './DesktopMenu.module.css';

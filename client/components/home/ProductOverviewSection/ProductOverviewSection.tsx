@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ProductList } from '@/components/product';
 import { Spinner, Button, Heading } from '@/components/ui';
-import useProducts from '@/hooks/products/use-products';
+import useProducts from '@/hooks/useProducts';
 import { Product } from '@/types';
 import { colors } from '@/utils/theme';
 

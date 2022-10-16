@@ -7,7 +7,7 @@ import { Meta } from '@/components/core';
 import WithAuth from '@/components/core/WithAuth';
 import { ErrorMessage, Container } from '@/components/ui';
 import { STRIPE_CLIENT_KEY } from '@/constants';
-import useCart from '@/hooks/cart/use-cart';
+import useCart from '@/hooks/cart/useCart';
 import styles from '@/styles/Checkout.module.css';
 import calculateCartTotal from '@/utils/calculateCartTotal';
 import formatPrice from '@/utils/formatPrice';

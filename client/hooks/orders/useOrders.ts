@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 
-import useUser from '@/hooks/user/use-user';
-import { OrderService } from '@/services/OrderService';
+import useUser from '@/hooks/user/useUser';
+import OrderService from '@/services/OrderService';
 
 const useOrders = () => {
   const { data: user } = useUser();

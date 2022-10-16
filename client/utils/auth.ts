@@ -1,6 +1,6 @@
 import { setCookie, destroyCookie } from 'nookies';
 
-import apiClient from './apiClient';
+import apiClient from '@/lib/apiClient';
 
 export const setAuthToken = (token: string) => {
   apiClient.defaults.headers.common['Authorization'] = '';

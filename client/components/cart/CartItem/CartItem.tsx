@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 
 import { ProductInputQuantity } from '@/components/product';
 import { useToast } from '@/contexts';
-import useRemoveItem from '@/hooks/cart/use-remove-item';
-import useUpdateItem from '@/hooks/cart/use-update-item';
+import useRemoveItem from '@/hooks/cart/useRemoveItem';
+import useUpdateItem from '@/hooks/cart/useUpdateItem';
 import { CartItem as CartItemType } from '@/types';
 import formatPrice from '@/utils/formatPrice';
 

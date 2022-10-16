@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { Spinner } from '@/components/ui';
-import useUser from '@/hooks/user/use-user';
+import useUser from '@/hooks/user/useUser';
 
 const styles = {
   container: {

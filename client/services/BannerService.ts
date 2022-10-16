@@ -1,5 +1,5 @@
+import apiClient from '@/lib/apiClient';
 import { Banner } from '@/types';
-import apiClient from '@/utils/apiClient';
 import { catchError } from '@/utils/catchError';
 
 const getBanners = async (): Promise<Banner[]> => {
@@ -11,6 +11,8 @@ const getBanners = async (): Promise<Banner[]> => {
   }
 };
 
-export const BannerService = {
+const BannerService = {
   getBanners,
 };
+
+export default BannerService;

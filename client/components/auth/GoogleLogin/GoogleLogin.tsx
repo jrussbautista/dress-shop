@@ -6,7 +6,7 @@ import { IconGoogle } from '@/components/icons';
 import { Button, PageLoader } from '@/components/ui';
 import { GOOGLE_CLIENT_ID } from '@/constants';
 import { useToast } from '@/contexts';
-import useGoogleLogin from '@/hooks/auth/use-google-login';
+import { useGoogleLogin } from '@/hooks/useAuth';
 
 interface GoogleError {
   error: string;

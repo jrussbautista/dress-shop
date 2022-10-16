@@ -1,6 +1,6 @@
 import { useSWRInfinite } from 'swr';
 
-import { ProductService } from '@/services';
+import ProductService from '@/services/ProductService';
 import { Product } from '@/types';
 
 const PAGE_SIZE = 12;

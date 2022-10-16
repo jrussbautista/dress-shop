@@ -1,5 +1,5 @@
+import apiClient from '@/lib/apiClient';
 import { User } from '@/types';
-import apiClient from '@/utils/apiClient';
 import { catchError } from '@/utils/catchError';
 
 interface UserData {
@@ -109,7 +109,7 @@ export const updateProfile = async (userId: string, userFields: UserFields): Pro
   }
 };
 
-export const AuthService = {
+const AuthService = {
   getMe,
   login,
   signUp,
@@ -117,3 +117,5 @@ export const AuthService = {
   changePassword,
   updateProfile,
 };
+
+export default AuthService;
